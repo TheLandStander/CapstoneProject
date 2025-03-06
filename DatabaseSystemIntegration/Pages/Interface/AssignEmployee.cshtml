@@ -1,0 +1,43 @@
+﻿@page
+@model DatabaseSystemIntegration.Pages.Interface.AssignEmployeeModel
+@{
+    //Noah Kurtz, **WORKED INDIVIDUALLY**
+    //form for creating an Employee project
+    <form method="post">
+
+        <div class="form-group">
+            <h4>Select a Project to Assign</h4>
+            <br /> <select asp-for="Project_ID" class="form-control">
+                @foreach (var Project in Model.BusProjects)
+                {
+                    <option value="@Project.Bus_Project_ID">@Project.Project_Name</option>
+                }
+            </select><br />
+        </div>
+
+        <div class="form-group">
+            <h4>Select an Employee to add to the Project</h4>
+            <br /> <select asp-for="Employee_ID" class="form-control">
+                @foreach (var Employee in Model.Employees)
+                {
+                    <option value="@Employee.Employee_ID">@Employee.Employee_Name</option>
+                }
+            </select><br />
+        </div>
+
+        <div class="form-group">
+            <h4>Select an Admin to Associate with this Project Assignment</h4>
+            <br /> <select asp-for="Admin_ID" class="form-control">
+                @foreach (var Admin in Model.Admins)
+                {
+                    <option value="@Admin.Employee_ID">@Admin.Employee_Name</option>
+                }
+            </select><br />
+        </div>
+        <br />
+        <div class="form-group">
+            <br>  <button type="submit" class="btn btn-primary">Add Assignment</button>  <br>
+        </div>
+    </form>
+
+}

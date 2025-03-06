@@ -1,0 +1,86 @@
+﻿@page
+@model DatabaseSystemIntegration.Pages.Interface.Project_DashboardModel
+@{
+    //Noah Kurtz, **WORKED INDIVIDUALLY**
+    //loop through each string array and set the column headers to array values
+    @if (HttpContext.Session.GetString("UserType") == "Admin" ||HttpContext.Session.GetString("UserType") == "BusPartner" ||
+    HttpContext.Session.GetString("UserType") == "BusRep" || HttpContext.Session.GetString("UserType") == "Faculty")
+    {
+    <h2 style="text-align: center; margin-bottom: 20px;">Grants</h2>
+    <table border="1" style="width: 100%; margin: 0 auto;">
+            <tr>
+                <th style="padding: 10px; text-align: left;">Grant Name</th>
+                <th style="padding: 10px; text-align: left;">Award Amount $</th>
+                <th style="padding: 10px; text-align: left;">Submission Date</th>
+                <th style="padding: 10px; text-align: left;">Award Date</th>
+                <th style="padding: 10px; text-align: left;">Category</th>
+                <th style="padding: 10px; text-align: left;">Status</th>
+                <th style="padding: 10px; text-align: left;">Lead Faculty</th>
+                <th style="padding: 10px; text-align: left;">Associated Project</th>
+            </tr>
+        <tbody>
+            @for (int i = 0; i < Model.Grants.Length; i++)
+            {
+                <tr>
+                    <td style="padding: 8px;">@Model.Grants[i].Grant_Name</td>
+                    <td style="padding: 8px;">@Model.Grants[i].Amount</td>
+                    <td style="padding: 8px;">@Model.Grants[i].Submission_Date</td>
+                    <td style="padding: 8px;">@Model.Grants[i].Award_Date</td>
+                    <td style="padding: 8px;">@Model.Grants[i].Grant_Category_Name</td>
+                    <td style="padding: 8px;">@Model.Grants[i].Grant_Status</td>
+                    <td style="padding: 8px;">@Model.Grants[i].Lead_Faculty_Name</td>
+                    <td style="padding: 8px;">@Model.Grants[i].Project_Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    }
+    @if (HttpContext.Session.GetString("UserType") == "Admin" || HttpContext.Session.GetString("UserType") == "Faculty")
+    {
+    <h2 style="text-align: center; margin-top: 50px; margin-bottom: 20px;">Projects Asssociated With Grants</h2>
+    <table border="1" style="width: 100%; margin: 0 auto;" form method="get">
+            <tr>
+                <th style="padding: 10px; text-align: left;">Project Name</th>
+                <th style="padding: 10px; text-align: left;">Project Description</th>
+                <th style="padding: 10px; text-align: left;">Faculty</th>
+            </tr>
+        <tbody>
+                @for (int i = 0; i < Model.FacultyProject.Length; i++)
+                {
+                    <tr>
+                        <td style="padding: 8px;">@Model.FacultyProject[i].Grant_Project_Name</td>
+                        <td style="padding: 8px;">@Model.FacultyProject[i].Grant_Project_Desc</td>
+                        <td style="padding: 8px;">@Model.FacultyProject[i].Faculty_Name</td>
+                    </tr>
+                }
+        </tbody>
+    
+    </table>
+    <br/>
+        }
+    @if (HttpContext.Session.GetString("UserType") == "Employee" || HttpContext.Session.GetString("UserType") == "Admin")
+    {
+        <h2 style="text-align: center; margin-top: 50px; margin-bottom: 20px;">Business Projects</h2>
+        <table border="1" style="width: 100%; margin: 0 auto;" form method="get">
+            <tr>
+                <th style="padding: 10px; text-align: left;">Project Name</th>
+                <th style="padding: 10px; text-align: left;">Project Description</th>
+                <th style="padding: 10px; text-align: left;">Project Start Date</th>
+                <th style="padding: 10px; text-align: left;">Project Due Date</th>
+            </tr>
+            <tbody>
+                @for (int i = 0; i < Model.BusProjects.Length; i++)
+                {
+                    <tr>
+                        <td style="padding: 8px;">@Model.BusProjects[i].Project_Name</td>
+                        <td style="padding: 8px;">@Model.BusProjects[i].Description</td>
+                        <td style="padding: 8px;">@Model.BusProjects[i].Start_Date</td>
+                        <td style="padding: 8px;">@Model.BusProjects[i].Due_Date</td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    }
+
+}

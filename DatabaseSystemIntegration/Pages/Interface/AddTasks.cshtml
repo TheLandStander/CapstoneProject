@@ -1,0 +1,40 @@
+﻿@page
+@model DatabaseSystemIntegration.Pages.Interface.AddTasksModel
+@{
+
+    <form method="post">
+        <h1>Add a Project Task</h1>
+        <br />
+        <h4>Select a Project</h4>
+        <div class="form-group">
+            <br /> <select asp-for="Bus_Project_ID" class="form-control">
+                @foreach (var Project in Model.Projects)
+                {
+                    <option value="@Project.Bus_Project_ID">@Project.Project_Name</option>
+                }
+            </select><br />
+        </div>
+        <br />
+        <div class="form-group">
+            <h4>Task Name</h4>
+            <br><input type="text" asp-for="TaskName" class="form-control" /><br>
+        </div>
+        <br />
+        <div class="form-group">
+            <h4>Task Description</h4>
+            <br><input type="text" asp-for="Task_Description" class="form-control" /><br>
+        </div>
+        <br />
+        <div class="form-group">
+            <br>  <button type="submit" asp-page-handler="" class="btn btn-primary">Add Task</button>  <br>
+        </div>
+    </form>
+    <br/>
+    <form method="post" style="margin-top: 100px;margin-bottom: 100px;">
+        <div class="form-group">
+            <button asp-page="AddTasks" asp-page-handler="PopulateHandler">Populate</button>
+            <button asp-page="AddTasks" asp-page-handler="ClearHandler">Clear</button>
+        </div>
+    </form>
+
+}

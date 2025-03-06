@@ -1,0 +1,41 @@
+﻿@page
+@model DatabaseSystemIntegration.Pages.Interface.CreateAccountModel
+@{
+    //Noah Kurtz
+
+    <form method="post" style="margin-bottom: 100px;">
+        <h1>Create a User Account</h1>
+        
+        <div class="col-md-6">
+            <label class="form-label">Email</label>
+            <input asp-for="Email" type="email" class="form-control">
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label">Phone Number</label>
+            <input asp-for="PhoneNumber" type="tel" class="form-control">
+        </div>
+        <br/>
+        <div class="col-md-6">
+            <label class="form-label">Username</label>
+            <input asp-for="Username" type="text" class="form-control">
+        </div>
+
+        <br/>
+        <div class="col-md-6">
+            <label  class="form-label">Password</label>
+            <input asp-for="Password" type="password" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <br>  <button type="submit" asp-page-handler="" class="btn btn-primary">Create User Account</button>  <br>
+        </div>
+    </form>
+    <br/>
+    <form method="post" style="margin-top: 100px;margin-bottom: 100px;">
+        <div class="form-group">
+            <button asp-page="CreateAccount" asp-page-handler="PopulateHandler">Populate</button>
+            <button asp-page="CreateAccount" asp-page-handler="ClearHandler">Clear</button>
+        </div>
+    </form>
+}

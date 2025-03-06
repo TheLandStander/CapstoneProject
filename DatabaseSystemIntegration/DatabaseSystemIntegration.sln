@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35806.99
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseSystemIntegration", "DatabaseSystemIntegration.csproj", "{67B37597-1833-49AA-A723-3C8B96382FEB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{67B37597-1833-49AA-A723-3C8B96382FEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67B37597-1833-49AA-A723-3C8B96382FEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67B37597-1833-49AA-A723-3C8B96382FEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67B37597-1833-49AA-A723-3C8B96382FEB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D08E8252-F870-476B-AEF9-DEF9B5ED763C}
+	EndGlobalSection
+EndGlobal

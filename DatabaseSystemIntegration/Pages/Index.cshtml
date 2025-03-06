@@ -1,0 +1,31 @@
+﻿@page
+@model IndexModel;
+@{
+    //Create employee form
+    <form method="post">
+        <H1>Sign into your account</H1>
+        <br />
+        <div class="form-group">
+            <H4>User Name</H4>
+            <input type="text" asp-for="username" class="form-control" />
+        </div>
+        <br />
+        <div class="form-group">
+            <H4>Password</H4>
+            <input type="password" asp-for="password" class="form-control" />
+        </div>
+
+        @if (ViewData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger">
+                @ViewData["ErrorMessage"]
+            </div>
+        }
+        <br />
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+    </form>
+
+    <p>Noah Kurtz, this project is my work alone, etc.</p>
+}

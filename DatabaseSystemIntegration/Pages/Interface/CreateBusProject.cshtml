@@ -1,0 +1,71 @@
+﻿@page
+@model DatabaseSystemIntegration.Pages.Interface.CreateBusProjectModel
+@{
+      //for for creating a projects, add a space between the two
+    <form method="post">
+        <h1>Create a New Business Project</h1>
+        <br />
+        <div class="form-group">
+        <h4>Enter Project Name</h4>
+        <br><input type="text" asp-for="Project_Name" class="form-control" /><br>
+        </div>
+
+        <br />
+        <div class="form-group">
+            <h4>Enter Project Description</h4>
+            <br><input type="text" asp-for="Project_Description" class="form-control" /><br>
+        </div>
+        <br />
+
+        <div class="form-group">
+        <h4>Enter Project Start Date MM-DD-YYYY</h4>
+        <label>
+        <br> <input type="date" asp-for="StartDate" class="form-control" /><br>
+         </label>
+        </div>
+        <br />
+
+        <div class="form-group">
+            <h4>Enter Project Due Date MM-DD-YYYY</h4>
+            <label>
+                <br> <input type="date" asp-for="DueDate" class="form-control" /><br>
+            </label>
+        </div>
+        <br />
+        <div class="form-group">
+            <br>  <button type="submit" asp-page-handler="" class="btn btn-primary">Add Project</button>  <br>
+        </div>
+    </form>
+
+    <form method="post" style="margin-top: 100px;margin-bottom: 100px;">
+        <h1>Update Project</h1>
+        <br />
+        <div class="form-group">
+            <h4>Select a Project to Update</h4>
+            <br /> <select asp-for="Active_Project_ID" class="form-control">
+                @foreach (var Project in Model.ActiveProjects)
+                {
+                    <option value="@Project.Bus_Project_ID">@Project.Project_Name</option>
+                }
+            </select><br />
+        </div>
+        <br />
+        <div class="form-group">
+            <h4>Enter Project End Date MM-DD-YYYY</h4>
+            <label>
+                <br> <input type="date" asp-for="EndDate" class="form-control" /><br>
+            </label>
+        </div>
+        <br/>
+        <div class="form-group">
+            <br>  <button type="submit" asp-page-handler="" class="btn btn-primary">Update Project</button>  <br>
+        </div>
+    </form>
+    <br/>
+    <form method="post" style="margin-top: 100px;margin-bottom: 100px;">
+        <div class="form-group">
+            <button asp-page="CreateBusProject" asp-page-handler="PopulateHandler">Populate</button>
+            <button asp-page="CreateBusProject" asp-page-handler="ClearHandler">Clear</button>
+        </div>
+    </form>
+}

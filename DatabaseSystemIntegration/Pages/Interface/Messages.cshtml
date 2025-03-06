@@ -1,0 +1,65 @@
+﻿@page
+@model DatabaseSystemIntegration.Pages.Interface.MessagesModel
+@{
+    //Noah Kurtz
+    //functionality to display message, create container to hold messages first
+    //then add each message in reverse order to cards/inner containers holding message info
+    //first message  in should be the oldest & go on the top
+    <form method="post">
+
+        <div class="form-group">
+            <h4>Messages</h4>
+            <div class="card">
+                <div class="card-body" style="overflow-y: scroll; max-height:500px;">
+                        @for (int i = Model.Messages.Length -1; i >= 0; i--)
+                        {
+                        <br />
+                        <div class="card">
+                            <div class="card-body" style="width: 20rem;">
+                            Time : @Model.Messages[i].Send_Date
+                            <br/>
+                                Sender : @Model.Messages[i].Sender
+                            <br />
+                                Subject : @Model.Messages[i].Message_Subject
+                            <br />
+                                Message: @Model.Messages[i].Content
+                            <br />
+                         </div>
+                        </div>
+                        }
+                </div>
+        <br />
+        <div class="form-group">
+            <h4>Select a Recipient</h4>
+            <select asp-for="Recipient_ID" class="form-control">
+                @foreach (var User in Model.Users)
+                {
+                    <option value="@User.getInfoID()">@User.getUsername()</option>
+                }
+            </select>
+        </div>
+        </div>
+        <br/>
+        <div class="form-group">
+            <H4>Subject</H4>
+            <input type="text" asp-for="MessageSubject" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label >Enter Message</label>
+            <textarea class="form-control" rows="3" asp-for = "MessageContent"></textarea>
+        </div>
+            <br />
+
+        <div class="form-group">
+         <button type="submit" asp-page-handler=""  class="btn btn-primary">Send Message</button> 
+        </div>
+    </form>
+    <br/>
+    <form method="post" style="margin-top: 100px;margin-bottom: 100px;">
+        <div class="form-group">
+            <button asp-page="Messages" asp-page-handler="PopulateHandler">Populate</button>
+            <button asp-page="Messages" asp-page-handler="ClearHandler">Clear</button>
+        </div>
+    </form>
+}

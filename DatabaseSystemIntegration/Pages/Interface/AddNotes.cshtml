@@ -1,0 +1,70 @@
+﻿@page
+@model DatabaseSystemIntegration.Pages.Interface.AddNotesModel
+@{
+
+    //form for adding notes
+    <form method="post">
+        <h1>Add a Project Note</h1>
+        <br />
+        <h4>Select a Project</h4>
+        <div class="form-group">
+            <br /> <select asp-for="Bus_Project_ID" class="form-control">
+                @foreach (var Project in Model.Projects)
+                {
+                    <option value="@Project.Bus_Project_ID">@Project.Project_Name</option>
+                }
+            </select><br />
+        </div>
+        <br />
+        <div class="form-group">
+            <h4>Project Notes</h4>
+          <input type="text" asp-for="Project_Notes" class="form-control" />
+        </div>
+        <br />
+        <div class="form-group">
+             <button type="submit" asp-page-handler="" class="btn btn-primary">Add Note</button>
+        </div>
+    </form>
+
+
+
+    //form for addingg Meeting Minutes
+    <form method="post" style="margin-top: 100px;margin-bottom: 100px;">
+        <h1>Add a Meeting Minute</h1>
+        <br />
+
+        <div class="form-group">
+            <h4>Select the Representative to Associated With this Meeting</h4>
+            <br /> <select asp-for="Bus_Rep_ID" class="form-control">
+                @foreach (var Rep in Model.Reps)
+                {
+                    <option value="@Rep.Bus_Rep_ID">@Rep.Rep_Name</option>
+                }
+            </select><br />
+        </div>
+
+        <br />
+        <div class="form-group">
+            <h4>Enter Meeting Notes</h4>
+        <input type="text" asp-for="Meeting_Notes" class="form-control" />
+        </div>
+        <br />
+
+        <div class="form-group">
+            <h4>Enter Meeting Date and Time MM-DD-YYYY</h4>
+            <label>
+             <input type="datetime-local" asp-for="Meeting_Date" class="form-control" />
+            </label>
+        </div>
+        <br />
+        <div class="form-group">
+         <button type="submit" asp-page-handler="" class="btn btn-primary">Add Meeting Minute</button> 
+        </div>
+    </form>
+    <form method ="post" style="margin-top: 100px;margin-bottom: 100px;">
+        <div class="form-group">
+            <button asp-page="AddNotes" asp-page-handler="PopulateHandler">Populate</button>
+            <button asp-page="AddNotes" asp-page-handler="ClearHandler">Clear</button>
+        </div>
+    </form>
+}

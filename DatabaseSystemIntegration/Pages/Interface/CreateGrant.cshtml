@@ -1,0 +1,115 @@
+﻿@page
+@model DatabaseSystemIntegration.Pages.Interface.CreateGrantModel
+@{
+    //Noah Kurtz, **WORKED INDIVIDUALLY**
+    //form for creating a grant project
+    <form method="post">
+        <h1>Start a project</h1>
+        <br />
+        <div class="form-group">
+        <h4>Enter Project Name</h4>
+        <br /><input type="text" asp-for="Project_Name" class="form-control" /><br />
+        </div>
+
+        <div class="form-group">
+        <h4>Enter Project Description</h4>
+            <br> <input type="text" asp-for="Description" class="form-control" /><br>
+        </div>
+
+        <div class="form-group">
+            <br>  <button type="submit" asp-page-handler="" class="btn btn-primary">Add Project</button>  <br>
+        </div>
+      </form>
+
+
+      //for for creating a grant, add a space between the two
+    <form method="post" style="margin-top: 100px;">
+        <h1>Add a Grant</h1>
+        <br />
+        <div class="form-group">
+        <h4>Enter Grant Name</h4>
+        <br><input type="text" asp-for="Grant_Name" class="form-control" /><br>
+        </div>
+
+        <div class="form-group">
+        <h4>Enter Grant Award Amount</h4>
+        <br><input type="number" asp-for="Amount" class="form-control" /><br>
+        </div>
+
+        <div class="form-group">
+        <h4>Enter Grant Submission Date MM-DD-YYYY</h4>
+        <label>
+        <br> <input type="date" asp-for="Submission_Date" class="form-control" /><br>
+         </label>
+        </div>
+
+        <div class="form-group">
+        <h4>Enter Grant Award Date MM-DD-YYYY</h4>
+            <label>
+        <br> <input type="date" asp-for="Award_Date" class="form-control"/><br>
+            </label>
+        </div>
+
+        <div class="form-group">
+            <h4>Select a Project to associate with this grant</h4>
+            <br /> <select asp-for="Grant_Project_ID" class="form-control">
+                @foreach (var Project in Model.GrantProjectsSelection)
+                {
+                    <option value="@Project.Grant_Project_ID">@Project.Project_Name</option>
+                }
+            </select><br />
+        </div>
+
+        <div class="form-group">
+        <h4>Select a Grant Category</h4>
+        <br /> <select asp-for="Category_ID" class="form-control">
+            @foreach (var Category in Model.GrantCategories)
+            {
+                <option value="@Category.Grant_Category_ID">@Category.Grant_Category_Name</option>
+            }
+        </select><br />
+        </div>
+
+        <div class="form-group">
+        <h4>Select a Grant Status</h4>
+        <br /> <select asp-for="Status_ID" class="form-control">
+            @foreach (var Status in Model.Status)
+            {
+                <option value="@Status.Grant_Status_ID">@Status.Grant_Status</option>
+            }
+        </select><br />
+        </div>
+
+        <div class="form-group">
+        <h4>Select a lead faculty member</h4>
+        <br /> <select asp-for="Lead_Faculty_ID" class="form-control">
+            @foreach (var Faculty in Model.LeadFaculty)
+            {
+                <option value="@Faculty.Faculty_ID">@Faculty.Faculty_Name</option>
+            }
+        </select><br />
+        </div>
+
+        <div class="form-group">
+        <h4>Select a Business Partner To associate with this grant</h4>
+        <br /> <select asp-for="Bus_Partner_ID" class="form-control">
+            @foreach (var Partner in Model.Partners)
+            {
+                <option value="@Partner.Bus_Partner_ID">@Partner.Bus_Name</option>
+            }
+        </select><br />
+        </div>
+
+        <div class="form-group">
+            <br>  <button type="submit" asp-page-handler="" class="btn btn-primary">Add Grant</button>  <br>
+        </div>
+    </form>
+    <form method="post" style="margin-top: 100px;margin-bottom: 100px;">
+        <div class="form-group">
+            <button asp-page="CreateGrant" asp-page-handler="PopulateHandler">Populate</button>
+            <button asp-page="CreateGrant" asp-page-handler="ClearHandler">Clear</button>
+        </div>
+    </form>
+
+
+}
