@@ -153,12 +153,43 @@ namespace DatabaseSystemIntegration.Pages.Interface
 
                     return Page();
             }
-            return RedirectToPage("/Index");
+            return RedirectToPage("Index");
         }
 
-        public void OnPost()
+        public IActionResult OnPostSelectBusProject(string ID)
         {
-          
+            HttpContext.Session.SetString("ItemType", "BusProject");
+            HttpContext.Session.SetString("ItemID", ID);
+
+            return RedirectToPage("AccessItem");
+        }
+
+        public IActionResult OnPostSelectGrantProject(string ID)
+        {
+            HttpContext.Session.SetString("ItemType", "GrantProject");
+            HttpContext.Session.SetString("ItemID", ID);
+            return RedirectToPage("AccessItem");
+        }
+
+        public IActionResult OnPostSelectGrant(string ID)
+        {
+            HttpContext.Session.SetString("ItemType", "Grant");
+            HttpContext.Session.SetString("ItemID", ID);
+            return RedirectToPage("AccessItem");
+        }
+
+        public IActionResult OnPostSelectProjectNote(string ID)
+        {
+            HttpContext.Session.SetString("ItemType", "ProjectNote");
+            HttpContext.Session.SetString("ItemID", ID);
+            return RedirectToPage("AccessItem");
+        }
+
+        public IActionResult OnPostSelectMeetingNote(string ID)
+        {
+            HttpContext.Session.SetString("ItemType", "MeetingNote");
+            HttpContext.Session.SetString("ItemID", ID);
+            return RedirectToPage("AccessItem");
         }
     }
 }

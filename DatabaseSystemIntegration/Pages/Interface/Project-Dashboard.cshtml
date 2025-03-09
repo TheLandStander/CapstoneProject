@@ -3,6 +3,8 @@
 @{
     //Noah Kurtz, **WORKED INDIVIDUALLY**
     //loop through each string array and set the column headers to array values
+
+    <form method="post">
     @if (HttpContext.Session.GetString("UserType") == "Admin" ||HttpContext.Session.GetString("UserType") == "BusPartner" ||
     HttpContext.Session.GetString("UserType") == "BusRep" || HttpContext.Session.GetString("UserType") == "Faculty")
     {
@@ -22,7 +24,10 @@
             @for (int i = 0; i < Model.Grants.Length; i++)
             {
                 <tr>
-                    <td style="padding: 8px;">@Model.Grants[i].Grant_Name</td>
+                    <td style="padding: 8px;">
+                                <button class="btn btn-link" asp-page-handler="SelectGrant" asp-route-id="@Model.Grants[i].Grant_ID">@Model.Grants[i].Grant_Name</button>
+                    
+                    </td>
                     <td style="padding: 8px;">@Model.Grants[i].Amount</td>
                     <td style="padding: 8px;">@Model.Grants[i].Submission_Date</td>
                     <td style="padding: 8px;">@Model.Grants[i].Award_Date</td>
@@ -48,7 +53,9 @@
                 @for (int i = 0; i < Model.FacultyProject.Length; i++)
                 {
                     <tr>
-                        <td style="padding: 8px;">@Model.FacultyProject[i].Grant_Project_Name</td>
+                        <td style="padding: 8px;">
+                                <button class="btn btn-link" asp-page-handler="SelectGrantProject" asp-route-id="@Model.FacultyProject[i].Grant_Project_ID">@Model.FacultyProject[i].Grant_Project_Name</button>
+                        </td>
                         <td style="padding: 8px;">@Model.FacultyProject[i].Grant_Project_Desc</td>
                         <td style="padding: 8px;">@Model.FacultyProject[i].Faculty_Name</td>
                     </tr>
@@ -72,7 +79,9 @@
                 @for (int i = 0; i < Model.BusProjects.Length; i++)
                 {
                     <tr>
-                        <td style="padding: 8px;">@Model.BusProjects[i].Project_Name</td>
+                        <td style="padding: 8px;">
+                                <button class="btn btn-link" asp-page-handler="SelectBusProject" asp-route-id="@Model.BusProjects[i].Bus_Project_ID">@Model.BusProjects[i].Project_Name</button>
+                        </td>
                         <td style="padding: 8px;">@Model.BusProjects[i].Description</td>
                         <td style="padding: 8px;">@Model.BusProjects[i].Start_Date</td>
                         <td style="padding: 8px;">@Model.BusProjects[i].Due_Date</td>
@@ -82,5 +91,5 @@
 
         </table>
     }
-
+    </form>
 }

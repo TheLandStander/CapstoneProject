@@ -1,0 +1,27 @@
+-- default categories/status/etc. 
+INSERT INTO GrantStatus VALUES('123456','Pending');
+INSERT INTO GrantStatus VALUES('123455','Accepted');
+INSERT INTO GrantStatus VALUES('123454','Rejected');
+
+INSERT INTO GrantCategory VALUES('123456','Federal');
+INSERT INTO GrantCategory VALUES('123455','State');
+
+INSERT INTO OrgType VALUES('123456','University');
+INSERT INTO OrgType VALUES('123455','Non-Profit');
+
+INSERT INTO BusPartnerStatus VALUES ('123456','Prospect');
+INSERT INTO BusPartnerStatus VALUES ('123455','Initial Contact');
+INSERT INTO BusPartnerStatus VALUES ('123454','In Negotiation');
+INSERT INTO BusPartnerStatus VALUES ('123453','Memo-Signed');
+INSERT INTO BusPartnerStatus VALUES ('123452','Active Partner');
+
+INSERT INTO FACULTY VALUES ('123456','TestFaculty','123456');
+INSERT INTO EMPLOYEE VALUES ('123452','TestEmployeeAdmin',1,'123451');
+
+INSERT INTO PersonalInfo VALUES ('123456','Contact@test.com','Contact2@test.com','TestUser1','Password123');
+INSERT INTO PersonalInfo VALUES ('123455','Contact@test.com','Contact2@test.com','TestUser2','Password123');
+INSERT INTO PersonalInfo VALUES ('123454','Contact@test.com','Contact2@test.com','TestUser3','Password123');
+INSERT INTO PersonalInfo VALUES ('123451','Contact@test.com','Contact2@test.com','TestUser4','Password123');
+
+INSERT INTO BusProject VALUES('123456','TestBusProject','test description','01/01/2001','01/02/2025','06/02/2025')
+INSERT INTO BusProject VALUES('123455','TestBusProject2','test description 2','01/01/2025','','06/02/2027')

@@ -1,0 +1,126 @@
+CREATE TABLE PersonalInfo (
+    Info_ID CHAR(6) PRIMARY KEY,
+    Primary_Contact VARCHAR(255),
+    Secondary_Contact VARCHAR(255),
+    User_Name VARCHAR(255),
+    Password VARCHAR(255)
+);
+
+CREATE TABLE Message (
+    Message_ID CHAR(6) PRIMARY KEY,
+    Message_Subject VARCHAR(255),
+    Content VARCHAR(255),
+    Send_Date DateTime,
+    Sender_ID CHAR(6) FOREIGN KEY REFERENCES PersonalInfo(Info_ID),
+    Receiver_ID CHAR(6) FOREIGN KEY REFERENCES PersonalInfo(Info_ID)
+);
+
+CREATE TABLE GrantStatus (
+    Status_ID CHAR(6) PRIMARY KEY,
+    Grant_Status VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE GrantCategory (
+    Category_ID CHAR(6) PRIMARY KEY,
+    Category_Name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE GrantProject (
+    Grant_Project_ID CHAR(6) PRIMARY KEY,
+    Project_Name VARCHAR(255) NOT NULL,
+    Description TEXT
+);
+
+CREATE TABLE Faculty (
+    Faculty_ID CHAR(6) PRIMARY KEY,
+    Faculty_Name VARCHAR(255) NOT NULL,
+    Info_ID CHAR(6) FOREIGN KEY REFERENCES PersonalInfo(Info_ID)
+);
+
+CREATE TABLE FacultyProject (
+    Faculty_Project_ID CHAR(6) PRIMARY KEY,
+    Faculty_ID CHAR(6) FOREIGN KEY REFERENCES Faculty(Faculty_ID),
+    Grant_Project_ID CHAR(6) FOREIGN KEY REFERENCES GrantProject(Grant_Project_ID)
+);
+
+CREATE TABLE BusPartnerStatus (
+    Partner_Status_ID CHAR(6) PRIMARY KEY,
+    Status_Flag VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE OrgType (
+    Org_Type_ID CHAR(6) PRIMARY KEY,
+    Org_Type VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE BusPartner (
+    Bus_Partner_ID CHAR(6) PRIMARY KEY,
+    Bus_Name VARCHAR(255) NOT NULL,
+    Partner_Status_ID CHAR(6) FOREIGN KEY REFERENCES BusPartnerStatus(Partner_Status_ID),
+    Org_Type_ID CHAR(6) FOREIGN KEY REFERENCES OrgType(Org_Type_ID),
+    Info_ID CHAR(6) FOREIGN KEY REFERENCES PersonalInfo(Info_ID)
+);
+
+CREATE TABLE BusRep (
+    Bus_Rep_ID CHAR(6) PRIMARY KEY,
+    Rep_Name VARCHAR(255) NOT NULL,
+    Bus_Partner_ID CHAR(6) FOREIGN KEY REFERENCES BusPartner(Bus_Partner_ID),
+    Info_ID CHAR(6) FOREIGN KEY REFERENCES PersonalInfo(Info_ID)
+);
+
+CREATE TABLE MeetingMinutes (
+    Meeting_Minutes_ID CHAR(6) PRIMARY KEY,
+    Meeting_Notes TEXT,
+    Meeting_Date DATETIME NOT NULL,
+    Bus_Rep_ID CHAR(6) FOREIGN KEY REFERENCES BusRep(Bus_Rep_ID)
+);
+
+CREATE TABLE Grants (
+    Grant_ID CHAR(6) PRIMARY KEY,
+    Grant_Name VARCHAR(255) NOT NULL,
+    Amount DECIMAL(18,2),
+    Submission_Date DATE NOT NULL,
+    Award_Date DATE,
+    Lead_Faculty_ID CHAR(6) FOREIGN KEY REFERENCES Faculty(Faculty_ID),
+    Status_ID CHAR(6) FOREIGN KEY REFERENCES GrantStatus(Status_ID),
+    Category_ID CHAR(6) FOREIGN KEY REFERENCES GrantCategory(Category_ID),
+    Bus_Partner_ID CHAR(6) FOREIGN KEY REFERENCES BusPartner(Bus_Partner_ID),
+    Grant_Project_ID CHAR(6) FOREIGN KEY REFERENCES GrantProject(Grant_Project_ID)
+);
+
+CREATE TABLE Employee (
+    Employee_ID CHAR(6) PRIMARY KEY,
+    Employee_Name VARCHAR(255) NOT NULL,
+    is_Admin bit NOT NULL,
+    Info_ID CHAR(6) FOREIGN KEY REFERENCES PersonalInfo(Info_ID)
+);
+
+CREATE TABLE BusProject (
+    Bus_Project_ID CHAR(6) PRIMARY KEY,
+    Project_Name VARCHAR(255) NOT NULL,
+    Description TEXT,
+    Start_Date DATE NOT NULL,
+    End_Date DATE,
+    Due_Date DATE
+);
+
+CREATE TABLE EmployeeProject (
+    Employee_Project_ID CHAR(6) PRIMARY KEY,
+    Assigning_Admin_ID CHAR(6) FOREIGN KEY REFERENCES Employee(Employee_ID),
+    Employee_ID CHAR(6) FOREIGN KEY REFERENCES Employee(Employee_ID),
+    Bus_Project_ID CHAR(6) FOREIGN KEY REFERENCES BusProject(Bus_Project_ID)
+);
+
+CREATE TABLE ProjectNotes (
+    Notes_ID CHAR(6) PRIMARY KEY,
+    Project_Notes TEXT,
+    Date_Recorded DATETIME NOT NULL,
+    Bus_Project_ID CHAR(6) FOREIGN KEY REFERENCES BusProject(Bus_Project_ID)
+);
+
+CREATE TABLE Task (
+    Task_ID CHAR(6) PRIMARY KEY,
+    Task_Name VARCHAR(255) NOT NULL,
+    Task_Description TEXT,
+    Bus_Project_ID CHAR(6) FOREIGN KEY REFERENCES BusProject(Bus_Project_ID)
+);
