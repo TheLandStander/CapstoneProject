@@ -8,35 +8,54 @@ namespace DatabaseSystemIntegration.Pages.Interface
 {
     public class AccessItemModel : PageModel
     {
-        [BindProperty]
+        
         public string ItemType { get; set; }
 
-        [BindProperty]
+        
         public string ItemID { get; set; }
 
-        [BindProperty]
+     
         public BusProject BProject { get; set; }
 
-        [BindProperty]
+     
+        public Classes.Task[] Tasks { get; set; }
+
+
+   
         public BusRep[] BusReps { get; set; }
 
-        [BindProperty]
+      
         public BusPartner[] BusPartners { get; set; }
 
-        [BindProperty]
+        
         public GrantProject GProject { get; set; }
 
-        [BindProperty]
+       
+        public FacultyProject[] FacultyProjects { get; set; }
+
+
+        public EmployeeProject[] EmployeeProjects { get; set; }
+
+        
         public Grant ThisGrant { get; set; }
 
-        [BindProperty]
+
         public Grant[] AssociatedGrants { get; set; }
 
-        [BindProperty]
+   
         public ProjectNotes[] ProjectNotes { get; set; }
 
-        [BindProperty]
+    
         public MeetingMinutes[] MeetingNotes { get; set; }
+
+    
+        public Faculty[] FacultyMembers { get; set; }
+
+
+      
+        public Employee[] Employees { get; set; }
+
+
 
         public void LoadGrant()
         {
@@ -55,6 +74,16 @@ namespace DatabaseSystemIntegration.Pages.Interface
             {
                 BProject = ObjectConverter.ToBusProject(DatabaseControls.SelectFilter(2, 2, ItemID))[0];
                 ProjectNotes = ObjectConverter.ToProjectNotes(DatabaseControls.SelectFilter(15, 2, ItemID));
+                Tasks = ObjectConverter.ToTask(DatabaseControls.SelectFilter(16, 2, BProject.Bus_Project_ID));
+                EmployeeProjects = ObjectConverter.ToEmployeeProject(DatabaseControls.SelectFilter(5, 2, ItemID));
+                List<Employee> EH = new List<Employee>();
+
+                foreach (EmployeeProject ep in EmployeeProjects)
+                {
+                    EH.Add(ObjectConverter.ToEmployee(DatabaseControls.SelectFilter(4, 4, ep.Employee_ID))[0]);
+                }
+
+                Employees = EH.ToArray();
             }
         }
 
@@ -64,10 +93,17 @@ namespace DatabaseSystemIntegration.Pages.Interface
             {
                 GProject = ObjectConverter.ToGrantProject(DatabaseControls.SelectFilter(9, 9, ItemID))[0];
                 AssociatedGrants = ObjectConverter.ToGrant(DatabaseControls.SelectFilter(10, 9, ItemID));
-
+                FacultyProjects = ObjectConverter.ToFacultyProject(DatabaseControls.SelectFilter(7, 9, ItemID));
                 List<BusRep> RepHolder = new List<BusRep>();
                 List<BusPartner> PartnerHolder = new List<BusPartner>();
                 List<MeetingMinutes> MMHolder = new List<MeetingMinutes>();
+                List<Faculty> FacultyHolder = new List<Faculty>();
+
+                foreach (FacultyProject fp in FacultyProjects)
+                {
+                    FacultyHolder.Add(ObjectConverter.ToFaculty(DatabaseControls.SelectFilter(6, 6, fp.Faculty_ID))[0]);
+
+                }
 
                 foreach (Grant G in AssociatedGrants)
                 {
@@ -82,22 +118,49 @@ namespace DatabaseSystemIntegration.Pages.Interface
 
                 foreach (BusRep BR in RepHolder)
                 {
-                    MMHolder.Add(ObjectConverter.ToMeetingMinutes(DatabaseControls.SelectFilter(12, 3, BR.Bus_Rep_ID))[0]);
+                    MeetingMinutes[] Holder = ObjectConverter.ToMeetingMinutes(DatabaseControls.SelectFilter(12, 3, BR.Bus_Rep_ID));
+                    if (Holder.Length > 0)
+                    {
+                        MMHolder.Add(Holder[0]);
+                    }
                 }
 
                 BusPartners = PartnerHolder.ToArray();
                 BusReps = RepHolder.ToArray();
                 MeetingNotes = MMHolder.ToArray();
+                FacultyMembers = FacultyHolder.ToArray();
             }
         }
 
+        public IActionResult OnPostSelectGrant(string ID)
+        {
+            HttpContext.Session.SetString("ItemType", "Grant");
+            HttpContext.Session.SetString("ItemID", ID);
+            return RedirectToPage("AccessItem");
+        }
 
-
-
+        public IActionResult OnPostSelectGrantProject(string ID)
+        {
+            HttpContext.Session.SetString("ItemType", "GrantProject");
+            HttpContext.Session.SetString("ItemID", ID);
+            return RedirectToPage("AccessItem");
+        }
         public void OnGet()
         {
            ItemType = HttpContext.Session.GetString("ItemType");
            ItemID = HttpContext.Session.GetString("ItemID");
+            LoadGrant();
+            LoadGrantProject();
+            LoadBusProject();
+        }
+
+        public void OnPost()
+        {
+            ItemType = HttpContext.Session.GetString("ItemType");
+            ItemID = HttpContext.Session.GetString("ItemID");
+            LoadGrant();
+            LoadGrantProject();
+            LoadBusProject();
         }
     }
 }

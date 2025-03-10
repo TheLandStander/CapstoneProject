@@ -1,4 +1,6 @@
-﻿namespace DatabaseSystemIntegration.Pages.Classes
+﻿using DatabaseSystemIntegration.Pages.Tools;
+
+namespace DatabaseSystemIntegration.Pages.Classes
 {
     public class MeetingMinutes
     {
@@ -7,6 +9,13 @@
         public DateTime Meeting_Date { get; set; }
         public string Bus_Rep_ID { get; set; }
         public string Rep_Name { get; set; }
+        public string Bus_Name { get; set; }
+
+        public void SetVars()
+        {
+            Rep_Name = ObjectConverter.ToBusRep(DatabaseControls.SelectFilter(3, 3,Bus_Rep_ID))[0].Rep_Name;
+            Bus_Name = ObjectConverter.ToBusRep(DatabaseControls.SelectFilter(3, 3, Bus_Rep_ID))[0].Bus_Name;
+        }
 
         private string MakeID()
         {
@@ -27,6 +36,7 @@
             Meeting_Notes = Notes;
             Meeting_Date = date;
             Bus_Rep_ID = RepID;
+            SetVars();
         }
 
 

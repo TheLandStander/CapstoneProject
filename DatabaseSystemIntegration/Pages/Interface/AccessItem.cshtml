@@ -2,7 +2,160 @@
 @model DatabaseSystemIntegration.Pages.Interface.AccessItemModel
 @{
 
-    <form method="post">
-        <h1>Item</h1>
+    <form style="text-align: left; margin-bottom: 20px; method="post" asp-page-handler="">
+        @if (HttpContext.Session.GetString("ItemType") == "GrantProject")
+        {
+            <div class="container">
+                <div class="text-center mb-4">
+                    <h3 class="fw-bold">Grant Project</h3>
+                </div>
+
+                <div class="card shadow-lg mx-auto" style="max-width: 800px;">
+                    <div class="card-body">
+                        <h4 class="card-title text-center fw-semibold">@Model.GProject.Project_Name</h4>
+                        <p class="card-text text-center">@Model.GProject.Description</p>
+                            <ul class="list-group list-group-flush mt-2">
+                                @foreach (var partner in Model.BusPartners)
+                                {
+                                    <li class="list-group-item"><strong>Partner:</strong> @partner.Bus_Name</li>
+                                }
+                            </ul>
+                            <br />
+                        <ul class="list-group list-group-flush mt-2">
+                            @foreach (var faculty in Model.FacultyMembers)
+                            {
+                                <li class="list-group-item"><strong>Faculty:</strong> @faculty.Faculty_Name</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+            <table class="table table-bordered table-striped mt-4 mx-auto" style="max-width: 800px; max-height: 700px; overflow-y: auto;">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Representative</th>
+                        <th>Business</th>
+                        <th>Meeting Note</th>
+                        <th>Meeting Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var Meeting in Model.MeetingNotes)
+                    {
+                        <tr>
+                            <td>@Meeting.Rep_Name</td>
+                            <td>@Meeting.Bus_Name</td>
+                            <td>@Meeting.Meeting_Notes</td>
+                            <td>@Meeting.Meeting_Date</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <h3 class="text-center mt-5 mb-3">Grants Associated with This Project</h3>
+            <table class="table table-bordered table-striped mx-auto" style="max-width: 1000px; max-height: 700px; overflow-y: auto;">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Grant Name</th>
+                        <th>Award Amount ($)</th>
+                        <th>Submission Date</th>
+                        <th>Award Date</th>
+                        <th>Category</th>
+                        <th>Status</th>
+                        <th>Lead Faculty</th>
+                        <th>Associated Project</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var grant in Model.AssociatedGrants)
+                    {
+                        <tr>
+                            <td>
+                                <a asp-page-handler="SelectGrant" asp-route-id="@grant.Grant_ID" class="btn btn-link">@grant.Grant_Name</a>
+                            </td>
+                            <td>@grant.Amount</td>
+                            <td>@grant.Submission_Date</td>
+                            <td>@grant.Award_Date</td>
+                            <td>@grant.Grant_Category_Name</td>
+                            <td>@grant.Grant_Status</td>
+                            <td>@grant.Lead_Faculty_Name</td>
+                            <td>@grant.Project_Name</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            }
+        @if (HttpContext.Session.GetString("ItemType") == "BusProject")
+        {
+            <h3 class="text-center mb-4">Business Project</h3>
+
+            <div class="border p-4 rounded bg-light mx-auto" style="max-width: 800px; max-height: 700px; overflow-y: auto;">
+                <h4 class="text-center">@Model.BProject.Project_Name</h4>
+                <p class="mb-2 text-muted">@Model.BProject.Description</p>
+                <p class="mb-2"><strong>Start Date:</strong> @Model.BProject.Start_Date</p>
+                <p class="mb-2"><strong>Due Date:</strong> @Model.BProject.Due_Date</p>
+            </div>
+            <h3 class="text-center mb-4">Project Tasks</h3>
+            <table class="table table-bordered table-striped mt-4 mx-auto" style="max-width: 800px;">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var task in @Model.Tasks)
+                    {
+                        <tr>
+                            <td>@task.Task_Name</td>
+                            <td>@task.Task_Description</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <h3 class="text-center mb-4">Project Notes</h3>
+            <table class="table table-bordered table-striped mt-4 mx-auto" style="max-width: 800px; max-height: 700px; overflow-y: auto;">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Note</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var Note in @Model.ProjectNotes)
+                    {
+                        <tr>
+                            <td>@Note.Project_Note</td>
+                            <td>@Note.Date_Recorded</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+           
+            }
+
+        @if (HttpContext.Session.GetString("ItemType") == "Grant")
+        {
+            <h3 class="text-center mb-4">Grant</h3>
+
+            <div class="border p-4 rounded bg-light mx-auto" style="max-width: 800px; max-height: 700px; overflow-y: auto;">
+                <h4 class="text-center">@Model.ThisGrant.Grant_Name</h4>
+                <p class="mb-2"><strong>Grant Category:</strong> @Model.ThisGrant.Grant_Category_Name</p>
+                <p class="mb-2"><strong>Grant Status:</strong> @Model.ThisGrant.Grant_Status</p>
+                <p class="mb-2"><strong>Award Date:</strong> @Model.ThisGrant.Award_Date</p>
+                <p class="mb-2"><strong>Submission Date:</strong> @Model.ThisGrant.Submission_Date</p>
+                <p class="mb-2"><strong>Award Amount:</strong> @Model.ThisGrant.Amount</p>
+                <p class="mb-2"><strong>Lead Faculty Member:</strong> @Model.ThisGrant.Lead_Faculty_Name</p>
+                <p class="mb-2"><strong>Business Partner:</strong> @Model.ThisGrant.Bus_Name</p>
+                <button class="btn btn-link" asp-page-handler="SelectGrantProject" asp-route-id="@Model.ThisGrant.Grant_Project_ID">@Model.ThisGrant.Project_Name</button>
+            </div> 
+         }
+         
     </form>
+    
+
+
 }

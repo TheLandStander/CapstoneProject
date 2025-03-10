@@ -103,9 +103,12 @@ namespace DatabaseSystemIntegration.Pages.Tools
             SqlCommand cmd = new SqlCommand();
             SqlConnection Database = new SqlConnection(ConnectionString);
             cmd.Connection = Database;
-            cmd.Connection.Open();
+            if (cmd.Connection.State != ConnectionState.Open)
+            {
+                cmd.Connection.Open();
+            }
             cmd.CommandText = "SELECT Info_ID FROM " + Tables[14] + " WHERE User_Name = '" + UserName + "' AND Password = '"  + Password + "'" + ";";
-            SqlDataReader tempReader = cmd.ExecuteReader();
+            SqlDataReader tempReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
             cmd.Dispose();
             return tempReader;
         }
@@ -116,10 +119,13 @@ namespace DatabaseSystemIntegration.Pages.Tools
             SqlCommand cmd = new SqlCommand();
             SqlConnection Database = new SqlConnection(ConnectionString);
             cmd.Connection = Database;
-            cmd.Connection.Open();
+            if (cmd.Connection.State != ConnectionState.Open)
+            {
+                cmd.Connection.Open();
+            }
             cmd.CommandText = "SELECT * FROM " + Tables[Table] + ";" ;
 
-            SqlDataReader tempReader = cmd.ExecuteReader();
+            SqlDataReader tempReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
             cmd.Dispose();
             return tempReader;
         }
@@ -130,12 +136,15 @@ namespace DatabaseSystemIntegration.Pages.Tools
             SqlCommand cmd = new SqlCommand();
             SqlConnection Database = new SqlConnection(ConnectionString);
             cmd.Connection = Database;
-            cmd.Connection.Open();
+            if (cmd.Connection.State != ConnectionState.Open)
+            {
+                cmd.Connection.Open();
+            }
             cmd.CommandText = "SELECT * FROM " + Tables[Foreign] + " JOIN " + Tables[Primary] + " ON " +
             Tables[Foreign] + "." + Keys[JoinColumn] + " = " + Tables[Primary] + "." + Keys[JoinColumn] + ";";
 
 
-            SqlDataReader tempReader = cmd.ExecuteReader();
+            SqlDataReader tempReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
             cmd.Dispose();
             return tempReader;
         }
@@ -146,13 +155,16 @@ namespace DatabaseSystemIntegration.Pages.Tools
             SqlCommand cmd = new SqlCommand();
             SqlConnection Database = new SqlConnection(ConnectionString);
             cmd.Connection = Database;
-            cmd.Connection.Open();
+            if (cmd.Connection.State != ConnectionState.Open)
+            {
+                cmd.Connection.Open();
+            }
             cmd.CommandText = "SELECT * FROM " + Tables[Foreign] + " JOIN " + Tables[Primary] + " ON " +
             Tables[Foreign] + "." + Keys[JoinColumn] + " = " + Tables[Primary] + "." + Keys[JoinColumn] + " WHERE " +
             Keys[IDField] + " = " + Identifier + ";";
 
 
-            SqlDataReader tempReader = cmd.ExecuteReader();
+            SqlDataReader tempReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
             cmd.Dispose();
             return tempReader;
         }
@@ -163,9 +175,12 @@ namespace DatabaseSystemIntegration.Pages.Tools
             SqlCommand cmd = new SqlCommand();
             SqlConnection Database = new SqlConnection(ConnectionString);
             cmd.Connection = Database;
-            cmd.Connection.Open();
+            if (cmd.Connection.State != ConnectionState.Open)
+            {
+                cmd.Connection.Open();
+            }
             cmd.CommandText = "SELECT * FROM " + Tables[SearchTable] + " Where " + Keys[SearchField] + " = '" + Identifier + "' ;";
-            SqlDataReader tempReader = cmd.ExecuteReader();
+            SqlDataReader tempReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
             cmd.Dispose();
             return tempReader;
         }
@@ -249,7 +264,10 @@ namespace DatabaseSystemIntegration.Pages.Tools
             SqlConnection Database = new SqlConnection(ConnectionString);
             cmd.Connection = Database;
             cmd.CommandText = sqlQuery;
-            cmd.Connection.Open(); // Open connection here, close in Model!
+            if (cmd.Connection.State != ConnectionState.Open)
+            {
+                cmd.Connection.Open();
+            }
 
             cmd.ExecuteNonQuery();
             cmd.Dispose();
@@ -279,9 +297,11 @@ namespace DatabaseSystemIntegration.Pages.Tools
             SqlConnection Database = new SqlConnection(ConnectionString);
             cmd.Connection = Database;
             cmd.CommandText = sqlQuery;
-            cmd.Connection.Open(); // Open connection here, close in Model!
+            cmd.Connection.Open();
+
             cmd.ExecuteNonQuery();
             cmd.Dispose();
+            cmd.Connection.Close();
 
         }
 
@@ -299,10 +319,13 @@ namespace DatabaseSystemIntegration.Pages.Tools
             SqlConnection Database = new SqlConnection(ConnectionString);
             cmd.Connection = Database;
             cmd.CommandText = sqlQuery;
-            cmd.Connection.Open(); // Open connection here, close in Model!
+            if (cmd.Connection.State != ConnectionState.Open)
+            {
+                cmd.Connection.Open();
+            }
             cmd.ExecuteNonQuery();
             cmd.Dispose();
-            cmd.Dispose();
+            cmd.Connection.Close();
 
         }
 
@@ -319,11 +342,14 @@ namespace DatabaseSystemIntegration.Pages.Tools
             SqlConnection Database = new SqlConnection(ConnectionString);
             cmd.Connection = Database;
             cmd.CommandText = sqlQuery;
-            cmd.Connection.Open(); // Open connection here, close in Model!
+            if (cmd.Connection.State != ConnectionState.Open)
+            {
+                cmd.Connection.Open();
+            }
 
             cmd.ExecuteNonQuery();
             cmd.Dispose();
-            cmd.Dispose();
+            cmd.Connection.Close();
 
         }
 
@@ -342,10 +368,13 @@ namespace DatabaseSystemIntegration.Pages.Tools
             SqlConnection Database = new SqlConnection(ConnectionString);
             cmd.Connection = Database;
             cmd.CommandText = sqlQuery;
-            cmd.Connection.Open(); // Open connection here, close in Model!
+            if (cmd.Connection.State != ConnectionState.Open)
+            {
+                cmd.Connection.Open();
+            }
             cmd.ExecuteNonQuery();
             cmd.Dispose();
-
+            cmd.Connection.Close();
         }
 
         public static void InsertBusRep(BusRep BR)
@@ -361,10 +390,13 @@ namespace DatabaseSystemIntegration.Pages.Tools
             SqlConnection Database = new SqlConnection(ConnectionString);
             cmd.Connection = Database;
             cmd.CommandText = sqlQuery;
-            cmd.Connection.Open(); // Open connection here, close in Model!
+            if (cmd.Connection.State != ConnectionState.Open)
+            {
+                cmd.Connection.Open();
+            }
             cmd.ExecuteNonQuery();
             cmd.Dispose();
-
+            cmd.Connection.Close();
         }
 
         public static void InsertBusProject(BusProject BP)
@@ -382,11 +414,14 @@ namespace DatabaseSystemIntegration.Pages.Tools
             SqlConnection Database = new SqlConnection(ConnectionString);
             cmd.Connection = Database;
             cmd.CommandText = sqlQuery;
-            cmd.Connection.Open(); // Open connection here, close in Model!
+            if (cmd.Connection.State != ConnectionState.Open)
+            {
+                cmd.Connection.Open();
+            }
 
             cmd.ExecuteNonQuery();
             cmd.Dispose();
-
+            cmd.Connection.Close();
         }
 
         public static void InsertTask(Classes.Task T)
@@ -402,11 +437,14 @@ namespace DatabaseSystemIntegration.Pages.Tools
             SqlConnection Database = new SqlConnection(ConnectionString);
             cmd.Connection = Database;
             cmd.CommandText = sqlQuery;
-            cmd.Connection.Open(); // Open connection here, close in Model!
+            if (cmd.Connection.State != ConnectionState.Open)
+            {
+                cmd.Connection.Open();
+            }
 
             cmd.ExecuteNonQuery();
             cmd.Dispose();
-
+            cmd.Connection.Close();
         }
 
         public static void InsertGrantProject(GrantProject GP)
@@ -421,11 +459,14 @@ namespace DatabaseSystemIntegration.Pages.Tools
             SqlConnection Database = new SqlConnection(ConnectionString);
             cmd.Connection = Database;
             cmd.CommandText = sqlQuery;
-            cmd.Connection.Open(); // Open connection here, close in Model!
+            if (cmd.Connection.State != ConnectionState.Open)
+            {
+                cmd.Connection.Open();
+            }
 
             cmd.ExecuteNonQuery();
             cmd.Dispose();
-
+            cmd.Connection.Close();
         }
 
         public static void InsertProjectNote(ProjectNotes PN)
@@ -441,11 +482,15 @@ namespace DatabaseSystemIntegration.Pages.Tools
             SqlConnection Database = new SqlConnection(ConnectionString);
             cmd.Connection = Database;
             cmd.CommandText = sqlQuery;
-            cmd.Connection.Open(); // Open connection here, close in Model!
+            if (cmd.Connection.State != ConnectionState.Open)
+            {
+                cmd.Connection.Open();
+            }
+            
 
             cmd.ExecuteNonQuery();
             cmd.Dispose();
-
+            cmd.Connection.Close();
         }
 
         public static void InsertMeetingMinutes(MeetingMinutes MM)
@@ -461,11 +506,14 @@ namespace DatabaseSystemIntegration.Pages.Tools
             SqlConnection Database = new SqlConnection(ConnectionString);
             cmd.Connection = Database;
             cmd.CommandText = sqlQuery;
-            cmd.Connection.Open(); // Open connection here, close in Model!
+            if (cmd.Connection.State != ConnectionState.Open)
+            {
+                cmd.Connection.Open();
+            }
 
             cmd.ExecuteNonQuery();
             cmd.Dispose();
-
+            cmd.Connection.Close();
         }
 
 
@@ -483,11 +531,14 @@ namespace DatabaseSystemIntegration.Pages.Tools
             SqlConnection Database = new SqlConnection(ConnectionString);
             cmd.Connection = Database;
             cmd.CommandText = sqlQuery;
-            cmd.Connection.Open(); // Open connection here, close in Model!
+            if (cmd.Connection.State != ConnectionState.Open)
+            {
+                cmd.Connection.Open();
+            }
 
             cmd.ExecuteNonQuery();
             cmd.Dispose();
-
+            cmd.Connection.Close();
         }
 
         public static void AssignFacultyProject(FacultyProject FP)
@@ -502,10 +553,14 @@ namespace DatabaseSystemIntegration.Pages.Tools
             SqlConnection Database = new SqlConnection(ConnectionString);
             cmd.Connection = Database;
             cmd.CommandText = sqlQuery;
-            cmd.Connection.Open(); // Open connection here, close in Model!
+            if (cmd.Connection.State != ConnectionState.Open)
+            {
+                cmd.Connection.Open();
+            }
 
             cmd.ExecuteNonQuery();
             cmd.Dispose();
+            cmd.Connection.Close();
         }
 
         public static void UpdateBusProject(string ID, DateOnly EndDate)
@@ -516,10 +571,14 @@ namespace DatabaseSystemIntegration.Pages.Tools
             SqlConnection Database = new SqlConnection(ConnectionString);
             cmd.Connection = Database;
             cmd.CommandText = sqlQuery;
-            cmd.Connection.Open(); // Open connection here, close in Model!
+            if (cmd.Connection.State != ConnectionState.Open)
+            {
+                cmd.Connection.Open();
+            }
 
             cmd.ExecuteNonQuery();
             cmd.Dispose();
+            cmd.Connection.Close();
 
         }
 
@@ -538,9 +597,13 @@ namespace DatabaseSystemIntegration.Pages.Tools
             SqlConnection Database = new SqlConnection(ConnectionString);
             cmd.Connection = Database;
             cmd.CommandText = sqlQuery;
-            cmd.Connection.Open(); // Open connection here, close in Model!
+            if (cmd.Connection.State != ConnectionState.Open)
+            {
+                cmd.Connection.Open();
+            }
 
             cmd.ExecuteNonQuery();
+            cmd.Connection.Close();
 
         }
 
@@ -549,9 +612,12 @@ namespace DatabaseSystemIntegration.Pages.Tools
             SqlCommand cmd = new SqlCommand();
             SqlConnection Database = new SqlConnection(ConnectionString);
             cmd.Connection = Database;
-            cmd.Connection.Open();
+            if (cmd.Connection.State != ConnectionState.Open)
+            {
+                cmd.Connection.Open();
+            }
             cmd.CommandText = "SELECT * FROM " + Tables[17] + " WHERE " + "Receiver_ID" + " = '" + ID + "' ;";
-            SqlDataReader tempReader = cmd.ExecuteReader();
+            SqlDataReader tempReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
             cmd.Dispose();
             return tempReader;
         }
