@@ -13,12 +13,12 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand ms-auto" asp-page="/index">Logout</a>
+                <a class="navbar-brand ms-auto" asp-page="index">Logout</a>
             </div>
             <div class="container-fluid">
                 @if (Context.Session.GetInt32("LoggedIn") == 1)
                 {
-                    <a class="navbar-brand" href="#">@Context.Session.GetString("UserName")</a>
+                    <a class="navbar-brand" asp-page="Project-Dashboard">@Context.Session.GetString("UserName")</a>
                 }
                 else
                 {

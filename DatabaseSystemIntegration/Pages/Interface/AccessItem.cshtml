@@ -14,13 +14,13 @@
                     <div class="card-body">
                         <h4 class="card-title text-center fw-semibold">@Model.GProject.Project_Name</h4>
                         <p class="card-text text-center">@Model.GProject.Description</p>
-                            <ul class="list-group list-group-flush mt-2">
-                                @foreach (var partner in Model.BusPartners)
-                                {
-                                    <li class="list-group-item"><strong>Partner:</strong> @partner.Bus_Name</li>
-                                }
-                            </ul>
-                            <br />
+                        <ul class="list-group list-group-flush mt-2">
+                            @foreach (var partner in Model.BusPartners)
+                            {
+                                <li class="list-group-item"><strong>Partner:</strong> @partner.Bus_Name</li>
+                            }
+                        </ul>
+                        <br />
                         <ul class="list-group list-group-flush mt-2">
                             @foreach (var faculty in Model.FacultyMembers)
                             {
@@ -30,7 +30,6 @@
                     </div>
                 </div>
             </div>
-
 
             <table class="table table-bordered table-striped mt-4 mx-auto" style="max-width: 800px; max-height: 700px; overflow-y: auto;">
                 <thead class="thead-light">
@@ -86,7 +85,8 @@
                     }
                 </tbody>
             </table>
-            }
+        }
+
         @if (HttpContext.Session.GetString("ItemType") == "BusProject")
         {
             <h3 class="text-center mb-4">Business Project</h3>
@@ -97,7 +97,8 @@
                 <p class="mb-2"><strong>Start Date:</strong> @Model.BProject.Start_Date</p>
                 <p class="mb-2"><strong>Due Date:</strong> @Model.BProject.Due_Date</p>
             </div>
-            <h3 class="text-center mb-4">Project Tasks</h3>
+
+            <h3 class="text-center mt-5 mb-4">Project Tasks</h3>
             <table class="table table-bordered table-striped mt-4 mx-auto" style="max-width: 800px;">
                 <thead class="thead-light">
                     <tr>
@@ -116,7 +117,7 @@
                 </tbody>
             </table>
 
-            <h3 class="text-center mb-4">Project Notes</h3>
+            <h3 class="text-center mt-5 mb-4">Project Notes</h3>
             <table class="table table-bordered table-striped mt-4 mx-auto" style="max-width: 800px; max-height: 700px; overflow-y: auto;">
                 <thead class="thead-light">
                     <tr>
@@ -134,8 +135,7 @@
                     }
                 </tbody>
             </table>
-           
-            }
+        }
 
         @if (HttpContext.Session.GetString("ItemType") == "Grant")
         {
@@ -150,10 +150,10 @@
                 <p class="mb-2"><strong>Award Amount:</strong> @Model.ThisGrant.Amount</p>
                 <p class="mb-2"><strong>Lead Faculty Member:</strong> @Model.ThisGrant.Lead_Faculty_Name</p>
                 <p class="mb-2"><strong>Business Partner:</strong> @Model.ThisGrant.Bus_Name</p>
+                <h4 class="text-center">Associated Grant Project</h4>
                 <button class="btn btn-link" asp-page-handler="SelectGrantProject" asp-route-id="@Model.ThisGrant.Grant_Project_ID">@Model.ThisGrant.Project_Name</button>
-            </div> 
-         }
-         
+            </div>
+        }
     </form>
     
 

@@ -5,91 +5,112 @@
     //loop through each string array and set the column headers to array values
 
     <form method="post">
-    @if (HttpContext.Session.GetString("UserType") == "Admin" ||HttpContext.Session.GetString("UserType") == "BusPartner" ||
-    HttpContext.Session.GetString("UserType") == "BusRep" || HttpContext.Session.GetString("UserType") == "Faculty")
-    {
-    <h2 style="text-align: center; margin-bottom: 20px;">Grants</h2>
-    <table border="1" style="width: 100%; margin: 0 auto;">
-            <tr>
-                <th style="padding: 10px; text-align: left;">Grant Name</th>
-                <th style="padding: 10px; text-align: left;">Award Amount $</th>
-                <th style="padding: 10px; text-align: left;">Submission Date</th>
-                <th style="padding: 10px; text-align: left;">Award Date</th>
-                <th style="padding: 10px; text-align: left;">Category</th>
-                <th style="padding: 10px; text-align: left;">Status</th>
-                <th style="padding: 10px; text-align: left;">Lead Faculty</th>
-                <th style="padding: 10px; text-align: left;">Associated Project</th>
-            </tr>
-        <tbody>
-            @for (int i = 0; i < Model.Grants.Length; i++)
-            {
-                <tr>
-                    <td style="padding: 8px;">
-                                <button class="btn btn-link" asp-page-handler="SelectGrant" asp-route-id="@Model.Grants[i].Grant_ID">@Model.Grants[i].Grant_Name</button>
-                    
-                    </td>
-                    <td style="padding: 8px;">@Model.Grants[i].Amount</td>
-                    <td style="padding: 8px;">@Model.Grants[i].Submission_Date</td>
-                    <td style="padding: 8px;">@Model.Grants[i].Award_Date</td>
-                    <td style="padding: 8px;">@Model.Grants[i].Grant_Category_Name</td>
-                    <td style="padding: 8px;">@Model.Grants[i].Grant_Status</td>
-                    <td style="padding: 8px;">@Model.Grants[i].Lead_Faculty_Name</td>
-                    <td style="padding: 8px;">@Model.Grants[i].Project_Name</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-    }
-    @if (HttpContext.Session.GetString("UserType") == "Admin" || HttpContext.Session.GetString("UserType") == "Faculty")
-    {
-    <h2 style="text-align: center; margin-top: 50px; margin-bottom: 20px;">Projects Asssociated With Grants</h2>
-    <table border="1" style="width: 100%; margin: 0 auto;" form method="get">
-            <tr>
-                <th style="padding: 10px; text-align: left;">Project Name</th>
-                <th style="padding: 10px; text-align: left;">Project Description</th>
-                <th style="padding: 10px; text-align: left;">Faculty</th>
-            </tr>
-        <tbody>
-                @for (int i = 0; i < Model.FacultyProject.Length; i++)
-                {
-                    <tr>
-                        <td style="padding: 8px;">
-                                <button class="btn btn-link" asp-page-handler="SelectGrantProject" asp-route-id="@Model.FacultyProject[i].Grant_Project_ID">@Model.FacultyProject[i].Grant_Project_Name</button>
-                        </td>
-                        <td style="padding: 8px;">@Model.FacultyProject[i].Grant_Project_Desc</td>
-                        <td style="padding: 8px;">@Model.FacultyProject[i].Faculty_Name</td>
-                    </tr>
-                }
-        </tbody>
-    
-    </table>
-    <br/>
-        }
-    @if (HttpContext.Session.GetString("UserType") == "Employee" || HttpContext.Session.GetString("UserType") == "Admin")
-    {
-        <h2 style="text-align: center; margin-top: 50px; margin-bottom: 20px;">Business Projects</h2>
-        <table border="1" style="width: 100%; margin: 0 auto;" form method="get">
-            <tr>
-                <th style="padding: 10px; text-align: left;">Project Name</th>
-                <th style="padding: 10px; text-align: left;">Project Description</th>
-                <th style="padding: 10px; text-align: left;">Project Start Date</th>
-                <th style="padding: 10px; text-align: left;">Project Due Date</th>
-            </tr>
-            <tbody>
-                @for (int i = 0; i < Model.BusProjects.Length; i++)
-                {
-                    <tr>
-                        <td style="padding: 8px;">
-                                <button class="btn btn-link" asp-page-handler="SelectBusProject" asp-route-id="@Model.BusProjects[i].Bus_Project_ID">@Model.BusProjects[i].Project_Name</button>
-                        </td>
-                        <td style="padding: 8px;">@Model.BusProjects[i].Description</td>
-                        <td style="padding: 8px;">@Model.BusProjects[i].Start_Date</td>
-                        <td style="padding: 8px;">@Model.BusProjects[i].Due_Date</td>
-                    </tr>
-                }
-            </tbody>
+        @using Microsoft.AspNetCore.Mvc.Rendering
 
-        </table>
+        <style>
+            .table-container {
+                margin: 20px auto;
+                max-width: 100%;
+            }
+        </style>
+
+        @if (HttpContext.Session.GetString("UserType") == "Admin" ||
+    HttpContext.Session.GetString("UserType") == "BusPartner" ||
+    HttpContext.Session.GetString("UserType") == "BusRep" ||
+    HttpContext.Session.GetString("UserType") == "Faculty")
+        {
+            <h2 class="text-center mb-4">Grants</h2>
+            <div class="table-container">
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Grant Name</th>
+                            <th>Award Amount ($)</th>
+                            <th>Submission Date</th>
+                            <th>Award Date</th>
+                            <th>Category</th>
+                            <th>Status</th>
+                            <th>Lead Faculty</th>
+                            <th>Associated Project</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var grant in Model.Grants)
+                        {
+                            <tr>
+                                <td>
+                                    <button class="btn btn-link" asp-page-handler="SelectGrant" asp-route-id="@grant.Grant_ID">@grant.Grant_Name</button>
+                                </td>
+                                <td>@grant.Amount</td>
+                                <td>@grant.Submission_Date</td>
+                                <td>@grant.Award_Date</td>
+                                <td>@grant.Grant_Category_Name</td>
+                                <td>@grant.Grant_Status</td>
+                                <td>@grant.Lead_Faculty_Name</td>
+                                <td>@grant.Project_Name</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+
+        @if (HttpContext.Session.GetString("UserType") == "Admin" || HttpContext.Session.GetString("UserType") == "Faculty")
+        {
+            <h2 class="text-center mt-5 mb-4">Projects Associated With Grants</h2>
+            <div class="table-container">
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Project Name</th>
+                            <th>Project Description</th>
+                            <th>Faculty</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var project in Model.FacultyProject)
+                        {
+                            <tr>
+                                <td>
+                                    <button class="btn btn-link" asp-page-handler="SelectGrantProject" asp-route-id="@project.Grant_Project_ID">@project.Grant_Project_Name</button>
+                                </td>
+                                <td>@project.Grant_Project_Desc</td>
+                                <td>@project.Faculty_Name</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+
+        @if (HttpContext.Session.GetString("UserType") == "Employee" || HttpContext.Session.GetString("UserType") == "Admin")
+        {
+            <h2 class="text-center mt-5 mb-4">Business Projects</h2>
+            <div class="table-container">
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Project Name</th>
+                            <th>Project Description</th>
+                            <th>Project Start Date</th>
+                            <th>Project Due Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var busProject in Model.BusProjects)
+                        {
+                            <tr>
+                                <td>
+                                    <button class="btn btn-link" asp-page-handler="SelectBusProject" asp-route-id="@busProject.Bus_Project_ID">@busProject.Project_Name</button>
+                                </td>
+                                <td>@busProject.Description</td>
+                                <td>@busProject.Start_Date</td>
+                                <td>@busProject.Due_Date</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
     }
     </form>
 }
