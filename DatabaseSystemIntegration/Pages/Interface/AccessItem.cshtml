@@ -72,13 +72,26 @@
                     {
                         <tr>
                             <td>
-                                <a asp-page-handler="SelectGrant" asp-route-id="@grant.Grant_ID" class="btn btn-link">@grant.Grant_Name</a>
+                                <button asp-page-handler="SelectGrant" asp-route-id="@grant.Grant_ID" class="btn btn-link">@grant.Grant_Name</button>
                             </td>
                             <td>@grant.Amount</td>
                             <td>@grant.Submission_Date</td>
                             <td>@grant.Award_Date</td>
                             <td>@grant.Grant_Category_Name</td>
-                            <td>@grant.Grant_Status</td>
+                            @if (@grant.Grant_Status == "Accepted")
+                            {
+                                <td class="text-success">@grant.Grant_Status</td>
+     
+                            }
+                            @if (@grant.Grant_Status == "Pending")
+                            {
+                                <td class="text-warning"> @grant.Grant_Status</td>
+                               
+                            }
+                            @if (@grant.Grant_Status == "Rejected")
+                            {
+                                <td class="text-danger"> @grant.Grant_Status</td>
+                            }
                             <td>@grant.Lead_Faculty_Name</td>
                             <td>@grant.Project_Name</td>
                         </tr>
@@ -96,6 +109,9 @@
                 <p class="mb-2 text-muted">@Model.BProject.Description</p>
                 <p class="mb-2"><strong>Start Date:</strong> @Model.BProject.Start_Date</p>
                 <p class="mb-2"><strong>Due Date:</strong> @Model.BProject.Due_Date</p>
+                <p class="mb-2"><strong>End Date:</strong> @Model.BProject.End_Date</p>
+                <input type="date" asp-for="ProjectEndDate" style="width: 300px;" class="form-control" />
+                <button asp-page-handler="UpdateProject" class="btn-close-white">Update Project</button>
             </div>
 
             <h3 class="text-center mt-5 mb-4">Project Tasks</h3>
@@ -144,15 +160,38 @@
             <div class="border p-4 rounded bg-light mx-auto" style="max-width: 800px; max-height: 700px; overflow-y: auto;">
                 <h4 class="text-center">@Model.ThisGrant.Grant_Name</h4>
                 <p class="mb-2"><strong>Grant Category:</strong> @Model.ThisGrant.Grant_Category_Name</p>
-                <p class="mb-2"><strong>Grant Status:</strong> @Model.ThisGrant.Grant_Status</p>
+                @if (@Model.ThisGrant.Grant_Status == "Accepted")
+                {
+                    <p class="text-success">@Model.ThisGrant.Grant_Status</p>
+                }
+                @if (@Model.ThisGrant.Grant_Status == "Pending")
+                {
+                    <p class="text-warning">@Model.ThisGrant.Grant_Status</p>
+                }
+                @if (@Model.ThisGrant.Grant_Status == "Rejected")
+                {
+                    <p class="text-danger">@Model.ThisGrant.Grant_Status</p>
+                }
+                <p class="mb-2"><strong>Update Status:</strong></p>
+                <select asp-for="GrantStatusID" class="form-control">
+                    @foreach (var status in Model.Statuses)
+                    {
+                        <option value="@status.Grant_Status_ID">@status.Grant_Status</option>
+                    }
+                </select>
+                <input type="date" asp-for="GrantAwardDate" style="width: 300px;" class="form-control" />
+                <button class="btn-close-white" asp-page-handler="UpdateGrant"> <strong>Update Award Date</strong></button>
+                <button class="btn-close-white" asp-page-handler="UpdateGrantStatus"> <strong>Update Grant Status</strong></button>
                 <p class="mb-2"><strong>Award Date:</strong> @Model.ThisGrant.Award_Date</p>
                 <p class="mb-2"><strong>Submission Date:</strong> @Model.ThisGrant.Submission_Date</p>
                 <p class="mb-2"><strong>Award Amount:</strong> @Model.ThisGrant.Amount</p>
                 <p class="mb-2"><strong>Lead Faculty Member:</strong> @Model.ThisGrant.Lead_Faculty_Name</p>
                 <p class="mb-2"><strong>Business Partner:</strong> @Model.ThisGrant.Bus_Name</p>
-                <h4 class="text-center">Associated Grant Project</h4>
-                <button class="btn btn-link" asp-page-handler="SelectGrantProject" asp-route-id="@Model.ThisGrant.Grant_Project_ID">@Model.ThisGrant.Project_Name</button>
-            </div>
+                <button class="btn btn-link" asp-page-handler="SelectGrantProject"
+                        asp-route-id="@Model.ThisGrant.Grant_Project_ID">
+                    <strong>Associted Project: @Model.ThisGrant.Project_Name</strong>
+                </button>
+                </div>
         }
     </form>
     

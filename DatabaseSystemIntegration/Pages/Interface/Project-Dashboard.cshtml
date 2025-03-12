@@ -45,7 +45,18 @@
                                 <td>@grant.Submission_Date</td>
                                 <td>@grant.Award_Date</td>
                                 <td>@grant.Grant_Category_Name</td>
-                                <td>@grant.Grant_Status</td>
+                                @if (@grant.Grant_Status == "Accepted")
+                                {
+                                    <td class="text-success">@grant.Grant_Status</td>
+                                }
+                                @if (@grant.Grant_Status == "Pending")
+                                {
+                                    <td class="text-warning">@grant.Grant_Status</td>
+                                }
+                                @if (@grant.Grant_Status == "Rejected")
+                                {
+                                    <td class="text-danger">@grant.Grant_Status</td>
+                                }
                                 <td>@grant.Lead_Faculty_Name</td>
                                 <td>@grant.Project_Name</td>
                             </tr>
@@ -94,6 +105,7 @@
                             <th>Project Description</th>
                             <th>Project Start Date</th>
                             <th>Project Due Date</th>
+                            <th>Project End Date</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -106,6 +118,10 @@
                                 <td>@busProject.Description</td>
                                 <td>@busProject.Start_Date</td>
                                 <td>@busProject.Due_Date</td>
+                                @if (@busProject.End_Date > DateOnly.MinValue)
+                                {
+                                <td>@busProject.End_Date</td>
+                                }
                             </tr>
                         }
                     </tbody>

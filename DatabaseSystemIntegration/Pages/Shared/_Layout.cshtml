@@ -13,7 +13,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand ms-auto" asp-page="index">Logout</a>
+                <a class="navbar-brand ms-auto" asp-page="/index">Logout</a>
             </div>
             <div class="container-fluid">
                 @if (Context.Session.GetInt32("LoggedIn") == 1)
@@ -22,7 +22,7 @@
                 }
                 else
                 {
-                    <a class="navbar-brand" href="#">Sign In</a>
+                    <a class="navbar-brand"  asp-page="/Index">Sign In</a>
                 }
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>

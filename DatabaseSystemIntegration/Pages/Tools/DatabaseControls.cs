@@ -566,21 +566,49 @@ namespace DatabaseSystemIntegration.Pages.Tools
         public static void UpdateBusProject(string ID, DateOnly EndDate)
         {
             String sqlQuery = "UPDATE BusProject SET END_DATE = '" + EndDate + "' WHERE Bus_Project_ID = " + ID + ";";
+            SqlCommand cmd = new SqlCommand();
+            SqlConnection Database = new SqlConnection(ConnectionString);
+            cmd.Connection = Database;
+            cmd.CommandText = sqlQuery;
+            cmd.Connection.Open();
+            cmd.ExecuteNonQuery();
+            cmd.Dispose();
+            cmd.Connection.Close();
+
+        }
+
+        public static void UpdateGrantAwardDate(string ID, DateOnly AwardDate)
+        {
+            String sqlQuery = "UPDATE Grants SET AWARD_DATE = '" + AwardDate + "' WHERE GRANT_ID = " + ID + ";";
 
             SqlCommand cmd = new SqlCommand();
             SqlConnection Database = new SqlConnection(ConnectionString);
             cmd.Connection = Database;
             cmd.CommandText = sqlQuery;
-            if (cmd.Connection.State != ConnectionState.Open)
-            {
-                cmd.Connection.Open();
-            }
+            cmd.Connection.Open();
 
             cmd.ExecuteNonQuery();
             cmd.Dispose();
             cmd.Connection.Close();
 
         }
+
+        public static void UpdateGrantStatus(string ID, string Status)
+        {
+            String sqlQuery = "UPDATE Grants SET STATUS_ID = '" + Status + "' WHERE GRANT_ID = " + ID + ";";
+
+            SqlCommand cmd = new SqlCommand();
+            SqlConnection Database = new SqlConnection(ConnectionString);
+            cmd.Connection = Database;
+            cmd.CommandText = sqlQuery;
+            cmd.Connection.Open();
+
+            cmd.ExecuteNonQuery();
+            cmd.Dispose();
+            cmd.Connection.Close();
+
+        }
+
 
         public static void SendMessage(Classes.Message M)
         {
@@ -597,10 +625,7 @@ namespace DatabaseSystemIntegration.Pages.Tools
             SqlConnection Database = new SqlConnection(ConnectionString);
             cmd.Connection = Database;
             cmd.CommandText = sqlQuery;
-            if (cmd.Connection.State != ConnectionState.Open)
-            {
-                cmd.Connection.Open();
-            }
+            cmd.Connection.Open();
 
             cmd.ExecuteNonQuery();
             cmd.Connection.Close();
@@ -612,10 +637,8 @@ namespace DatabaseSystemIntegration.Pages.Tools
             SqlCommand cmd = new SqlCommand();
             SqlConnection Database = new SqlConnection(ConnectionString);
             cmd.Connection = Database;
-            if (cmd.Connection.State != ConnectionState.Open)
-            {
-                cmd.Connection.Open();
-            }
+            cmd.Connection.Open();
+
             cmd.CommandText = "SELECT * FROM " + Tables[17] + " WHERE " + "Receiver_ID" + " = '" + ID + "' ;";
             SqlDataReader tempReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
             cmd.Dispose();

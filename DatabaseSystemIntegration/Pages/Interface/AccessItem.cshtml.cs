@@ -1,6 +1,7 @@
 using DatabaseSystemIntegration.Pages.Classes;
 using DatabaseSystemIntegration.Pages.Tools;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Runtime.CompilerServices;
 
@@ -8,7 +9,22 @@ namespace DatabaseSystemIntegration.Pages.Interface
 {
     public class AccessItemModel : PageModel
     {
-        
+
+        [BindProperty]
+        public string GrantStatusID { get; set; } 
+
+        [BindProperty]
+        public string ProjectStatusID { get; set; }
+
+        [BindProperty]
+        public DateOnly GrantAwardDate { get; set; }
+
+        [BindProperty]
+        public DateOnly ProjectEndDate { get; set; }
+
+        [BindProperty]
+        public GrantStatus[] Statuses { get; set; } = ObjectConverter.ToGrantStatus(DatabaseControls.SelectNoFilter(11));
+
         public string ItemType { get; set; }
 
         
@@ -36,9 +52,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
 
         public EmployeeProject[] EmployeeProjects { get; set; }
 
-        
         public Grant ThisGrant { get; set; }
-
 
         public Grant[] AssociatedGrants { get; set; }
 
@@ -50,11 +64,8 @@ namespace DatabaseSystemIntegration.Pages.Interface
 
     
         public Faculty[] FacultyMembers { get; set; }
-
-
       
         public Employee[] Employees { get; set; }
-
 
 
         public void LoadGrant()
@@ -131,11 +142,36 @@ namespace DatabaseSystemIntegration.Pages.Interface
                 FacultyMembers = FacultyHolder.ToArray();
             }
         }
-
         public IActionResult OnPostSelectGrant(string ID)
         {
             HttpContext.Session.SetString("ItemType", "Grant");
             HttpContext.Session.SetString("ItemID", ID);
+            return RedirectToPage("AccessItem");
+        }
+
+        public IActionResult OnPostUpdateProject()
+        {
+            SetVars();
+            if (ProjectEndDate > BProject.Start_Date)
+            {
+                DatabaseControls.UpdateBusProject(ItemID, ProjectEndDate);
+            }
+            return RedirectToPage("AccessItem");
+        }
+
+        public IActionResult OnPostUpdateGrant()
+        {
+            SetVars();
+            if (ThisGrant.Award_Date > ThisGrant.Submission_Date)
+            {
+                DatabaseControls.UpdateGrantAwardDate(ItemID, GrantAwardDate);
+            }
+            return RedirectToPage("AccessItem");
+        }
+        public IActionResult OnPostUpdateGrantStatus()
+        {
+            SetVars();
+            DatabaseControls.UpdateGrantStatus(ItemID, GrantStatusID);
             return RedirectToPage("AccessItem");
         }
 
@@ -145,22 +181,28 @@ namespace DatabaseSystemIntegration.Pages.Interface
             HttpContext.Session.SetString("ItemID", ID);
             return RedirectToPage("AccessItem");
         }
-        public void OnGet()
+
+        public void SetVars()
         {
-           ItemType = HttpContext.Session.GetString("ItemType");
-           ItemID = HttpContext.Session.GetString("ItemID");
+            ItemType = HttpContext.Session.GetString("ItemType");
+            ItemID = HttpContext.Session.GetString("ItemID");
+            Statuses = ObjectConverter.ToGrantStatus(DatabaseControls.SelectNoFilter(11));
             LoadGrant();
             LoadGrantProject();
             LoadBusProject();
         }
 
+        public void OnGet()
+        {
+            SetVars();
+            GrantAwardDate = DateOnly.Parse(DateTime.Now.ToString("yyyy-MM-dd"));
+            ProjectEndDate = DateOnly.Parse(DateTime.Now.ToString("yyyy-MM-dd"));
+        }
+
         public void OnPost()
         {
-            ItemType = HttpContext.Session.GetString("ItemType");
-            ItemID = HttpContext.Session.GetString("ItemID");
-            LoadGrant();
-            LoadGrantProject();
-            LoadBusProject();
+            SetVars();
+
         }
     }
 }
