@@ -1,0 +1,228 @@
+﻿@page
+@model DatabaseSystemIntegration.Pages.Interface.SearchModel
+@{
+
+    <form method="post">
+        <h4 class="text-black" style="text-align: center;"><strong>Select Filter:</strong></h4>
+        <br />
+        <select style="width: 300px; height: 300px; text-align: center; margin: 0 auto;" asp-for="SelectedFilter" class="form-control">
+            @foreach (var v in Model.Filters)
+            {
+                <option value="@v" style="text-align: center; font-size: 24px;">@v</option>
+            }
+        </select>
+
+                <br />
+            <p class="text-black" style="text-align: left;"><strong>Select Grant Status to Filter:</strong></p>
+        <select style = "max-width:150px;" asp-for="GStatus" class="form-control">
+            @foreach (var v in Model.GrantStatus)
+            {
+                <option value="@v.Grant_Status">@v.Grant_Status</option>
+            }
+        </select>
+                <br />
+         <p class="text-black" style="text-align: left;"><strong>Select Grant Category to Filter:</strong></p>
+        <select style = "max-width:150px;" asp-for="GrantCategory" class="form-control">
+            @foreach (var v in Model.GrantCategories)
+            {
+                <option value="@v.Grant_Category_Name">@v.Grant_Category_Name</option>
+            }
+        </select>
+        <br/>
+        <p class="text-black" style="text-align: left;"><strong>Select Grant Submission Date to Filter:</strong></p>
+        <input style = "max-width:150px;" type="date" asp-for="Submission" class="form-control" />
+        <p class="text-black" style="text-align: left;"><strong>Select Grant Award Date to Filter:</strong></p>
+        <input style="max-width:150px;" type="date" asp-for="Award" class="form-control" />
+        <p class="text-black" style="text-align: left;"><strong>Select Project Due Date to Filter:</strong></p>
+        <input style="max-width:150px;" type="date" asp-for="Due" class="form-control" />
+        <p class="text-black" style="text-align: left;"><strong>Select Project Start Date to Filter:</strong></p>
+        <input style="max-width:150px;" type="date" asp-for="Submission" class="form-control" />
+        <p class="text-black" style="text-align: left;"><strong>Select Project End Date to Filter:</strong></p>
+        <input style="max-width:150px;" type="date" asp-for="End" class="form-control" />
+        <p class="text-black" style="text-align: left;"><strong>Select Partner Status to Filter:</strong></p>
+        <select style = "max-width:150px;" asp-for="PStatus" class="form-control">
+
+
+            @foreach (var v in Model.PartnerStatus)
+            {
+                <option value="@v.Status_Flag">@v.Status_Flag</option>
+            }
+        </select>
+        <br />
+        <p class="text-black" style="text-align: left;"><strong>Select Organization Type to Filter:</strong></p>
+        <select style = "max-width:150px;" asp-for="OrgType" class="form-control">
+            @foreach (var v in Model.OrgTypes)
+            {
+                <option value="@v.Org_Type">@v.Org_Type</option>
+            }
+        </select>  
+        <br />
+         <p class="text-black" style="text-align: left;"><strong>Select Lead Faculty to Filter:</strong></p>
+        <select style = "max-width:150px;" asp-for="LeadFacultyID" class="form-control">
+            @foreach (var v in Model.LeadFaculty)
+            {
+                <option value="@v.Faculty_ID">@v.Faculty_Name</option>
+            }
+        </select>
+        <br>  <button type="submit" asp-page-handler="" class="btn btn-primary">Set Filter</button>  <br>
+    </form>
+
+    <form method="post">
+        @using Microsoft.AspNetCore.Mvc.Rendering
+
+        <style>
+            .table-container {
+                margin: 20px auto;
+                max-width: 100%;
+            }
+        </style>
+        <h2 class="text-center mb-4">Business Representatives</h2>
+        <div class="table-container">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Business Representative Name</th>
+                        <th>Business Partner</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var rep in Model.Reps)
+                    {
+                        <tr>
+                            <td>@rep.Rep_Name</td>
+                            <td>@rep.Bus_Name</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <style>
+            .table-container {
+                margin: 20px auto;
+                max-width: 100%;
+            }
+        </style>
+        <h2 class="text-center mb-4">Business Partners</h2>
+        <div class="table-container">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Business Partner Name</th>
+                        <th>Partner Status</th>
+                        <th>Organization Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var partner in Model.Partners)
+                    {
+                        <tr>
+                            <td>@partner.Bus_Name</td>
+                            @if (@partner.Status_Flag == "Active Partner")
+                            {
+                                <td class="text-primary">@partner.Status_Flag</td>
+                            }
+                            @if (@partner.Status_Flag == "Memo-Signed")
+                            {
+                                <td class="text-success">@partner.Status_Flag</td>
+                            }
+                            @if (@partner.Status_Flag == "In Negotiation")
+                            {
+                                <td class="text-warning">@partner.Status_Flag</td>
+                            }
+                            @if (@partner.Status_Flag == "Initial Contact")
+                            {
+                                <td class="text-danger">@partner.Status_Flag</td>
+                            }
+
+                            @if (@partner.Status_Flag == "Prospect")
+                            {
+                                <td class="text-secondary">@partner.Status_Flag</td>
+                            }
+                            <td>@partner.Org_Type</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+            <h2 class="text-center mb-4">Grants</h2>
+            <div class="table-container">
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Grant Name</th>
+                            <th>Award Amount ($)</th>
+                            <th>Submission Date</th>
+                            <th>Award Date</th>
+                            <th>Category</th>
+                            <th>Status</th>
+                            <th>Lead Faculty</th>
+                            <th>Associated Project</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var grant in Model.Grants)
+                        {
+                            <tr>
+                                <td>
+                                    <button class="btn btn-link" asp-page-handler="SelectGrant" asp-route-id="@grant.Grant_ID">@grant.Grant_Name</button>
+                                </td>
+                                <td>@grant.Amount</td>
+                                <td>@grant.Submission_Date</td>
+                                <td>@grant.Award_Date</td>
+                                <td>@grant.Grant_Category_Name</td>
+                                @if (@grant.Grant_Status == "Accepted")
+                                {
+                                    <td class="text-success">@grant.Grant_Status</td>
+                                }
+                                @if (@grant.Grant_Status == "Pending")
+                                {
+                                    <td class="text-warning">@grant.Grant_Status</td>
+                                }
+                                @if (@grant.Grant_Status == "Rejected")
+                                {
+                                    <td class="text-danger">@grant.Grant_Status</td>
+                                }
+                                <td>@grant.Lead_Faculty_Name</td>
+                                <td>@grant.Project_Name</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+       
+            <h2 class="text-center mt-5 mb-4">Business Projects</h2>
+            <div class="table-container">
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Project Name</th>
+                            <th>Project Description</th>
+                            <th>Project Start Date</th>
+                            <th>Project Due Date</th>
+                            <th>Project End Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var busProject in Model.BusProjects)
+                        {
+                            <tr>
+                                <td>
+                                    <button class="btn btn-link" asp-page-handler="SelectBusProject" asp-route-id="@busProject.Bus_Project_ID">@busProject.Project_Name</button>
+                                </td>
+                                <td>@busProject.Description</td>
+                                <td>@busProject.Start_Date</td>
+                                <td>@busProject.Due_Date</td>
+                                @if (@busProject.End_Date > DateOnly.MinValue)
+                                {
+                                    <td>@busProject.End_Date</td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+    </form>
+}
+

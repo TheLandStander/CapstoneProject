@@ -3,24 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\apers\\source\\repos\\DatabaseSystemIntegration\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|c:\\users\\apers\\source\\repos\\databasesystemintegration\\pages\\interface\\project-dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|solutionrelative:pages\\interface\\project-dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|c:\\users\\apers\\source\\repos\\databasesystemintegration\\pages\\interface\\search.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|solutionrelative:pages\\interface\\search.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|c:\\users\\apers\\source\\repos\\databasesystemintegration\\pages\\interface\\search.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|solutionrelative:pages\\interface\\search.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|c:\\users\\apers\\source\\repos\\databasesystemintegration\\pages\\interface\\createbusproject.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|solutionrelative:pages\\interface\\createbusproject.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|c:\\users\\apers\\source\\repos\\databasesystemintegration\\pages\\interface\\project-dashboard.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|solutionrelative:pages\\interface\\project-dashboard.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|c:\\users\\apers\\source\\repos\\databasesystemintegration\\pages\\interface\\accessitem.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|solutionrelative:pages\\interface\\accessitem.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|c:\\users\\apers\\source\\repos\\databasesystemintegration\\pages\\interface\\project-dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|solutionrelative:pages\\interface\\project-dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|c:\\users\\apers\\source\\repos\\databasesystemintegration\\pages\\tools\\databasecontrols.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|solutionrelative:pages\\tools\\databasecontrols.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|c:\\users\\apers\\source\\repos\\databasesystemintegration\\pages\\interface\\accessitem.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|solutionrelative:pages\\interface\\accessitem.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,67 +42,80 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
+              "Title": "CreateBusProject.cshtml",
+              "DocumentMoniker": "C:\\Users\\apers\\source\\repos\\DatabaseSystemIntegration\\Pages\\Interface\\CreateBusProject.cshtml",
+              "RelativeDocumentMoniker": "Pages\\Interface\\CreateBusProject.cshtml",
+              "ToolTip": "C:\\Users\\apers\\source\\repos\\DatabaseSystemIntegration\\Pages\\Interface\\CreateBusProject.cshtml",
+              "RelativeToolTip": "Pages\\Interface\\CreateBusProject.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAABQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-13T02:40:52.279Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Search.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\apers\\source\\repos\\DatabaseSystemIntegration\\Pages\\Interface\\Search.cshtml.cs",
+              "RelativeDocumentMoniker": "Pages\\Interface\\Search.cshtml.cs",
+              "ToolTip": "C:\\Users\\apers\\source\\repos\\DatabaseSystemIntegration\\Pages\\Interface\\Search.cshtml.cs",
+              "RelativeToolTip": "Pages\\Interface\\Search.cshtml.cs",
+              "ViewState": "AgIAAI4BAAAAAAAAAAAAAFAAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-12T21:07:35.709Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Search.cshtml",
+              "DocumentMoniker": "C:\\Users\\apers\\source\\repos\\DatabaseSystemIntegration\\Pages\\Interface\\Search.cshtml",
+              "RelativeDocumentMoniker": "Pages\\Interface\\Search.cshtml",
+              "ToolTip": "C:\\Users\\apers\\source\\repos\\DatabaseSystemIntegration\\Pages\\Interface\\Search.cshtml",
+              "RelativeToolTip": "Pages\\Interface\\Search.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-12T21:07:31.391Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "DatabaseControls.cs",
               "DocumentMoniker": "C:\\Users\\apers\\source\\repos\\DatabaseSystemIntegration\\Pages\\Tools\\DatabaseControls.cs",
               "RelativeDocumentMoniker": "Pages\\Tools\\DatabaseControls.cs",
               "ToolTip": "C:\\Users\\apers\\source\\repos\\DatabaseSystemIntegration\\Pages\\Tools\\DatabaseControls.cs",
               "RelativeToolTip": "Pages\\Tools\\DatabaseControls.cs",
-              "ViewState": "AgIAAC0CAAAAAAAAAAAAADcCAAB2AAAAAAAAAA==",
+              "ViewState": "AgIAAMoAAAAAAAAAAAAAANgAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-12T04:39:16.008Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "Project-Dashboard.cshtml",
               "DocumentMoniker": "C:\\Users\\apers\\source\\repos\\DatabaseSystemIntegration\\Pages\\Interface\\Project-Dashboard.cshtml",
               "RelativeDocumentMoniker": "Pages\\Interface\\Project-Dashboard.cshtml",
               "ToolTip": "C:\\Users\\apers\\source\\repos\\DatabaseSystemIntegration\\Pages\\Interface\\Project-Dashboard.cshtml",
               "RelativeToolTip": "Pages\\Interface\\Project-Dashboard.cshtml",
-              "ViewState": "AgIAAFoAAAAAAAAAAAAAAHoAAAA1AAAAAAAAAA==",
+              "ViewState": "AgIAAG4AAAAAAAAAAAAAAIIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-03-04T19:11:21.283Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Project-Dashboard.cshtml.cs",
               "DocumentMoniker": "C:\\Users\\apers\\source\\repos\\DatabaseSystemIntegration\\Pages\\Interface\\Project-Dashboard.cshtml.cs",
               "RelativeDocumentMoniker": "Pages\\Interface\\Project-Dashboard.cshtml.cs",
               "ToolTip": "C:\\Users\\apers\\source\\repos\\DatabaseSystemIntegration\\Pages\\Interface\\Project-Dashboard.cshtml.cs",
               "RelativeToolTip": "Pages\\Interface\\Project-Dashboard.cshtml.cs",
-              "ViewState": "AgIAAEUAAAAAAAAAAAAAAJcAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAJ8AAAAAAAAAAAAAAMAAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-04T21:45:48.527Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AccessItem.cshtml",
-              "DocumentMoniker": "C:\\Users\\apers\\source\\repos\\DatabaseSystemIntegration\\Pages\\Interface\\AccessItem.cshtml",
-              "RelativeDocumentMoniker": "Pages\\Interface\\AccessItem.cshtml",
-              "ToolTip": "C:\\Users\\apers\\source\\repos\\DatabaseSystemIntegration\\Pages\\Interface\\AccessItem.cshtml",
-              "RelativeToolTip": "Pages\\Interface\\AccessItem.cshtml",
-              "ViewState": "AgIAAF0AAAAAAAAAAAAAAG8AAABXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-08T19:31:32.124Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "AccessItem.cshtml.cs",
-              "DocumentMoniker": "C:\\Users\\apers\\source\\repos\\DatabaseSystemIntegration\\Pages\\Interface\\AccessItem.cshtml.cs",
-              "RelativeDocumentMoniker": "Pages\\Interface\\AccessItem.cshtml.cs",
-              "ToolTip": "C:\\Users\\apers\\source\\repos\\DatabaseSystemIntegration\\Pages\\Interface\\AccessItem.cshtml.cs",
-              "RelativeToolTip": "Pages\\Interface\\AccessItem.cshtml.cs",
-              "ViewState": "AgIAAIQAAAAAAAAAAAAAAJsAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-08T19:35:13.841Z",
               "EditorCaption": ""
             }
           ]

@@ -46,19 +46,14 @@ namespace DatabaseSystemIntegration.Pages.Interface
 
         public IActionResult OnGet()
         {
-            if (HttpContext.Session.GetInt32("LoggedIn") == 1)
-            {
-                if (HttpContext.Session.GetString("UserType") == "Admin")
-                {
-                    return Page();
-                }
-            }
-            return RedirectToPage("/Index");
+           
+            return Page();
         }
 
-        public void OnPost()
+        public IActionResult OnPost()
         {
             CreateAccount();
+            return RedirectToPage("/Index");
         }
     }
 }

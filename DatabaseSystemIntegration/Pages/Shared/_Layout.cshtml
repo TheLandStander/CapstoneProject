@@ -7,22 +7,25 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/DatabaseSystemIntegration.styles.css" asp-append-version="true" />
+
     @using Microsoft.AspNetCore.Http;
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand ms-auto" asp-page="/index">Logout</a>
+               
             </div>
             <div class="container-fluid">
+              
                 @if (Context.Session.GetInt32("LoggedIn") == 1)
                 {
+                    <a class="navbar-brand ms-auto" asp-page="/index">Logout</a>
                     <a class="navbar-brand" asp-page="Project-Dashboard">@Context.Session.GetString("UserName")</a>
                 }
                 else
                 {
-                    <a class="navbar-brand"  asp-page="/Index">Sign In</a>
+                    <a class="navbar-brand" asp-page="/Interface/CreateAccount">Create Account</a>
                 }
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -47,10 +50,13 @@
                                     @if (Context.Session.GetString("UserType") == "Admin")
                                     {
                                         <li class="nav-item">
-                                            <a class="nav-link text-dark" asp-area="" asp-page="/Interface/CreateAccount">Create a User Account</a>
+                                            <a class="nav-link text-dark" asp-area="" asp-page="/Interface/Search">Search System</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link text-dark" asp-area="" asp-page="/Interface/CreateUser">Create User</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-area="" asp-page="/Interface/CreateAccount">Create a User Account</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link text-dark" asp-area="" asp-page="/Interface/AssignEmployee">Assign Employee to Business Project</a>

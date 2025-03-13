@@ -14,7 +14,7 @@ namespace DatabaseSystemIntegration.Pages.Tools
         static string ConnectionString = "Data Source=Localhost;Initial Catalog=Lab2;Integrated Security=True;Encrypt=False";
 
         //array of tables, good for selections
-        static string[] Tables =
+        public static string[] Tables =
                {
         "BusPartner",
         "BusPartnerStatus ",
@@ -37,7 +37,7 @@ namespace DatabaseSystemIntegration.Pages.Tools
         };
 
         //array of primary keys, good for selections
-        static string[] Keys =
+        public static string[] Keys =
             {
         "Bus_Partner_ID",
         "Partner_Status_ID",
@@ -185,28 +185,52 @@ namespace DatabaseSystemIntegration.Pages.Tools
             return tempReader;
         }
 
-        //extracts a single column from a table 
-        public static string[] GetColumn(string[][] ResultsTable, int column)
+        //extracts columns from a table 
+        public static string[][] GetColumn(SqlDataReader data, int[] column)
         {
-            string[] Identifier = new string[ResultsTable.GetLength(0)];
-            for (int i = 0; i < ResultsTable.GetLength(0); i++)
+            string[][] Table = ParseResults(data);
+            string[][] FilterTable = new string[Table.Length][];
+
+            for (int i = 0; i < Table.Length; i++)
             {
-                Identifier[i] = ResultsTable[i][column];
+                FilterTable[i] = new string[column.Length];
+                for (int j = 0; j < Table[i].Length; j++)
+                {
+                    foreach (int col in column)
+                    {
+                        if (j == col)
+                        {
+                            FilterTable[i][j] = Table[i][j];
+                        }
+                    }
+                
+                }
             }
-            return Identifier;
+            return FilterTable;
         }
 
-        //extracts the first value (primary key), from the row. must only receive one row
-        public static string ReturnKey(SqlDataReader SelectedRecord)
+        public static Faculty[] GetLeadFaculty()
         {
+            List<Faculty> Leads = new List<Faculty>();
+            Grant[] Grants =    ObjectConverter.ToGrant(SelectNoFilter(10));
 
-            return GetColumn(ParseResults(SelectedRecord), 0)[0];
+            foreach (Grant g in Grants) 
+            {
+                Faculty Lead = ObjectConverter.ToFaculty(SelectFilter(6, 6, g.Lead_Faculty_ID))[0];
+                if (Leads.Contains(Lead) == false)
+                {
+                    Leads.Add(Lead);
+                }
+            }
 
+            return Leads.ToArray();
         }
 
-        //returns a string array that represents a join with a foreign key-primary key table
-        //default will just select the primary keys and second column...
-        public static string[][] ReturnColumnJoin(int PrimaryTable, int ForeignTable, int ForeignKeyColumn, int PrimaryKeyColumn = 0, int ReturnColumn = 1)
+
+
+       //returns a string array that represents a join with a foreign key-primary key table
+       //default will just select the primary keys and second column...
+       public static string[][] ReturnColumnJoin(int PrimaryTable, int ForeignTable, int ForeignKeyColumn, int PrimaryKeyColumn = 0, int ReturnColumn = 1)
         {
             string[][] PrimaryKeyTable = DatabaseControls.ParseResults(DatabaseControls.SelectNoFilter(PrimaryTable));
             string[][] ForeignKeyTable = DatabaseControls.ParseResults(DatabaseControls.SelectNoFilter(ForeignTable));
