@@ -684,14 +684,14 @@ namespace DatabaseSystemIntegration.Pages.Tools
             }
             return Active.ToArray();
         }
-        public static int SecureCreateAccount(string Username, string Password)
+        public static int SecureLogIn(string Username, string Password)
         {
             string AccountQuery =
-            "SELECT COUNT(*) FROM PersonalInfo where Username = @Username and Password = @Password";
+            "SELECT COUNT(*) FROM PersonalInfo where User_Name = @User_Name and Password = @Password";
             SqlCommand cmdLogin = new SqlCommand();
-            cmdLogin.Connection.ConnectionString = ConnectionString;
+            cmdLogin.Connection = new SqlConnection(ConnectionString);
             cmdLogin.CommandText = AccountQuery;
-            cmdLogin.Parameters.AddWithValue("@Username", Username);
+            cmdLogin.Parameters.AddWithValue("@User_Name", Username);
             cmdLogin.Parameters.AddWithValue("@Password", Password);
             cmdLogin.Connection.Open();
             int rowCount = (int)cmdLogin.ExecuteScalar();

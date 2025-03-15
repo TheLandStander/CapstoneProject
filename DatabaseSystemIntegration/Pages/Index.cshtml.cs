@@ -23,7 +23,10 @@ namespace DatabaseSystemIntegration.Pages
 
         public IActionResult OnPost()
         {
-            CheckLogin(DatabaseControls.LogIn(username,password));
+            if (DatabaseControls.SecureLogIn(username, password) == 1)
+            {
+                CheckLogin(DatabaseControls.LogIn(username, password));
+            }
 
             if (HttpContext.Session.GetInt32("LoggedIn") == 1)
             {
