@@ -5,7 +5,7 @@ using Microsoft.Extensions.ObjectPool;
 using System.Data;
 using System.Diagnostics.CodeAnalysis;
 
-//Noah Kurtz, **WORKED INDIVIDUALLY**
+// by Noah Kurtz, Joel Abbott, Nic Jordan, Andrew, Declan 
 
 namespace DatabaseSystemIntegration.Pages.Tools
 {

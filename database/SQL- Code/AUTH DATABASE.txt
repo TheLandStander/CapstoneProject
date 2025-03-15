@@ -5,3 +5,5 @@ CREATE HashedCredentials(
 	Username nvarchar(100)
 	Password nvarchar(500)
 );
+
+INSERT INTO dbo.HashedCredentials VALUES ('Admin','1000:QzqJmy2x1+YmgnaMOsUVQoRGaSG/sdng:LIF6i+yBAJ2Cx2ErienexH69Mzw=')

@@ -124,3 +124,33 @@ CREATE TABLE Task (
     Task_Description TEXT,
     Bus_Project_ID CHAR(6) FOREIGN KEY REFERENCES BusProject(Bus_Project_ID)
 );
+
+-- default categories/status/etc. 
+INSERT INTO GrantStatus VALUES('123456','Pending');
+INSERT INTO GrantStatus VALUES('123455','Accepted');
+INSERT INTO GrantStatus VALUES('123454','Rejected');
+
+INSERT INTO GrantCategory VALUES('123456','Federal');
+INSERT INTO GrantCategory VALUES('123455','State');
+
+INSERT INTO OrgType VALUES('123456','University');
+INSERT INTO OrgType VALUES('123455','Non-Profit');
+
+INSERT INTO PersonalInfo VALUES ('123456','Contact@test.com','Contact2@test.com','Faculty','Password');
+INSERT INTO PersonalInfo VALUES ('123455','Contact@test.com','Contact2@test.com','Admin','Password');
+INSERT INTO PersonalInfo VALUES ('123454','Contact@test.com','Contact2@test.com','Partner','Password');
+
+INSERT INTO BusPartnerStatus VALUES ('123456','Prospect');
+INSERT INTO BusPartnerStatus VALUES ('123455','Initial Contact');
+INSERT INTO BusPartnerStatus VALUES ('123454','In Negotiation');
+INSERT INTO BusPartnerStatus VALUES ('123453','Memo-Signed');
+INSERT INTO BusPartnerStatus VALUES ('123452','Active Partner');
+
+INSERT INTO FACULTY VALUES ('123456','TestFaculty','123456');
+INSERT INTO EMPLOYEE VALUES ('123452','TestEmployeeAdmin',1,'123455');
+INSERT INTO BusPartner VALUES ('123452','TestBusiness','123456','123456','123454');
+
+INSERT INTO GrantProject VALUES ('123456','Test Grant Project','Test Project Description');
+INSERT INTO Grants VALUES ('123456','TestGrant',1000,'03/03/2025','03/06/2025','123456','123456','123456','123452','123456');
+INSERT INTO BusProject VALUES ('123456','Test Business Project','Test Business Project Description','03-03-2025','0001-01-01','03-05-2025');
+
