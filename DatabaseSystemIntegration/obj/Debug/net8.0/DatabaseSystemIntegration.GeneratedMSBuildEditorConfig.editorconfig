@@ -20,14 +20,6 @@ build_property._RazorSourceGeneratorDebug =
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/apers/OneDrive/Documents/CapstoneProject/DatabaseSystemIntegration/Pages/CreateAccount.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ3JlYXRlQWNjb3VudC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/apers/OneDrive/Documents/CapstoneProject/DatabaseSystemIntegration/Pages/CreateAccountcs.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ3JlYXRlQWNjb3VudGNzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/apers/OneDrive/Documents/CapstoneProject/DatabaseSystemIntegration/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -62,6 +54,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/apers/OneDrive/Documents/CapstoneProject/DatabaseSystemIntegration/Pages/Interface/CreateAccount.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW50ZXJmYWNlXENyZWF0ZUFjY291bnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/apers/OneDrive/Documents/CapstoneProject/DatabaseSystemIntegration/Pages/Interface/CreateAccountcs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW50ZXJmYWNlXENyZWF0ZUFjY291bnRjcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/apers/OneDrive/Documents/CapstoneProject/DatabaseSystemIntegration/Pages/Interface/CreateBusProject.cshtml]

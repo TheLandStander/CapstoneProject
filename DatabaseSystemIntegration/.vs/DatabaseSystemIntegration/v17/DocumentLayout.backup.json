@@ -58,8 +58,7 @@
               "RelativeToolTip": "Pages\\Index.cshtml.cs",
               "ViewState": "AgIAAEcAAAAAAAAAAAAAAFgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-15T00:41:53.661Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-15T00:41:53.661Z"
             },
             {
               "$type": "Document",
@@ -71,8 +70,7 @@
               "RelativeToolTip": "Pages\\Index.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-15T00:41:51.513Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-15T00:41:51.513Z"
             },
             {
               "$type": "Document",
@@ -80,9 +78,9 @@
               "Title": "DatabaseControls.cs",
               "DocumentMoniker": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\Pages\\Tools\\DatabaseControls.cs",
               "RelativeDocumentMoniker": "Pages\\Tools\\DatabaseControls.cs",
-              "ToolTip": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\Pages\\Tools\\DatabaseControls.cs*",
-              "RelativeToolTip": "Pages\\Tools\\DatabaseControls.cs*",
-              "ViewState": "AgIAAFQAAAAAAAAAAAAAAG4AAAAMAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\Pages\\Tools\\DatabaseControls.cs",
+              "RelativeToolTip": "Pages\\Tools\\DatabaseControls.cs",
+              "ViewState": "AgIAAKACAAAAAAAAAAAAALwCAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-14T22:25:41.471Z",
               "EditorCaption": ""
@@ -97,8 +95,7 @@
               "RelativeToolTip": "Pages\\Interface\\CreateBusProject.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAABQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-13T02:40:52.279Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-13T02:40:52.279Z"
             },
             {
               "$type": "Document",
@@ -110,8 +107,7 @@
               "RelativeToolTip": "Pages\\Interface\\Search.cshtml.cs",
               "ViewState": "AgIAABoAAAAAAAAAAAAAAI4BAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T21:07:35.709Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-12T21:07:35.709Z"
             },
             {
               "$type": "Document",
@@ -123,8 +119,7 @@
               "RelativeToolTip": "Pages\\Interface\\Search.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-12T21:07:31.391Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-12T21:07:31.391Z"
             },
             {
               "$type": "Document",
@@ -136,8 +131,7 @@
               "RelativeToolTip": "Pages\\Interface\\Project-Dashboard.cshtml",
               "ViewState": "AgIAAG4AAAAAAAAAAAAAAIIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-04T19:11:21.283Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-04T19:11:21.283Z"
             },
             {
               "$type": "Document",
@@ -149,8 +143,7 @@
               "RelativeToolTip": "Pages\\Interface\\Project-Dashboard.cshtml.cs",
               "ViewState": "AgIAAJ8AAAAAAAAAAAAAAMAAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-04T21:45:48.527Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-04T21:45:48.527Z"
             }
           ]
         }
