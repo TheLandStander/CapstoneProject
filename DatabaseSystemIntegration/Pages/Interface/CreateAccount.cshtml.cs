@@ -20,6 +20,8 @@ namespace DatabaseSystemIntegration.Pages.Interface
         [BindProperty]
         public string PhoneNumber { get; set; }
 
+
+
         public IActionResult OnPostPopulateHandler()
         {
             ModelState.Clear();
@@ -53,6 +55,8 @@ namespace DatabaseSystemIntegration.Pages.Interface
         public IActionResult OnPost()
         {
             CreateAccount();
+            DatabaseControls.CreateHashedUser(Username, Password);
+            HttpContext.Session.SetString("UserType", "");
             return RedirectToPage("/Index");
         }
     }

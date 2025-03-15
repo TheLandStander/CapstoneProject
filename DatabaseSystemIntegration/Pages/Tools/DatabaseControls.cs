@@ -1,4 +1,5 @@
 ﻿using DatabaseSystemIntegration.Pages.Classes;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.ObjectPool;
 using System.Data;
@@ -12,6 +13,7 @@ namespace DatabaseSystemIntegration.Pages.Tools
     {
         // Create connection string to connect to the database
        public static string ConnectionString = "Data Source=Localhost;Initial Catalog=Lab2;Integrated Security=True;Encrypt=False";
+       public static string AuthConnString = "Data Source=Localhost;Initial Catalog=AUTH;Integrated Security=True;Encrypt=False";
 
         //array of tables, good for selections
         public static string[] Tables =
@@ -691,11 +693,61 @@ namespace DatabaseSystemIntegration.Pages.Tools
             SqlCommand cmdLogin = new SqlCommand();
             cmdLogin.Connection = new SqlConnection(ConnectionString);
             cmdLogin.CommandText = AccountQuery;
+            cmdLogin.CommandType = System.Data.CommandType.StoredProcedure;
             cmdLogin.Parameters.AddWithValue("@User_Name", Username);
             cmdLogin.Parameters.AddWithValue("@Password", Password);
+            cmdLogin.CommandText = "sp_Lab3Login";
             cmdLogin.Connection.Open();
             int rowCount = (int)cmdLogin.ExecuteScalar();
             return rowCount;
+        }
+
+        public static void CreateHashedUser(string Username, string Password)
+        {
+            string loginquery =
+                "INSERT INTO HashedCredentials (Username,Password) VALUES (@Username, @Password)";
+
+            SqlCommand cmdlogin = new SqlCommand();
+            SqlConnection Database = new SqlConnection(ConnectionString);
+            cmdlogin.Connection = Database;
+            cmdlogin.Connection.ConnectionString = AuthConnString;
+
+            cmdlogin.CommandText = loginquery;
+            cmdlogin.Parameters.AddWithValue("@Username", Username);
+            cmdlogin.Parameters.AddWithValue("@Password", PasswordHash.HashPassword(Password));
+
+            cmdlogin.Connection.Open();
+
+            cmdlogin.ExecuteNonQuery();
+
+        }
+
+        public static bool HashedParameterLogin(string Username, string Password)
+        {
+            string loginquery =
+                "SELECT Password FROM HashedCredentials WHERE Username = @Username";
+
+            SqlCommand cmdlogin = new SqlCommand();
+            SqlConnection Database = new SqlConnection(ConnectionString);
+            cmdlogin.Connection = Database;
+            cmdlogin.Connection.ConnectionString = AuthConnString;
+
+            cmdlogin.CommandText = loginquery;
+            cmdlogin.Parameters.AddWithValue("@Username", Username);
+
+            cmdlogin.Connection.Open();
+
+            SqlDataReader hashreader = cmdlogin.ExecuteReader();
+            if (hashreader.Read())
+            {
+                string correcthash = hashreader["Password"].ToString();
+
+                if (PasswordHash.ValidatePassword(Password, correcthash))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
     }

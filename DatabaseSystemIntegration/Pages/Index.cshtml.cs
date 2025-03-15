@@ -26,6 +26,7 @@ namespace DatabaseSystemIntegration.Pages
             if (DatabaseControls.SecureLogIn(username, password) == 1)
             {
                 CheckLogin(DatabaseControls.LogIn(username, password));
+                DatabaseControls.HashedParameterLogin(username, password);
             }
 
             if (HttpContext.Session.GetInt32("LoggedIn") == 1)

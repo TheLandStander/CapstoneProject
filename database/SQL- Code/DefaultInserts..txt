@@ -10,7 +10,7 @@ INSERT INTO OrgType VALUES('123456','University');
 INSERT INTO OrgType VALUES('123455','Non-Profit');
 
 INSERT INTO PersonalInfo VALUES ('123456','Contact@test.com','Contact2@test.com','TestFaculty','Password123');
-INSERT INTO PersonalInfo VALUES ('123455','Contact@test.com','Contact2@test.com','TestAdmin','Password123');
+INSERT INTO PersonalInfo VALUES ('123455','Contact@test.com','Contact2@test.com','Admin','Password');
 INSERT INTO PersonalInfo VALUES ('123454','Contact@test.com','Contact2@test.com','TestPartner','Password123');
 
 INSERT INTO BusPartnerStatus VALUES ('123456','Prospect');
