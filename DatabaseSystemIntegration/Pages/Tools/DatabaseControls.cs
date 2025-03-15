@@ -11,7 +11,7 @@ namespace DatabaseSystemIntegration.Pages.Tools
     public class DatabaseControls
     {
         // Create connection string to connect to the database
-        static string ConnectionString = "Data Source=Localhost;Initial Catalog=Lab2;Integrated Security=True;Encrypt=False";
+       public static string ConnectionString = "Data Source=Localhost;Initial Catalog=Lab2;Integrated Security=True;Encrypt=False";
 
         //array of tables, good for selections
         public static string[] Tables =
@@ -684,7 +684,19 @@ namespace DatabaseSystemIntegration.Pages.Tools
             }
             return Active.ToArray();
         }
-
+        public static int SecureCreateAccount(string Username, string Password)
+        {
+            string AccountQuery =
+            "SELECT COUNT(*) FROM PersonalInfo where Username = @Username and Password = @Password";
+            SqlCommand cmdLogin = new SqlCommand();
+            cmdLogin.Connection.ConnectionString = ConnectionString;
+            cmdLogin.CommandText = AccountQuery;
+            cmdLogin.Parameters.AddWithValue("@Username", Username);
+            cmdLogin.Parameters.AddWithValue("@Password", Password);
+            cmdLogin.Connection.Open();
+            int rowCount = (int)cmdLogin.ExecuteScalar();
+            return rowCount;
+        }
 
     }
 }

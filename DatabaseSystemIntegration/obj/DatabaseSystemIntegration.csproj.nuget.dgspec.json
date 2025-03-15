@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\apers\\source\\repos\\DatabaseSystemIntegration\\DatabaseSystemIntegration.csproj": {}
+    "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\DatabaseSystemIntegration.csproj": {}
   },
   "projects": {
-    "C:\\Users\\apers\\source\\repos\\DatabaseSystemIntegration\\DatabaseSystemIntegration.csproj": {
+    "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\DatabaseSystemIntegration.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\apers\\source\\repos\\DatabaseSystemIntegration\\DatabaseSystemIntegration.csproj",
+        "projectUniqueName": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\DatabaseSystemIntegration.csproj",
         "projectName": "DatabaseSystemIntegration",
-        "projectPath": "C:\\Users\\apers\\source\\repos\\DatabaseSystemIntegration\\DatabaseSystemIntegration.csproj",
+        "projectPath": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\DatabaseSystemIntegration.csproj",
         "packagesPath": "C:\\Users\\apers\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\apers\\source\\repos\\DatabaseSystemIntegration\\obj\\",
+        "outputPath": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

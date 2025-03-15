@@ -39,3 +39,14 @@
         </div>
     </form>
 }
+
+@{
+    if (HttpContext.Session.GetString("Username") != null)
+    {
+        <p class="text-success">@ViewData["LoginMessage"]</p>
+    }
+    else
+    {
+        <p class="text-danger">@ViewData["LoginMessage"]</p>
+    }
+}
