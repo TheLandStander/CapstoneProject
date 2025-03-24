@@ -1,8 +1,8 @@
 --AUTH DATABASE
 
-CREATE HashedCredentials(
+CREATE Table HashedCredentials(
 	CredentialID int IDENTITY(1,1) PRIMARY KEY,
-	Username nvarchar(100)
+	Username nvarchar(100),
 	Password nvarchar(500)
 );
 

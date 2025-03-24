@@ -26,7 +26,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
         {
             if (TaskName != null && Bus_Project_ID != null)
             {
-                Classes.Task t = new Classes.Task(TaskName, Task_Description, Bus_Project_ID);
+                Classes.Task t = new Classes.Task(TaskName, Task_Description,false, Bus_Project_ID);
                 DatabaseControls.InsertTask(t);
             }
         }

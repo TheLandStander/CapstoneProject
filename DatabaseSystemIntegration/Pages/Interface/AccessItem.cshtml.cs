@@ -124,7 +124,10 @@ namespace DatabaseSystemIntegration.Pages.Interface
 
                 foreach (BusPartner BP in PartnerHolder)
                 {
-                   RepHolder.Add(ObjectConverter.ToBusRep(DatabaseControls.SelectFilter(3, 0, BP.Bus_Partner_ID))[0]);
+                    if (DatabaseControls.SelectFilter(3, 0, BP.Bus_Partner_ID).HasRows)
+                    {
+                        RepHolder.Add(ObjectConverter.ToBusRep(DatabaseControls.SelectFilter(3, 0, BP.Bus_Partner_ID))[0]);
+                    }
                 }
 
                 foreach (BusRep BR in RepHolder)

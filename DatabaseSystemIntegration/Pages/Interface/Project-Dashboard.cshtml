@@ -66,7 +66,7 @@
             </div>
         }
 
-        @if (HttpContext.Session.GetString("UserType") == "Admin" || HttpContext.Session.GetString("UserType") == "Faculty")
+        @if (HttpContext.Session.GetString("UserType") == "Faculty")
         {
             <h2 class="text-center mt-5 mb-4">Projects Associated With Grants</h2>
             <div class="table-container">
@@ -85,6 +85,32 @@
                                     <button class="btn btn-link" asp-page-handler="SelectGrantProject" asp-route-id="@project.Grant_Project_ID">@project.Grant_Project_Name</button>
                                 </td>
                                 <td>@project.Grant_Project_Desc</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+
+        @if (HttpContext.Session.GetString("UserType") == "Admin")
+        {
+            <h2 class="text-center mt-5 mb-4">Projects Associated With Grants</h2>
+            <div class="table-container">
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Project Name</th>
+                            <th>Project Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var project in Model.GrantProjects)
+                        {
+                            <tr>
+                                <td>
+                                    <button class="btn btn-link" asp-page-handler="SelectGrantProject" asp-route-id="@project.Grant_Project_ID">@project.Project_Name</button>
+                                </td>
+                                <td>@project.Description</td>
                             </tr>
                         }
                     </tbody>

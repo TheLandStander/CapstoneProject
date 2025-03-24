@@ -101,7 +101,8 @@ CREATE TABLE BusProject (
     Description TEXT,
     Start_Date DATE NOT NULL,
     End_Date DATE,
-    Due_Date DATE
+    Due_Date DATE,
+  Grant_Project_ID CHAR(6) FOREIGN KEY REFERENCES GrantProject(Grant_Project_ID)
 );
 
 CREATE TABLE EmployeeProject (
@@ -118,11 +119,29 @@ CREATE TABLE ProjectNotes (
     Bus_Project_ID CHAR(6) FOREIGN KEY REFERENCES BusProject(Bus_Project_ID)
 );
 
+
 CREATE TABLE Task (
     Task_ID CHAR(6) PRIMARY KEY,
     Task_Name VARCHAR(255) NOT NULL,
     Task_Description TEXT,
+    Completed bit,
     Bus_Project_ID CHAR(6) FOREIGN KEY REFERENCES BusProject(Bus_Project_ID)
+    
+);
+
+CREATE TABLE ChildTask (
+    Child_Task_ID CHAR(6) PRIMARY KEY,
+    Task_Name VARCHAR(255) NOT NULL,
+    Task_Description TEXT,
+    Completed bit,
+    Parent_Task_ID CHAR(6) FOREIGN KEY REFERENCES Task(Task_ID)
+);
+
+
+CREATE TABLE AssignedTask (
+Assigned_Task_ID CHAR(6) PRIMARY KEY,
+Info_ID CHAR(6) FOREIGN KEY REFERENCES PersonalInfo(Info_ID),
+Task_ID CHAR(6) FOREIGN KEY REFERENCES Task(Task_ID)
 );
 
 -- default categories/status/etc. 
@@ -152,5 +171,5 @@ INSERT INTO BusPartner VALUES ('123452','TestBusiness','123456','123456','123454
 
 INSERT INTO GrantProject VALUES ('123456','Test Grant Project','Test Project Description');
 INSERT INTO Grants VALUES ('123456','TestGrant',1000,'03/03/2025','03/06/2025','123456','123456','123456','123452','123456');
-INSERT INTO BusProject VALUES ('123456','Test Business Project','Test Business Project Description','03-03-2025','0001-01-01','03-05-2025');
+INSERT INTO BusProject VALUES ('123456','Test Business Project','Test Business Project Description','03-03-2025','0001-01-01','03-05-2025','123456');
 

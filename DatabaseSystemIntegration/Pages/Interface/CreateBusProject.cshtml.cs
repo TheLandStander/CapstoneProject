@@ -28,6 +28,9 @@ namespace DatabaseSystemIntegration.Pages.Interface
         [BindProperty]
         public  string Active_Project_ID { get; set; }
 
+        [BindProperty]
+        public string Grant_Project_ID { get; set; }
+
         public void UpdateProject()
         {
             if (EndDate > StartDate && Active_Project_ID != "")
@@ -42,7 +45,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
         {
             if (Project_Name != "" && StartDate < DueDate)
             {
-                BusProject BP = new BusProject(Project_Name, Project_Description, StartDate, DueDate);
+                BusProject BP = new BusProject(Project_Name, Project_Description, StartDate, DueDate,Grant_Project_ID);
                 DatabaseControls.InsertBusProject(BP);
                 ActiveProjects = DatabaseControls.GetActiveBusProjects();
             }

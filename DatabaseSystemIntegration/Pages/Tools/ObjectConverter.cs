@@ -71,9 +71,11 @@ namespace DatabaseSystemIntegration.Pages.Tools
             {
                 BusProject obj = new BusProject(data.GetValue(1).ToString(), data.GetValue(2).ToString(), 
                     DateOnly.ParseExact(data.GetValue(3).ToString().Replace(" 12:00:00 AM", ""), "M/d/yyyy"), 
-                    DateOnly.ParseExact(data.GetValue(5).ToString().Replace(" 12:00:00 AM", ""), "M/d/yyyy"));
+                    DateOnly.ParseExact(data.GetValue(5).ToString().Replace(" 12:00:00 AM", ""), "M/d/yyyy"),
+                    data.GetValue(6).ToString());
                 obj.Bus_Project_ID = data.GetValue(0).ToString();
                 obj.End_Date = DateOnly.ParseExact(data.GetValue(4).ToString().Replace(" 12:00:00 AM", ""), "M/d/yyyy");
+                
                 list.Add(obj);
             }
             data.DisposeAsync();
@@ -249,8 +251,21 @@ namespace DatabaseSystemIntegration.Pages.Tools
             List<Classes.Task> list = new List<Classes.Task>();
             while (data.Read())
             {
-                Classes.Task obj = new Classes.Task(data.GetValue(1).ToString(), data.GetValue(2).ToString(), data.GetValue(3).ToString());
+                Classes.Task obj = new Classes.Task(data.GetValue(1).ToString(), data.GetValue(2).ToString(), Convert.ToBoolean(data.GetValue(3).ToString()), data.GetValue(4).ToString());
                 obj.Task_ID = data.GetValue(0).ToString();
+                list.Add(obj);
+            }
+            data.DisposeAsync();
+            return list.ToArray();
+        }
+
+        public static ChildTask[] ToChildTask(SqlDataReader data)
+        {
+            List<ChildTask> list = new List<ChildTask>();
+            while (data.Read())
+            {
+                ChildTask obj = new ChildTask(data.GetValue(1).ToString(), data.GetValue(2).ToString(), Convert.ToBoolean(data.GetValue(3).ToString()), data.GetValue(4).ToString());
+                obj.Child_Task_ID = data.GetValue(0).ToString();
                 list.Add(obj);
             }
             data.DisposeAsync();
@@ -263,7 +278,7 @@ namespace DatabaseSystemIntegration.Pages.Tools
             while (data.Read())
             {
                 Classes.Message obj = new Classes.Message(data.GetValue(1).ToString(), data.GetValue(2).ToString(),
-               DateTime.Parse(data.GetValue(3).ToString()), data.GetValue(4).ToString(), data.GetValue(5).ToString());
+                DateTime.Parse(data.GetValue(3).ToString()), data.GetValue(4).ToString(), data.GetValue(5).ToString());
                 obj.Message_ID = data.GetValue(0).ToString();
                 list.Add(obj);
             }

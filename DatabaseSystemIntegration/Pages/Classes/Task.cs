@@ -8,6 +8,8 @@
         public string Bus_Project_ID { get; set; }
         public string Project_Name { get; set; }
 
+        public bool Completed { get; set; }
+
         private string MakeID()
         {
             //Makes the primary key 
@@ -20,12 +22,13 @@
             return ID;
         }
 
-        public Task(string Name, string desc, string ProjectID)
+        public Task(string Name, string desc,bool Complete , string ProjectID)
         {
             //Set attributes and foreign keys
             Task_ID = MakeID();
             Task_Name = Name;
             Task_Description = desc;
+            Completed = Complete;
             Bus_Project_ID = ProjectID;
         }
     }

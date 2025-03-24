@@ -12,7 +12,7 @@ namespace DatabaseSystemIntegration.Pages.Tools
     public class DatabaseControls
     {
         // Create connection string to connect to the database
-       public static string ConnectionString = "Data Source=Localhost;Initial Catalog=Lab2;Integrated Security=True;Encrypt=False";
+       public static string ConnectionString = "Data Source=localhost;Initial Catalog=Sprint2;Integrated Security=True;Encrypt=False";
        public static string AuthConnString = "Data Source=Localhost;Initial Catalog=AUTH;Integrated Security=True;Encrypt=False";
 
         //array of tables, good for selections
@@ -35,7 +35,9 @@ namespace DatabaseSystemIntegration.Pages.Tools
         "PersonalInfo",
         "ProjectNotes",
         "Task",
-        "Message"
+        "Message",
+        "ChildTask",
+        "Assigned_Task"
         };
 
         //array of primary keys, good for selections
@@ -58,7 +60,9 @@ namespace DatabaseSystemIntegration.Pages.Tools
         "Info_ID",
         "Project_Notes_ID",
         "Task_ID",
-        "Message_ID"
+        "Message_ID",
+        "Child_Task_ID",
+        "Assigned_Task_ID"
         };
 
         //I need to use this for Employee since it has a boolean value which is stored as a byte in the database
@@ -275,7 +279,7 @@ namespace DatabaseSystemIntegration.Pages.Tools
             return Admins.ToArray();
         }
 
-        //Insert Faculty
+      
         public static void CreateAccount(PersonalInfo P)
         {
             String sqlQuery = "INSERT INTO PersonalInfo(Info_ID,Primary_Contact,Secondary_Contact,User_Name,Password) VALUES ('";
@@ -300,8 +304,7 @@ namespace DatabaseSystemIntegration.Pages.Tools
             cmd.Dispose();
 
         }
-
-
+       
 
         //Inserts Grant
         public static void InsertGrant(Grant G)
@@ -433,7 +436,8 @@ namespace DatabaseSystemIntegration.Pages.Tools
             sqlQuery += BP.Description + "','";
             sqlQuery += BP.Start_Date + "','";
             sqlQuery += BP.End_Date + "','";
-            sqlQuery += BP.Due_Date;
+            sqlQuery += BP.Due_Date + "','";
+            sqlQuery += BP.Grant_Project_ID;
             sqlQuery += "');";
 
             SqlCommand cmd = new SqlCommand();
@@ -452,10 +456,11 @@ namespace DatabaseSystemIntegration.Pages.Tools
 
         public static void InsertTask(Classes.Task T)
         {
-            String sqlQuery = "INSERT INTO Task (Task_ID,Task_Name,Task_Description,Bus_Project_ID) VALUES ('";
+            String sqlQuery = "INSERT INTO Task (Task_ID,Task_Name,Task_Description,Completed,Bus_Project_ID) VALUES ('";
             sqlQuery += T.Task_ID + "','";
             sqlQuery += T.Task_Name + "','";
             sqlQuery += T.Task_Description + "','";
+            sqlQuery += tobyte(T.Completed) + "','";
             sqlQuery += T.Bus_Project_ID;
             sqlQuery += "');";
 
@@ -471,6 +476,31 @@ namespace DatabaseSystemIntegration.Pages.Tools
             cmd.ExecuteNonQuery();
             cmd.Dispose();
             cmd.Connection.Close();
+        }
+
+        public static void InsertChildTask(ChildTask CT)
+        {
+            String sqlQuery = "INSERT INTO ChildTask(Child_Task_ID,Task_Name,Task_Description,Completed,Parent_Task_ID) VALUES ('";
+            sqlQuery += CT.Child_Task_ID + "','";
+            sqlQuery += CT.Task_Name + "','";
+            sqlQuery += CT.Task_Description + "','";
+            sqlQuery += tobyte(CT.Completed) + "','";
+            sqlQuery += CT.Parent_Task_ID;
+            sqlQuery += "');";
+
+            SqlCommand cmd = new SqlCommand();
+            SqlConnection Database = new SqlConnection(ConnectionString);
+            cmd.Connection = Database;
+            cmd.CommandText = sqlQuery;
+            if (cmd.Connection.State != ConnectionState.Open)
+            {
+                cmd.Connection.Open();
+            }
+
+            cmd.ExecuteNonQuery();
+            cmd.Dispose();
+            cmd.Dispose();
+
         }
 
         public static void InsertGrantProject(GrantProject GP)
