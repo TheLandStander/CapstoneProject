@@ -75,7 +75,6 @@ namespace DatabaseSystemIntegration.Pages.Tools
                     data.GetValue(6).ToString());
                 obj.Bus_Project_ID = data.GetValue(0).ToString();
                 obj.End_Date = DateOnly.ParseExact(data.GetValue(4).ToString().Replace(" 12:00:00 AM", ""), "M/d/yyyy");
-                
                 list.Add(obj);
             }
             data.DisposeAsync();
@@ -172,7 +171,6 @@ namespace DatabaseSystemIntegration.Pages.Tools
             {
                 GrantProject obj = new GrantProject(data.GetValue(1).ToString(),data.GetValue(2).ToString());
                 obj.Grant_Project_ID = data.GetValue(0).ToString();
-                obj.SetVars(data.GetValue(0).ToString());
                 list.Add(obj);
             }
             data.DisposeAsync();

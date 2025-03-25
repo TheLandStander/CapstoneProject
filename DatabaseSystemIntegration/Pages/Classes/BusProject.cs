@@ -1,4 +1,7 @@
-﻿namespace DatabaseSystemIntegration.Pages.Classes
+﻿using DatabaseSystemIntegration.Pages.Tools;
+using Microsoft.Net.Http.Headers;
+
+namespace DatabaseSystemIntegration.Pages.Classes
 {
     public class BusProject
     {
@@ -12,6 +15,13 @@
         public DateOnly Due_Date { get; set; }
 
         public string Grant_Project_ID { get; set; }
+        public string Grant_Project_Name { get; set; }
+
+        public void SetVars()
+        {   
+                GrantProject Funding = ObjectConverter.ToGrantProject(DatabaseControls.SelectFilter(9,9,Grant_Project_ID))[0];
+                Grant_Project_Name = Funding.Project_Name;
+        }
 
         private string MakeID()
         {
@@ -34,6 +44,7 @@
             Start_Date = Start;
             Due_Date = Due;
             Grant_Project_ID = grant_Project_ID;
+            SetVars();
         }
     }
 }

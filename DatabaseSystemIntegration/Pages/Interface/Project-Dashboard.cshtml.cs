@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.ObjectPool;
 using System.Runtime.CompilerServices;
+using System.Text.Json.Serialization.Metadata;
 
 namespace DatabaseSystemIntegration.Pages.Interface
 {
@@ -77,6 +78,10 @@ namespace DatabaseSystemIntegration.Pages.Interface
             }
 
             GrantProjects = GPHolder.ToArray();
+            foreach (GrantProject gp in GrantProjects)
+            {
+                gp.SetVars(gp.Grant_Project_ID);
+            }
         }
 
         public void LoadPartner()
@@ -93,12 +98,20 @@ namespace DatabaseSystemIntegration.Pages.Interface
             }
 
             GrantProjects = GPHolder.ToArray();
+            foreach (GrantProject gp in GrantProjects)
+            {
+                gp.SetVars(gp.Grant_Project_ID);
+            }
         }
 
         public void LoadAdmin()
         {
             Grants = ObjectConverter.ToGrant(DatabaseControls.SelectNoFilter(10));
             GrantProjects = ObjectConverter.ToGrantProject(DatabaseControls.SelectNoFilter(9));
+            foreach (GrantProject gp in GrantProjects)
+            {
+                gp.SetVars(gp.Grant_Project_ID);
+            }
             BusProjects = ObjectConverter.ToBusProject(DatabaseControls.SelectNoFilter(2));
             Partners = ObjectConverter.ToBusPartner(DatabaseControls.SelectNoFilter(0));
             FacultyProject = ObjectConverter.ToFacultyProject(DatabaseControls.SelectNoFilter(7));
@@ -121,6 +134,10 @@ namespace DatabaseSystemIntegration.Pages.Interface
 
             Grants = GrantHolder.ToArray();
             GrantProjects = GPHolder.ToArray();
+            foreach (GrantProject gp in GrantProjects)
+            {
+                gp.SetVars(gp.Grant_Project_ID);
+            }
         }
 
 

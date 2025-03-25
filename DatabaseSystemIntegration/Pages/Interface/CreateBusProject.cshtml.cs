@@ -31,6 +31,8 @@ namespace DatabaseSystemIntegration.Pages.Interface
         [BindProperty]
         public string Grant_Project_ID { get; set; }
 
+        public GrantProject[] FundingProjects { get; set; }
+
         public void UpdateProject()
         {
             if (EndDate > StartDate && Active_Project_ID != "")
@@ -43,7 +45,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
 
         private void CheckAndSubmitProject()
         {
-            if (Project_Name != "" && StartDate < DueDate)
+            if (Project_Name != "" && StartDate < DueDate && Grant_Project_ID != null)
             {
                 BusProject BP = new BusProject(Project_Name, Project_Description, StartDate, DueDate,Grant_Project_ID);
                 DatabaseControls.InsertBusProject(BP);
@@ -58,6 +60,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
                 if (HttpContext.Session.GetString("UserType") == "Admin")
                 {
                     ActiveProjects = DatabaseControls.GetActiveBusProjects();
+                    FundingProjects = ObjectConverter.ToGrantProject(DatabaseControls.SelectNoFilter(9));
                     return Page();
                 }
             }
@@ -88,7 +91,9 @@ namespace DatabaseSystemIntegration.Pages.Interface
         {
             CheckAndSubmitProject();
             UpdateProject();
-        
+            ActiveProjects = DatabaseControls.GetActiveBusProjects();
+            FundingProjects = ObjectConverter.ToGrantProject(DatabaseControls.SelectNoFilter(9));
+
         }
     }
 }

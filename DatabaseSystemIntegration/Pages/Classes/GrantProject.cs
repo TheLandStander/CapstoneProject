@@ -12,7 +12,6 @@ namespace DatabaseSystemIntegration.Pages.Classes
 
         public void SetVars(string GrantProjectID)
         {
-            Console.Write(Grant_Project_ID);
             if (DatabaseControls.SelectFilter(2, 9, Grant_Project_ID).HasRows)
             {
                 BusProject project = ObjectConverter.ToBusProject(DatabaseControls.SelectFilter(2, 9,GrantProjectID))[0];
