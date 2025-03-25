@@ -152,6 +152,13 @@ namespace DatabaseSystemIntegration.Pages.Interface
             return RedirectToPage("AccessItem");
         }
 
+        public IActionResult OnPostSelectBusProject(string ID)
+        {
+            HttpContext.Session.SetString("ItemType", "BusProject");
+            HttpContext.Session.SetString("ItemID", ID);
+            return RedirectToPage("AccessItem");
+        }
+
         public IActionResult OnPostUpdateProject()
         {
             SetVars();

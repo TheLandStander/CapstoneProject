@@ -97,10 +97,10 @@ namespace DatabaseSystemIntegration.Pages.Interface
 
         public void LoadAdmin()
         {
-            BusProjects = ObjectConverter.ToBusProject(DatabaseControls.SelectNoFilter(2));
-            Partners = ObjectConverter.ToBusPartner(DatabaseControls.SelectNoFilter(0));
             Grants = ObjectConverter.ToGrant(DatabaseControls.SelectNoFilter(10));
             GrantProjects = ObjectConverter.ToGrantProject(DatabaseControls.SelectNoFilter(9));
+            BusProjects = ObjectConverter.ToBusProject(DatabaseControls.SelectNoFilter(2));
+            Partners = ObjectConverter.ToBusPartner(DatabaseControls.SelectNoFilter(0));
             FacultyProject = ObjectConverter.ToFacultyProject(DatabaseControls.SelectNoFilter(7));
 
         }

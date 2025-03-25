@@ -430,7 +430,7 @@ namespace DatabaseSystemIntegration.Pages.Tools
 
         public static void InsertBusProject(BusProject BP)
         {
-            String sqlQuery = "INSERT INTO BusProject (Bus_Project_ID,Project_Name,Description,Start_Date,End_Date,Due_Date) VALUES ('";
+            String sqlQuery = "INSERT INTO BusProject (Bus_Project_ID,Project_Name,Description,Start_Date,End_Date,Due_Date,Grant_Project_ID) VALUES ('";
             sqlQuery += BP.Bus_Project_ID + "','";
             sqlQuery += BP.Project_Name + "','";
             sqlQuery += BP.Description + "','";

@@ -68,13 +68,14 @@
 
         @if (HttpContext.Session.GetString("UserType") == "Faculty")
         {
-            <h2 class="text-center mt-5 mb-4">Projects Associated With Grants</h2>
+            <h2 class="text-center mt-5 mb-4">Funding Projects</h2>
             <div class="table-container">
                 <table class="table table-bordered table-striped">
                     <thead class="thead-dark">
                         <tr>
                             <th>Project Name</th>
                             <th>Project Description</th>
+                            <th>Associated Organization Project</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -85,6 +86,9 @@
                                     <button class="btn btn-link" asp-page-handler="SelectGrantProject" asp-route-id="@project.Grant_Project_ID">@project.Grant_Project_Name</button>
                                 </td>
                                 <td>@project.Grant_Project_Desc</td>
+                                <td>
+                                    <button class="btn btn-link" asp-page-handler="SelectBusProject" asp-route-id="@project.Bus_Project_ID">@project.Bus_Project_Name</button>
+                                </td>
                             </tr>
                         }
                     </tbody>
@@ -94,13 +98,14 @@
 
         @if (HttpContext.Session.GetString("UserType") == "Admin")
         {
-            <h2 class="text-center mt-5 mb-4">Projects Associated With Grants</h2>
+            <h2 class="text-center mt-5 mb-4">Funding Projects</h2>
             <div class="table-container">
                 <table class="table table-bordered table-striped">
                     <thead class="thead-dark">
                         <tr>
                             <th>Project Name</th>
                             <th>Project Description</th>
+                            <th>Associated Organizational Project</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -111,6 +116,10 @@
                                     <button class="btn btn-link" asp-page-handler="SelectGrantProject" asp-route-id="@project.Grant_Project_ID">@project.Project_Name</button>
                                 </td>
                                 <td>@project.Description</td>
+
+                                <td>
+                                    <button class="btn btn-link" asp-page-handler="SelectBusProject" asp-route-id="@project.Bus_Project_ID">@project.Bus_Project_Name</button>
+                                </td>
                             </tr>
                         }
                     </tbody>
@@ -120,12 +129,13 @@
 
         @if (HttpContext.Session.GetString("UserType") == "Employee" || HttpContext.Session.GetString("UserType") == "Admin")
         {
-            <h2 class="text-center mt-5 mb-4">Business Projects</h2>
+            <h2 class="text-center mt-5 mb-4">Projects</h2>
             <div class="table-container">
                 <table class="table table-bordered table-striped">
                     <thead class="thead-dark">
                         <tr>
                             <th>Project Name</th>
+                            <th>Funding Project</th>
                             <th>Project Description</th>
                             <th>Project Start Date</th>
                             <th>Project Due Date</th>
@@ -138,6 +148,9 @@
                             <tr>
                                 <td>
                                     <button class="btn btn-link" asp-page-handler="SelectBusProject" asp-route-id="@busProject.Bus_Project_ID">@busProject.Project_Name</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-link" asp-page-handler="SelectGrantProject" asp-route-id="@busProject.Grant_Project_ID">@busProject.Project_Name</button>
                                 </td>
                                 <td>@busProject.Description</td>
                                 <td>@busProject.Start_Date</td>

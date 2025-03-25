@@ -172,6 +172,7 @@ namespace DatabaseSystemIntegration.Pages.Tools
             {
                 GrantProject obj = new GrantProject(data.GetValue(1).ToString(),data.GetValue(2).ToString());
                 obj.Grant_Project_ID = data.GetValue(0).ToString();
+                obj.SetVars(data.GetValue(0).ToString());
                 list.Add(obj);
             }
             data.DisposeAsync();
