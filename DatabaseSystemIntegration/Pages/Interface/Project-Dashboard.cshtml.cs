@@ -2,190 +2,77 @@ using DatabaseSystemIntegration.Pages.Classes;
 using DatabaseSystemIntegration.Pages.Tools;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.ObjectPool;
-using System.Runtime.CompilerServices;
-using System.Text.Json.Serialization.Metadata;
 
 namespace DatabaseSystemIntegration.Pages.Interface
 {
     //This is a test
     public class Project_DashboardModel : PageModel
     {
+        public Users User { get; set; }
+        public Role UserRoles { get; set; }
 
-        [BindProperty]
-        public GrantProject[] GrantProjects { get; set; }
+        public Grant[] AllGrants { get; set; }
 
-        [BindProperty]
-        public BusProject[] BusProjects { get; set; }
+        public Project[] AllProjects { get; set; }
 
-        [BindProperty]
-        public Grant[] Grants { get; set; }
+        public Tasks[] AllTasks { get; set; }
 
-        [BindProperty]
-        public GrantStatus[] GrantStatus { get; set; }
+        public Users[] AllUsers { get; set; }
 
-        [BindProperty]
-        public GrantCategory[] GrantCategories { get; set; }
+        public AssignedProject[] AssignedProjects { get; set; }
 
-        [BindProperty]
-        public BusPartner[] Partners { get; set; }
-
-        [BindProperty]
-        public Faculty[] Faculty { get; set; }
-
-
-        [BindProperty]
-        public FacultyProject[] FacultyProject { get; set; }
-
-        [BindProperty]
-        public Employee[] Employees { get; set; }
-
-        [BindProperty]
-        public BusRep[] Reps { get; set; }
-
-
-        public void LoadEmployee()
-        {
-            string ID = HttpContext.Session.GetString("AccountID");
-            List<BusProject> ProjectHolder = new List<BusProject>();
-            List<Employee> EmployeeHolder = new List<Employee>();
-            Employee ThisEmployee = ObjectConverter.ToEmployee(DatabaseControls.SelectFilter(4, 14, ID))[0];
-            EmployeeProject[] EP = ObjectConverter.ToEmployeeProject(DatabaseControls.SelectFilter(5, 4, ThisEmployee.Employee_ID));
-
-            foreach (EmployeeProject P in EP)
-            {
-                //find all the employees associated with the project and the projects associated with the current user
-                //there should be only one project/employee associated with each ID
-                EmployeeHolder.Add(ObjectConverter.ToEmployee(DatabaseControls.SelectFilter(4, 4, P.Employee_ID))[0]);
-                ProjectHolder.Add(ObjectConverter.ToBusProject(DatabaseControls.SelectFilter(2, 2, P.Bus_Project_ID))[0]);
-             }
-
-            BusProjects = ProjectHolder.ToArray();
-            Employees = EmployeeHolder.ToArray();
-        }
-
-        public void LoadBusRep()
-        {
-            string ID = HttpContext.Session.GetString("AccountID");
-            List<Grant> GrantHolder = new List<Grant>();
-            BusRep ThisRep = ObjectConverter.ToBusRep(DatabaseControls.SelectFilter(3, 14, ID))[0];
-            BusPartner ThisPartner = ObjectConverter.ToBusPartner(DatabaseControls.SelectFilter(0, 14, ThisRep.Bus_Partner_ID))[0];
-            Grants = ObjectConverter.ToGrant(DatabaseControls.SelectFilter(10, 0, ThisRep.Bus_Partner_ID));
-            List<GrantProject> GPHolder = new List<GrantProject>();
-
-            foreach (Grant g in Grants)
-            {
-                GPHolder.Add(ObjectConverter.ToGrantProject(DatabaseControls.SelectFilter(10, 10, g.Grant_Project_ID))[0]);
-            }
-
-            GrantProjects = GPHolder.ToArray();
-            foreach (GrantProject gp in GrantProjects)
-            {
-                gp.SetVars(gp.Grant_Project_ID);
-            }
-        }
-
-        public void LoadPartner()
-        {
-            
-            string ID = HttpContext.Session.GetString("AccountID");
-            BusPartner ThisPartner = ObjectConverter.ToBusPartner(DatabaseControls.SelectFilter(0, 14,ID))[0];
-            Grants = ObjectConverter.ToGrant(DatabaseControls.SelectFilter(10, 0,ThisPartner.Bus_Partner_ID));
-            List<GrantProject> GPHolder = new List<GrantProject>();
-
-            foreach (Grant g in Grants)
-            {
-                GPHolder.Add(ObjectConverter.ToGrantProject(DatabaseControls.SelectFilter(9, 9, g.Grant_Project_ID))[0]);
-            }
-
-            GrantProjects = GPHolder.ToArray();
-            foreach (GrantProject gp in GrantProjects)
-            {
-                gp.SetVars(gp.Grant_Project_ID);
-            }
-        }
+        public AssignedTask[] AssignedTasks { get; set; }
 
         public void LoadAdmin()
         {
-            Grants = ObjectConverter.ToGrant(DatabaseControls.SelectNoFilter(10));
-            GrantProjects = ObjectConverter.ToGrantProject(DatabaseControls.SelectNoFilter(9));
-            foreach (GrantProject gp in GrantProjects)
-            {
-                gp.SetVars(gp.Grant_Project_ID);
-            }
-            BusProjects = ObjectConverter.ToBusProject(DatabaseControls.SelectNoFilter(2));
-            Partners = ObjectConverter.ToBusPartner(DatabaseControls.SelectNoFilter(0));
-            FacultyProject = ObjectConverter.ToFacultyProject(DatabaseControls.SelectNoFilter(7));
-
+            AllUsers = ObjectConverter.ToUsers(DatabaseControls.SelectNoFilter(19));
+            AllProjects = ObjectConverter.ToProject(DatabaseControls.SelectNoFilter(12));
+            AllTasks = ObjectConverter.ToTask(DatabaseControls.SelectNoFilter(15));
+            AllGrants = ObjectConverter.ToGrants(DatabaseControls.SelectNoFilter(7));
         }
 
-        public void LoadFaculty()
+        public void LoadGenericUser()
+        { 
+            AssignedProjects = ObjectConverter.ToAssignedProject(DatabaseControls.SelectFilter(0, 19, User.UserID));
+        }
+
+        public void LoadProjectManager()
         {
-            string ID = HttpContext.Session.GetString("AccountID");
-            Faculty ThisFaculty = ObjectConverter.ToFaculty(DatabaseControls.SelectFilter(6, 14, ID))[0];
-            List<Grant> GrantHolder = new List<Grant>();
-            FacultyProject = ObjectConverter.ToFacultyProject(DatabaseControls.SelectFilter(7, 6, ThisFaculty.Faculty_ID));
-            List<GrantProject> GPHolder = new List<GrantProject>();
-            foreach (FacultyProject FP in FacultyProject)
-            {
-                GrantHolder.Add(ObjectConverter.ToGrant(DatabaseControls.SelectFilter(10, 9, FP.Grant_Project_ID))[0]);
-                GPHolder.Add(ObjectConverter.ToGrantProject(DatabaseControls.SelectFilter(9, 9, FP.Grant_Project_ID))[0]);
-
-            }
-
-            Grants = GrantHolder.ToArray();
-            GrantProjects = GPHolder.ToArray();
-            foreach (GrantProject gp in GrantProjects)
-            {
-                gp.SetVars(gp.Grant_Project_ID);
-            }
+            AllProjects = ObjectConverter.ToProject(DatabaseControls.SelectNoFilter(12));
+            AllGrants = ObjectConverter.ToGrants(DatabaseControls.SelectNoFilter(7));
         }
+
 
 
         public IActionResult OnGet()
         {
             if (HttpContext.Session.GetInt32("LoggedIn") == 1)
             {
-                string UserType = HttpContext.Session.GetString("UserType");
-                if (UserType == "Admin")
-                {
-                    LoadAdmin();
+                User = ObjectConverter.ToUsers(DatabaseControls.SelectFilter(19, 19, HttpContext.Session.GetString("UserID")))[0];
+                UserRoles = User.UserRole.role;
+                if(UserRoles != null) {
+                        if (UserRoles.RoleName == "Admin")
+                        {
+                            LoadAdmin();
+                            HttpContext.Session.SetString("UserType", "Admin");
+                        }
                 }
-                else if (UserType == "Employee")
+                else
                 {
+                    HttpContext.Session.SetString("UserType", "Guest");
+                }
+                    
 
-                    LoadEmployee();
-                }
-                else if (UserType == "BusPartner")
-                {
-                    LoadPartner();
-                }
-                else if (UserType == "BusRep")
-                {
-                    LoadBusRep();
-                }
-                else if (UserType == "Faculty")
-                {
-                    LoadFaculty();
-                }
-
-                    return Page();
+                return Page();
             }
             return RedirectToPage("Index");
         }
 
-        public IActionResult OnPostSelectBusProject(string ID)
+        public IActionResult OnPostSelectProject(string ID)
         {
-            HttpContext.Session.SetString("ItemType", "BusProject");
+            HttpContext.Session.SetString("ItemType", "Project");
             HttpContext.Session.SetString("ItemID", ID);
 
-            return RedirectToPage("AccessItem");
-        }
-
-        public IActionResult OnPostSelectGrantProject(string ID)
-        {
-            HttpContext.Session.SetString("ItemType", "GrantProject");
-            HttpContext.Session.SetString("ItemID", ID);
             return RedirectToPage("AccessItem");
         }
 
@@ -196,14 +83,14 @@ namespace DatabaseSystemIntegration.Pages.Interface
             return RedirectToPage("AccessItem");
         }
 
-        public IActionResult OnPostSelectProjectNote(string ID)
+        public IActionResult OnPostSelectTask(string ID)
         {
             HttpContext.Session.SetString("ItemType", "ProjectNote");
             HttpContext.Session.SetString("ItemID", ID);
             return RedirectToPage("AccessItem");
         }
 
-        public IActionResult OnPostSelectMeetingNote(string ID)
+        public IActionResult OnPostSelectChildTask(string ID)
         {
             HttpContext.Session.SetString("ItemType", "MeetingNote");
             HttpContext.Session.SetString("ItemID", ID);

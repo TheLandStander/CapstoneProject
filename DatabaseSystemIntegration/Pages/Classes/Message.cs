@@ -15,33 +15,24 @@ namespace DatabaseSystemIntegration.Pages.Classes
         public string Sender { get; set; }
         public string Recipient { get; set; }
 
+        public Users SendingUser { get; set; }
+        public Users ReceivingUser { get; set; }
+
+
         public void SetVars()
         {
-            Sender = ObjectConverter.ToPersonalInfo(DatabaseControls.SelectFilter(14, 14, Sender_ID))[0].getUsername();
-            Recipient = ObjectConverter.ToPersonalInfo(DatabaseControls.SelectFilter(14, 14, Receiver_ID))[0].getUsername();
-        }
-
-        private string MakeID()
-        {
-            //Makes the primary key 
-            string ID = "";
-            Random rand = new Random();
-            for (int i = 0; i < 6; i++)
-            {
-                ID += rand.Next(10);
-            }
-            return ID;
+            SendingUser = ObjectConverter.ToUsers(DatabaseControls.SelectFilter(19,19, Sender_ID))[0];
+            ReceivingUser = ObjectConverter.ToUsers(DatabaseControls.SelectFilter(19, 19, Receiver_ID))[0];
         }
 
         public Message(string subject, string content, DateTime sendDate, string sender, string receiver)
         {
-            this.Message_ID = MakeID();
-            this.Sender_ID = sender;
-            this.Receiver_ID = receiver;
-            this.Message_Subject = subject;
-            this.Content = content;
-            this.Send_Date = sendDate;
-            SetVars();
+            Message_ID = DatabaseControls.MakeID();
+            Sender_ID = sender;
+            Receiver_ID = receiver;
+            Message_Subject = subject;
+            Content = content;
+            Send_Date = sendDate;
         }
 
 

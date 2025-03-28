@@ -38,13 +38,13 @@ namespace DatabaseSystemIntegration.Pages.Interface
         public void OnPost() 
         {
             SendMessage();
-            Messages = ObjectConverter.ToMessage(DatabaseControls.GetMessages(HttpContext.Session.GetString("AccountID")));
+            Messages = ObjectConverter.ToMessages(DatabaseControls.GetMessages(HttpContext.Session.GetString("AccountID")));
             Users = ObjectConverter.ToPersonalInfo(DatabaseControls.SelectNoFilter(14));
         }
         public IActionResult OnPostPopulateHandler()
         {
             ModelState.Clear();
-            Messages = ObjectConverter.ToMessage(DatabaseControls.GetMessages(HttpContext.Session.GetString("AccountID")));
+            Messages = ObjectConverter.ToMessages(DatabaseControls.GetMessages(HttpContext.Session.GetString("AccountID")));
             Users = ObjectConverter.ToPersonalInfo(DatabaseControls.SelectNoFilter(14));
             MessageContent = "Sample message body";
             MessageSubject = "Sample message subject";
@@ -55,7 +55,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
         public IActionResult OnPostClearHandler()
         {
             ModelState.Clear();
-            Messages = ObjectConverter.ToMessage(DatabaseControls.GetMessages(HttpContext.Session.GetString("AccountID")));
+            Messages = ObjectConverter.ToMessages(DatabaseControls.GetMessages(HttpContext.Session.GetString("AccountID")));
             Users = ObjectConverter.ToPersonalInfo(DatabaseControls.SelectNoFilter(14));
 
             return Page();
@@ -65,8 +65,8 @@ namespace DatabaseSystemIntegration.Pages.Interface
         {
             if (HttpContext.Session.GetInt32("LoggedIn") == 1)
             {
-                Messages = ObjectConverter.ToMessage(DatabaseControls.GetMessages(HttpContext.Session.GetString("AccountID")));
-                Users = ObjectConverter.ToPersonalInfo(DatabaseControls.SelectNoFilter(14));
+                Messages = ObjectConverter.ToMessages(DatabaseControls.GetMessages(HttpContext.Session.GetString("AccountID")));
+                Users = ObjectConverter.ToPersonalInfo(DatabaseControls.SelectNoFilter(11));
                     return Page();
             }
             return RedirectToPage("/Index");

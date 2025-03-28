@@ -3,116 +3,23 @@
 @{
 
     <form style="text-align: left; margin-bottom: 20px; method="post" asp-page-handler="">
-        @if (HttpContext.Session.GetString("ItemType") == "GrantProject")
-        {
-            <div class="container">
-                <div class="text-center mb-4">
-                    <h3 class="fw-bold">Funding Project</h3>
-                </div>
-
-                <div class="card shadow-lg mx-auto" style="max-width: 800px;">
-                    <div class="card-body">
-                        <h4 class="card-title text-center fw-semibold">@Model.GProject.Project_Name</h4>
-                        <h4 class="card-title text-center fw-semibold">
-                            <button asp-page-handler="SelectBusProject" asp-route-id="@Model.GProject.Bus_Project_ID" class="btn btn-link">@Model.GProject.Bus_Project_Name</button>
-                        </h4>
-
-                        <p class="card-text text-center">@Model.GProject.Description</p>
-                        <ul class="list-group list-group-flush mt-2">
-                            @foreach (var partner in Model.BusPartners)
-                            {
-                                <li class="list-group-item"><strong>Partner:</strong> @partner.Bus_Name</li>
-                            }
-                        </ul>
-                        <br />
-                        <ul class="list-group list-group-flush mt-2">
-                            @foreach (var faculty in Model.FacultyMembers)
-                            {
-                                <li class="list-group-item"><strong>Faculty:</strong> @faculty.Faculty_Name</li>
-                            }
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <table class="table table-bordered table-striped mt-4 mx-auto" style="max-width: 800px; max-height: 700px; overflow-y: auto;">
-                <thead class="thead-light">
-                    <tr>
-                        <th>Representative</th>
-                        <th>Business</th>
-                        <th>Meeting Note</th>
-                        <th>Meeting Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var Meeting in Model.MeetingNotes)
-                    {
-                        <tr>
-                            <td>@Meeting.Rep_Name</td>
-                            <td>@Meeting.Bus_Name</td>
-                            <td>@Meeting.Meeting_Notes</td>
-                            <td>@Meeting.Meeting_Date</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-
-            <h3 class="text-center mt-5 mb-3">Grants Associated with This Project</h3>
-            <table class="table table-bordered table-striped mx-auto" style="max-width: 1000px; max-height: 700px; overflow-y: auto;">
-                <thead class="thead-light">
-                    <tr>
-                        <th>Grant Name</th>
-                        <th>Award Amount ($)</th>
-                        <th>Submission Date</th>
-                        <th>Award Date</th>
-                        <th>Category</th>
-                        <th>Status</th>
-                        <th>Lead Faculty</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var grant in Model.AssociatedGrants)
-                    {
-                        <tr>
-                            <td>
-                                <button asp-page-handler="SelectGrant" asp-route-id="@grant.Grant_ID" class="btn btn-link">@grant.Grant_Name</button>
-                            </td>
-                            <td>@grant.Amount</td>
-                            <td>@grant.Submission_Date</td>
-                            <td>@grant.Award_Date</td>
-                            <td>@grant.Grant_Category_Name</td>
-                            @if (@grant.Grant_Status == "Accepted")
-                            {
-                                <td class="text-success">@grant.Grant_Status</td>
-     
-                            }
-                            @if (@grant.Grant_Status == "Pending")
-                            {
-                                <td class="text-warning"> @grant.Grant_Status</td>
-                               
-                            }
-                            @if (@grant.Grant_Status == "Rejected")
-                            {
-                                <td class="text-danger"> @grant.Grant_Status</td>
-                            }
-                            <td>@grant.Lead_Faculty_Name</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        }
-
-        @if (HttpContext.Session.GetString("ItemType") == "BusProject")
+        @if (HttpContext.Session.GetString("ItemType") == "Project")
         {
             <h3 class="text-center mb-4">Project</h3>
 
             <div class="border p-4 rounded bg-light mx-auto" style="max-width: 800px; max-height: 700px; overflow-y: auto;">
-                <h4 class="text-center">@Model.BProject.Project_Name</h4>
-                <p class="mb-2 text-muted">@Model.BProject.Description</p>
-                <p class="mb-2"><strong>Start Date:</strong> @Model.BProject.Start_Date</p>
-                <p class="mb-2"><strong>Due Date:</strong> @Model.BProject.Due_Date</p>
-                <p class="mb-2"><strong>End Date:</strong> @Model.BProject.End_Date</p>
-                <input type="date" asp-for="ProjectEndDate" style="width: 300px;" class="form-control" />
+                <h4 class="text-center">@Model.project.ProjectName</h4>
+                <p class="mb-2 text-muted">@Model.project.Description</p>
+                <p class="mb-2 text-muted">@Model.project.Status.ProjectStatusName</p>
+                <p class="mb-2"><strong>Start Date:</strong> @Model.project.StartDate</p>
+                <p class="mb-2"><strong>Due Date:</strong> @Model.project.DueDate</p>
+                <p class="mb-2"><strong>End Date:</strong> @Model.project.EndDate</p>
+                <select asp-for="ProjectStatusID" class="form-control">
+                    @foreach (var status in Model.ProjectStatus)
+                    {
+                        <option value="@status.ProjectStatusID">@status.ProjectStatusName</option>
+                    }
+                </select>
                 <button asp-page-handler="UpdateProject" class="btn-close-white">Update Project</button>
             </div>
 
@@ -121,15 +28,40 @@
                 <thead class="thead-light">
                     <tr>
                         <th>Name</th>
+                        <th>Status</th>
                         <th>Description</th>
+                        <th>Start Date</th>
+                        <th>Due Date</th>
+                        <th>End Date</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var task in @Model.Tasks)
+                    @foreach (var Task in @Model.project.ProjectTasks)
                     {
                         <tr>
-                            <td>@task.Task_Name</td>
-                            <td>@task.Task_Description</td>
+                            <td>
+                                <button class="btn btn-link" asp-page-handler="SelectTask" asp-route-id="@Task.TaskID">@Task.TaskName</button>
+                            </td>
+                            <td>@Task.Description</td>
+                            @if (Task.Completed == true)
+                            {
+                                <td>Complete</td>
+                            }
+                            else
+                            {
+                                <td>Incomplete</td>
+                            }
+                            @foreach (var User in Task.GetEmployees())
+                            {
+                                <td>@User.Name</td>
+                            }
+                            <td>@Task.StartDate</td>
+                            <td>@Task.DueDate</td>
+                            @if (@Task.EndDate > DateOnly.MinValue)
+                            {
+                                <td>@Task.EndDate</td>
+                            }
+
                         </tr>
                     }
                 </tbody>
@@ -144,11 +76,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var Note in @Model.ProjectNotes)
+                    @foreach (var Note in @Model.project.ProjectNotes)
                     {
                         <tr>
-                            <td>@Note.Project_Note</td>
-                            <td>@Note.Date_Recorded</td>
+                            <td>@Note.Notes</td>
+                            <td>@Note.Date</td>
                         </tr>
                     }
                 </tbody>
@@ -160,38 +92,34 @@
             <h3 class="text-center mb-4">Grant</h3>
 
             <div class="border p-4 rounded bg-light mx-auto" style="max-width: 800px; max-height: 700px; overflow-y: auto;">
-                <h4 class="text-center">@Model.ThisGrant.Grant_Name</h4>
-                <p class="mb-2"><strong>Grant Category:</strong> @Model.ThisGrant.Grant_Category_Name</p>
-                @if (@Model.ThisGrant.Grant_Status == "Accepted")
+                <h4 class="text-center">@Model.grant.GrantName</h4>
+                <p class="mb-2"><strong>Grant Category:</strong> @Model.grant.Category.CategoryName</p>
+                @if (Model.grant.Status.GrantStatusName == "Accepted")
                 {
-                    <p class="text-success">@Model.ThisGrant.Grant_Status</p>
+                    <p class="text-success">@Model.grant.Status.GrantStatusName</p>
                 }
-                @if (@Model.ThisGrant.Grant_Status == "Pending")
+                @if (@Model.grant.Status.GrantStatusName == "Pending")
                 {
-                    <p class="text-warning">@Model.ThisGrant.Grant_Status</p>
+                    <p class="text-warning">@Model.grant.Status.GrantStatusName</p>
                 }
-                @if (@Model.ThisGrant.Grant_Status == "Rejected")
+                @if (@Model.grant.Status.GrantStatusName == "Rejected")
                 {
-                    <p class="text-danger">@Model.ThisGrant.Grant_Status</p>
+                    <p class="text-danger">@Model.grant.Status.GrantStatusName</p>
                 }
                 <p class="mb-2"><strong>Update Status:</strong></p>
                 <select asp-for="GrantStatusID" class="form-control">
-                    @foreach (var status in Model.Statuses)
+                    @foreach (var status in Model.GrantStatus)
                     {
-                        <option value="@status.Grant_Status_ID">@status.Grant_Status</option>
+                        <option value="@status.StatusID">@status.GrantStatusName</option>
                     }
                 </select>
-                <input type="date" asp-for="GrantAwardDate" style="width: 300px;" class="form-control" />
-                <button class="btn-close-white" asp-page-handler="UpdateGrant"> <strong>Update Award Date</strong></button>
                 <button class="btn-close-white" asp-page-handler="UpdateGrantStatus"> <strong>Update Grant Status</strong></button>
-                <p class="mb-2"><strong>Award Date:</strong> @Model.ThisGrant.Award_Date</p>
-                <p class="mb-2"><strong>Submission Date:</strong> @Model.ThisGrant.Submission_Date</p>
-                <p class="mb-2"><strong>Award Amount:</strong> @Model.ThisGrant.Amount</p>
-                <p class="mb-2"><strong>Lead Faculty Member:</strong> @Model.ThisGrant.Lead_Faculty_Name</p>
-                <p class="mb-2"><strong>Business Partner:</strong> @Model.ThisGrant.Bus_Name</p>
-                <button class="btn btn-link" asp-page-handler="SelectGrantProject"
-                        asp-route-id="@Model.ThisGrant.Grant_Project_ID">
-                    <strong>Associted Project: @Model.ThisGrant.Project_Name</strong>
+                <p class="mb-2"><strong>Award Date:</strong> @Model.grant.AwardDate</p>
+                <p class="mb-2"><strong>Submission Date:</strong> @Model.grant.SubmissionDate</p>
+                <p class="mb-2"><strong>Submission Date:</strong> @Model.grant.DueDate</p>
+                <p class="mb-2"><strong>Award Amount:</strong> @Model.grant.Amount</p>
+                <button class="btn btn-link" asp-page-handler="SelectProject" asp-route-id="@Model.grant.ProjectID">
+                    <strong>Associted Project: @Model.grant.GetProject().ProjectName</strong>
                 </button>
                 </div>
         }

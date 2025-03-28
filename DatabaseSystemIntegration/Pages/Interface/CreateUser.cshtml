@@ -1,157 +1,75 @@
 ﻿@page
-@model DatabaseSystemIntegration.Pages.Interface.IndexModel
+@model DatabaseSystemIntegration.Pages.Interface.CreateUser
 @{
-    //Noah Kurtz, **WORKED INDIVIDUALLY**
-    //passes user input to the model, separated into 3 forms, employee, faculty, and Business Partners.
-     //use form.group divs to seperate sections of the form, use class = "form-control" to make the UI look nicer 
-
-     //Create employee form
-    <form method="post">
-        <H1>Create Employee</H1>
-        <br />
-        <div class="form-group"> 
-            <H4>Employee Name</H4>
-            <input type="text" asp-for="Employee_Name" class="form-control" />
-        </div>
-
-        <div class="form-group">
-            <H4>Is this employee an admin?</H4><br />
-            <label>
-                <input type="radio" asp-for="is_Admin" value= "true" /> Yes
-            </label>
-            <label>
-                <input type="radio" asp-for="is_Admin" value= "false" /> No
-            </label>
-        </div>
-
-        <div class="form-group">
-            <H4>Select Account</H4>
-            <select asp-for="Employee_Info_ID" class="form-control">
-                @foreach (var Info in Model.UserInfo)
-                {
-                    <option value="@Info.getInfoID()">@Info.getUsername()</option>
-                }
-            </select>
-        </div>
-        <br/>
-
-        <div class="form-group">
-            <button type="submit" asp-page-handler="" class="btn btn-primary">Add Employee</button>
-        </div>
-    </form>
-
-
-    //add a space/margin between forms
-    //create faculty form
-    <form method="post" style="margin-top: 100px;">
-        <h1>Create Faculty</h1>
-        <br />
-        <div class="form-group">
-            <h4>Faculty Name</h4>
-            <input type="text" id="Faculty_Name" asp-for="Faculty_Name" class="form-control" />
-        </div>
-
-        <div class="form-group">
-            <h4>Select Account</h4>
-            <select asp-for="Faculty_Info_ID" class="form-control">
-                @foreach (var Info in Model.UserInfo)
-                {
-                    <option value="@Info.getInfoID()">@Info.getUsername()</option>
-                }
-            </select>
-
-        <br />
-        <div class="form-group">
-                <button type="submit" asp-page-handler="" class="btn btn-primary">Add Faculty</button>
-        </div>
-    </form>
-
-    //create business rep form
-    <form method="post" style="margin-top: 100px;">
-        <h1>Create Business Representative</h1>
-        <br />
-        <div class="form-group">
-            <H4>Enter Representative's Name</H4>
-            <input type="text" asp-for="Rep_Name" class="form-control" />
-        </div>
-
-        <div class="form-group">
-            <h4>Select a Business Partner to Associate with this Representative</h4>
-            <select asp-for="Partner_ID" class="form-control">
-                @foreach (var Parter in Model.Partners)
-                {
-                    <option value="@Parter.Bus_Partner_ID">@Parter.Bus_Name</option>
-                }
-            </select>
-        </div>
-
-        <div class="form-group">
-            <h4>Select Account</h4>
-            <select asp-for="Rep_Info_ID" class="form-control">
-                @foreach (var info in Model.UserInfo)
-                {
-                    <option value="@info.getInfoID()">@info.getUsername()</option>
-                }
-            </select>
-        </div>
-
-        <br />
-        <div class="form-group">
-            <button type="submit" asp-page-handler="" class="btn btn-primary">Add Representative</button>
-        </div>
-    </form>
-    
-    //create bus partner
-    <form method="post" style="margin-top: 100px;margin-bottom: 100px;">
-        <h1>Create Business Partner</h1>
-        <br />
-        <div class="form-group">
-            <H4>Enter Business Name</H4>
-            <input type="text" asp-for="Bus_Name" class="form-control" />
-        </div>
-
-        <div class="form-group">
-            <h4>Select Account</h4>
-            <select asp-for="Partner_Info_ID" class="form-control">
-                @foreach (var Info in Model.UserInfo)
-                {
-                    <option value="@Info.getInfoID()">@Info.getUsername()</option>
-                }
-            </select>
-        </div>
-
-        <div class="form-group">
-            <h4>Select Partner Status</h4>
-            <select asp-for="Partner_Status_ID" class="form-control">
-                @foreach (var Partner in Model.Status)
-                {
-                    <option value="@Partner.Bus_Partner_Status_ID">@Partner.Status_Flag</option>
-                }
-            </select>
-        </div>
-
-        <div class="form-group">
-            <h4>Select Organization Type</h4>
-            <select asp-for="Org_Type_ID" class="form-control">
-                @foreach (var Org in Model.Orgs)
-                {
-                    <option value="@Org.Org_Type_ID">@Org.Org_Type</option>
-                }
-            </select>
-        </div>
-
-        <br />
-        <div class="form-group">
-            <button type="submit" asp-page-handler="" class="btn btn-primary">Add Partner</button>
-        </div>
-    </form>
-    <br/>
-    //populate/clear
-    <form method="post" style="margin-top: 100px;margin-bottom: 100px;">
-        <div class="form-group">
-            <button asp-page="CreateUser" asp-page-handler="PopulateHandler">Populate</button>
-            <button asp-page="CreateUser" asp-page-handler="ClearHandler">Clear</button>
-        </div>
-    </form>
-
+    ViewData["Title"] = "Create User";
 }
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+    <form method="post">
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="Name">Name</label>
+            <div class="col-sm-10">
+                <input asp-for="Name" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="AccountID">Account</label>
+            <div class="col-sm-10">
+                <select asp-for="AccountID" class="form-control">
+                    @foreach (var account in Model.Accounts)
+                    {
+                        <option value="@account.getInfoID()">@account.getUsername()</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="PartnerID">Partner</label>
+            <div class="col-sm-10">
+                <select asp-for="PartnerID" class="form-control">
+                    @foreach (var partner in Model.Partners)
+                    {
+                        <option value="@partner.PartnerID">@partner.BusName</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="UserTypeID">User Role</label>
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <select asp-for="UserTypeID" class="form-control" multiple>
+                        @foreach (var Role in Model.Roles)
+                        {
+                            <option value="@Role.RoleID">@Role.RoleName</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="UserTypeID">User Type</label>
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <select asp-for="UserTypeID" class="form-control" multiple>
+                        @foreach (var type in Model.Types)
+                        {
+                            <option value="@type.UserTypeID">@type.UserTypeName</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-10 offset-sm-2">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-secondary" asp-page-handler="PopulateHandler">Populate</button>
+                <button type="submit" class="btn btn-danger" asp-page-handler="ClearHandler">Clear</button>
+            </div>
+        </div>
+    </form>
+</div>

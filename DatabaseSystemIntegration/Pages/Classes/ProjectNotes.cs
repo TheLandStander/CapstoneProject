@@ -4,38 +4,23 @@ namespace DatabaseSystemIntegration.Pages.Classes
 {
     public class ProjectNotes
     {
-        public string Notes_ID { get; set; }
-        public string Project_Note { get; set;}
-        public DateTime Date_Recorded { get; set; }
-        public string Bus_Project_ID { get; set; }
-        public string Project_Name { get; set; }
-
+        public string NotesID { get; set; }
+        public string Notes { get; set; }
+        public DateOnly Date { get; set; }
+        public string ProjectID { get; set; }
+        public Project AssociatedProject { get; set; }
 
         public void SetVars()
         {
-            Project_Name = ObjectConverter.ToBusProject(DatabaseControls.SelectFilter(2, 2, Bus_Project_ID))[0].Project_Name;
+            AssociatedProject = ObjectConverter.ToProject(DatabaseControls.SelectFilter(12, 12, ProjectID))[0];
         }
-
-        private string MakeID()
+        public ProjectNotes(string projectNotes, DateOnly date, string projectID)
         {
-            //Makes the primary key 
-            string ID = "";
-            Random rand = new Random();
-            for (int i = 0; i < 6; i++)
-            {
-                ID += rand.Next(10);
-            }
-            return ID;
-        }
-
-        public ProjectNotes(string Note, DateTime recordDate, string ProjectID)
-        {
-            // set attributes and foreign keys
-            Notes_ID = MakeID();
-            Project_Note = Note;
-            Date_Recorded = recordDate;
-            Bus_Project_ID = ProjectID;
-            SetVars();
+            NotesID = DatabaseControls.MakeID();  // Set primary key
+            Notes = projectNotes;
+            Date = date;
+            ProjectID = projectID;
         }
     }
+
 }

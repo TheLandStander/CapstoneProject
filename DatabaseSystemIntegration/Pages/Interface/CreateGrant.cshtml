@@ -1,115 +1,82 @@
 ﻿@page
 @model DatabaseSystemIntegration.Pages.Interface.CreateGrantModel
 @{
-    //Noah Kurtz, **WORKED INDIVIDUALLY**
-    //form for creating a grant project
-    <form method="post">
-        <h1>Start a project</h1>
-        <br />
-        <div class="form-group">
-        <h4>Enter Project Name</h4>
-        <br /><input type="text" asp-for="Project_Name" class="form-control" /><br />
-        </div>
-
-        <div class="form-group">
-        <h4>Enter Project Description</h4>
-            <br> <input type="text" asp-for="Description" class="form-control" /><br>
-        </div>
-
-        <div class="form-group">
-            <br>  <button type="submit" asp-page-handler="" class="btn btn-primary">Add Project</button>  <br>
-        </div>
-      </form>
-
-
-      //for for creating a grant, add a space between the two
-    <form method="post" style="margin-top: 100px;">
-        <h1>Add a Grant</h1>
-        <br />
-        <div class="form-group">
-        <h4>Enter Grant Name</h4>
-        <br><input type="text" asp-for="Grant_Name" class="form-control" /><br>
-        </div>
-
-        <div class="form-group">
-        <h4>Enter Grant Award Amount</h4>
-        <br><input type="number" asp-for="Amount" class="form-control" /><br>
-        </div>
-
-        <div class="form-group">
-        <h4>Enter Grant Submission Date MM-DD-YYYY</h4>
-        <label>
-        <br> <input type="date" asp-for="Submission_Date" class="form-control" /><br>
-         </label>
-        </div>
-
-        <div class="form-group">
-        <h4>Enter Grant Award Date MM-DD-YYYY</h4>
-            <label>
-        <br> <input type="date" asp-for="Award_Date" class="form-control"/><br>
-            </label>
-        </div>
-
-        <div class="form-group">
-            <h4>Select a Project to associate with this grant</h4>
-            <br /> <select asp-for="Grant_Project_ID" class="form-control">
-                @foreach (var Project in Model.GrantProjectsSelection)
-                {
-                    <option value="@Project.Grant_Project_ID">@Project.Project_Name</option>
-                }
-            </select><br />
-        </div>
-
-        <div class="form-group">
-        <h4>Select a Grant Category</h4>
-        <br /> <select asp-for="Category_ID" class="form-control">
-            @foreach (var Category in Model.GrantCategories)
-            {
-                <option value="@Category.Grant_Category_ID">@Category.Grant_Category_Name</option>
-            }
-        </select><br />
-        </div>
-
-        <div class="form-group">
-        <h4>Select a Grant Status</h4>
-        <br /> <select asp-for="Status_ID" class="form-control">
-            @foreach (var Status in Model.Status)
-            {
-                <option value="@Status.Grant_Status_ID">@Status.Grant_Status</option>
-            }
-        </select><br />
-        </div>
-
-        <div class="form-group">
-        <h4>Select a lead faculty member</h4>
-        <br /> <select asp-for="Lead_Faculty_ID" class="form-control">
-            @foreach (var Faculty in Model.LeadFaculty)
-            {
-                <option value="@Faculty.Faculty_ID">@Faculty.Faculty_Name</option>
-            }
-        </select><br />
-        </div>
-
-        <div class="form-group">
-        <h4>Select a Business Partner To associate with this grant</h4>
-        <br /> <select asp-for="Bus_Partner_ID" class="form-control">
-            @foreach (var Partner in Model.Partners)
-            {
-                <option value="@Partner.Bus_Partner_ID">@Partner.Bus_Name</option>
-            }
-        </select><br />
-        </div>
-
-        <div class="form-group">
-            <br>  <button type="submit" asp-page-handler="" class="btn btn-primary">Add Grant</button>  <br>
-        </div>
-    </form>
-    <form method="post" style="margin-top: 100px;margin-bottom: 100px;">
-        <div class="form-group">
-            <button asp-page="CreateGrant" asp-page-handler="PopulateHandler">Populate</button>
-            <button asp-page="CreateGrant" asp-page-handler="ClearHandler">Clear</button>
-        </div>
-    </form>
-
-
+    ViewData["Title"] = "Add Grant";
 }
+
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+    <form method="post">
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="GrantName">Grant Name</label>
+            <div class="col-sm-10">
+                <input asp-for="GrantName" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="Amount">Amount</label>
+            <div class="col-sm-10">
+                <input asp-for="Amount" class="form-control" type="number" step="0.01" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="SubDate">Submission Date</label>
+            <div class="col-sm-10">
+                <input asp-for="SubDate" class="form-control" type="date" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="DueDate">Due Date</label>
+            <div class="col-sm-10">
+                <input asp-for="DueDate" class="form-control" type="date" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="StatusID">Status</label>
+            <div class="col-sm-10">
+                <select asp-for="StatusID" class="form-control">
+                    @foreach (var status in Model.Status)
+                    {
+                        <option value="@status.StatusID">@status.GrantStatusName</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="CategoryID">Category</label>
+            <div class="col-sm-10">
+                <select asp-for="CategoryID" class="form-control">
+                    @foreach (var category in Model.Category)
+                    {
+                        <option value="@category.CategoryID">@category.CategoryName</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="ProjectID">Project</label>
+            <div class="col-sm-10">
+                <select asp-for="ProjectID" class="form-control">
+                    @foreach (var project in Model.Projects)
+                    {
+                        <option value="@project.ProjectID">@project.ProjectName</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-10 offset-sm-2">
+                <button type="submit" class="btn btn-primary" asp-page-handler="">Submit</button>
+                <button type="submit" class="btn btn-secondary" asp-page-handler="PopulateHandler">Populate</button>
+                <button type="submit" class="btn btn-danger" asp-page-handler="ClearHandler">Clear</button>
+            </div>
+        </div>
+    </form>
+</div>

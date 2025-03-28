@@ -1,43 +1,42 @@
 ﻿using DatabaseSystemIntegration.Pages.Tools;
+using System.Threading.Tasks;
 
 namespace DatabaseSystemIntegration.Pages.Classes
 {
     public class ChildTask
     {
-        public string Child_Task_ID { get; set; }
-        public string Task_Name { get; set; }
-        public string Task_Description { get; set; }
-        public string Parent_Task_ID { get; set; }
-        public string Parent_Task_Name { get; set; }
+        public string ChildTaskID { get; set; }
+        public string TaskName { get; set; }
+        public string Description { get; set; }
+        public DateOnly StartDate { get; set; }
+        public DateOnly DueDate { get; set; }
+        public DateOnly EndDate { get; set; }
         public bool Completed { get; set; }
+        public string ParentTaskID { get; set; }
 
-        private void setVars()
+
+        public void CompleteTask()
         {
-            Parent_Task_Name = ObjectConverter.ToTask(DatabaseControls.SelectFilter(16,16 ,Parent_Task_ID))[0].Task_Name;
-                
+            DatabaseControls.CompleteChildTask(this);
         }
 
-        private string MakeID()
+
+        public Tasks GetParentTask()
         {
-            //Makes the primary key 
-            string ID = "";
-            Random rand = new Random();
-            for (int i = 0; i < 6; i++)
-            {
-                ID += rand.Next(10);
-            }
-            return ID;
+           return ObjectConverter.ToTask(DatabaseControls.SelectFilter(15, 15, ParentTaskID))[0];
         }
 
-        public ChildTask(string Name, string Desc,bool Complete ,string Parent_Task)
+        public ChildTask(string taskName, string description, DateOnly Start, DateOnly Due, bool completed, string parentTaskID)
         {
-            Child_Task_ID = MakeID();
-            Task_Name = Name;
-            Task_Description = Desc;
-            Completed = Complete;
-            Parent_Task_ID = Parent_Task;
-            setVars();
-        
+            ChildTaskID = DatabaseControls.MakeID();  // Set primary key
+            TaskName = taskName;
+            Description = description;
+            StartDate = Start;
+            DueDate = Due;
+            Completed = completed;
+            ParentTaskID = parentTaskID;
         }
     }
+
 }
+

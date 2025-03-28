@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using DatabaseSystemIntegration.Pages.Tools;
+using System.Security.Cryptography;
 
 namespace DatabaseSystemIntegration.Pages.Classes
 {
@@ -55,31 +56,19 @@ namespace DatabaseSystemIntegration.Pages.Classes
         public void setPassword(string password)
         {
 
-            this.Password = password;
+            Password = password;
         }
 
         //Allows database records to be read & sync IDs upon creation 
         public void setInfo_ID(string InfoID)
         {
-            this.Info_ID = InfoID;
-        }
-
-        private string MakeID()
-        {
-            //Makes the primary key 
-            string ID = "";
-            Random rand = new Random();
-            for (int i = 0; i < 6; i++)
-            {
-                ID += rand.Next(10);
-            }
-            return ID;
+            Info_ID = InfoID;
         }
 
         public PersonalInfo(string PrimaryCont, string SecondaryCont, string User, string Pass)
         {
             //set primary key & attributes
-            Info_ID = MakeID();
+            Info_ID = DatabaseControls.MakeID();
             PrimaryContact = PrimaryCont;
             SecondaryContact = SecondaryCont;
             UserName = User;

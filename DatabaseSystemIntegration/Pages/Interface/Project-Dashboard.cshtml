@@ -9,161 +9,221 @@
 
         <style>
             .table-container {
-                margin: 20px auto;
-                max-width: 100%;
+            margin: 20px auto;
+            max-width: 100%;
             }
         </style>
-
-        @if (HttpContext.Session.GetString("UserType") == "Admin" ||
-    HttpContext.Session.GetString("UserType") == "BusPartner" ||
-    HttpContext.Session.GetString("UserType") == "BusRep" ||
-    HttpContext.Session.GetString("UserType") == "Faculty")
-        {
-            <h2 class="text-center mb-4">Grants</h2>
-            <div class="table-container">
-                <table class="table table-bordered table-striped">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>Grant Name</th>
-                            <th>Award Amount ($)</th>
-                            <th>Submission Date</th>
-                            <th>Award Date</th>
-                            <th>Category</th>
-                            <th>Status</th>
-                            <th>Lead Faculty</th>
-                            <th>Associated Project</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var grant in Model.Grants)
+        <h2 class="text-center mb-4">Grants</h2>
+        <div class="table-container">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Grant Name</th>
+                        <th>Award Amount ($)</th>
+                        <th>Submission Date</th>
+                        <th>Due Date</th>
+                        <th>Award Date</th>
+                        <th>Category</th>
+                        <th>Status</th>
+                        <th>Associated Project</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if(HttpContext.Session.GetString("UserType") == "Admin")
+                        @foreach (var grant in Model.AllGrants)
                         {
                             <tr>
                                 <td>
-                                    <button class="btn btn-link" asp-page-handler="SelectGrant" asp-route-id="@grant.Grant_ID">@grant.Grant_Name</button>
+                                    <button class="btn btn-link" asp-page-handler="SelectGrant" asp-route-id="@grant.GrantID">@grant.GrantName</button>
                                 </td>
                                 <td>@grant.Amount</td>
-                                <td>@grant.Submission_Date</td>
-                                <td>@grant.Award_Date</td>
-                                <td>@grant.Grant_Category_Name</td>
-                                @if (@grant.Grant_Status == "Accepted")
+                                <td>@grant.SubmissionDate</td>
+                                <td>@grant.DueDate</td>
+                                <td>@grant.AwardDate</td>
+                                <td>@grant.Category.CategoryName</td>
+                                @if (@grant.Status.GrantStatusName == "Accepted")
                                 {
-                                    <td class="text-success">@grant.Grant_Status</td>
+                                    <td class="text-success">@grant.Status.GrantStatusName</td>
                                 }
-                                @if (@grant.Grant_Status == "Pending")
+                                @if (@grant.Status.GrantStatusName == "Pending")
                                 {
-                                    <td class="text-warning">@grant.Grant_Status</td>
+                                    <td class="text-warning">@grant.Status.GrantStatusName</td>
                                 }
-                                @if (@grant.Grant_Status == "Rejected")
+                                @if (@grant.Status.GrantStatusName == "Rejected")
                                 {
-                                    <td class="text-danger">@grant.Grant_Status</td>
+                                    <td class="text-danger">@grant.Status.GrantStatusName</td>
                                 }
-                                <td>@grant.Lead_Faculty_Name</td>
-                                <td>@grant.Project_Name</td>
+                                <td>
+                                    <button class="btn btn-link" asp-page-handler="SelectProject" asp-route-id="@grant.ProjectID">@grant.GetProject().ProjectName</button>
+                                </td>
                             </tr>
                         }
-                    </tbody>
-                </table>
-            </div>
-        }
-
-        @if (HttpContext.Session.GetString("UserType") == "Faculty")
-        {
-            <h2 class="text-center mt-5 mb-4">Funding Projects</h2>
-            <div class="table-container">
-                <table class="table table-bordered table-striped">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>Project Name</th>
-                            <th>Project Description</th>
-                            <th>Associated Organization Project</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var project in Model.FacultyProject)
+                    else {
+                        @foreach (var Project in Model.AssignedProjects)
+                        {
+                            @foreach(var grant in Project.ProjectAssignment.ProjectGrants){
+                                <tr>
+                                    <td>
+                                        <button class="btn btn-link" asp-page-handler="SelectGrant" asp-route-id="@grant.GrantID">@grant.GrantName</button>
+                                    </td>
+                                    <td>@grant.Amount</td>
+                                    <td>@grant.SubmissionDate</td>
+                                    <td>@grant.AwardDate</td>
+                                    <td>@grant.Category.CategoryName</td>
+                                    @if (@grant.Status.GrantStatusName == "Accepted")
+                                    {
+                                        <td class="text-success">@grant.Status.GrantStatusName</td>
+                                    }
+                                    @if (@grant.Status.GrantStatusName == "Pending")
+                                    {
+                                        <td class="text-warning">@grant.Status.GrantStatusName</td>
+                                    }
+                                    @if (@grant.Status.GrantStatusName == "Rejected")
+                                    {
+                                        <td class="text-danger">@grant.Status.GrantStatusName</td>
+                                    }
+                                    <td>
+                                        <button class="btn btn-link" asp-page-handler="SelectProject" asp-route-id="@grant.ProjectID">@grant.GetProject().ProjectName</button>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <h2 class="text-center mt-5 mb-4">Projects</h2>
+        <div class="table-container">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Project Name</th>
+                        <th>Description</th>
+                        <th>Start Date</th>
+                        <th>Due Date</th>
+                        <th>End Date</th>
+                        <th>Project Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if(HttpContext.Session.GetString("UserType") == "Admin"){
+                        @foreach (var Project in Model.AllProjects)
                         {
                             <tr>
                                 <td>
-                                    <button class="btn btn-link" asp-page-handler="SelectGrantProject" asp-route-id="@project.Grant_Project_ID">@project.Grant_Project_Name</button>
+                                    <button class="btn btn-link" asp-page-handler="SelectProject" asp-route-id="@Project.ProjectID">@Project.ProjectName</button>
                                 </td>
-                                <td>@project.Grant_Project_Desc</td>
-                                <td>
-                                    <button class="btn btn-link" asp-page-handler="SelectBusProject" asp-route-id="@project.Bus_Project_ID">@project.Bus_Project_Name</button>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        }
-
-        @if (HttpContext.Session.GetString("UserType") == "Admin")
-        {
-            <h2 class="text-center mt-5 mb-4">Funding Projects</h2>
-            <div class="table-container">
-                <table class="table table-bordered table-striped">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>Project Name</th>
-                            <th>Project Description</th>
-                            <th>Associated Organizational Project</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var project in Model.GrantProjects)
-                        {
-                            <tr>
-                                <td>
-                                    <button class="btn btn-link" asp-page-handler="SelectGrantProject" asp-route-id="@project.Grant_Project_ID">@project.Project_Name</button>
-                                </td>
-                                <td>@project.Description</td>
-
-                                <td>
-                                    <button class="btn btn-link" asp-page-handler="SelectBusProject" asp-route-id="@project.Bus_Project_ID">@project.Bus_Project_Name</button>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        }
-
-        @if (HttpContext.Session.GetString("UserType") == "Employee" || HttpContext.Session.GetString("UserType") == "Admin")
-        {
-            <h2 class="text-center mt-5 mb-4">Projects</h2>
-            <div class="table-container">
-                <table class="table table-bordered table-striped">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>Project Name</th>
-                            <th>Funding Project</th>
-                            <th>Project Description</th>
-                            <th>Project Start Date</th>
-                            <th>Project Due Date</th>
-                            <th>Project End Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var busProject in Model.BusProjects)
-                        {
-                            <tr>
-                                <td>
-                                    <button class="btn btn-link" asp-page-handler="SelectBusProject" asp-route-id="@busProject.Bus_Project_ID">@busProject.Project_Name</button>
-                                </td>
-                                <td>
-                                    <button class="btn btn-link" asp-page-handler="SelectGrantProject" asp-route-id="@busProject.Grant_Project_ID">@busProject.Grant_Project_Name</button>
-                                </td>
-                                <td>@busProject.Description</td>
-                                <td>@busProject.Start_Date</td>
-                                <td>@busProject.Due_Date</td>
-                                @if (@busProject.End_Date > DateOnly.MinValue)
+                                <td>@Project.Description</td>
+                                <td>@Project.StartDate</td>
+                                <td>@Project.DueDate</td>
+                                @if (@Project.EndDate > DateOnly.MinValue)
                                 {
-                                <td>@busProject.End_Date</td>
+                                    <td>@Project.EndDate</td>
                                 }
                             </tr>
                         }
-                    </tbody>
-                </table>
-            </div>
-    }
+                    }
+                    else
+                    {
+                        @foreach (var Project in Model.AssignedProjects)
+                        {
+                            <tr>
+                                <td>
+                                    <button class="btn btn-link" asp-page-handler="SelectProject" asp-route-id="@Project.ProjectID">@Project.ProjectAssignment.ProjectName</button>
+                                </td>
+                                <td>@Project.ProjectAssignment.Description</td>
+                                <td>@Project.ProjectAssignment.StartDate</td>
+                                <td>@Project.ProjectAssignment.DueDate</td>
+                                @if (@Project.ProjectAssignment.EndDate > DateOnly.MinValue)
+                                {
+                                    <td>@Project.ProjectAssignment.EndDate</td>
+                                }
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <h2 class="text-center mt-5 mb-4">Project Tasks</h2>
+        <div class="table-container">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Task Name</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Users Assigned</th>
+                        <th>Start Date</th>
+                        <th>Due Date</th>
+                        <th>End Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (HttpContext.Session.GetString("UserType") == "Admin")
+                    {
+                        @foreach (var Task in Model.AllTasks)
+                        {
+                            <tr>
+                                <td>
+                                    <button class="btn btn-link" asp-page-handler="SelectTask" asp-route-id="@Task.TaskID">@Task.TaskName</button>
+                                </td>
+                                <td>@Task.Description</td>
+                                @if (Task.Completed == true)
+                                {
+                                    <td>Complete</td>
+                                }
+                                else
+                                {
+                                    <td>Incomplete</td>
+                                }
+                                @foreach (var User in Task.GetEmployees())
+                                {
+                                    <td>@User.Name</td>
+                                }
+                                <td>@Task.StartDate</td>
+                                <td>@Task.DueDate</td>
+                                @if (@Task.EndDate > DateOnly.MinValue)
+                                {
+                                    <td>@Task.EndDate</td>
+                                }
+
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        @foreach (var Task in Model.AssignedTasks)
+                        {
+                                <tr>
+                                    <td>
+                                        <button class="btn btn-link" asp-page-handler="SelectTask" asp-route-id="@Task.TaskID">@Task.TaskAssignment.TaskName</button>
+                                    </td>
+                                    <td>@Task.TaskAssignment.Description</td>
+                                   @if (Task.TaskAssignment.Completed == true)
+                                    {
+                                        <td>Complete</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Incomplete</td>
+                                    }
+                                @foreach (var User in Task.TaskAssignment.GetEmployees())
+                                    {
+                                        <td>@User.Name</td>
+                                    }
+                                    <td>@Task.TaskAssignment.StartDate</td>
+                                    <td>@Task.TaskAssignment.DueDate</td>
+                                    @if (@Task.TaskAssignment.EndDate > DateOnly.MinValue)
+                                    {
+                                        <td>@Task.TaskAssignment.EndDate</td>
+                                    }
+
+                                </tr>
+                            }
+                    }
+                </tbody>
+            </table>
+        </div>
     </form>
 }

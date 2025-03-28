@@ -102,7 +102,7 @@ CREATE TABLE BusProject (
     Start_Date DATE NOT NULL,
     End_Date DATE,
     Due_Date DATE,
-  Grant_Project_ID CHAR(6) FOREIGN KEY REFERENCES GrantProject(Grant_Project_ID)
+    Grant_Project_ID CHAR(6) FOREIGN KEY REFERENCES GrantProject(Grant_Project_ID)
 );
 
 CREATE TABLE EmployeeProject (
@@ -124,6 +124,8 @@ CREATE TABLE Task (
     Task_ID CHAR(6) PRIMARY KEY,
     Task_Name VARCHAR(255) NOT NULL,
     Task_Description TEXT,
+    Start_Date Date,
+    End_Date Date,
     Completed bit,
     Bus_Project_ID CHAR(6) FOREIGN KEY REFERENCES BusProject(Bus_Project_ID)
     
@@ -133,6 +135,8 @@ CREATE TABLE ChildTask (
     Child_Task_ID CHAR(6) PRIMARY KEY,
     Task_Name VARCHAR(255) NOT NULL,
     Task_Description TEXT,
+    Start_Date Date,
+    End_Date Date,
     Completed bit,
     Parent_Task_ID CHAR(6) FOREIGN KEY REFERENCES Task(Task_ID)
 );

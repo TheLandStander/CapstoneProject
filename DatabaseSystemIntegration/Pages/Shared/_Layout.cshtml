@@ -52,44 +52,39 @@
                                         <li class="nav-item">
                                             <a class="nav-link text-dark" asp-area="" asp-page="/Interface/Search">Search System</a>
                                         </li>
+
                                         <li class="nav-item">
                                             <a class="nav-link text-dark" asp-area="" asp-page="/Interface/CreateUser">Create User</a>
                                         </li>
+
                                         <li class="nav-item">
                                             <a class="nav-link text-dark" asp-area="" asp-page="/Interface/CreateAccount">Create a User Account</a>
                                         </li>
+
                                         <li class="nav-item">
-                                            <a class="nav-link text-dark" asp-area="" asp-page="/Interface/AssignEmployee">Assign Employee to Business Project</a>
+                                            <a class="nav-link text-dark" asp-area="" asp-page="/Interface/CreateProject">Create Project</a>
                                         </li>
+
                                         <li class="nav-item">
-                                            <a class="nav-link text-dark" asp-area="" asp-page="/Interface/AssignFaculty">Assign Faculty Member to a Grant Project</a>
+                                            <a class="nav-link text-dark" asp-area="" asp-page="/Interface/CreateGrant">Create Grant</a>
                                         </li>
+
                                         <li class="nav-item">
-                                            <a class="nav-link text-dark" asp-area="" asp-page="/Interface/CreateBusProject">Create or Update a Business Project</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link text-dark" asp-area="" asp-page="/Interface/AddTasks">Add Task</a>
-                                        </li>
-                                    }
-                                    @if (Context.Session.GetString("UserType") == "Employee" || Context.Session.GetString("UserType") == "Admin")
-                                    {
-                                        <li class="nav-item">
-                                            <a class="nav-link text-dark" asp-area="" asp-page="/Interface/ProjectNotes">View Project Notes</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link text-dark" asp-area="" asp-page="/Interface/AddNotes">Add Notes or Meeting Minutes</a>
+                                            <a class="nav-link text-dark" asp-area="" asp-page="/Interface/AddNotes">Add Meeting Minutes</a>
                                         </li>
                                     }
-                                    @if (Context.Session.GetString("UserType") == "BusPartner")
-                                    {
-                                    }
-                                    @if (Context.Session.GetString("UserType") == "Faculty")
+                                    else 
                                     {
                                         <li class="nav-item">
-                                            <a class="nav-link text-dark" asp-area="" asp-page="/Interface/CreateGrant">Add Grant or Project</a>
+                                            <a class="nav-link text-dark" asp-area="" asp-page="/Interface/CreateProject">Create Project</a>
                                         </li>
+
                                         <li class="nav-item">
-                                            <a class="nav-link text-dark" asp-area="" asp-page="/Interface/AddNotes">Add Notes or Meeting Minutes</a>
+                                            <a class="nav-link text-dark" asp-area="" asp-page="/Interface/CreateGrant">Create Grant</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-area="" asp-page="/Interface/AddNotes">Add Meeting Minutes</a>
                                         </li>
                                     }
 
@@ -110,7 +105,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2025 - DatabaseSystemIntegration - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; 2025 - CARE - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
 

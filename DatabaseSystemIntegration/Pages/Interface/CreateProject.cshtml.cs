@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DatabaseSystemIntegration.Pages.Interface
 {
-    public class CreateBusProjectModel : PageModel
+    public class CreateProject : PageModel
     {
         [BindProperty]
         public string Project_Name { get; set; }
@@ -20,36 +20,30 @@ namespace DatabaseSystemIntegration.Pages.Interface
         public DateOnly DueDate { get; set; }
 
         [BindProperty]
-        public DateOnly EndDate { get; set; }
+        public string LeadID { get; set; }
 
         [BindProperty]
-        public BusProject[] ActiveProjects { get; set; }
+        public string StatusID { get; set; }
 
         [BindProperty]
-        public  string Active_Project_ID { get; set; }
+        public Users[] Users { get; set; }
 
         [BindProperty]
-        public string Grant_Project_ID { get; set; }
+        public ProjectStatus[] ProjectStatuses { get; set; }
 
-        public GrantProject[] FundingProjects { get; set; }
-
-        public void UpdateProject()
+        public void RefreshSelection()
         {
-            if (EndDate > StartDate && Active_Project_ID != "")
-            {
-                DatabaseControls.UpdateBusProject(Active_Project_ID, EndDate);
-            
-            }
-        
+            Users = ObjectConverter.ToUsers(DatabaseControls.SelectNoFilter(19));
+            ProjectStatuses = ObjectConverter.ToProjectStatus(DatabaseControls.SelectNoFilter(14));
         }
+
 
         private void CheckAndSubmitProject()
         {
-            if (Project_Name != "" && StartDate < DueDate && Grant_Project_ID != null)
+            if (Project_Name != null && Project_Description != null && StatusID != null && StartDate < DueDate && LeadID != null )
             {
-                BusProject BP = new BusProject(Project_Name, Project_Description, StartDate, DueDate,Grant_Project_ID);
-                DatabaseControls.InsertBusProject(BP);
-                ActiveProjects = DatabaseControls.GetActiveBusProjects();
+                Project P = new Project(Project_Name, Project_Description, StartDate, DueDate, LeadID,StatusID);
+                DatabaseControls.Insert(P);
             }
         }
 
@@ -59,8 +53,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
             {
                 if (HttpContext.Session.GetString("UserType") == "Admin")
                 {
-                    ActiveProjects = DatabaseControls.GetActiveBusProjects();
-                    FundingProjects = ObjectConverter.ToGrantProject(DatabaseControls.SelectNoFilter(9));
+                    RefreshSelection();
                     return Page();
                 }
             }
@@ -70,7 +63,6 @@ namespace DatabaseSystemIntegration.Pages.Interface
         public IActionResult OnPostPopulateHandler()
         {
             ModelState.Clear();
-            ActiveProjects = DatabaseControls.GetActiveBusProjects();
             Project_Name = "Sample Project";
             Project_Description = "Sample Description";
             StartDate = new DateOnly(2025, 12, 1);
@@ -81,8 +73,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
         public IActionResult OnPostClearHandler()
         {
             ModelState.Clear();
-            ActiveProjects = DatabaseControls.GetActiveBusProjects();
-
+            RefreshSelection();
             return Page();
         }
 
@@ -90,9 +81,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
         public void OnPost()
         {
             CheckAndSubmitProject();
-            UpdateProject();
-            ActiveProjects = DatabaseControls.GetActiveBusProjects();
-            FundingProjects = ObjectConverter.ToGrantProject(DatabaseControls.SelectNoFilter(9));
+            RefreshSelection();
 
         }
     }

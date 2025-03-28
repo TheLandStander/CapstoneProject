@@ -32,36 +32,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW50ZXJmYWNlXEFjY2Vzc0l0ZW0uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/apers/OneDrive/Documents/CapstoneProject/DatabaseSystemIntegration/Pages/Interface/AddNotes.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW50ZXJmYWNlXEFkZE5vdGVzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/apers/OneDrive/Documents/CapstoneProject/DatabaseSystemIntegration/Pages/Interface/AddTasks.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW50ZXJmYWNlXEFkZFRhc2tzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/apers/OneDrive/Documents/CapstoneProject/DatabaseSystemIntegration/Pages/Interface/AssignEmployee.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW50ZXJmYWNlXEFzc2lnbkVtcGxveWVlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/apers/OneDrive/Documents/CapstoneProject/DatabaseSystemIntegration/Pages/Interface/AssignFaculty.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW50ZXJmYWNlXEFzc2lnbkZhY3VsdHkuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/apers/OneDrive/Documents/CapstoneProject/DatabaseSystemIntegration/Pages/Interface/Business-Parners.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW50ZXJmYWNlXEJ1c2luZXNzLVBhcm5lcnMuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/apers/OneDrive/Documents/CapstoneProject/DatabaseSystemIntegration/Pages/Interface/CreateAccount.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW50ZXJmYWNlXENyZWF0ZUFjY291bnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/apers/OneDrive/Documents/CapstoneProject/DatabaseSystemIntegration/Pages/Interface/CreateBusProject.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW50ZXJmYWNlXENyZWF0ZUJ1c1Byb2plY3QuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/apers/OneDrive/Documents/CapstoneProject/DatabaseSystemIntegration/Pages/Interface/CreateGrant.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW50ZXJmYWNlXENyZWF0ZUdyYW50LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/apers/OneDrive/Documents/CapstoneProject/DatabaseSystemIntegration/Pages/Interface/CreatePartner.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW50ZXJmYWNlXENyZWF0ZVBhcnRuZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/apers/OneDrive/Documents/CapstoneProject/DatabaseSystemIntegration/Pages/Interface/CreateProject.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW50ZXJmYWNlXENyZWF0ZVByb2plY3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/apers/OneDrive/Documents/CapstoneProject/DatabaseSystemIntegration/Pages/Interface/CreateUser.cshtml]
@@ -74,10 +58,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/apers/OneDrive/Documents/CapstoneProject/DatabaseSystemIntegration/Pages/Interface/Project-Dashboard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW50ZXJmYWNlXFByb2plY3QtRGFzaGJvYXJkLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/apers/OneDrive/Documents/CapstoneProject/DatabaseSystemIntegration/Pages/Interface/ProjectNotes.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW50ZXJmYWNlXFByb2plY3ROb3Rlcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/apers/OneDrive/Documents/CapstoneProject/DatabaseSystemIntegration/Pages/Interface/Search.cshtml]

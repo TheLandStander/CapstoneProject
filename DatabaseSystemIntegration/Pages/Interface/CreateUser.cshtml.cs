@@ -2,133 +2,73 @@ using DatabaseSystemIntegration.Pages.Classes;
 using DatabaseSystemIntegration.Pages.Tools;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.ComponentModel;
+using Microsoft.Extensions.ObjectPool;
+using Microsoft.Identity.Client;
 
 namespace DatabaseSystemIntegration.Pages.Interface
 {
-    public class IndexModel : PageModel
+    public class CreateUser : PageModel
     {
-        //creates the objects that the user will be selecting in the drop down
         [BindProperty]
-        public PersonalInfo[] UserInfo { get; set; } = ObjectConverter.ToPersonalInfo(DatabaseControls.SelectNoFilter(14));
-
-        [BindProperty]
-        public BusPartnerStatus[] Status { get; set; } = ObjectConverter.ToBusPartnerStatus(DatabaseControls.SelectNoFilter(1));
+        public string AccountID { get; set; }
 
         [BindProperty]
-        public OrgType[] Orgs { get; set; } = ObjectConverter.ToOrgType(DatabaseControls.SelectNoFilter(13));
+        public string PartnerID { get; set; }
 
         [BindProperty]
-        public BusPartner[] Partners { get; set; } = ObjectConverter.ToBusPartner(DatabaseControls.SelectNoFilter(0));
+        public string Name { get; set; }
 
         [BindProperty]
-        public string Rep_Name { get; set; } = "";
+        public string UserTypeID { get; set; }
 
         [BindProperty]
-        public string Partner_ID { get; set; } = "";
+        public string RoleID { get; set; }
 
-        [BindProperty]
-        public string Rep_Info_ID { get; set; } = "";
+        public Partner[] Partners { get; set; }
 
-        //details for making an employee
-        [BindProperty]
-        public string Employee_Name { get; set; } = "";
+        public PersonalInfo[] Accounts {get;set;}
 
-        [BindProperty]
-        public bool is_Admin { get; set; }
-
-        [BindProperty]
-        public string Employee_Info_ID { get; set; } = "";
+        public UserType[] Types { get; set; }
 
 
-        //details for making a faculty
-        [BindProperty]
-        public string Faculty_Name { get; set; } = "";
+        public Role[] Roles { get; set; }
 
-        [BindProperty]
-        public string Faculty_Info_ID { get; set; } = "";
-
-        //details for making a business partner
-        [BindProperty]
-        public string Bus_Name { get; set; } = "";
-
-        [BindProperty]
-        public string Org_Type_ID { get; set; } = "";
-
-        [BindProperty]
-        public string Partner_Status_ID { get; set; } = "";
-
-        [BindProperty]
-        public string Partner_Info_ID { get; set; } = "";
-
-        //checks if the Form was complete and then adds it to the list & into the database
-        public void CheckAddEmployee()
-        {
-            Console.Write(is_Admin);
-            if (Employee_Name != "" && Employee_Info_ID != "")
-            {
-                Employee E = new Employee(Employee_Name,is_Admin, Employee_Info_ID);
-                DatabaseControls.InsertEmployee(E);
-            }
-        
-        }
-
-        public void CheckAddFaculty()
-        {
-            if (Faculty_Name != "" && Faculty_Info_ID != "")
-            {
-                Faculty F = new Faculty(Faculty_Name, Faculty_Info_ID);
-                DatabaseControls.InsertFaculty(F);
-            }
-        
-        }
-
-        public void CheckAddBusPartner()
-        {
-            if (Bus_Name != "" && Org_Type_ID != "" && Partner_Status_ID != "" && Partner_Info_ID != "")
-            {
-
-                BusPartner BS = new BusPartner(Bus_Name, Partner_Status_ID, Org_Type_ID, Partner_Info_ID);
-                DatabaseControls.InsertBusPartner(BS);
-            }
-        }
-
-        public void CheckAddBusRep()
-        {
-            if (Rep_Name != "" && Partner_ID != "")
-            {
-
-                BusRep BR = new BusRep(Rep_Name,Partner_ID, Rep_Info_ID);
-                DatabaseControls.InsertBusRep(BR);
-            }
-        }
 
         public void RefreshSelection()
         {
-            //refreshes selection options after the user adds a record when they load the page
-        UserInfo = ObjectConverter.ToPersonalInfo(DatabaseControls.SelectNoFilter(14));
-        Status = ObjectConverter.ToBusPartnerStatus(DatabaseControls.SelectNoFilter(1));
-        Orgs = ObjectConverter.ToOrgType(DatabaseControls.SelectNoFilter(13));
-        Partners = ObjectConverter.ToBusPartner(DatabaseControls.SelectNoFilter(0));
+            Partners = ObjectConverter.ToPartner(DatabaseControls.SelectNoFilter(2));
+            Accounts = ObjectConverter.ToPersonalInfo(DatabaseControls.SelectNoFilter(11));
+            Types = ObjectConverter.ToUserType(DatabaseControls.SelectNoFilter(18));
+            Roles = ObjectConverter.ToRole(DatabaseControls.SelectNoFilter(10));
+
+        }
+
+        public void AddUser()
+        {
+            if (Name != null && UserTypeID != null && RoleID != null && AccountID != null && Name.Length != 0)
+            {
+                Users U = new Users(Name, UserTypeID, DatabaseControls.GetUserStatus("Active").UserStatusID, AccountID);
+                UserRole ur = new UserRole(U.UserID, RoleID);
+                DatabaseControls.Insert(U);
+                DatabaseControls.Insert(ur);
+
+            }
         
         }
+
         public void OnPost()
         {
-            CheckAddBusPartner();
-            CheckAddEmployee();
-            CheckAddFaculty();
-            CheckAddBusRep();
+            AddUser();
             RefreshSelection();
         }
 
         public IActionResult OnPostPopulateHandler()
         {
             ModelState.Clear();
-            RefreshSelection();
-            Rep_Name = "Sample representative";
-            Employee_Name = "Sample Employee";
-            Faculty_Name = "Sample Faculty";
-            Bus_Name = "Sample Partner";
+            AccountID = "123456";   
+            PartnerID = "123456"; 
+            Name = "Default User Name";  
+            UserTypeID = "123456";
             return Page();
         }
 

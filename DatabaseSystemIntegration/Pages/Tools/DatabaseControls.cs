@@ -1,9 +1,6 @@
 ﻿using DatabaseSystemIntegration.Pages.Classes;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.SqlClient;
-using Microsoft.Extensions.ObjectPool;
 using System.Data;
-using System.Diagnostics.CodeAnalysis;
 
 // by Noah Kurtz, Joel Abbott, Nic Jordan, Andrew, Declan 
 
@@ -17,53 +14,66 @@ namespace DatabaseSystemIntegration.Pages.Tools
 
         //array of tables, good for selections
         public static string[] Tables =
-               {
-        "BusPartner",
-        "BusPartnerStatus ",
-        "BusProject",
-        "BusRep",
-        "Employee",
-        "EmployeeProject",
-        "Faculty",
-        "FacultyProject",
-        "GrantCategory",
-        "GrantProject",
-        "Grants",
-        "GrantStatus",
-        "MeetingMinutes",
-        "OrgType",
-        "PersonalInfo",
-        "ProjectNotes",
-        "Task",
-        "Message",
+        {
+        "AssignedProject",
+        "AssignedTask",
+        "Partner",
+        "PartnerStatus",
         "ChildTask",
-        "Assigned_Task"
+        "GrantCategory",
+        "GrantStatus",
+        "Grants",
+        "MeetingMinutes",
+        "Messages",
+        "Role",
+        "PersonalInfo",
+        "Project",
+        "ProjectNotes",
+        "ProjectStatus",
+        "Task",
+        "UserRole",
+        "UserStatus",
+        "UserType",
+        "Users"
         };
 
         //array of primary keys, good for selections
         public static string[] Keys =
             {
-        "Bus_Partner_ID",
-        "Partner_Status_ID",
-        "Bus_Project_ID",
-        "Bus_Rep_ID",
-        "Employee_ID",
-        "Employee_Project_ID",
-        "Faculty_ID",
-        "Faculty_Project_ID",
-        "Category_ID",
-        "Grant_Project_ID",
-        "Grant_ID",
-        "Status_ID",
-        "Meeting_Minutes_ID",
-        "Org_Type_ID",
-        "Info_ID",
-        "Project_Notes_ID",
-        "Task_ID",
-        "Message_ID",
-        "Child_Task_ID",
-        "Assigned_Task_ID"
-        };
+       "Assigned_Project_ID",
+       "Assigned_Task_ID",
+       "Partner_ID",
+       "Partner_Status_ID",
+       "Child_Task_ID",
+       "Category_ID",
+       "Status_ID",
+       "Grant_ID",
+       "Meeting_Minutes_ID",
+       "Message_ID",
+       "Role_ID",
+       "Info_ID",
+       "Project_ID",
+       "Notes_ID",
+       "Project_Status_ID",
+       "Task_ID",
+       "User_Role_ID",
+       "User_Status_ID",
+       "User_Type_ID",
+       "User_ID"
+            };
+
+
+        public static string MakeID()
+        {
+            //Makes the primary key 
+            string ID = "";
+            Random rand = new Random();
+            for (int i = 0; i < 6; i++)
+            {
+                ID += rand.Next(10);
+            }
+            return ID;
+        }
 
         //I need to use this for Employee since it has a boolean value which is stored as a byte in the database
         public static byte tobyte(bool b)
@@ -78,13 +88,430 @@ namespace DatabaseSystemIntegration.Pages.Tools
             }
         }
 
-        /*takes the sqldata reader, datareader goes by rows
-        make a while loop /while read() is true /reading rows
-        make a new row every time it checks for a new row
-        inside the for loop, fill the row array with the column values (getvalue)
-        after the loop goes through all of the columns in the current row, add the 
-        row to the ParsedResults list, after all rows are collected, return it as 2D array.
-        */
+        public static Role GetRole(string name)
+        {
+            Role[] All = ObjectConverter.ToRole(SelectNoFilter(10));
+
+            foreach (Role r in All)
+            {
+                if (r.RoleName == name)
+                {
+                    return r;
+                }
+            }
+            return new Role("INVALD");
+        }
+
+        public static GrantStatus GetGrantStatus(string name)
+        {
+            GrantStatus[] All = ObjectConverter.ToGrantStatus(SelectNoFilter(6));
+
+            foreach (GrantStatus i in All)
+            {
+                if (i.GrantStatusName == name)
+                {
+                    return i;
+                }
+            }
+            return new GrantStatus("INVALD");
+        }
+
+        public static ProjectStatus GetProjectStatus(string name)
+        {
+            ProjectStatus[] All = ObjectConverter.ToProjectStatus(SelectNoFilter(14));
+
+            foreach (ProjectStatus i in All)
+            {
+                if (i.ProjectStatusName == name)
+                {
+                    return i;
+                }
+            }
+            return new ProjectStatus("INVALD");
+        }
+
+        public static UserStatus GetUserStatus(string name)
+        {
+            UserStatus[] All = ObjectConverter.ToUserStatus(SelectNoFilter(17));
+
+            foreach (UserStatus i in All)
+            {
+                if (i.StatusFlag == name)
+                {
+                    return i;
+                }
+            }
+            return new UserStatus("INVALD");
+        }
+
+        public static PartnerStatus GePartnerStatus(string name)
+        {
+            PartnerStatus[] All = ObjectConverter.ToPartnerStatus(SelectNoFilter(3));
+
+            foreach (PartnerStatus i in All)
+            {
+                if (i.Status_Flag == name)
+                {
+                    return i;
+                }
+            }
+            return new PartnerStatus("INVALD");
+        }
+
+        public static GrantCategory GeGrantCategory(string name)
+        {
+            GrantCategory[] All = ObjectConverter.ToGrantCategory(SelectNoFilter(5));
+
+            foreach (GrantCategory i in All)
+            {
+                if (i.CategoryName == name)
+                {
+                    return i;
+                }
+            }
+            return new GrantCategory("INVALD");
+        }
+
+        public static UserType GeUserType(string name)
+        {
+            UserType[] All = ObjectConverter.ToUserType(SelectNoFilter(18));
+
+            foreach (UserType i in All)
+            {
+                if (i.UserTypeName == name)
+                {
+                    return i;
+                }
+            }
+            return new UserType("INVALD");
+        }
+
+        public static Users[] GetUsersWithRole(string Role)
+        {
+            List<Users> Matches = new List<Users>();
+            UserRole[] AllUserRoles = ObjectConverter.ToUserRole(SelectNoFilter(16));
+            foreach (UserRole UR in AllUserRoles)
+            {
+                if (UR.role.RoleName == Role)
+                {
+                    Matches.Add(UR.getUser());
+                }
+            
+            }
+            return Matches.ToArray();
+        }
+
+        public static Project[] GetActiveProjects()
+        {
+            List<Project> Holder = new List<Project>();
+            Project[] AllPrjects = ObjectConverter.ToProject(SelectNoFilter(12));
+            foreach (Project p in AllPrjects)
+            {
+                if(p.Status.ProjectStatusName == "Ongoing")
+                {
+                    Holder.Add(p);
+                }
+            }
+            return Holder.ToArray();
+        }
+
+        public static void Execute(string Query)
+        {
+            SqlCommand cmd = new SqlCommand();
+            SqlConnection Database = new SqlConnection(ConnectionString);
+            cmd.Connection = Database;
+            cmd.CommandText = Query;
+            if (cmd.Connection.State != ConnectionState.Open)
+            {
+                cmd.Connection.Open();
+            }
+
+            cmd.ExecuteNonQuery();
+            cmd.Dispose();
+            cmd.Connection.Close();
+        }
+
+        public static void CompleteTask(Tasks t)
+        {
+            String sqlQuery = "UPDATE Task SET Completed = " + t.Completed + " WHERE Task_ID = " + t.TaskID + ";";
+            Execute(sqlQuery);
+
+            sqlQuery = "UPDATE Task SET End_Date '" + DateOnly.FromDateTime(DateTime.Now) + "' WHERE Task_ID = " + t.TaskID + ";";
+            Execute(sqlQuery);
+        }
+
+        public static void CompleteChildTask(ChildTask t)
+        {
+            String sqlQuery = "UPDATE ChildTask SET Completed = " + t.Completed + " WHERE Child_Task_ID = " + t.ChildTaskID + ";";
+            Execute(sqlQuery);
+
+            sqlQuery = "UPDATE ChildTask SET End_Date '" + DateOnly.FromDateTime(DateTime.Now) + "' WHERE Child_Task_ID = " + t.ChildTaskID + ";";
+            Execute(sqlQuery);
+        }
+
+        public static void SetProjectLead(Project P, Users U)
+        {
+            String sqlQuery = "UPDATE Project SET Project_Lead_ID = " + U.UserID + " WHERE Project_ID = " + P.ProjectID + ";";
+            Execute(sqlQuery);
+        }
+
+        public static void UpdateProjectStatus(string ProjectID, string StatusID)
+        {
+            String sqlQuery = "UPDATE Project SET Project_Status_ID = " + StatusID + " WHERE Project_ID = " + ProjectID + ";";
+            Execute(sqlQuery);
+
+            ProjectStatus ps = ObjectConverter.ToProjectStatus(SelectFilter(14, 14, StatusID))[0];
+
+            if (ps.ProjectStatusName != "Ongoing")
+            {
+                sqlQuery = "UPDATE Project SET End_Date = '" + DateOnly.FromDateTime(DateTime.Now) + "' WHERE Project_ID = " + ProjectID + ";";
+                Execute(sqlQuery);
+            }
+
+        }
+
+        public static void UpdateProjectDueDate(string ProjectID, DateOnly date)
+        {
+            String sqlQuery = "UPDATE Project SET Due_Date = '" + date.ToString("yyyy-MM-dd") + "' WHERE Project_ID = " + ProjectID + ";";
+            Execute(sqlQuery);
+        }
+
+
+        public static void Insert(PartnerStatus ps)
+        {
+            String sqlQuery = "INSERT INTO PartnerStatus(Partner_Status_ID, Status_Flag) VALUES ('";
+            sqlQuery += ps.Partner_Status_ID + "','";
+            sqlQuery += ps.Status_Flag;
+            sqlQuery += "');";
+
+            Execute(sqlQuery);
+        }
+
+        public static void Insert(Partner p)
+        {
+            String sqlQuery = "INSERT INTO Partner(Partner_ID, Bus_Name, Address, Phone, Email, Description, Partner_Status_ID) VALUES ('";
+            sqlQuery += p.PartnerID + "','";
+            sqlQuery += p.BusName + "','";
+            sqlQuery += p.Address + "','";
+            sqlQuery += p.Phone + "','";
+            sqlQuery += p.Email + "','";
+            sqlQuery += p.Description + "','";
+            sqlQuery += p.PartnerStatusID;
+            sqlQuery += "');";
+
+            Execute(sqlQuery);
+        }
+
+        public static void Insert(MeetingMinutes mm)
+        {
+            String sqlQuery = "INSERT INTO MeetingMinutes(Meeting_Minutes_ID, Meeting_Notes, Date, Partner_ID) VALUES ('";
+            sqlQuery += mm.MeetingMinutesID + "','";
+            sqlQuery += mm.MeetingNotes + "','";
+            sqlQuery += mm.Date + "','";
+            sqlQuery += mm.PartnerID;
+            sqlQuery += "');";
+
+            Execute(sqlQuery);
+        }
+
+        public static void Insert(PersonalInfo pi)
+        {
+            String sqlQuery = "INSERT INTO PersonalInfo(Info_ID, Primary_Contact, Secondary_Contact, User_Name, Password) VALUES ('";
+            sqlQuery += pi.getInfoID() + "','";
+            sqlQuery += pi.GetPrimaryContact() + "','";
+            sqlQuery += pi.GetSecondaryContact() + "','";
+            sqlQuery += pi.getUsername() + "','";
+            sqlQuery += pi.getPassword();
+            sqlQuery += "');";
+
+            Execute(sqlQuery);
+        }
+
+        public static void Insert(UserType ut)
+        {
+            String sqlQuery = "INSERT INTO UserType(User_Type_ID, User_Type) VALUES ('";
+            sqlQuery += ut.UserTypeID + "','";
+            sqlQuery += ut.UserTypeName;
+            sqlQuery += "');";
+
+            Execute(sqlQuery);
+        }
+
+        public static void Insert(UserStatus us)
+        {
+            String sqlQuery = "INSERT INTO UserStatus(User_Status_ID, Status_Flag) VALUES ('";
+            sqlQuery += us.UserStatusID + "','";
+            sqlQuery += us.StatusFlag;
+            sqlQuery += "');";
+
+            Execute(sqlQuery);
+        }
+
+        public static void Insert(Users u)
+        {
+            String sqlQuery = "INSERT INTO Users(User_ID, Name, User_Type_ID, User_Status_ID, Info_ID, Partner_ID) VALUES ('";
+            sqlQuery += u.UserID + "','";
+            sqlQuery += u.Name + "','";
+            sqlQuery += u.UserTypeID + "','";
+            sqlQuery += u.UserStatusID + "','";
+            sqlQuery += u.InfoID + "','";
+            sqlQuery += u.PartnerID;
+            sqlQuery += "');";
+
+            Execute(sqlQuery);
+        }
+
+        public static void Insert(Role r)
+        {
+            String sqlQuery = "INSERT INTO Role(Role_ID, Role) VALUES ('";
+            sqlQuery += r.RoleID + "','";
+            sqlQuery += r.RoleName;
+            sqlQuery += "');";
+
+            Execute(sqlQuery);
+        }
+
+        public static void Insert(UserRole ur)
+        {
+            String sqlQuery = "INSERT INTO UserRole(User_Role_ID, User_ID, Role_ID) VALUES ('";
+            sqlQuery += ur.UserRoleID + "','";
+            sqlQuery += ur.UserID + "','";
+            sqlQuery += ur.RoleID;
+            sqlQuery += "');";
+
+            Execute(sqlQuery);
+        }
+
+        public static void Insert(ProjectStatus ps)
+        {
+            String sqlQuery = "INSERT INTO ProjectStatus(Project_Status_ID, Project_Status) VALUES ('";
+            sqlQuery += ps.ProjectStatusID + "','";
+            sqlQuery += ps.ProjectStatusName;
+            sqlQuery += "');";
+
+            Execute(sqlQuery);
+        }
+
+        public static void Insert(Project p)
+        {
+            String sqlQuery = "INSERT INTO Project(Project_ID, Project_Name, Description, Start_Date, End_Date, Due_Date, Project_Lead_ID, Project_Status_ID) VALUES ('";
+            sqlQuery += p.ProjectID + "','";
+            sqlQuery += p.ProjectName + "','";
+            sqlQuery += p.Description + "','";
+            sqlQuery += p.StartDate + "','";
+            sqlQuery += p.EndDate + "','";
+            sqlQuery += p.DueDate + "','";
+            sqlQuery += p.ProjectLeadID + "','";
+            sqlQuery += p.ProjectStatusID;
+            sqlQuery += "');";
+
+            Execute(sqlQuery);
+        }
+
+        public static void Insert(AssignedProject ap)
+        {
+            String sqlQuery = "INSERT INTO AssignedProject(Assigned_Project_ID, User_ID, Project_ID) VALUES ('";
+            sqlQuery += ap.AssignedProjectID + "','";
+            sqlQuery += ap.UserID + "','";
+            sqlQuery += ap.ProjectID;
+            sqlQuery += "');";
+
+            Execute(sqlQuery);
+        }
+
+        public static void Insert(Tasks t)
+        {
+            String sqlQuery = "INSERT INTO Task(Task_ID, Task_Name, Description, StartDate,DueDate ,EndDate, Completed, Project_ID) VALUES ('";
+            sqlQuery += t.TaskID + "','";
+            sqlQuery += t.TaskName + "','";
+            sqlQuery += t.Description + "','";
+            sqlQuery += t.StartDate + "','";
+            sqlQuery += t.DueDate + "','";
+            sqlQuery += t.EndDate + "','";
+            sqlQuery += t.Completed + "','";
+            sqlQuery += t.ProjectID;
+            sqlQuery += "');";
+
+            Execute(sqlQuery);
+        }
+
+        public static void Insert(ChildTask ct)
+        {
+            String sqlQuery = "INSERT INTO ChildTask(Child_Task_ID, Task_Name, Description, StartDate, DueDate, EndDate, Completed, Parent_Task_ID) VALUES ('";
+            sqlQuery += ct.ChildTaskID + "','";
+            sqlQuery += ct.TaskName + "','";
+            sqlQuery += ct.Description + "','";
+            sqlQuery += ct.StartDate + "','";
+            sqlQuery += ct.DueDate + "','";
+            sqlQuery += ct.EndDate + "','";
+            sqlQuery += ct.Completed + "','";
+            sqlQuery += ct.ParentTaskID;
+            sqlQuery += "');";
+
+            Execute(sqlQuery);
+        }
+
+        public static void Insert(AssignedTask at)
+        {
+            String sqlQuery = "INSERT INTO AssignedTask(Assigned_Task_ID, User_ID, Task_ID) VALUES ('";
+            sqlQuery += at.AssignedTaskID + "','";
+            sqlQuery += at.UserID + "','";
+            sqlQuery += at.TaskID;
+            sqlQuery += "');";
+
+            Execute(sqlQuery);
+        }
+
+
+        public static void Insert(GrantStatus gs)
+        {
+            String sqlQuery = "INSERT INTO GrantStatus(Status_ID, Grant_Status) VALUES ('";
+            sqlQuery += gs.StatusID + "','";
+            sqlQuery += gs.GrantStatusName;
+            sqlQuery += "');";
+
+            Execute(sqlQuery);
+        }
+
+        public static void Insert(GrantCategory gc)
+        {
+            String sqlQuery = "INSERT INTO GrantCategory(Category_ID, Category_Name) VALUES ('";
+            sqlQuery += gc.CategoryID + "','";
+            sqlQuery += gc.CategoryName;
+            sqlQuery += "');";
+
+            Execute(sqlQuery);
+        }
+
+        public static void Insert(Grant g)
+        {
+            String sqlQuery = "INSERT INTO Grants(Grant_ID, Grant_Name, Amount, Submission_Date, Award_Date, Due_Date, Status_ID, Category_ID, Project_ID) VALUES ('";
+            sqlQuery += g.GrantID + "','";
+            sqlQuery += g.GrantName + "','";
+            sqlQuery += g.Amount + "','";
+            sqlQuery += g.SubmissionDate + "','";
+            sqlQuery += g.AwardDate + "','";
+            sqlQuery += g.DueDate + "','";
+            sqlQuery += g.StatusID + "','";
+            sqlQuery += g.CategoryID + "','";
+            sqlQuery += g.ProjectID;
+            sqlQuery += "');";
+
+            Execute(sqlQuery);
+        }
+
+        public static void Insert(ProjectNotes pn)
+        {
+            String sqlQuery = "INSERT INTO ProjectNotes(Notes_ID, Project_Notes, Date, Project_ID) VALUES ('";
+            sqlQuery += pn.NotesID + "','";
+            sqlQuery += pn.Notes + "','";
+            sqlQuery += pn.Date + "','";
+            sqlQuery += pn.ProjectID;
+            sqlQuery += "');";
+
+            Execute(sqlQuery);
+        }
+
         public static string[][] ParseResults(SqlDataReader r)
         {
             //Parses and closes the connection
@@ -113,7 +540,7 @@ namespace DatabaseSystemIntegration.Pages.Tools
             {
                 cmd.Connection.Open();
             }
-            cmd.CommandText = "SELECT Info_ID FROM " + Tables[14] + " WHERE User_Name = '" + UserName + "' AND Password = '"  + Password + "'" + ";";
+            cmd.CommandText = "SELECT Info_ID FROM " + Tables[11] + " WHERE User_Name = '" + UserName + "' AND Password = '"  + Password + "'" + ";";
             SqlDataReader tempReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
             cmd.Dispose();
             return tempReader;
@@ -136,45 +563,6 @@ namespace DatabaseSystemIntegration.Pages.Tools
             return tempReader;
         }
 
-        //retreives matching records in foreign key table
-        public static SqlDataReader SelectLeftJoin(int Primary, int Foreign, int JoinColumn)
-        {
-            SqlCommand cmd = new SqlCommand();
-            SqlConnection Database = new SqlConnection(ConnectionString);
-            cmd.Connection = Database;
-            if (cmd.Connection.State != ConnectionState.Open)
-            {
-                cmd.Connection.Open();
-            }
-            cmd.CommandText = "SELECT * FROM " + Tables[Foreign] + " JOIN " + Tables[Primary] + " ON " +
-            Tables[Foreign] + "." + Keys[JoinColumn] + " = " + Tables[Primary] + "." + Keys[JoinColumn] + ";";
-
-
-            SqlDataReader tempReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-            cmd.Dispose();
-            return tempReader;
-        }
-
-        //choose by identigier...
-        public static SqlDataReader SelectLeftJoinFilter(int Primary, int Foreign, int JoinColumn, int IDField,string Identifier)
-        {
-            SqlCommand cmd = new SqlCommand();
-            SqlConnection Database = new SqlConnection(ConnectionString);
-            cmd.Connection = Database;
-            if (cmd.Connection.State != ConnectionState.Open)
-            {
-                cmd.Connection.Open();
-            }
-            cmd.CommandText = "SELECT * FROM " + Tables[Foreign] + " JOIN " + Tables[Primary] + " ON " +
-            Tables[Foreign] + "." + Keys[JoinColumn] + " = " + Tables[Primary] + "." + Keys[JoinColumn] + " WHERE " +
-            Keys[IDField] + " = " + Identifier + ";";
-
-
-            SqlDataReader tempReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-            cmd.Dispose();
-            return tempReader;
-        }
-
         //Select everything from a table, given a key filter
         public static SqlDataReader SelectFilter(int SearchTable, int SearchField, string Identifier)
         {
@@ -190,95 +578,6 @@ namespace DatabaseSystemIntegration.Pages.Tools
             cmd.Dispose();
             return tempReader;
         }
-
-        //extracts columns from a table 
-        public static string[][] GetColumn(SqlDataReader data, int[] column)
-        {
-            string[][] Table = ParseResults(data);
-            string[][] FilterTable = new string[Table.Length][];
-
-            for (int i = 0; i < Table.Length; i++)
-            {
-                FilterTable[i] = new string[column.Length];
-                for (int j = 0; j < Table[i].Length; j++)
-                {
-                    foreach (int col in column)
-                    {
-                        if (j == col)
-                        {
-                            FilterTable[i][j] = Table[i][j];
-                        }
-                    }
-                
-                }
-            }
-            return FilterTable;
-        }
-
-        public static Faculty[] GetLeadFaculty()
-        {
-            List<Faculty> Leads = new List<Faculty>();
-            Grant[] Grants =    ObjectConverter.ToGrant(SelectNoFilter(10));
-
-            foreach (Grant g in Grants) 
-            {
-                Faculty Lead = ObjectConverter.ToFaculty(SelectFilter(6, 6, g.Lead_Faculty_ID))[0];
-                if (Leads.Contains(Lead) == false)
-                {
-                    Leads.Add(Lead);
-                }
-            }
-
-            return Leads.ToArray();
-        }
-
-
-
-       //returns a string array that represents a join with a foreign key-primary key table
-       //default will just select the primary keys and second column...
-       public static string[][] ReturnColumnJoin(int PrimaryTable, int ForeignTable, int ForeignKeyColumn, int PrimaryKeyColumn = 0, int ReturnColumn = 1)
-        {
-            string[][] PrimaryKeyTable = DatabaseControls.ParseResults(DatabaseControls.SelectNoFilter(PrimaryTable));
-            string[][] ForeignKeyTable = DatabaseControls.ParseResults(DatabaseControls.SelectNoFilter(ForeignTable));
-
-            string[][] KeyPair = new string[ForeignKeyTable.Length][];
-            for (int i = 0; i < KeyPair.Length; i++)
-            {
-                //you must search through the entire primary key table.
-                for (int j =0; j < PrimaryKeyTable.Length; j++) 
-                {
-                    //compares the primary and foreign key, if they match, add the key tot eh first element, and the selected column in the primary key table
-                    if (ForeignKeyTable[i][ForeignKeyColumn] == PrimaryKeyTable[j][PrimaryKeyColumn])
-                    {
-                        //initialze the column with each loop before assigning...
-                        KeyPair[i] = new string[2];
-                        KeyPair[i][0] = PrimaryKeyTable[j][0];
-                        KeyPair[i][1] = PrimaryKeyTable[j][ReturnColumn];
-                        //break to avoid unnececary calculations once the key is found
-                        break;
-                    }
-                }
-
-            }
-            return KeyPair;
-        }
-
-        //returns list of admins
-        public static Employee[] GetAdmins(Employee[] Employees)
-        {
-            List<Employee> Admins = new List<Employee>();
-
-            foreach (Employee e in Employees)
-            {
-                if (e.is_Admin)
-                {
-                    Admins.Add(e);
-                }
-            }
-
-            return Admins.ToArray();
-        }
-
       
         public static void CreateAccount(PersonalInfo P)
         {
@@ -301,337 +600,11 @@ namespace DatabaseSystemIntegration.Pages.Tools
 
             cmd.ExecuteNonQuery();
             cmd.Dispose();
-            cmd.Dispose();
+            cmd.Connection.Close();
 
         }
+
        
-
-        //Inserts Grant
-        public static void InsertGrant(Grant G)
-        {
-            String sqlQuery = "INSERT INTO Grants (Grant_ID,Grant_Name,Amount,Submission_Date,Award_Date,Lead_Faculty_ID,Status_ID,Category_ID,Bus_Partner_ID,Grant_Project_ID) VALUES ('";
-            sqlQuery += G.Grant_ID + "','";
-            sqlQuery += G.Grant_Name + "','";
-            sqlQuery += G.Amount + "','";
-            sqlQuery += G.Submission_Date + "','";
-            sqlQuery += G.Award_Date + "','";
-            sqlQuery += G.Lead_Faculty_ID + "','";
-            sqlQuery += G.Grant_Status_ID + "','";
-            sqlQuery += G.Grant_Category_ID + "','";
-            sqlQuery += G.Bus_Partner_ID + "','";
-            sqlQuery += G.Grant_Project_ID;
-            sqlQuery += "');";
-
-            SqlCommand cmd = new SqlCommand();
-            SqlConnection Database = new SqlConnection(ConnectionString);
-            cmd.Connection = Database;
-            cmd.CommandText = sqlQuery;
-            cmd.Connection.Open();
-
-            cmd.ExecuteNonQuery();
-            cmd.Dispose();
-            cmd.Connection.Close();
-
-        }
-
-        //Insert Employee
-        public static void InsertEmployee(Employee E)
-        {
-            String sqlQuery = "INSERT INTO Employee (Employee_ID,Employee_Name,is_Admin,Info_ID) VALUES ('";
-            sqlQuery += E.Employee_ID + "','";
-            sqlQuery += E.Employee_Name + "','";
-            sqlQuery += tobyte(E.is_Admin) + "','";
-            sqlQuery += E.getInfoID();
-            sqlQuery += "');";
-
-            SqlCommand cmd = new SqlCommand();
-            SqlConnection Database = new SqlConnection(ConnectionString);
-            cmd.Connection = Database;
-            cmd.CommandText = sqlQuery;
-            if (cmd.Connection.State != ConnectionState.Open)
-            {
-                cmd.Connection.Open();
-            }
-            cmd.ExecuteNonQuery();
-            cmd.Dispose();
-            cmd.Connection.Close();
-
-        }
-
-        //Insert Faculty
-        public static void InsertFaculty(Faculty F)
-        {
-            String sqlQuery = "INSERT INTO Faculty (Faculty_ID,Faculty_Name,Info_ID) VALUES ('";
-            sqlQuery += F.Faculty_ID + "','";
-            sqlQuery += F.Faculty_Name + "','";
-            sqlQuery += F.getInfoID();
-            sqlQuery += "');";
-
-            SqlCommand cmd = new SqlCommand();
-            SqlConnection Database = new SqlConnection(ConnectionString);
-            cmd.Connection = Database;
-            cmd.CommandText = sqlQuery;
-            if (cmd.Connection.State != ConnectionState.Open)
-            {
-                cmd.Connection.Open();
-            }
-
-            cmd.ExecuteNonQuery();
-            cmd.Dispose();
-            cmd.Connection.Close();
-
-        }
-
-        //Insert Business Partner
-        public static void InsertBusPartner(BusPartner BP)
-        {
-            String sqlQuery = "INSERT INTO BusPartner (Bus_Partner_ID,Bus_Name,Partner_Status_ID,Org_Type_ID,Info_ID) VALUES ('";
-            sqlQuery += BP.Bus_Partner_ID + "','";
-            sqlQuery += BP.Bus_Name + "','";
-            sqlQuery += BP.Partner_Status_ID + "','";
-            sqlQuery += BP.Org_Type_ID + "','";
-            sqlQuery += BP.getInfoID();
-            sqlQuery += "');";
-
-            SqlCommand cmd = new SqlCommand();
-            SqlConnection Database = new SqlConnection(ConnectionString);
-            cmd.Connection = Database;
-            cmd.CommandText = sqlQuery;
-            if (cmd.Connection.State != ConnectionState.Open)
-            {
-                cmd.Connection.Open();
-            }
-            cmd.ExecuteNonQuery();
-            cmd.Dispose();
-            cmd.Connection.Close();
-        }
-
-        public static void InsertBusRep(BusRep BR)
-        {
-            String sqlQuery = "INSERT INTO BusRep (Bus_Rep_ID,Rep_Name,Bus_Partner_ID,Info_ID) VALUES ('";
-            sqlQuery += BR.Bus_Rep_ID + "','";
-            sqlQuery += BR.Rep_Name + "','";
-            sqlQuery += BR.Bus_Partner_ID + "','";
-            sqlQuery += BR.GetInfoID();
-            sqlQuery += "');";
-
-            SqlCommand cmd = new SqlCommand();
-            SqlConnection Database = new SqlConnection(ConnectionString);
-            cmd.Connection = Database;
-            cmd.CommandText = sqlQuery;
-            if (cmd.Connection.State != ConnectionState.Open)
-            {
-                cmd.Connection.Open();
-            }
-            cmd.ExecuteNonQuery();
-            cmd.Dispose();
-            cmd.Connection.Close();
-        }
-
-        public static void InsertBusProject(BusProject BP)
-        {
-            String sqlQuery = "INSERT INTO BusProject (Bus_Project_ID,Project_Name,Description,Start_Date,End_Date,Due_Date,Grant_Project_ID) VALUES ('";
-            sqlQuery += BP.Bus_Project_ID + "','";
-            sqlQuery += BP.Project_Name + "','";
-            sqlQuery += BP.Description + "','";
-            sqlQuery += BP.Start_Date + "','";
-            sqlQuery += BP.End_Date + "','";
-            sqlQuery += BP.Due_Date + "','";
-            sqlQuery += BP.Grant_Project_ID;
-            sqlQuery += "');";
-
-            SqlCommand cmd = new SqlCommand();
-            SqlConnection Database = new SqlConnection(ConnectionString);
-            cmd.Connection = Database;
-            cmd.CommandText = sqlQuery;
-            if (cmd.Connection.State != ConnectionState.Open)
-            {
-                cmd.Connection.Open();
-            }
-
-            cmd.ExecuteNonQuery();
-            cmd.Dispose();
-            cmd.Connection.Close();
-        }
-
-        public static void InsertTask(Classes.Task T)
-        {
-            String sqlQuery = "INSERT INTO Task (Task_ID,Task_Name,Task_Description,Completed,Bus_Project_ID) VALUES ('";
-            sqlQuery += T.Task_ID + "','";
-            sqlQuery += T.Task_Name + "','";
-            sqlQuery += T.Task_Description + "','";
-            sqlQuery += tobyte(T.Completed) + "','";
-            sqlQuery += T.Bus_Project_ID;
-            sqlQuery += "');";
-
-            SqlCommand cmd = new SqlCommand();
-            SqlConnection Database = new SqlConnection(ConnectionString);
-            cmd.Connection = Database;
-            cmd.CommandText = sqlQuery;
-            if (cmd.Connection.State != ConnectionState.Open)
-            {
-                cmd.Connection.Open();
-            }
-
-            cmd.ExecuteNonQuery();
-            cmd.Dispose();
-            cmd.Connection.Close();
-        }
-
-        public static void InsertChildTask(ChildTask CT)
-        {
-            String sqlQuery = "INSERT INTO ChildTask(Child_Task_ID,Task_Name,Task_Description,Completed,Parent_Task_ID) VALUES ('";
-            sqlQuery += CT.Child_Task_ID + "','";
-            sqlQuery += CT.Task_Name + "','";
-            sqlQuery += CT.Task_Description + "','";
-            sqlQuery += tobyte(CT.Completed) + "','";
-            sqlQuery += CT.Parent_Task_ID;
-            sqlQuery += "');";
-
-            SqlCommand cmd = new SqlCommand();
-            SqlConnection Database = new SqlConnection(ConnectionString);
-            cmd.Connection = Database;
-            cmd.CommandText = sqlQuery;
-            if (cmd.Connection.State != ConnectionState.Open)
-            {
-                cmd.Connection.Open();
-            }
-
-            cmd.ExecuteNonQuery();
-            cmd.Dispose();
-            cmd.Dispose();
-
-        }
-
-        public static void InsertGrantProject(GrantProject GP)
-        {
-            String sqlQuery = "INSERT INTO GrantProject (Grant_Project_ID,Project_Name,Description) VALUES ('";
-            sqlQuery += GP.Grant_Project_ID + "','";
-            sqlQuery += GP.Project_Name + "','";
-            sqlQuery += GP.Description;
-            sqlQuery += "');";
-
-            SqlCommand cmd = new SqlCommand();
-            SqlConnection Database = new SqlConnection(ConnectionString);
-            cmd.Connection = Database;
-            cmd.CommandText = sqlQuery;
-            if (cmd.Connection.State != ConnectionState.Open)
-            {
-                cmd.Connection.Open();
-            }
-
-            cmd.ExecuteNonQuery();
-            cmd.Dispose();
-            cmd.Connection.Close();
-        }
-
-        public static void InsertProjectNote(ProjectNotes PN)
-        {
-            String sqlQuery = "INSERT INTO ProjectNotes (Notes_ID,Project_Notes,Date_Recorded,Bus_Project_ID) VALUES ('";
-            sqlQuery += PN.Notes_ID + "','";
-            sqlQuery += PN.Project_Note + "','";
-            sqlQuery += PN.Date_Recorded + "','";
-            sqlQuery += PN.Bus_Project_ID;
-            sqlQuery += "');";
-
-            SqlCommand cmd = new SqlCommand();
-            SqlConnection Database = new SqlConnection(ConnectionString);
-            cmd.Connection = Database;
-            cmd.CommandText = sqlQuery;
-            if (cmd.Connection.State != ConnectionState.Open)
-            {
-                cmd.Connection.Open();
-            }
-            
-
-            cmd.ExecuteNonQuery();
-            cmd.Dispose();
-            cmd.Connection.Close();
-        }
-
-        public static void InsertMeetingMinutes(MeetingMinutes MM)
-        {
-            String sqlQuery = "INSERT INTO MeetingMinutes (Meeting_Minutes_ID,Meeting_Notes,Meeting_Date,Bus_Rep_ID) VALUES ('";
-            sqlQuery += MM.Meeting_Minutes_ID + "','";
-            sqlQuery += MM.Meeting_Notes + "','";
-            sqlQuery +=  MM.Meeting_Date + "','";
-            sqlQuery += MM.Bus_Rep_ID;
-            sqlQuery += "');";
-
-            SqlCommand cmd = new SqlCommand();
-            SqlConnection Database = new SqlConnection(ConnectionString);
-            cmd.Connection = Database;
-            cmd.CommandText = sqlQuery;
-            if (cmd.Connection.State != ConnectionState.Open)
-            {
-                cmd.Connection.Open();
-            }
-
-            cmd.ExecuteNonQuery();
-            cmd.Dispose();
-            cmd.Connection.Close();
-        }
-
-
-        //creates entry into the EmployeeProject table
-        public static void AssignProject(EmployeeProject EP)
-        {
-            String sqlQuery = "INSERT INTO EmployeeProject (Employee_Project_ID,Assigning_Admin_ID,Employee_ID,Bus_Project_ID) VALUES ('";
-            sqlQuery += EP.Employee_Project_ID + "','";
-            sqlQuery += EP.Assigning_Admin_ID + "','";
-            sqlQuery += EP.Employee_ID + "','";
-            sqlQuery += EP.Bus_Project_ID;
-            sqlQuery += "');";
-
-            SqlCommand cmd = new SqlCommand();
-            SqlConnection Database = new SqlConnection(ConnectionString);
-            cmd.Connection = Database;
-            cmd.CommandText = sqlQuery;
-            if (cmd.Connection.State != ConnectionState.Open)
-            {
-                cmd.Connection.Open();
-            }
-
-            cmd.ExecuteNonQuery();
-            cmd.Dispose();
-            cmd.Connection.Close();
-        }
-
-        public static void AssignFacultyProject(FacultyProject FP)
-        {
-            String sqlQuery = "INSERT INTO FacultyProject (Faculty_Project_ID,Faculty_ID,Grant_Project_ID) VALUES ('";
-            sqlQuery += FP.Faculty_Project_ID + "','";
-            sqlQuery += FP.Faculty_ID + "','";
-            sqlQuery += FP.Grant_Project_ID;
-            sqlQuery += "');";
-
-            SqlCommand cmd = new SqlCommand();
-            SqlConnection Database = new SqlConnection(ConnectionString);
-            cmd.Connection = Database;
-            cmd.CommandText = sqlQuery;
-            if (cmd.Connection.State != ConnectionState.Open)
-            {
-                cmd.Connection.Open();
-            }
-
-            cmd.ExecuteNonQuery();
-            cmd.Dispose();
-            cmd.Connection.Close();
-        }
-
-        public static void UpdateBusProject(string ID, DateOnly EndDate)
-        {
-            String sqlQuery = "UPDATE BusProject SET END_DATE = '" + EndDate + "' WHERE Bus_Project_ID = " + ID + ";";
-            SqlCommand cmd = new SqlCommand();
-            SqlConnection Database = new SqlConnection(ConnectionString);
-            cmd.Connection = Database;
-            cmd.CommandText = sqlQuery;
-            cmd.Connection.Open();
-            cmd.ExecuteNonQuery();
-            cmd.Dispose();
-            cmd.Connection.Close();
-
-        }
 
         public static void UpdateGrantAwardDate(string ID, DateOnly AwardDate)
         {
@@ -695,27 +668,13 @@ namespace DatabaseSystemIntegration.Pages.Tools
             cmd.Connection = Database;
             cmd.Connection.Open();
 
-            cmd.CommandText = "SELECT * FROM " + Tables[17] + " WHERE " + "Receiver_ID" + " = '" + ID + "' ;";
+            cmd.CommandText = "SELECT * FROM " + Tables[9] + " WHERE " + "Receiver_ID" + " = '" + ID + "' ;";
             SqlDataReader tempReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
             cmd.Dispose();
             return tempReader;
         }
 
 
-        public static BusProject[] GetActiveBusProjects()
-        {
-            BusProject[] Projects = ObjectConverter.ToBusProject(SelectNoFilter(2));
-            List<BusProject> Active = new List<BusProject>();
-            foreach (BusProject p in Projects)
-            {
-                //check if the end date was not set & add to list, by default it is min date
-                if (p.End_Date == DateOnly.MinValue)
-                {
-                    Active.Add(p);
-                }
-            }
-            return Active.ToArray();
-        }
         public static int SecureLogIn(string Username, string Password)
         {
             string AccountQuery =
@@ -723,7 +682,7 @@ namespace DatabaseSystemIntegration.Pages.Tools
             SqlCommand cmdLogin = new SqlCommand();
             cmdLogin.Connection = new SqlConnection(ConnectionString);
             cmdLogin.CommandText = AccountQuery;
-            cmdLogin.CommandType = System.Data.CommandType.StoredProcedure;
+            cmdLogin.CommandType = CommandType.StoredProcedure;
             cmdLogin.Parameters.AddWithValue("@User_Name", Username);
             cmdLogin.Parameters.AddWithValue("@Password", Password);
             cmdLogin.CommandText = "sp_Lab3Login";
