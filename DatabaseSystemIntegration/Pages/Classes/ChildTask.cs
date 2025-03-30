@@ -12,6 +12,9 @@ namespace DatabaseSystemIntegration.Pages.Classes
         public DateOnly DueDate { get; set; }
         public DateOnly EndDate { get; set; }
         public bool Completed { get; set; }
+
+        public string UserID { get; set; }
+
         public string ParentTaskID { get; set; }
 
 
@@ -21,6 +24,25 @@ namespace DatabaseSystemIntegration.Pages.Classes
             DatabaseControls.CompleteChildTask(this);
         }
 
+        public bool isAssigned()
+        {
+            if (UserID.Length == 6)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public void AssignTask(string userID)
+        {
+                UserID = userID;
+                DatabaseControls.AssignChildTask(this);
+        }
+
+        public Users GetAssignedUser()
+        {
+                return ObjectConverter.ToUsers(DatabaseControls.SelectFilter(19, 19, UserID))[0];
+        }
 
         public Tasks GetParentTask()
         {

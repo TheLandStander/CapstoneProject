@@ -277,6 +277,12 @@ namespace DatabaseSystemIntegration.Pages.Tools
             Execute(sqlQuery);
         }
 
+        public static void AssignChildTask(ChildTask t)
+        {
+            String sqlQuery = "UPDATE ChildTask SET User_ID = " + t.UserID + " WHERE Child_Task_ID = " + t.ChildTaskID + ";";
+            Execute(sqlQuery);
+        }
+
         public static void SetProjectLead(Project P, Users U)
         {
             String sqlQuery = "UPDATE Project SET Project_Lead_ID = " + U.UserID + " WHERE Project_ID = " + P.ProjectID + ";";

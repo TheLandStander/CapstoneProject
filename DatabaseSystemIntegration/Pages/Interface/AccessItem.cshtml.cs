@@ -97,6 +97,12 @@ namespace DatabaseSystemIntegration.Pages.Interface
                 ChildTask.CompleteTask();
         }
 
+        public void AssignChildTask(string ID)
+        {
+            ChildTask = ObjectConverter.ToChildTask(DatabaseControls.SelectFilter(4, 4, ID))[0];
+            ChildTask.AssignTask(HttpContext.Session.GetString("UserID"));
+        }
+
 
         public IActionResult OnPostSelectGrant(string ID)
         {
@@ -141,6 +147,14 @@ namespace DatabaseSystemIntegration.Pages.Interface
             return RedirectToPage("AccessItem");
         }
 
+        public IActionResult OnPostAssignChildTask(string ID)
+        {
+            LoadObjects();
+            AssignChildTask(ID);
+            SetVars();
+            return RedirectToPage("AccessItem");
+        }
+
         public IActionResult OnPostAssignProject()
         {
             LoadObjects();
@@ -176,7 +190,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
         public IActionResult OnPostAddTask()
         {
             LoadObjects();
-            if (Date < Date2)
+            if (Date <= Date2)
             {
                 project.AddTask(Name, Description, Date, Date2);
             }
@@ -187,7 +201,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
         public IActionResult OnPostAddChildTask()
         {
             LoadObjects();
-            if (Date < Date2)
+            if (Date <= Date2)
             {
                 ParentTask.AddChildTask(Name, Description, Date, Date2);
             }

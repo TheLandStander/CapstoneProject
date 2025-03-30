@@ -291,7 +291,7 @@
                                 <button type="submit" asp-page-handler="UpdateTask" class="btn btn-primary btn-sm me-2">Mark As Completed</button>
                                 <button type="submit" asp-page-handler="AssignTask" class="btn btn-primary btn-sm">Take Task</button>
                             }
-                          
+
                         </div>
 
                         <p><strong>Assigned Users:</strong></p>
@@ -329,6 +329,7 @@
                             <th>Start Date</th>
                             <th>Due Date</th>
                             <th>End Date</th>
+                            <th>Take Task</th>
                             <th>Mark As Completed</th>
                         </tr>
                     </thead>
@@ -344,7 +345,15 @@
                                 <td>@task.StartDate</td>
                                 <td>@task.DueDate</td>
                                 <td>@(task.EndDate != DateOnly.MinValue ? task.EndDate.ToString() : "-")</td>
-                                @if (task.Completed == true)
+                                @if (task.isAssigned())
+                                {
+                                    <td>Member Assigned: @task.GetAssignedUser().Name</td>
+                                }
+                                else
+                                {
+                                    <td><button type="submit" asp-page-handler="AssignChildTask" asp-route-ID="@task.ChildTaskID" class="btn btn-primary mt-2">Assign</button></td>
+                                }
+                                @if (task.Completed == true || task.isAssigned() == false)
                                 {
                                     <td><button type="submit" asp-page-handler="UpdateChildTask" asp-route-ID="@task.ChildTaskID" class="btn btn-primary mt-2" disabled>Complete</button></td>
                                 }

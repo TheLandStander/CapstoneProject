@@ -288,14 +288,16 @@ namespace DatabaseSystemIntegration.Pages.Tools
                     DateOnly.FromDateTime((DateTime)data.GetValue(3)),
                     DateOnly.FromDateTime((DateTime)data.GetValue(4)),
                     Convert.ToBoolean(((byte[])data.GetValue(6))[0]),
-                    data.GetValue(7).ToString()
+                    data.GetValue(8).ToString()
                 );
                 obj.ChildTaskID = data.GetValue(0).ToString();
+                obj.UserID = data.GetValue(7).ToString();
                 obj.EndDate = DateOnly.FromDateTime((DateTime)data.GetValue(5));
                 list.Add(obj);
             }
             data.DisposeAsync();
             data.Close();
+
             return list.ToArray();
         }
 
