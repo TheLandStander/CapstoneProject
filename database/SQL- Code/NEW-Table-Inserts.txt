@@ -9,7 +9,7 @@ CREATE TABLE Partner (
     Partner_ID CHAR(6) PRIMARY KEY,
     Bus_Name VARCHAR(255) NOT NULL,
     Address TEXT,
-    Phone VARCHAR(15),
+    Phone VARCHAR(255),
     Email VARCHAR(255) UNIQUE,
     Description TEXT,
     Partner_Status_ID CHAR(6),
@@ -86,7 +86,6 @@ CREATE TABLE Project (
     Due_Date DATE,
     Project_Lead_ID CHAR(6),
     Project_Status_ID CHAR(6),
-    FOREIGN KEY (Project_Lead_ID) REFERENCES Users(User_ID),
     FOREIGN KEY (Project_Status_ID) REFERENCES ProjectStatus(Project_Status_ID)
 );
 
@@ -119,8 +118,8 @@ CREATE TABLE ChildTask (
     DueDate Date,
     EndDate Date,
     Completed binary,
-    Parent_Task_ID CHAR(6),
-    FOREIGN KEY (Parent_Task_ID) REFERENCES Task(Task_ID)
+    Task_ID CHAR(6),
+    FOREIGN KEY (Task_ID) REFERENCES Task(Task_ID)
 );
 
 CREATE TABLE AssignedTask (
@@ -212,8 +211,10 @@ INSERT INTO Role VALUES('123456','Admin');
 INSERT INTO Role VALUES('123455','Internal Employee');
 INSERT INTO Role VALUES('123454','External Employee');
 
+INSERT INTO Partner VALUES('123456','JMU CARE','800 South Main Street, Harrisonburg, VA 22807','800-800-8000','Contact@example.com','JMU CARE - Our Organization','123452');
+
 INSERT INTO PersonalInfo VALUES ('123455','Contact@test.com','Contact2@test.com','Admin','Password');
-INSERT INTO Users VALUES ('123456','Noah','123456','123456','123455','');
+INSERT INTO Users VALUES ('123456','Noah','123456','123456','123455','123456');
 INSERT INTO UserRole VALUES ('123456','123456','123456');
 
 

@@ -19,6 +19,8 @@ namespace DatabaseSystemIntegration.Pages.Interface
 
         public Users[] AllUsers { get; set; }
 
+        public Partner[] Partners { get; set; }
+
         public AssignedProject[] AssignedProjects { get; set; }
 
         public AssignedTask[] AssignedTasks { get; set; }
@@ -29,6 +31,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
             AllProjects = ObjectConverter.ToProject(DatabaseControls.SelectNoFilter(12));
             AllTasks = ObjectConverter.ToTask(DatabaseControls.SelectNoFilter(15));
             AllGrants = ObjectConverter.ToGrants(DatabaseControls.SelectNoFilter(7));
+            Partners = ObjectConverter.ToPartner(DatabaseControls.SelectNoFilter(2));
         }
 
         public void LoadGenericUser()
@@ -66,6 +69,14 @@ namespace DatabaseSystemIntegration.Pages.Interface
                 return Page();
             }
             return RedirectToPage("Index");
+        }
+
+        public IActionResult OnPostSelectPartner(string ID)
+        {
+            HttpContext.Session.SetString("ItemType", "Partner");
+            HttpContext.Session.SetString("ItemID", ID);
+
+            return RedirectToPage("AccessItem");
         }
 
         public IActionResult OnPostSelectProject(string ID)

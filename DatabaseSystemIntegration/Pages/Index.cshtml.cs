@@ -36,6 +36,7 @@ namespace DatabaseSystemIntegration.Pages
                 string ID = HttpContext.Session.GetString("AccountID");
                 User = ObjectConverter.ToUsers(DatabaseControls.SelectFilter(19, 11, ID))[0];
                 HttpContext.Session.SetString("UserID",User.UserID);
+                HttpContext.Session.SetString("UserName", User.Name);
                 HttpContext.Session.SetString("UserType", User.type.UserTypeName);
                 return RedirectToPage("Interface/Project-Dashboard");
             }

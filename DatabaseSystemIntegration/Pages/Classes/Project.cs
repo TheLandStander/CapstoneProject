@@ -1,4 +1,5 @@
 ﻿using DatabaseSystemIntegration.Pages.Tools;
+using System.Threading.Tasks;
 
 namespace DatabaseSystemIntegration.Pages.Classes
 {
@@ -12,8 +13,6 @@ namespace DatabaseSystemIntegration.Pages.Classes
         public DateOnly DueDate { get; set; }
         public string ProjectLeadID { get; set; }
         public string ProjectStatusID { get; set; }
-
-        public ProjectNotes[] ProjectNotes { get; set; }
         public Grant[] ProjectGrants {get;set;}
         public Tasks[] ProjectTasks { get; set; }
         public Users ProjectLeader { get; set; }
@@ -22,21 +21,31 @@ namespace DatabaseSystemIntegration.Pages.Classes
 
         public Users[] GetEmployees()
         {
-            AssignedProject[] ap = ObjectConverter.ToAssignedProject(DatabaseControls.SelectFilter(0, 0, ProjectID));
+            AssignedProject[] ap = ObjectConverter.ToAssignedProject(DatabaseControls.SelectFilter(0, 12, ProjectID));
             List<Users> holder = new List<Users>();
 
             foreach (AssignedProject p in ap)
             {
-                holder.Add(p.AssignedUser);
+                holder.Add(p.GetAssignedUser());
             }
 
             return holder.ToArray();
         }
 
-        public void SetProjectLeader(Users Leader)
+        public ProjectNotes[] GetNotes()
+        { 
+            return ObjectConverter.ToProjectNotes(DatabaseControls.SelectFilter(13, 12, ProjectID));
+        }
+
+        public Users GetProjectLead()
+        { 
+            return ObjectConverter.ToUsers(DatabaseControls.SelectFilter(19, 19, ProjectLeadID))[0];
+        }
+
+        public void SetProjectLeader(string LeaderID)
         {
-            ProjectLeader = Leader;
-            DatabaseControls.SetProjectLead(this, Leader);
+            ProjectLeader = ObjectConverter.ToUsers(DatabaseControls.SelectFilter(19, 19, LeaderID))[0];
+            DatabaseControls.SetProjectLead(this,ProjectLeader);
         }
 
         public void UpdateStatus(string StatusID)
@@ -53,7 +62,11 @@ namespace DatabaseSystemIntegration.Pages.Classes
         public void AssignProject(string UserID)
         {
             AssignedProject ap = new AssignedProject(UserID, ProjectID);
-            DatabaseControls.Insert(ap);
+            AssignedProject[] All = ObjectConverter.ToAssignedProject(DatabaseControls.SelectNoFilter(0));
+            if (DatabaseControls.CheckDuplicate(ap) == false)
+            {
+                DatabaseControls.Insert(ap);
+            }
         }
 
         public void AddNote(string Note)
@@ -62,24 +75,26 @@ namespace DatabaseSystemIntegration.Pages.Classes
             DatabaseControls.Insert(PN);
         }
 
+        public void AddTask(string Name, string Description, DateOnly Start, DateOnly Due)
+        {
+            Tasks t = new Tasks(Name, Description, Start, Due, false, ProjectID);
+            DatabaseControls.Insert(t);
+        }
 
         public void SetVars()
         {
-            ProjectLeader = ObjectConverter.ToUsers(DatabaseControls.SelectFilter(19,19, ProjectLeadID))[0];
             Status = ObjectConverter.ToProjectStatus(DatabaseControls.SelectFilter(14,14, ProjectStatusID))[0];
-            ProjectNotes = ObjectConverter.ToProjectNotes(DatabaseControls.SelectFilter(13, 12, ProjectID));
             ProjectGrants = ObjectConverter.ToGrants(DatabaseControls.SelectFilter(7, 12, ProjectID));
             ProjectTasks = ObjectConverter.ToTask(DatabaseControls.SelectFilter(15, 12, ProjectID));
         }
 
-        public Project(string projectName, string description, DateOnly startDate,DateOnly dueDate, string projectLead, string projectStatusID)
+        public Project(string projectName, string description, DateOnly startDate,DateOnly dueDate, string projectStatusID)
         {
             ProjectID = DatabaseControls.MakeID();  // Set primary key
             ProjectName = projectName;
             Description = description;
             StartDate = startDate;
             DueDate = dueDate;
-            ProjectLeadID = projectLead;
             ProjectStatusID = projectStatusID;
         }
     }

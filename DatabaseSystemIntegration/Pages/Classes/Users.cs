@@ -13,8 +13,6 @@ namespace DatabaseSystemIntegration.Pages.Classes
 
         public UserRole UserRole { get; set; }
 
-        public Partner partner { get; set; }
-
         public UserStatus status { get; set; }
 
         public UserType type { get; set; }
@@ -25,12 +23,15 @@ namespace DatabaseSystemIntegration.Pages.Classes
             {
                 UserRole = ObjectConverter.ToUserRole(DatabaseControls.SelectFilter(16, 19, UserID))[0];
             }
-            if (DatabaseControls.SelectFilter(2, 2, PartnerID).HasRows)
-            {
-                partner = ObjectConverter.ToPartner(DatabaseControls.SelectFilter(2, 2, PartnerID))[0];
-            }
+
             status = ObjectConverter.ToUserStatus(DatabaseControls.SelectFilter(17, 17, UserStatusID))[0];
             type = ObjectConverter.ToUserType(DatabaseControls.SelectFilter(18, 18, UserTypeID))[0];
+        }
+
+        public Partner GetPartner() 
+        {
+            return ObjectConverter.ToPartner(DatabaseControls.SelectFilter(2, 2, PartnerID))[0];
+
         }
 
         public Users(string name, string userTypeID, string userStatusID, string infoID)

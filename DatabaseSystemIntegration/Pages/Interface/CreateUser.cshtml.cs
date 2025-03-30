@@ -69,6 +69,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
             PartnerID = "123456"; 
             Name = "Default User Name";  
             UserTypeID = "123456";
+            RefreshSelection();
             return Page();
         }
 

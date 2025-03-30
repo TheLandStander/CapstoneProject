@@ -12,18 +12,16 @@ namespace DatabaseSystemIntegration.Pages.Classes
         public DateOnly EndDate { get; set; }
         public bool Completed { get; set; }
         public string ProjectID { get; set; }
-        public Project AssociatedProject { get; set; }
 
-        public ChildTask[] ChildTasks { get; set; }
 
         public Users[] GetEmployees()
         {
-            AssignedProject[] ap = ObjectConverter.ToAssignedProject(DatabaseControls.SelectFilter(1, 1, TaskID));
+            AssignedProject[] ap = ObjectConverter.ToAssignedProject(DatabaseControls.SelectFilter(1, 15, TaskID));
             List<Users> holder = new List<Users>();
 
             foreach (AssignedProject p in ap)
             {
-                holder.Add(p.AssignedUser);
+                holder.Add(p.GetAssignedUser());
             }
 
             return holder.ToArray();
@@ -31,13 +29,17 @@ namespace DatabaseSystemIntegration.Pages.Classes
 
         public void CompleteTask()
         {
+            Completed = true;
             DatabaseControls.CompleteTask(this);
         }
 
         public void AssignTask(string UserID)
         {
             AssignedTask at = new AssignedTask(UserID,TaskID);
-            DatabaseControls.Insert(at);
+            if (DatabaseControls.CheckDuplicate(at) == false)
+            {
+                DatabaseControls.Insert(at);
+            }
         }
 
         public void AddChildTask(string Name, string Description,DateOnly Start,DateOnly Due)
@@ -46,10 +48,19 @@ namespace DatabaseSystemIntegration.Pages.Classes
             DatabaseControls.Insert(ct);
         }
 
+        public Project GetProject()
+        { 
+            return ObjectConverter.ToProject(DatabaseControls.SelectFilter(12, 12, ProjectID))[0];
+        }
+
+        public ChildTask[] GetChildTasks()
+        {
+           return ObjectConverter.ToChildTask(DatabaseControls.SelectFilter(4, 15, TaskID));
+        }
+
         public void SetVars()
         {
-            AssociatedProject = ObjectConverter.ToProject(DatabaseControls.SelectFilter(12, 12, ProjectID))[0];
-            ChildTasks = ObjectConverter.ToChildTask(DatabaseControls.SelectFilter(4, 15, TaskID));
+
         }
         public Tasks(string taskName, string description,DateOnly Start,DateOnly Due,bool completed, string projectID)
         {

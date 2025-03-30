@@ -17,6 +17,7 @@ namespace DatabaseSystemIntegration.Pages.Classes
 
         public void CompleteTask()
         {
+            Completed = true;
             DatabaseControls.CompleteChildTask(this);
         }
 

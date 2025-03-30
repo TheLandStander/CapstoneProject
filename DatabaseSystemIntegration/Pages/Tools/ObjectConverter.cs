@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using Azure.Core.GeoJson;
 using System.Reflection;
 using System.Data;
+using System.Collections;
 
 namespace DatabaseSystemIntegration.Pages.Tools
 {
@@ -213,11 +214,11 @@ namespace DatabaseSystemIntegration.Pages.Tools
                     data.GetValue(2).ToString(),
                     DateOnly.FromDateTime((DateTime)data.GetValue(3)),
                     DateOnly.FromDateTime((DateTime)data.GetValue(5)),
-                    data.GetValue(6).ToString(),
                     data.GetValue(7).ToString()
                 );
                 obj.ProjectID = data.GetValue(0).ToString();
                 obj.EndDate = DateOnly.FromDateTime((DateTime)data.GetValue(4));
+                obj.ProjectLeadID = data.GetValue(6).ToString();
                 list.Add(obj);
             }
             data.Close();
@@ -260,7 +261,7 @@ namespace DatabaseSystemIntegration.Pages.Tools
                     data.GetValue(2).ToString(),
                     DateOnly.FromDateTime((DateTime)data.GetValue(3)),
                     DateOnly.FromDateTime((DateTime)data.GetValue(4)),
-                    Convert.ToBoolean(data.GetValue(6)),
+                    Convert.ToBoolean(((byte[])data.GetValue(6))[0]),
                     data.GetValue(7).ToString()
                 );
                 obj.TaskID = data.GetValue(0).ToString();
@@ -286,7 +287,7 @@ namespace DatabaseSystemIntegration.Pages.Tools
                     data.GetValue(2).ToString(),
                     DateOnly.FromDateTime((DateTime)data.GetValue(3)),
                     DateOnly.FromDateTime((DateTime)data.GetValue(4)),
-                    Convert.ToBoolean(data.GetValue(6)),
+                    Convert.ToBoolean(((byte[])data.GetValue(6))[0]),
                     data.GetValue(7).ToString()
                 );
                 obj.ChildTaskID = data.GetValue(0).ToString();

@@ -13,7 +13,63 @@
             max-width: 100%;
             }
         </style>
-        <h2 class="text-center mb-4">Grants</h2>
+
+        <h2 class="text-center mt-5 mb-4">Organizations</h2>
+        <div class="table-container">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Organization Name</th>
+                        <th>Status</th>
+                        <th>Address</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (HttpContext.Session.GetString("UserType") == "Admin")
+                    {
+                        @foreach (var partner in Model.Partners)
+                        {
+                            <tr>
+                                <td>
+                                    <button class="btn btn-link" asp-page-handler="SelectPartner" asp-route-id="@partner.PartnerID">@partner.BusName</button>
+                                </td>
+                                @if (partner.Status.Status_Flag == "Prospect")
+                                {
+                                    <td class="text-secondary">@partner.Status.Status_Flag</td>
+                                }
+                                @if (partner.Status.Status_Flag == "Initial Contact")
+                                {
+                                    <td class="text-danger">@partner.Status.Status_Flag</td>
+                                }
+                                @if (partner.Status.Status_Flag == "In Negotiation")
+                                {
+                                    <td class="text-warning">@partner.Status.Status_Flag</td>
+                                }
+                                @if (partner.Status.Status_Flag == "Memo-Signed")
+                                {
+                                    <td class="text-success">@partner.Status.Status_Flag</td>
+                                }
+                                @if (partner.Status.Status_Flag == "Active Partner")
+                                {
+                                    <td class="text-primary">@partner.Status.Status_Flag</td>
+                                }
+                                
+
+                                <td>@partner.Address</td>
+                                <td>@partner.Phone</td>
+                                <td>@partner.Email</td>
+                                <td>@partner.Description</td>
+
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <h2 class="text-center mb-4">Grant Applications</h2>
         <div class="table-container">
             <table class="table table-bordered table-striped">
                 <thead class="thead-dark">
@@ -39,7 +95,13 @@
                                 <td>@grant.Amount</td>
                                 <td>@grant.SubmissionDate</td>
                                 <td>@grant.DueDate</td>
-                                <td>@grant.AwardDate</td>
+                                @if (@grant.AwardDate != DateOnly.MinValue){
+                                    <td>@grant.AwardDate</td>
+                                }
+                                else
+                                {
+                                    <td>N/A</td>
+                                }
                                 <td>@grant.Category.CategoryName</td>
                                 @if (@grant.Status.GrantStatusName == "Accepted")
                                 {
@@ -61,7 +123,7 @@
                     else {
                         @foreach (var Project in Model.AssignedProjects)
                         {
-                            @foreach(var grant in Project.ProjectAssignment.ProjectGrants){
+                            @foreach(var grant in Project.GetProject().ProjectGrants){
                                 <tr>
                                     <td>
                                         <button class="btn btn-link" asp-page-handler="SelectGrant" asp-route-id="@grant.GrantID">@grant.GrantName</button>
@@ -120,6 +182,16 @@
                                 {
                                     <td>@Project.EndDate</td>
                                 }
+                                else
+                                {
+                                    <td>N/A</td>
+                                }
+                                <td class="
+                                @(Project.Status.ProjectStatusName == "Completed - Success" ? "text-success" :
+                                  Project.Status.ProjectStatusName == "Completed - Failed" ? "text-danger" :
+                                  Project.Status.ProjectStatusName == "Ongoing" ? "text-warning" : "")">
+                                  @Project.Status.ProjectStatusName
+                                </td>
                             </tr>
                         }
                     }
@@ -129,98 +201,18 @@
                         {
                             <tr>
                                 <td>
-                                    <button class="btn btn-link" asp-page-handler="SelectProject" asp-route-id="@Project.ProjectID">@Project.ProjectAssignment.ProjectName</button>
+                                    <button class="btn btn-link" asp-page-handler="SelectProject" asp-route-id="@Project.ProjectID">@Project.GetProject().ProjectName</button>
                                 </td>
-                                <td>@Project.ProjectAssignment.Description</td>
-                                <td>@Project.ProjectAssignment.StartDate</td>
-                                <td>@Project.ProjectAssignment.DueDate</td>
-                                @if (@Project.ProjectAssignment.EndDate > DateOnly.MinValue)
+                                <td>@Project.GetProject().Description</td>
+                                <td>@Project.GetProject().StartDate</td>
+                                <td>@Project.GetProject().DueDate</td>
+                                @if (@Project.GetProject().EndDate > DateOnly.MinValue)
                                 {
-                                    <td>@Project.ProjectAssignment.EndDate</td>
+                                    <td>@Project.GetProject().EndDate</td>
                                 }
+                                <td>@Project.GetProject().Status.ProjectStatusName</td>
                             </tr>
                         }
-                    }
-                </tbody>
-            </table>
-        </div>
-
-        <h2 class="text-center mt-5 mb-4">Project Tasks</h2>
-        <div class="table-container">
-            <table class="table table-bordered table-striped">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>Task Name</th>
-                        <th>Description</th>
-                        <th>Status</th>
-                        <th>Users Assigned</th>
-                        <th>Start Date</th>
-                        <th>Due Date</th>
-                        <th>End Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if (HttpContext.Session.GetString("UserType") == "Admin")
-                    {
-                        @foreach (var Task in Model.AllTasks)
-                        {
-                            <tr>
-                                <td>
-                                    <button class="btn btn-link" asp-page-handler="SelectTask" asp-route-id="@Task.TaskID">@Task.TaskName</button>
-                                </td>
-                                <td>@Task.Description</td>
-                                @if (Task.Completed == true)
-                                {
-                                    <td>Complete</td>
-                                }
-                                else
-                                {
-                                    <td>Incomplete</td>
-                                }
-                                @foreach (var User in Task.GetEmployees())
-                                {
-                                    <td>@User.Name</td>
-                                }
-                                <td>@Task.StartDate</td>
-                                <td>@Task.DueDate</td>
-                                @if (@Task.EndDate > DateOnly.MinValue)
-                                {
-                                    <td>@Task.EndDate</td>
-                                }
-
-                            </tr>
-                        }
-                    }
-                    else
-                    {
-                        @foreach (var Task in Model.AssignedTasks)
-                        {
-                                <tr>
-                                    <td>
-                                        <button class="btn btn-link" asp-page-handler="SelectTask" asp-route-id="@Task.TaskID">@Task.TaskAssignment.TaskName</button>
-                                    </td>
-                                    <td>@Task.TaskAssignment.Description</td>
-                                   @if (Task.TaskAssignment.Completed == true)
-                                    {
-                                        <td>Complete</td>
-                                    }
-                                    else
-                                    {
-                                        <td>Incomplete</td>
-                                    }
-                                @foreach (var User in Task.TaskAssignment.GetEmployees())
-                                    {
-                                        <td>@User.Name</td>
-                                    }
-                                    <td>@Task.TaskAssignment.StartDate</td>
-                                    <td>@Task.TaskAssignment.DueDate</td>
-                                    @if (@Task.TaskAssignment.EndDate > DateOnly.MinValue)
-                                    {
-                                        <td>@Task.TaskAssignment.EndDate</td>
-                                    }
-
-                                </tr>
-                            }
                     }
                 </tbody>
             </table>

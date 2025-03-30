@@ -44,11 +44,13 @@ namespace DatabaseSystemIntegration.Pages.Interface
             Projects = ObjectConverter.ToProject(DatabaseControls.SelectNoFilter(12));
             Status = ObjectConverter.ToGrantStatus(DatabaseControls.SelectNoFilter(6));
             Category = ObjectConverter.ToGrantCategory(DatabaseControls.SelectNoFilter(5));
+            SubDate = DateOnly.FromDateTime(DateTime.Now);
+            DueDate = DateOnly.FromDateTime(DateTime.Now);
         }
 
         public void CheckAddGrant()
         {
-            if (GrantName != null && Amount > 0 && SubDate != DateOnly.MinValue &&
+            if (GrantName != null && Amount > 0 &&
                DueDate > SubDate && StatusID != null && CategoryID != null && ProjectID != null)
             {
                 Grant g = new Grant(GrantName, (decimal)Amount, SubDate, DueDate, StatusID, CategoryID, ProjectID);

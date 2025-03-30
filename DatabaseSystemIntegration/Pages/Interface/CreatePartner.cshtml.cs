@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DatabaseSystemIntegration.Pages.Interface
 {
-    public class CreatePartner : PageModel
+    public class CreatePartnerModel : PageModel
     {
         [BindProperty]
         public string BusinessName { get; set; }
@@ -25,7 +25,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
         [BindProperty]
         public string StatusID { get; set; }
 
-        public PartnerStatus[] Status { get; set; }
+        public PartnerStatus[] Status { get; set; } = ObjectConverter.ToPartnerStatus(DatabaseControls.SelectNoFilter(3));
 
         public void AddPartner()
         {
@@ -38,6 +38,13 @@ namespace DatabaseSystemIntegration.Pages.Interface
         
         }
 
+        public IActionResult OnPostSubmit()
+        {
+            ObjectConverter.ToPartnerStatus(DatabaseControls.SelectNoFilter(3));
+            AddPartner();
+            return Page();
+        }
+
         public IActionResult OnPostPopulateHandler()
         {
             ModelState.Clear();
@@ -46,36 +53,36 @@ namespace DatabaseSystemIntegration.Pages.Interface
             Phone = "123-456-7890";
             Email = "example@example.com";
             Description = "Default Description of the business.";
-            StatusID = "1";
+            StatusID = "123456";
             return Page();
         }
 
         public IActionResult OnPostClearHandler()
         {
             ModelState.Clear();
-            Status = ObjectConverter.ToPartnerStatus(DatabaseControls.SelectNoFilter(3));
+            BusinessName = "";
+            Address = "";
+            Phone = "";
+            Email = "";
+            Description = "";
+            StatusID = "";
             return Page();
         }
 
 
         public IActionResult OnGet()
         {
+            ObjectConverter.ToPartnerStatus(DatabaseControls.SelectNoFilter(3));
+
             if (HttpContext.Session.GetInt32("LoggedIn") == 1)
             {
-                Status = ObjectConverter.ToPartnerStatus(DatabaseControls.SelectNoFilter(3));
 
                 if (HttpContext.Session.GetString("UserType") == "Admin")
                 {
-                    Status = ObjectConverter.ToPartnerStatus(DatabaseControls.SelectNoFilter(3));
                     return Page();
                 }
             }
             return RedirectToPage("/Index");
-        }
-
-        public void onPost()
-        {
-            Status = ObjectConverter.ToPartnerStatus(DatabaseControls.SelectNoFilter(3));
         }
     }
 }

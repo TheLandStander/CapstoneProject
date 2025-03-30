@@ -8,15 +8,20 @@ namespace DatabaseSystemIntegration.Pages.Classes
         public string UserID { get; set; }
         public string TaskID { get; set; }
 
-        public Tasks TaskAssignment { get; set; }
-
-        public Users AssignedUser { get; set; }
-
         public void SetVars()
         {
-            TaskAssignment = ObjectConverter.ToTask(DatabaseControls.SelectFilter(15, 15, TaskID))[0];
-            AssignedUser = ObjectConverter.ToUsers(DatabaseControls.SelectFilter(19, 19, UserID))[0];
         }
+
+        public Project GetTask()
+        {
+            return ObjectConverter.ToProject(DatabaseControls.SelectFilter(15, 15, TaskID))[0];
+        }
+
+        public Users GetAssignedUser()
+        {
+            return ObjectConverter.ToUsers(DatabaseControls.SelectFilter(19, 19, UserID))[0];
+        }
+
 
         public AssignedTask(string userID, string taskID)
         {

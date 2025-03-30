@@ -2,6 +2,7 @@ using DatabaseSystemIntegration.Pages.Classes;
 using DatabaseSystemIntegration.Pages.Tools;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.VisualBasic;
 
 namespace DatabaseSystemIntegration.Pages.Interface
 {
@@ -20,9 +21,6 @@ namespace DatabaseSystemIntegration.Pages.Interface
         public DateOnly DueDate { get; set; }
 
         [BindProperty]
-        public string LeadID { get; set; }
-
-        [BindProperty]
         public string StatusID { get; set; }
 
         [BindProperty]
@@ -35,14 +33,16 @@ namespace DatabaseSystemIntegration.Pages.Interface
         {
             Users = ObjectConverter.ToUsers(DatabaseControls.SelectNoFilter(19));
             ProjectStatuses = ObjectConverter.ToProjectStatus(DatabaseControls.SelectNoFilter(14));
+            DueDate = DateOnly.FromDateTime(DateTime.Now);
+            StartDate = DateOnly.FromDateTime(DateTime.Now);
         }
 
 
         private void CheckAndSubmitProject()
         {
-            if (Project_Name != null && Project_Description != null && StatusID != null && StartDate < DueDate && LeadID != null )
+            if (Project_Name != null && Project_Description != null && StatusID != null && StartDate < DueDate)
             {
-                Project P = new Project(Project_Name, Project_Description, StartDate, DueDate, LeadID,StatusID);
+                Project P = new Project(Project_Name, Project_Description, StartDate, DueDate,StatusID);
                 DatabaseControls.Insert(P);
             }
         }
@@ -67,6 +67,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
             Project_Description = "Sample Description";
             StartDate = new DateOnly(2025, 12, 1);
             DueDate = new DateOnly(2026, 12, 2);
+            RefreshSelection();
             return Page();
         }
 
@@ -80,6 +81,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
 
         public void OnPost()
         {
+            Console.Write("Works");
             CheckAndSubmitProject();
             RefreshSelection();
 

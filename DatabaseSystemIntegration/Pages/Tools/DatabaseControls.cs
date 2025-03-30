@@ -62,6 +62,32 @@ namespace DatabaseSystemIntegration.Pages.Tools
        "User_ID"
             };
 
+        public static bool CheckDuplicate(AssignedTask at)
+        {
+            AssignedTask[] Assignments = ObjectConverter.ToAssignedTask(SelectNoFilter(1));
+            foreach (AssignedTask i in Assignments)
+            {
+                if (at.TaskID == i.TaskID && at.UserID == i.UserID)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public static bool CheckDuplicate(AssignedProject ap)
+        {
+            AssignedProject[] Assignments = ObjectConverter.ToAssignedProject(SelectNoFilter(0));
+            foreach (AssignedProject i in Assignments)
+            {
+                if (ap.ProjectID == i.ProjectID && ap.UserID == i.UserID)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
 
         public static string MakeID()
         {
@@ -87,6 +113,7 @@ namespace DatabaseSystemIntegration.Pages.Tools
                 return 0;
             }
         }
+
 
         public static Role GetRole(string name)
         {
@@ -233,19 +260,20 @@ namespace DatabaseSystemIntegration.Pages.Tools
 
         public static void CompleteTask(Tasks t)
         {
-            String sqlQuery = "UPDATE Task SET Completed = " + t.Completed + " WHERE Task_ID = " + t.TaskID + ";";
+            String sqlQuery = "UPDATE Task SET Completed =" +  tobyte(t.Completed)  + "WHERE Task_ID = " + t.TaskID + ";";
             Execute(sqlQuery);
 
-            sqlQuery = "UPDATE Task SET End_Date '" + DateOnly.FromDateTime(DateTime.Now) + "' WHERE Task_ID = " + t.TaskID + ";";
+            sqlQuery = "UPDATE Task SET EndDate = '" + DateOnly.FromDateTime(DateTime.Now) + "' WHERE Task_ID = " + t.TaskID + ";";
+
             Execute(sqlQuery);
         }
 
         public static void CompleteChildTask(ChildTask t)
         {
-            String sqlQuery = "UPDATE ChildTask SET Completed = " + t.Completed + " WHERE Child_Task_ID = " + t.ChildTaskID + ";";
+            String sqlQuery = "UPDATE ChildTask SET Completed =" + tobyte(t.Completed) + "WHERE Child_Task_ID = " + t.ChildTaskID + ";";
             Execute(sqlQuery);
 
-            sqlQuery = "UPDATE ChildTask SET End_Date '" + DateOnly.FromDateTime(DateTime.Now) + "' WHERE Child_Task_ID = " + t.ChildTaskID + ";";
+            sqlQuery = "UPDATE ChildTask SET EndDate = '" + DateOnly.FromDateTime(DateTime.Now) + "' WHERE Child_Task_ID = " + t.ChildTaskID + ";";
             Execute(sqlQuery);
         }
 
@@ -257,7 +285,7 @@ namespace DatabaseSystemIntegration.Pages.Tools
 
         public static void UpdateProjectStatus(string ProjectID, string StatusID)
         {
-            String sqlQuery = "UPDATE Project SET Project_Status_ID = " + StatusID + " WHERE Project_ID = " + ProjectID + ";";
+            String sqlQuery = "UPDATE Project SET Project_Status_ID =" + StatusID + " WHERE Project_ID = " + ProjectID + ";";
             Execute(sqlQuery);
 
             ProjectStatus ps = ObjectConverter.ToProjectStatus(SelectFilter(14, 14, StatusID))[0];
@@ -267,6 +295,13 @@ namespace DatabaseSystemIntegration.Pages.Tools
                 sqlQuery = "UPDATE Project SET End_Date = '" + DateOnly.FromDateTime(DateTime.Now) + "' WHERE Project_ID = " + ProjectID + ";";
                 Execute(sqlQuery);
             }
+
+        }
+
+        public static void UpdatePartnerStatus(string PartnerID, string StatusID)
+        {
+            String sqlQuery = "UPDATE Partner SET Partner_Status_ID = " + StatusID + " WHERE Partner_ID = " + PartnerID + ";";
+            Execute(sqlQuery);
 
         }
 
@@ -427,27 +462,26 @@ namespace DatabaseSystemIntegration.Pages.Tools
             sqlQuery += t.Description + "','";
             sqlQuery += t.StartDate + "','";
             sqlQuery += t.DueDate + "','";
-            sqlQuery += t.EndDate + "','";
-            sqlQuery += t.Completed + "','";
+            sqlQuery += t.EndDate + "',";
+            sqlQuery += "Convert(binary," +tobyte(t.Completed) + "),'";
             sqlQuery += t.ProjectID;
             sqlQuery += "');";
-
             Execute(sqlQuery);
         }
 
         public static void Insert(ChildTask ct)
         {
-            String sqlQuery = "INSERT INTO ChildTask(Child_Task_ID, Task_Name, Description, StartDate, DueDate, EndDate, Completed, Parent_Task_ID) VALUES ('";
+            String sqlQuery = "INSERT INTO ChildTask(Child_Task_ID, Task_Name, Description, StartDate, DueDate, EndDate, Completed, Task_ID) VALUES ('";
             sqlQuery += ct.ChildTaskID + "','";
             sqlQuery += ct.TaskName + "','";
             sqlQuery += ct.Description + "','";
             sqlQuery += ct.StartDate + "','";
-            sqlQuery += ct.DueDate + "','";
-            sqlQuery += ct.EndDate + "','";
-            sqlQuery += ct.Completed + "','";
+            sqlQuery += ct.DueDate + "','"; 
+            sqlQuery += ct.EndDate + "',";
+            sqlQuery += "Convert(binary," + tobyte(ct.Completed) + "),'";
             sqlQuery += ct.ParentTaskID;
             sqlQuery += "');";
-
+            Console.Write(sqlQuery);
             Execute(sqlQuery);
         }
 
@@ -546,7 +580,7 @@ namespace DatabaseSystemIntegration.Pages.Tools
             return tempReader;
         }
 
-        //Select everything from a table, no filter
+
         public static SqlDataReader SelectNoFilter(int Table)
         {
             SqlCommand cmd = new SqlCommand();
@@ -563,7 +597,7 @@ namespace DatabaseSystemIntegration.Pages.Tools
             return tempReader;
         }
 
-        //Select everything from a table, given a key filter
+
         public static SqlDataReader SelectFilter(int SearchTable, int SearchField, string Identifier)
         {
             SqlCommand cmd = new SqlCommand();
@@ -676,7 +710,7 @@ namespace DatabaseSystemIntegration.Pages.Tools
 
 
         public static int SecureLogIn(string Username, string Password)
-        {
+        {   
             string AccountQuery =
             "SELECT COUNT(*) FROM PersonalInfo where User_Name = @User_Name and Password = @Password";
             SqlCommand cmdLogin = new SqlCommand();
