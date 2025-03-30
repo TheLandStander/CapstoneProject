@@ -118,6 +118,7 @@ CREATE TABLE ChildTask (
     DueDate Date,
     EndDate Date,
     Completed binary,
+    User_ID CHAR(6),
     Task_ID CHAR(6),
     FOREIGN KEY (Task_ID) REFERENCES Task(Task_ID)
 );
