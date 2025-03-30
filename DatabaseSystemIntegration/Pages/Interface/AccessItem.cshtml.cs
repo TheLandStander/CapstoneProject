@@ -2,7 +2,7 @@ using DatabaseSystemIntegration.Pages.Classes;
 using DatabaseSystemIntegration.Pages.Tools;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-
+//AI WAS USED TO IMPROVE THE UI STYLE
 namespace DatabaseSystemIntegration.Pages.Interface
 {
     public class AccessItemModel : PageModel

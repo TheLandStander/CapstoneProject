@@ -18,15 +18,14 @@ namespace DatabaseSystemIntegration.Pages.Interface
         public string Recipient_ID { get; set; }
 
         [BindProperty]
-        public PersonalInfo[] Users { get; set; }
+        public Users[] Users { get; set; }
 
         [BindProperty]
         public Message[] Messages { get; set; }
 
         public void SendMessage()
         {
-            string ID = HttpContext.Session.GetString("AccountID");
-            Console.Write(MessageSubject != null && MessageContent != null && Recipient_ID != null);
+            string ID = HttpContext.Session.GetString("UserID");
             if (MessageSubject != null && MessageContent != null && Recipient_ID !=  null)
             {
                 Message m = new Message(MessageSubject,MessageContent,DateTime.Now,ID,Recipient_ID);
@@ -38,14 +37,14 @@ namespace DatabaseSystemIntegration.Pages.Interface
         public void OnPost() 
         {
             SendMessage();
-            Messages = ObjectConverter.ToMessages(DatabaseControls.GetMessages(HttpContext.Session.GetString("AccountID")));
-            Users = ObjectConverter.ToPersonalInfo(DatabaseControls.SelectNoFilter(14));
+            Messages = ObjectConverter.ToMessages(DatabaseControls.GetMessages(HttpContext.Session.GetString("UserID")));
+            Users = ObjectConverter.ToUsers(DatabaseControls.SelectNoFilter(19));
         }
         public IActionResult OnPostPopulateHandler()
         {
             ModelState.Clear();
-            Messages = ObjectConverter.ToMessages(DatabaseControls.GetMessages(HttpContext.Session.GetString("AccountID")));
-            Users = ObjectConverter.ToPersonalInfo(DatabaseControls.SelectNoFilter(14));
+            Messages = ObjectConverter.ToMessages(DatabaseControls.GetMessages(HttpContext.Session.GetString("UserID")));
+            Users = ObjectConverter.ToUsers(DatabaseControls.SelectNoFilter(19));
             MessageContent = "Sample message body";
             MessageSubject = "Sample message subject";
 
@@ -55,8 +54,8 @@ namespace DatabaseSystemIntegration.Pages.Interface
         public IActionResult OnPostClearHandler()
         {
             ModelState.Clear();
-            Messages = ObjectConverter.ToMessages(DatabaseControls.GetMessages(HttpContext.Session.GetString("AccountID")));
-            Users = ObjectConverter.ToPersonalInfo(DatabaseControls.SelectNoFilter(14));
+            Messages = ObjectConverter.ToMessages(DatabaseControls.GetMessages(HttpContext.Session.GetString("UserID")));
+            Users = ObjectConverter.ToUsers(DatabaseControls.SelectNoFilter(19));
 
             return Page();
         }
@@ -65,8 +64,8 @@ namespace DatabaseSystemIntegration.Pages.Interface
         {
             if (HttpContext.Session.GetInt32("LoggedIn") == 1)
             {
-                Messages = ObjectConverter.ToMessages(DatabaseControls.GetMessages(HttpContext.Session.GetString("AccountID")));
-                Users = ObjectConverter.ToPersonalInfo(DatabaseControls.SelectNoFilter(11));
+                Messages = ObjectConverter.ToMessages(DatabaseControls.GetMessages(HttpContext.Session.GetString("UserID")));
+                Users = ObjectConverter.ToUsers(DatabaseControls.SelectNoFilter(19));
                     return Page();
             }
             return RedirectToPage("/Index");

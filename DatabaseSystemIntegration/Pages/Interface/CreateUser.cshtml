@@ -3,70 +3,65 @@
 @{
     ViewData["Title"] = "Create User";
 }
-<div class="container">
-    <h1>@ViewData["Title"]</h1>
-    <form method="post">
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label" for="Name">Name</label>
-            <div class="col-sm-10">
-                <input asp-for="Name" class="form-control" />
-            </div>
+<div class="container mt-4">
+    <h1 class="text-center mb-4">@ViewData["Title"]</h1>
+
+    <form method="post" class="p-4 border rounded bg-light">
+        <!-- Name Input -->
+        <div class="mb-3">
+            <label class="form-label fw-bold" for="Name">Name</label>
+            <input asp-for="Name" class="form-control" />
         </div>
 
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label" for="AccountID">Account</label>
-            <div class="col-sm-10">
-                <select asp-for="AccountID" class="form-control">
-                    @foreach (var account in Model.Accounts)
-                    {
-                        <option value="@account.getInfoID()">@account.getUsername()</option>
-                    }
-                </select>
-            </div>
+        <!-- Account Selection -->
+        <div class="mb-3">
+            <label class="form-label fw-bold" for="AccountID">Account</label>
+            <select asp-for="AccountID" class="form-select">
+                @foreach (var account in Model.Accounts)
+                {
+                    <option value="@account.getInfoID()">@account.getUsername()</option>
+                }
+            </select>
         </div>
 
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Organization</label>
-            <div class="col-sm-10">
-                <select asp-for="PartnerID" class="form-control">
-                    @foreach (var partner in Model.Partners)
-                    {
-                        <option value="@partner.PartnerID">@partner.BusName</option>
-                    }
-                </select>
-            </div>
+        <!-- Organization Selection -->
+        <div class="mb-3">
+            <label class="form-label fw-bold">Organization</label>
+            <select asp-for="PartnerID" class="form-select">
+                @foreach (var partner in Model.Partners)
+                {
+                    <option value="@partner.PartnerID">@partner.BusName</option>
+                }
+            </select>
         </div>
 
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label" for="RoleID">User Role</label>
-            <div class="col-sm-10">
-                <select asp-for="RoleID" class="form-control" multiple>
-                    @foreach (var Role in Model.Roles)
-                    {
-                        <option value="@Role.RoleID">@Role.RoleName</option>
-                    }
-                </select>
-            </div>
+        <!-- User Role Selection -->
+        <div class="mb-3">
+            <label class="form-label fw-bold" for="RoleID">User Role</label>
+            <select asp-for="RoleID" class="form-select" multiple>
+                @foreach (var Role in Model.Roles)
+                {
+                    <option value="@Role.RoleID">@Role.RoleName</option>
+                }
+            </select>
         </div>
 
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label" for="UserTypeID">User Type</label>
-            <div class="col-sm-10">
-                <select asp-for="UserTypeID" class="form-control" multiple>
-                    @foreach (var type in Model.Types)
-                    {
-                        <option value="@type.UserTypeID">@type.UserTypeName</option>
-                    }
-                </select>
-            </div>
+        <!-- User Type Selection -->
+        <div class="mb-3">
+            <label class="form-label fw-bold" for="UserTypeID">User Type</label>
+            <select asp-for="UserTypeID" class="form-select" multiple>
+                @foreach (var type in Model.Types)
+                {
+                    <option value="@type.UserTypeID">@type.UserTypeName</option>
+                }
+            </select>
         </div>
 
-        <div class="form-group row">
-            <div class="col-sm-10 offset-sm-2">
-                <button type="submit" class="btn btn-primary" asp-page-handler="">Submit</button>
-                <button type="submit" class="btn btn-secondary" asp-page-handler="PopulateHandler">Populate</button>
-                <button type="submit" class="btn btn-danger" asp-page-handler="ClearHandler">Clear</button>
-            </div>
+        <!-- Buttons -->
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary me-2" asp-page-handler="">Submit</button>
+            <button type="submit" class="btn btn-secondary me-2" asp-page-handler="PopulateHandler">Populate</button>
+            <button type="submit" class="btn btn-danger" asp-page-handler="ClearHandler">Clear</button>
         </div>
     </form>
 </div>

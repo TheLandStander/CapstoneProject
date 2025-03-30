@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.ObjectPool;
-
+//AI WAS USED TO IMPROVE THE UI STYLE 
 namespace DatabaseSystemIntegration.Pages.Interface
 {
     public class CreateGrantModel : PageModel
@@ -22,9 +22,6 @@ namespace DatabaseSystemIntegration.Pages.Interface
         public DateOnly DueDate { get; set; }
 
         [BindProperty]
-        public string StatusID { get; set; }
-
-        [BindProperty]
         public string CategoryID { get; set; }
 
         [BindProperty]
@@ -34,15 +31,11 @@ namespace DatabaseSystemIntegration.Pages.Interface
         public Project[] Projects { get; set; }
 
         [BindProperty]
-        public GrantStatus[] Status { get; set; }
-
-        [BindProperty]
         public GrantCategory[] Category { get; set; }
 
         public void RefreshSelection()
         {
             Projects = ObjectConverter.ToProject(DatabaseControls.SelectNoFilter(12));
-            Status = ObjectConverter.ToGrantStatus(DatabaseControls.SelectNoFilter(6));
             Category = ObjectConverter.ToGrantCategory(DatabaseControls.SelectNoFilter(5));
             SubDate = DateOnly.FromDateTime(DateTime.Now);
             DueDate = DateOnly.FromDateTime(DateTime.Now);
@@ -51,9 +44,9 @@ namespace DatabaseSystemIntegration.Pages.Interface
         public void CheckAddGrant()
         {
             if (GrantName != null && Amount > 0 &&
-               DueDate > SubDate && StatusID != null && CategoryID != null && ProjectID != null)
+               DueDate > SubDate && CategoryID != null && ProjectID != null)
             {
-                Grant g = new Grant(GrantName, (decimal)Amount, SubDate, DueDate, StatusID, CategoryID, ProjectID);
+                Grant g = new Grant(GrantName, (decimal)Amount, SubDate, DueDate, DatabaseControls.GetGrantStatus("Pending").StatusID, CategoryID, ProjectID);
                 DatabaseControls.Insert(g);
             }
         }
@@ -76,7 +69,6 @@ namespace DatabaseSystemIntegration.Pages.Interface
             Amount = 1000;
             SubDate = new DateOnly(1999, 1, 1);
             DueDate = new DateOnly(1999, 3, 1);
-            StatusID = "123456";
             ProjectID = "123456";
             CategoryID = "123456";
             RefreshSelection();
@@ -91,10 +83,11 @@ namespace DatabaseSystemIntegration.Pages.Interface
             return Page();
         }
 
-        public void OnPost()
+        public IActionResult OnPost()
         {
             CheckAddGrant();
             RefreshSelection();
+            return RedirectToPage("Project-Dashboard");
         }
     }
 }

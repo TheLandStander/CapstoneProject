@@ -1,10 +1,7 @@
 ﻿@page
 @model DatabaseSystemIntegration.Pages.Interface.MessagesModel
 @{
-    //Noah Kurtz
-    //functionality to display message, create container to hold messages first
-    //then add each message in reverse order to cards/inner containers holding message info
-    //first message  in should be the oldest & go on the top
+  
     <form method="post">
 
         <div class="form-group">
@@ -18,7 +15,7 @@
                             <div class="card-body" style="width: 20rem;">
                             Time : @Model.Messages[i].Send_Date
                             <br/>
-                                Sender : @Model.Messages[i].Sender
+                                Sender : @Model.Messages[i].SendingUser.Name
                             <br />
                                 Subject : @Model.Messages[i].Message_Subject
                             <br />
@@ -34,7 +31,7 @@
             <select asp-for="Recipient_ID" class="form-control">
                 @foreach (var User in Model.Users)
                 {
-                    <option value="@User.getInfoID()">@User.getUsername()</option>
+                    <option value="@User.UserID">@User.Name</option>
                 }
             </select>
         </div>

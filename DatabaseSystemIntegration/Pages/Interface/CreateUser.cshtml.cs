@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.ObjectPool;
 using Microsoft.Identity.Client;
-
+//AI WAS USED TO IMPROVE THE UI STYLE 
 namespace DatabaseSystemIntegration.Pages.Interface
 {
     public class CreateUser : PageModel
@@ -47,7 +47,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
         {
             if (Name != null && UserTypeID != null && RoleID != null && AccountID != null && Name.Length != 0)
             {
-                Users U = new Users(Name, UserTypeID, DatabaseControls.GetUserStatus("Active").UserStatusID, AccountID);
+                Users U = new Users(Name, UserTypeID, DatabaseControls.GetUserStatus("Active").UserStatusID, AccountID, PartnerID);
                 UserRole ur = new UserRole(U.UserID, RoleID);
                 DatabaseControls.Insert(U);
                 DatabaseControls.Insert(ur);
@@ -56,10 +56,11 @@ namespace DatabaseSystemIntegration.Pages.Interface
         
         }
 
-        public void OnPost()
+        public IActionResult OnPost()
         {
             AddUser();
             RefreshSelection();
+            return RedirectToPage("Project-Dashboard");
         }
 
         public IActionResult OnPostPopulateHandler()

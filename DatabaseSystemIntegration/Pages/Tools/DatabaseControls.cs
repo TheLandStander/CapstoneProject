@@ -675,7 +675,7 @@ namespace DatabaseSystemIntegration.Pages.Tools
 
         public static void SendMessage(Classes.Message M)
         {
-            String sqlQuery = "INSERT INTO Message (Message_ID,Message_Subject,Content,Send_Date,Sender_ID,Receiver_ID) VALUES ('";
+            String sqlQuery = "INSERT INTO Messages (Message_ID,Subject,Content,Date,Sender_ID,Receiver_ID) VALUES ('";
             sqlQuery += M.Message_ID + "','";
             sqlQuery += M.Message_Subject+ "','";
             sqlQuery += M.Content + "','";

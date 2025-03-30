@@ -44,6 +44,7 @@ namespace DatabaseSystemIntegration.Pages.Classes
 
         public void SetProjectLeader(string LeaderID)
         {
+            ProjectLeadID = LeaderID;
             ProjectLeader = ObjectConverter.ToUsers(DatabaseControls.SelectFilter(19, 19, LeaderID))[0];
             DatabaseControls.SetProjectLead(this,ProjectLeader);
         }

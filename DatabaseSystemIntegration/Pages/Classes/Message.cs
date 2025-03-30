@@ -12,7 +12,6 @@ namespace DatabaseSystemIntegration.Pages.Classes
         public DateTime Send_Date { get; set; }
         public string Message_Subject { get; set; }
         public string Content { get; set; }
-        public string Sender { get; set; }
         public string Recipient { get; set; }
 
         public Users SendingUser { get; set; }

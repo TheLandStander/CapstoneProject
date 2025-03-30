@@ -2,49 +2,45 @@
 @model DatabaseSystemIntegration.Pages.Interface.SearchModel
 @{
 
-    <form method="post">
-        <h4 class="text-black" style="text-align: center;"><strong>Select Filter:</strong></h4>
-        <br />
-        <select style="width: 300px; height: 300px; text-align: center; margin: 0 auto;" asp-for="SelectedFilter" class="form-control">
-            @foreach (var v in Model.Filters)
-            {
-                <option value="@v" style="text-align: center; font-size: 24px;">@v</option>
-            }
-        </select>
-        <p class="text-black" style="text-align: left;"><strong>Select Grant Status to Filter:</strong></p>
-        <select style = "max-width:150px;" asp-for="StatusID" class="form-control">
-            @foreach (var v in Model.GrantStatus)
-            {
-                <option value="@v.GrantStatusName">@v.StatusID</option>
-            }
-        </select>
-        <br/>
-        <p class="text-black" style="text-align: left;"><strong>Select Due Date Range:</strong></p>
-        <input style="max-width:150px;" type="date" asp-for="Date1" class="form-control" />
-        <input style="max-width:150px;" type="date" asp-for="Date2" class="form-control" />
-        <p class="text-black" style="text-align: left;"><strong>Select Status to Filter:</strong></p>
+    <div class="container">
+        <h2>Generate Report</h2>
 
-        <select style = "max-width:150px;" asp-for="StatusID" class="form-control">
-            @foreach (var v in Model.GrantStatus)
-            {
-                <option value="@v.GrantStatusName">@v.StatusID</option>
-            }
-        </select>
+        <form method="post">
+            <div class="form-group" style="border: 1px solid #ddd; padding: 15px; margin-bottom: 20px;">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <label class="form-label" for="Date1">Start Date</label>
+                        <input asp-for="Date1" class="form-control" type="date" />
+                    </div>
+                    <div class="col-sm-5 offset-sm-2">
+                        <label class="form-label" for="Date2">End Date</label>
+                        <input asp-for="Date2" class="form-control" type="date" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row" style="margin-bottom: 20px;">
+                <label class="col-sm-2 col-form-label" for="StatusSelected">Status</label>
+                <div class="col-sm-4">
+                    <select asp-for="StatusSelected" class="form-control">
+                        <option value="">Select Status</option>
+                        @foreach (var status in Model.Status)
+                        {
+                            <option value="@status">@status</option>
+                        }
+                    </select>
+                </div>
+            </div>
 
-        <select style="max-width:150px;" asp-for="StatusID" class="form-control">
-            @foreach (var v in Model.ProjectStatus)
-            {
-                <option value="@v.ProjectStatusName">@v.ProjectStatusID</option>
-            }
-        </select>
+            <div class="form-group row">
+                <div class="col-sm-10 offset-sm-2">
+                    <button type="submit" class="btn btn-primary" asp-page-handler="FilterDueDate">Filter by Due-Date Range</button>
+                    <button type="submit" class="btn btn-secondary" asp-page-handler="FilterStatus">Filter by Status</button>
+                </div>
+            </div>
+        </form>
+    </div>
 
-        <select style="max-width:150px;" asp-for="StatusID" class="form-control">
-            <option value="Complete">Complete</option>
-            <option value="Incomplete">Incomplete</option>
-        </select>
 
-        <br>  <button type="submit" asp-page-handler="" class="btn btn-primary">Set Filter</button>  <br>
-    </form>
 
     <form method="post">
         @using Microsoft.AspNetCore.Mvc.Rendering
@@ -79,7 +75,13 @@
                             <td>@grant.Amount</td>
                             <td>@grant.SubmissionDate</td>
                             <td>@grant.DueDate</td>
-                            <td>@grant.AwardDate</td>
+                            @if (@grant.AwardDate != DateOnly.MinValue){
+                                <td>@grant.AwardDate</td>
+                            }
+                            else
+                            {
+                                <td> - </td>
+                            }
                             <td>@grant.Category.CategoryName</td>
                             @if (@grant.Status.GrantStatusName == "Accepted")
                             {
@@ -130,6 +132,10 @@
                             {
                                 <td>@Project.EndDate</td>
                             }
+                            else
+                            {
+                                <td> - </td> 
+                            }
                         </tr>
                     }
                 </tbody>
@@ -154,7 +160,7 @@
                     {
                         <tr>
                             <td>
-                                <button class="btn btn-link" asp-page-handler="SelectProject" asp-route-id="@Task.ProjectID">@Task.TaskName</button>
+                                <button class="btn btn-link" asp-page-handler="SelectTask" asp-route-id="@Task.TaskID">@Task.TaskName</button>
                             </td>
                             @if (@Task.Completed == true){
                                 <td>Complete</td>
@@ -170,6 +176,13 @@
                             {
                                 <td>@Task.EndDate</td>
                             }
+                            else
+                            {
+                                <td> - </td>
+                            }
+                            <td>
+                                <button class="btn btn-link" asp-page-handler="SelectProject" asp-route-id="@Task.ProjectID">@Task.TaskName</button>
+                            </td>
                         </tr>
                     }
                 </tbody>

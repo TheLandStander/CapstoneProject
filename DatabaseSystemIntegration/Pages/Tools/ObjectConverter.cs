@@ -136,10 +136,10 @@ namespace DatabaseSystemIntegration.Pages.Tools
                     data.GetValue(1).ToString(),
                     data.GetValue(2).ToString(),
                     data.GetValue(3).ToString(),
-                    data.GetValue(4).ToString()
+                    data.GetValue(4).ToString(),
+                    data.GetValue(5).ToString()
                 );
                 obj.UserID = data.GetValue(0).ToString();
-                obj.PartnerID = data.GetValue(5).ToString();
                 list.Add(obj);
             }
             data.DisposeAsync();
@@ -265,7 +265,7 @@ namespace DatabaseSystemIntegration.Pages.Tools
                     data.GetValue(7).ToString()
                 );
                 obj.TaskID = data.GetValue(0).ToString();
-                DateOnly.FromDateTime((DateTime)data.GetValue(5));
+                obj.EndDate = DateOnly.FromDateTime((DateTime)data.GetValue(5));
                 list.Add(obj);
             }
             data.DisposeAsync();
@@ -291,7 +291,7 @@ namespace DatabaseSystemIntegration.Pages.Tools
                     data.GetValue(7).ToString()
                 );
                 obj.ChildTaskID = data.GetValue(0).ToString();
-                DateOnly.FromDateTime((DateTime)data.GetValue(5));
+                obj.EndDate = DateOnly.FromDateTime((DateTime)data.GetValue(5));
                 list.Add(obj);
             }
             data.DisposeAsync();

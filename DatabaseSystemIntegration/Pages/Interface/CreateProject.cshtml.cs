@@ -3,7 +3,7 @@ using DatabaseSystemIntegration.Pages.Tools;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.VisualBasic;
-
+//AI WAS USED TO IMPROVE THE UI STYLE 
 namespace DatabaseSystemIntegration.Pages.Interface
 {
     public class CreateProject : PageModel
@@ -21,18 +21,11 @@ namespace DatabaseSystemIntegration.Pages.Interface
         public DateOnly DueDate { get; set; }
 
         [BindProperty]
-        public string StatusID { get; set; }
-
-        [BindProperty]
         public Users[] Users { get; set; }
-
-        [BindProperty]
-        public ProjectStatus[] ProjectStatuses { get; set; }
 
         public void RefreshSelection()
         {
             Users = ObjectConverter.ToUsers(DatabaseControls.SelectNoFilter(19));
-            ProjectStatuses = ObjectConverter.ToProjectStatus(DatabaseControls.SelectNoFilter(14));
             DueDate = DateOnly.FromDateTime(DateTime.Now);
             StartDate = DateOnly.FromDateTime(DateTime.Now);
         }
@@ -40,9 +33,9 @@ namespace DatabaseSystemIntegration.Pages.Interface
 
         private void CheckAndSubmitProject()
         {
-            if (Project_Name != null && Project_Description != null && StatusID != null && StartDate < DueDate)
+            if (Project_Name != null && Project_Description != null && StartDate < DueDate)
             {
-                Project P = new Project(Project_Name, Project_Description, StartDate, DueDate,StatusID);
+                Project P = new Project(Project_Name, Project_Description, StartDate, DueDate,DatabaseControls.GetProjectStatus("Ongoing").ProjectStatusID);
                 DatabaseControls.Insert(P);
             }
         }
@@ -79,12 +72,11 @@ namespace DatabaseSystemIntegration.Pages.Interface
         }
 
 
-        public void OnPost()
+        public IActionResult OnPost()
         {
-            Console.Write("Works");
             CheckAndSubmitProject();
             RefreshSelection();
-
+            return RedirectToPage("Project-Dashboard");
         }
     }
 }

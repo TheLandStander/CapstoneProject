@@ -31,7 +31,11 @@ namespace DatabaseSystemIntegration.Pages.Classes
 
         public void UpdateStatus(string StatusID)
         {
-            DatabaseControls.UpdateGrantStatus(GrantID, StatusID); 
+            DatabaseControls.UpdateGrantStatus(GrantID, StatusID);
+            if (StatusID == DatabaseControls.GetGrantStatus("Accepted").StatusID)
+            {
+                DatabaseControls.UpdateGrantAwardDate(GrantID, DateOnly.FromDateTime(DateTime.Now));
+            }
         }
 
 

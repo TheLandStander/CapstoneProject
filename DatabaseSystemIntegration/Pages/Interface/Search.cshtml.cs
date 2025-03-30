@@ -3,16 +3,13 @@ using DatabaseSystemIntegration.Pages.Tools;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.ObjectPool;
-
+//AI WAS USED TO IMPROVE THE UI STYLE 
 namespace DatabaseSystemIntegration.Pages.Interface
 {
     public class SearchModel : PageModel
     {
 
-        public string[] Filters { get; set; } = { "Grant", "Task", "Project"};
-
-       [BindProperty]
-       public string SelectedFilter { get; set; }
+        public string[] Status { get; set; } = { "Complete", "Incomplete", "Past-Due" };
 
         [BindProperty]
         public DateOnly Date1 { get; set; }
@@ -21,11 +18,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
         public DateOnly Date2 { get; set; }
 
         [BindProperty]
-        public string StatusID { get; set; }
-
-        public GrantStatus[] GrantStatus { get; set; }
-
-        public ProjectStatus[] ProjectStatus { get; set; }
+        public string StatusSelected { get; set; }
 
         public Grant[] Grants { get; set; }
 
@@ -36,15 +29,134 @@ namespace DatabaseSystemIntegration.Pages.Interface
 
         public void SetVars()
         {
-           Projects = ObjectConverter.ToProject(DatabaseControls.SelectNoFilter(12));
-           Grants = ObjectConverter.ToGrants(DatabaseControls.SelectNoFilter(7));
-           ProjectTasks = ObjectConverter.ToTask(DatabaseControls.SelectNoFilter(15));
-           GrantStatus = ObjectConverter.ToGrantStatus(DatabaseControls.SelectNoFilter(6));
-           ProjectStatus = ObjectConverter.ToProjectStatus(DatabaseControls.SelectNoFilter(14));
-
+           Status = new string[]{ "Complete", "Incomplete", "Past-Due" };
+           Date1 = DateOnly.FromDateTime(DateTime.Now);
+           Date2 = DateOnly.FromDateTime(DateTime.Now);
         }
 
-      
+        public void LoadObjects()
+        {
+            Projects = ObjectConverter.ToProject(DatabaseControls.SelectNoFilter(12));
+            Grants = ObjectConverter.ToGrants(DatabaseControls.SelectNoFilter(7));
+            ProjectTasks = ObjectConverter.ToTask(DatabaseControls.SelectNoFilter(15));
+        }
+
+        public void FilterByDue()
+        {
+            List<Grant> GHolder = new List<Grant>();
+            List<Project> PHolder = new List<Project>();
+            List<Tasks> THolder = new List<Tasks>();
+
+            foreach (Grant g in Grants)
+            {
+                if (g.DueDate <= DateOnly.FromDateTime(DateTime.Now) && g.AwardDate == DateOnly.MinValue)
+                {
+                    GHolder.Add(g);
+                }
+
+            }
+
+            foreach (Project p in Projects)
+            {
+                if (p.DueDate <= DateOnly.FromDateTime(DateTime.Now) && p.EndDate == DateOnly.MinValue)
+                {
+                    PHolder.Add(p);
+                }
+
+            }
+
+            foreach (Tasks t in ProjectTasks)
+            {
+                if (t.DueDate <= DateOnly.FromDateTime(DateTime.Now) && t.EndDate == DateOnly.MinValue)
+                {
+                    THolder.Add(t);
+                }
+
+            }
+
+            Grants = GHolder.ToArray();
+            Projects = PHolder.ToArray();
+            ProjectTasks = THolder.ToArray();
+        }
+
+        public void FilterByCompleted()
+        {
+            List<Grant> GHolder = new List<Grant>();
+            List<Project> PHolder = new List<Project>();
+            List<Tasks> THolder = new List<Tasks>();
+
+            foreach (Grant g in Grants)
+            {
+                if (g.AwardDate != DateOnly.MinValue)
+                {
+                    GHolder.Add(g);
+                }
+
+            }
+
+            foreach (Project p in Projects)
+            {
+                if (p.EndDate != DateOnly.MinValue)
+                {
+                    PHolder.Add(p);
+                }
+
+            }
+
+            foreach (Tasks t in ProjectTasks)
+            {
+                if (t.EndDate != DateOnly.MinValue)
+                {
+                    THolder.Add(t);
+                }
+
+            }
+
+            Grants = GHolder.ToArray();
+            Projects = PHolder.ToArray();
+            ProjectTasks = THolder.ToArray();
+        }
+
+        public void FilterByIncomplete()
+        {
+            List<Grant> GHolder = new List<Grant>();
+            List<Project> PHolder = new List<Project>();
+            List<Tasks> THolder = new List<Tasks>();
+
+            foreach (Grant g in Grants)
+            {
+                if (g.AwardDate == DateOnly.MinValue)
+                {
+                    GHolder.Add(g);
+                }
+
+            }
+
+            foreach (Project p in Projects)
+            {
+                if (p.EndDate == DateOnly.MinValue)
+                {
+                    PHolder.Add(p);
+                }
+
+            }
+
+            foreach (Tasks t in ProjectTasks)
+            {
+                if (t.EndDate == DateOnly.MinValue)
+                {
+                    THolder.Add(t);
+                }
+
+            }
+
+            Grants = GHolder.ToArray();
+            Projects = PHolder.ToArray();
+            ProjectTasks = THolder.ToArray();
+        }
+
+
+
         public void FilterGrantDueDate(DateOnly D1, DateOnly D2)
         {
            
@@ -90,53 +202,6 @@ namespace DatabaseSystemIntegration.Pages.Interface
             ProjectTasks = Holder.ToArray();
         }
 
-        public void FilterGrantStatus(string Status)
-        {
-
-            List<Grant> GHolder = new List<Grant>();
-            foreach (Grant g in Grants)
-            {
-                if (g.StatusID == Status)
-                {
-                    GHolder.Add(g);
-                }
-
-            }
-            Grants = GHolder.ToArray();
-
-        }
-
-        public void FilterProjectStatus(string Status)
-        {
-
-            List<Project> Holder = new List<Project>();
-            foreach (Project p in Projects)
-            {
-                if (p.ProjectStatusID == Status)
-                {
-                    Holder.Add(p);
-                }
-
-            }
-            Projects = Holder.ToArray();
-
-        }
-
-        public void FilterTaskStatus(string status)
-        {
-            List<Tasks> Holder = new List<Tasks>();
-            foreach (Tasks t in ProjectTasks)
-            {
-                if (t.Completed == true && status == "Complete" || t.Completed == false && status == "Incomplete")
-                {
-                    Holder.Add(t);
-                }
-
-            }
-           ProjectTasks = Holder.ToArray();
-
-        }
-
 
         public IActionResult OnGet()
         {
@@ -146,56 +211,39 @@ namespace DatabaseSystemIntegration.Pages.Interface
                 if (HttpContext.Session.GetString("UserType") == "Admin")
                 {
                     SetVars();
+                    LoadObjects();
                     return Page();
                 }
             }
             return RedirectToPage("/Index");
         }
 
-        public void Load()
+        public IActionResult OnPostFilterStatus()
         {
+            LoadObjects();
             SetVars();
-            if (SelectedFilter == "Grant")
+            if (StatusSelected == "Complete")
             {
-                if (Date1 < Date2)
-                {
-                    FilterGrantDueDate(Date1, Date2);
-                }
-                if (StatusID != null)
-                {
-                    FilterGrantStatus(StatusID);
-                }
+                FilterByCompleted();
             }
-
-            if (SelectedFilter == "Task")
+            if (StatusSelected == "Incomplete")
             {
-                if (Date1 < Date2)
-                {
-                    FilterTaskDueDate(Date1, Date2);
-                }
-                if (StatusID != null)
-                {
-                    FilterTaskStatus(StatusID);
-                }
+                FilterByIncomplete();
             }
-
-            if (SelectedFilter == "Project")
+            if (StatusSelected == "Past-Due")
             {
-                if (Date1 < Date2)
-                {
-                    FilterProjectDueDate(Date1, Date2);
-                }
-                if (StatusID != null)
-                {
-                    FilterProjectStatus(StatusID);
-                }
+                FilterByDue();
             }
+            return Page();
         }
 
-
-        public IActionResult OnPost()
+        public IActionResult OnPostFilterDueDate()
         {
-            Load();
+            LoadObjects();
+            FilterGrantDueDate(Date1, Date2);
+            FilterProjectDueDate(Date1, Date2);
+            FilterTaskDueDate(Date1, Date2);
+            SetVars();
             return Page();
         }
 

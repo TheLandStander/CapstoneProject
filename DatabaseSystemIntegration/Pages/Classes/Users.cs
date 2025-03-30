@@ -34,13 +34,14 @@ namespace DatabaseSystemIntegration.Pages.Classes
 
         }
 
-        public Users(string name, string userTypeID, string userStatusID, string infoID)
+        public Users(string name, string userTypeID, string userStatusID, string infoID, string partnerID)
         {
             UserID = DatabaseControls.MakeID();  // Set primary key
             Name = name;
             UserTypeID = userTypeID;
             UserStatusID = userStatusID;
             InfoID = infoID;
+            PartnerID = partnerID;
         }
     }
 
