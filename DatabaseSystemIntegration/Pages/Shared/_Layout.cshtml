@@ -12,22 +12,24 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #450084;">
             <div class="container-fluid">
-               
             </div>
             <div class="container-fluid">
               
                 @if (Context.Session.GetInt32("LoggedIn") == 1)
                 {
-                    <a class="navbar-brand ms-auto" asp-page="/index">Logout</a>
-                    <a class="navbar-brand" asp-page="Project-Dashboard">@Context.Session.GetString("UserName")</a>
+                    <div class="d-flex ms-auto gap-3">
+                        <a class="navbar-brand" style="color: #fff;" asp-page="/index">Logout</a>
+                        <a class="navbar-brand" style="color: #fff;" asp-page="Project-Dashboard">@Context.Session.GetString("UserName")</a>
+                    </div>
+
                 }
                 else
                 {
-                    <a class="navbar-brand" asp-page="/Interface/CreateAccount">Create Account</a>
+                    <a class="navbar-brand" style="color: #fff;" asp-page="/Interface/CreateAccount">Create Account</a>
                 }
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button"  data-bs-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 @if (Context.Session.GetInt32("LoggedIn") == 1)
@@ -35,7 +37,7 @@
                     <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
                         <ul class="navbar-nav">
                             <li class="nav-item dropdown">
-                                <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="btn btn-dark dropdown-toggle" style="background-color: #450084; color:#fff;" data-bs-toggle="dropdown" aria-expanded="false">
                                     Select a Workflow 
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-light">
