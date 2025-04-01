@@ -28,7 +28,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (HttpContext.Session.GetString("UserType") == "Admin")
+                    @if (HttpContext.Session.GetString("UserType") == "Admin" || HttpContext.Session.GetString("UserType") == "Project-Manager")
                     {
                         @foreach (var partner in Model.Partners)
                         {
@@ -56,7 +56,7 @@
                                 {
                                     <td class="text-primary">@partner.Status.Status_Flag</td>
                                 }
-                                
+
 
                                 <td>@partner.Address</td>
                                 <td>@partner.Phone</td>
@@ -85,7 +85,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if(HttpContext.Session.GetString("UserType") == "Admin")
+                    @if (HttpContext.Session.GetString("UserType") == "Admin" || HttpContext.Session.GetString("UserType") == "Project-Manager")
                         @foreach (var grant in Model.AllGrants)
                         {
                             <tr>
@@ -100,7 +100,7 @@
                                 }
                                 else
                                 {
-                                    <td>N/A</td>
+                                    <td> - </td>
                                 }
                                 <td>@grant.Category.CategoryName</td>
                                 @if (@grant.Status.GrantStatusName == "Accepted")
@@ -123,14 +123,22 @@
                     else {
                         @foreach (var Project in Model.AssignedProjects)
                         {
-                            @foreach(var grant in Project.GetProject().ProjectGrants){
+                            @foreach(var grant in Project.GetProject().GetGrants()){
                                 <tr>
                                     <td>
                                         <button class="btn btn-link" asp-page-handler="SelectGrant" asp-route-id="@grant.GrantID">@grant.GrantName</button>
                                     </td>
                                     <td>@grant.Amount</td>
                                     <td>@grant.SubmissionDate</td>
-                                    <td>@grant.AwardDate</td>
+                                    <td>@grant.DueDate</td>
+                                    @if (@grant.AwardDate != DateOnly.MinValue)
+                                    {
+                                        <td>@grant.AwardDate</td>
+                                    }
+                                    else
+                                    {
+                                        <td> - </td>
+                                    }
                                     <td>@grant.Category.CategoryName</td>
                                     @if (@grant.Status.GrantStatusName == "Accepted")
                                     {
@@ -168,7 +176,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if(HttpContext.Session.GetString("UserType") == "Admin"){
+                    @if (HttpContext.Session.GetString("UserType") == "Admin" || HttpContext.Session.GetString("UserType") == "Project-Manager")
+                    {
                         @foreach (var Project in Model.AllProjects)
                         {
                             <tr>
@@ -190,7 +199,7 @@
                                 @(Project.Status.ProjectStatusName == "Completed - Success" ? "text-success" :
                                   Project.Status.ProjectStatusName == "Completed - Failed" ? "text-danger" :
                                   Project.Status.ProjectStatusName == "Ongoing" ? "text-warning" : "")">
-                                  @Project.Status.ProjectStatusName
+                                    @Project.Status.ProjectStatusName
                                 </td>
                             </tr>
                         }
@@ -209,6 +218,10 @@
                                 @if (@Project.GetProject().EndDate > DateOnly.MinValue)
                                 {
                                     <td>@Project.GetProject().EndDate</td>
+                                }
+                                else
+                                {
+                                    <td> - </td>
                                 }
                                 <td>@Project.GetProject().Status.ProjectStatusName</td>
                             </tr>

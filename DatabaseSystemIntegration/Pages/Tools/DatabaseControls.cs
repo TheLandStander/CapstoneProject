@@ -728,6 +728,7 @@ namespace DatabaseSystemIntegration.Pages.Tools
             cmdLogin.CommandText = "sp_Lab3Login";
             cmdLogin.Connection.Open();
             int rowCount = (int)cmdLogin.ExecuteScalar();
+            cmdLogin.Connection.Close();
             return rowCount;
         }
 
@@ -746,8 +747,8 @@ namespace DatabaseSystemIntegration.Pages.Tools
             cmdlogin.Parameters.AddWithValue("@Password", PasswordHash.HashPassword(Password));
 
             cmdlogin.Connection.Open();
-
             cmdlogin.ExecuteNonQuery();
+            cmdlogin.Connection.Close();
 
         }
 
@@ -766,7 +767,7 @@ namespace DatabaseSystemIntegration.Pages.Tools
 
             cmdlogin.Connection.Open();
 
-            SqlDataReader hashreader = cmdlogin.ExecuteReader();
+            SqlDataReader hashreader = cmdlogin.ExecuteReader(CommandBehavior.CloseConnection);
             if (hashreader.Read())
             {
                 string correcthash = hashreader["Password"].ToString();

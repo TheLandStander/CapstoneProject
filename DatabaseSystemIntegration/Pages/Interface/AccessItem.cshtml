@@ -19,6 +19,9 @@
                 <p class="mb-2"><strong>Due Date:</strong> @Model.project.DueDate</p>
                 <p class="mb-2"><strong>End Date:</strong> @(Model.project.EndDate != DateOnly.MinValue ? Model.project.EndDate.ToString() : "-")</p>
 
+                @if (HttpContext.Session.GetString("UserType") == "Admin" || HttpContext.Session.GetString("UserType") == "Project-Manager"
+                 || Model.project.ProjectLeadID == HttpContext.Session.GetString("UserID"))
+                {
                 <p class="mb-2"><strong>Update Status:</strong></p>
                 <select asp-for="ProjectStatusID" class="form-control">
                     @foreach (var status in Model.ProjectStatus)
@@ -27,6 +30,7 @@
                     }
                 </select>
                 <button type="submit" asp-page-handler="UpdateProject" class="btn btn-primary mt-2">Update Project</button>
+                }
             </div>
 
             <div class="border rounded p-3 mt-4 bg-white mx-auto" style="max-width: 1000px; overflow-x: auto;">
@@ -54,8 +58,9 @@
                         <span class="text-muted">No Employees Assigned</span>
                     }
                 </div>
-
-                <div class="mt-3">
+            <div class="mt-3">
+                    @if (HttpContext.Session.GetString("UserType") == "Project-Manager" || HttpContext.Session.GetString("UserType") == "Admin")
+                    {
                     <p class="mb-2"><strong>Add Member To Project:</strong></p>
                     <div class="form-group d-flex align-items-center">
                         <label for="User_ID" class="mr-2">Select Member:</label>
@@ -79,10 +84,12 @@
                         </select>
                         <button type="submit" asp-page-handler="UpdateProjectLead" class="btn btn-primary">Add</button>
                     </div>
+                    }
                 </div>
+                
             </div>
-
-            <div class="border rounded p-4 mt-5 bg-white mx-auto" style="max-width: 1200px;">
+            
+            <div class="border rounded p-4 mt-4 bg-white mx-auto" style="max-width: 1200px;">
                 <h3 class="text-center mb-3">Project Tasks</h3>
                 <div class="table-responsive" style="max-height: 400px; overflow: auto;">
                     <table class="table table-bordered table-striped">
@@ -97,7 +104,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var task in Model.project.ProjectTasks)
+                            @foreach (var task in Model.project.GetTasks())
                             {
                                 <tr>
                                     <td>
@@ -135,6 +142,36 @@
                     </div>
                 }
             </div>
+
+
+            <div class="border rounded p-4 mt-4 bg-white mx-auto" style="max-width: 1200px;">
+                <h3 class="text-center mb-3">Project Notes</h3>
+                <div class="table-responsive" style="max-height: 800px; overflow: auto;">
+                    <table class="table table-bordered table-striped">
+                        <thead class="thead-light">
+                            <tr>
+                                <th style="white-space: nowrap;">Note</th>
+                                <th style="white-space: nowrap;">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var Note in Model.project.GetNotes())
+                            {
+                                <tr>
+                                    <td style="white-space: normal; word-wrap: break-word; Max-width: 400px;">@Note.Notes</td>
+                                    <td>@Note.Date</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            <div class="text-center mt-3">
+                <p class="mb-3" style="font-size: 1.5rem;"><strong>Add Note:</strong></p>
+                <label class="form-label" style="font-size: 1.2rem;">Add Project Note</label>
+                <textarea asp-for="Note" class="form-control mx-auto mt-3" style="max-width: 600px; font-size: 1.2rem;" placeholder="Enter Description" rows="4"></textarea>
+                <button type="submit" asp-page-handler="AddNote" class="btn btn-primary mt-4" style="font-size: 1.2rem; padding: 10px 20px;">Add Note</button>
+            </div>
+          </div>
 
         }
 
@@ -218,6 +255,7 @@
                 <p class="mb-2"><strong>Phone:</strong> @Model.partner.Phone</p>
                 <p class="mb-2"><strong>Email:</strong> @Model.partner.Email</p>
 
+                <div style="max-height: 600px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; width: 80%; margin: 0 auto; text-align: center;">
                 <p class="mb-2"><strong>Associated Projects:</strong></p>
                 <ul class="list-unstyled">
                     @foreach (var project in Model.partner.GetAssociatedProjects())
@@ -227,6 +265,7 @@
                         </li>
                     }
                 </ul>
+                </div>
                 <p class="mb-2 text-center"><strong>Meeting Minutes:</strong></p>
                 <div style="max-height: 600px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; width: 80%; margin: 0 auto; text-align: center;">
                     <ul class="list-unstyled" style="padding-left: 0; margin: 0; list-style-position: inside;">
@@ -284,12 +323,12 @@
                             @if (Model.ParentTask.Completed == true)
                             {
                                 <button type="submit" asp-page-handler="UpdateTask" class="btn btn-primary btn-sm me-2" disabled>Mark As Completed</button>
-                                <button type="submit" asp-page-handler="AssignTask" class="btn btn-primary btn-sm" disabled>Take Task</button>
+                                <button type="submit" asp-page-handler="AssignTask" class="btn btn-primary btn-sm" disabled>Join Task</button>
                             }
                             else
                             {
                                 <button type="submit" asp-page-handler="UpdateTask" class="btn btn-primary btn-sm me-2">Mark As Completed</button>
-                                <button type="submit" asp-page-handler="AssignTask" class="btn btn-primary btn-sm">Take Task</button>
+                                <button type="submit" asp-page-handler="AssignTask" class="btn btn-primary btn-sm">Join Task</button>
                             }
 
                         </div>

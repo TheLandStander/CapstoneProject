@@ -13,8 +13,6 @@ namespace DatabaseSystemIntegration.Pages.Classes
         public DateOnly DueDate { get; set; }
         public string ProjectLeadID { get; set; }
         public string ProjectStatusID { get; set; }
-        public Grant[] ProjectGrants {get;set;}
-        public Tasks[] ProjectTasks { get; set; }
         public Users ProjectLeader { get; set; }
 
         public ProjectStatus Status { get; set; }
@@ -35,6 +33,16 @@ namespace DatabaseSystemIntegration.Pages.Classes
         public ProjectNotes[] GetNotes()
         { 
             return ObjectConverter.ToProjectNotes(DatabaseControls.SelectFilter(13, 12, ProjectID));
+        }
+
+        public Tasks[] GetTasks()
+        {
+            return ObjectConverter.ToTask(DatabaseControls.SelectFilter(15, 12, ProjectID));
+        }
+
+        public Grant[] GetGrants()
+        {
+          return ObjectConverter.ToGrants(DatabaseControls.SelectFilter(7, 12, ProjectID));
         }
 
         public Users GetProjectLead()
@@ -62,8 +70,8 @@ namespace DatabaseSystemIntegration.Pages.Classes
 
         public void AssignProject(string UserID)
         {
-            AssignedProject ap = new AssignedProject(UserID, ProjectID);
             AssignedProject[] All = ObjectConverter.ToAssignedProject(DatabaseControls.SelectNoFilter(0));
+            AssignedProject ap = new AssignedProject(UserID, ProjectID);
             if (DatabaseControls.CheckDuplicate(ap) == false)
             {
                 DatabaseControls.Insert(ap);
@@ -85,8 +93,6 @@ namespace DatabaseSystemIntegration.Pages.Classes
         public void SetVars()
         {
             Status = ObjectConverter.ToProjectStatus(DatabaseControls.SelectFilter(14,14, ProjectStatusID))[0];
-            ProjectGrants = ObjectConverter.ToGrants(DatabaseControls.SelectFilter(7, 12, ProjectID));
-            ProjectTasks = ObjectConverter.ToTask(DatabaseControls.SelectFilter(15, 12, ProjectID));
         }
 
         public Project(string projectName, string description, DateOnly startDate,DateOnly dueDate, string projectStatusID)

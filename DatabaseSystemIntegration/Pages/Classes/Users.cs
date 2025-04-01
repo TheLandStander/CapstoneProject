@@ -19,11 +19,8 @@ namespace DatabaseSystemIntegration.Pages.Classes
 
         public void SetVars()
         {
-            if (DatabaseControls.SelectFilter(16, 19, UserID).HasRows)
-            {
-                UserRole = ObjectConverter.ToUserRole(DatabaseControls.SelectFilter(16, 19, UserID))[0];
-            }
 
+            UserRole = ObjectConverter.ToUserRole(DatabaseControls.SelectFilter(16, 19, UserID))[0];
             status = ObjectConverter.ToUserStatus(DatabaseControls.SelectFilter(17, 17, UserStatusID))[0];
             type = ObjectConverter.ToUserType(DatabaseControls.SelectFilter(18, 18, UserTypeID))[0];
         }

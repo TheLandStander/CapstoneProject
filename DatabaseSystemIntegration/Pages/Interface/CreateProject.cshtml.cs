@@ -44,7 +44,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
         {
             if (HttpContext.Session.GetInt32("LoggedIn") == 1)
             {
-                if (HttpContext.Session.GetString("UserType") == "Admin")
+                if (HttpContext.Session.GetString("UserType") == "Admin" || HttpContext.Session.GetString("UserType") == "Project-Manager")
                 {
                     RefreshSelection();
                     return Page();

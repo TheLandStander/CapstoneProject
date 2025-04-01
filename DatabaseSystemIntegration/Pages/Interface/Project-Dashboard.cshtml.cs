@@ -45,8 +45,6 @@ namespace DatabaseSystemIntegration.Pages.Interface
             AllGrants = ObjectConverter.ToGrants(DatabaseControls.SelectNoFilter(7));
         }
 
-
-
         public IActionResult OnGet()
         {
             if (HttpContext.Session.GetInt32("LoggedIn") == 1)
@@ -54,11 +52,14 @@ namespace DatabaseSystemIntegration.Pages.Interface
                 User = ObjectConverter.ToUsers(DatabaseControls.SelectFilter(19, 19, HttpContext.Session.GetString("UserID")))[0];
                 UserRoles = User.UserRole.role;
                 if(UserRoles != null) {
-                        if (UserRoles.RoleName == "Admin")
-                        {
-                            LoadAdmin();
-                            HttpContext.Session.SetString("UserType", "Admin");
-                        }
+                    if (UserRoles.RoleName == "Admin" || HttpContext.Session.GetString("UserType") == "Project-Manager")
+                    {
+                        LoadAdmin();
+                    }
+                    else
+                    {
+                        LoadGenericUser();
+                    }
                 }
                 else
                 {
