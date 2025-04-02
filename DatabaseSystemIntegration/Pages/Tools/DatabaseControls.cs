@@ -1,6 +1,7 @@
 ﻿using DatabaseSystemIntegration.Pages.Classes;
 using Microsoft.Data.SqlClient;
 using System.Data;
+using Microsoft.AspNetCore.Http;
 
 // by Noah Kurtz, Joel Abbott, Nic Jordan, Andrew, Declan 
 
@@ -357,12 +358,11 @@ namespace DatabaseSystemIntegration.Pages.Tools
 
         public static void Insert(PersonalInfo pi)
         {
-            String sqlQuery = "INSERT INTO PersonalInfo(Info_ID, Primary_Contact, Secondary_Contact, User_Name, Password) VALUES ('";
+            String sqlQuery = "INSERT INTO PersonalInfo(Info_ID, Primary_Contact, Secondary_Contact, User_Name) VALUES ('";
             sqlQuery += pi.getInfoID() + "','";
             sqlQuery += pi.GetPrimaryContact() + "','";
             sqlQuery += pi.GetSecondaryContact() + "','";
             sqlQuery += pi.getUsername() + "','";
-            sqlQuery += pi.getPassword();
             sqlQuery += "');";
 
             Execute(sqlQuery);
@@ -621,26 +621,13 @@ namespace DatabaseSystemIntegration.Pages.Tools
       
         public static void CreateAccount(PersonalInfo P)
         {
-            String sqlQuery = "INSERT INTO PersonalInfo(Info_ID,Primary_Contact,Secondary_Contact,User_Name,Password) VALUES ('";
+            String sqlQuery = "INSERT INTO PersonalInfo(Info_ID,Primary_Contact,Secondary_Contact,User_Name) VALUES ('";
             sqlQuery += P.getInfoID() + "','";
             sqlQuery += P.GetPrimaryContact() + "','";
             sqlQuery += P.GetSecondaryContact() + "','";
-            sqlQuery += P.getUsername() + "','";
-            sqlQuery += P.getPassword();
+            sqlQuery += P.getUsername();
             sqlQuery += "');";
-
-            SqlCommand cmd = new SqlCommand();
-            SqlConnection Database = new SqlConnection(ConnectionString);
-            cmd.Connection = Database;
-            cmd.CommandText = sqlQuery;
-            if (cmd.Connection.State != ConnectionState.Open)
-            {
-                cmd.Connection.Open();
-            }
-
-            cmd.ExecuteNonQuery();
-            cmd.Dispose();
-            cmd.Connection.Close();
+            Execute(sqlQuery); 
 
         }
 
@@ -720,22 +707,22 @@ namespace DatabaseSystemIntegration.Pages.Tools
             string AccountQuery =
             "SELECT COUNT(*) FROM PersonalInfo where User_Name = @User_Name and Password = @Password";
             SqlCommand cmdLogin = new SqlCommand();
-            cmdLogin.Connection = new SqlConnection(ConnectionString);
+            cmdLogin.Connection = new SqlConnection(AuthConnString);
             cmdLogin.CommandText = AccountQuery;
             cmdLogin.CommandType = CommandType.StoredProcedure;
             cmdLogin.Parameters.AddWithValue("@User_Name", Username);
             cmdLogin.Parameters.AddWithValue("@Password", Password);
-            cmdLogin.CommandText = "sp_Lab3Login";
+            cmdLogin.CommandText = "dbo.sp_Login";
             cmdLogin.Connection.Open();
             int rowCount = (int)cmdLogin.ExecuteScalar();
             cmdLogin.Connection.Close();
             return rowCount;
         }
 
-        public static void CreateHashedUser(string Username, string Password)
+        public static void CreateHashedUser(string ID, string Username, string Password)
         {
             string loginquery =
-                "INSERT INTO HashedCredentials (Username,Password) VALUES (@Username, @Password)";
+                "INSERT INTO HashedCredentials (CredentialID,Username,Password) VALUES (@CredentialID,@Username, @Password)";
 
             SqlCommand cmdlogin = new SqlCommand();
             SqlConnection Database = new SqlConnection(ConnectionString);
@@ -743,6 +730,7 @@ namespace DatabaseSystemIntegration.Pages.Tools
             cmdlogin.Connection.ConnectionString = AuthConnString;
 
             cmdlogin.CommandText = loginquery;
+            cmdlogin.Parameters.AddWithValue("@CredentialID", ID);
             cmdlogin.Parameters.AddWithValue("@Username", Username);
             cmdlogin.Parameters.AddWithValue("@Password", PasswordHash.HashPassword(Password));
 
@@ -758,9 +746,8 @@ namespace DatabaseSystemIntegration.Pages.Tools
                 "SELECT Password FROM HashedCredentials WHERE Username = @Username";
 
             SqlCommand cmdlogin = new SqlCommand();
-            SqlConnection Database = new SqlConnection(ConnectionString);
+            SqlConnection Database = new SqlConnection(AuthConnString);
             cmdlogin.Connection = Database;
-            cmdlogin.Connection.ConnectionString = AuthConnString;
 
             cmdlogin.CommandText = loginquery;
             cmdlogin.Parameters.AddWithValue("@Username", Username);
@@ -768,6 +755,7 @@ namespace DatabaseSystemIntegration.Pages.Tools
             cmdlogin.Connection.Open();
 
             SqlDataReader hashreader = cmdlogin.ExecuteReader(CommandBehavior.CloseConnection);
+
             if (hashreader.Read())
             {
                 string correcthash = hashreader["Password"].ToString();
@@ -778,6 +766,34 @@ namespace DatabaseSystemIntegration.Pages.Tools
                 }
             }
             return false;
+        }
+
+        public static string GetHashedAccount(string Username, string Password)
+        {
+            string loginquery =
+                "SELECT* FROM HashedCredentials WHERE Username = @Username";
+
+            SqlCommand cmdlogin = new SqlCommand();
+            SqlConnection Database = new SqlConnection(AuthConnString);
+            cmdlogin.Connection = Database;
+
+            cmdlogin.CommandText = loginquery;
+            cmdlogin.Parameters.AddWithValue("@Username", Username);
+
+            cmdlogin.Connection.Open();
+
+            SqlDataReader hashreader = cmdlogin.ExecuteReader(CommandBehavior.CloseConnection);
+
+            if (hashreader.Read())
+            {
+                string correcthash = hashreader["Password"].ToString();
+
+                if (PasswordHash.ValidatePassword(Password, correcthash))
+                {
+                    return hashreader.GetValue(0).ToString();
+                }
+            }
+            return "";
         }
 
     }

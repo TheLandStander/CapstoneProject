@@ -9,7 +9,6 @@ namespace DatabaseSystemIntegration.Pages.Classes
         private string PrimaryContact { get; set; }
         private string SecondaryContact { get; set; }
         private string UserName { get; set; }
-        private string Password { get; set; }
 
         public string getUsername()
         {
@@ -21,12 +20,6 @@ namespace DatabaseSystemIntegration.Pages.Classes
         {
 
             return Info_ID;
-        }
-
-        public string getPassword()
-        {
-
-            return this.Password;
         }
 
         public string GetPrimaryContact()
@@ -53,11 +46,6 @@ namespace DatabaseSystemIntegration.Pages.Classes
             this.SecondaryContact = contact;
         }
 
-        public void setPassword(string password)
-        {
-
-            Password = password;
-        }
 
         //Allows database records to be read & sync IDs upon creation 
         public void setInfo_ID(string InfoID)
@@ -65,14 +53,13 @@ namespace DatabaseSystemIntegration.Pages.Classes
             Info_ID = InfoID;
         }
 
-        public PersonalInfo(string PrimaryCont, string SecondaryCont, string User, string Pass)
+        public PersonalInfo(string PrimaryCont, string SecondaryCont, string User)
         {
             //set primary key & attributes
             Info_ID = DatabaseControls.MakeID();
             PrimaryContact = PrimaryCont;
             SecondaryContact = SecondaryCont;
             UserName = User;
-            Password = Pass;
         }
     }
 }

@@ -3,8 +3,9 @@
 @{
     //Noah Kurtz, **WORKED INDIVIDUALLY**
     //loop through each string array and set the column headers to array values
-
-    <form method="post">
+    @if (HttpContext.Session.GetInt32("LoggedIn") == 1)
+    {
+        <form method="post">
         @using Microsoft.AspNetCore.Mvc.Rendering
 
         <style>
@@ -13,7 +14,6 @@
             max-width: 100%;
             }
         </style>
-
         <h2 class="text-center mt-5 mb-4">Organizations</h2>
         <div class="table-container">
             <table class="table table-bordered table-striped">
@@ -223,7 +223,12 @@
                                 {
                                     <td> - </td>
                                 }
-                                <td>@Project.GetProject().Status.ProjectStatusName</td>
+                                <td class="
+                                @(Project.GetProject().Status.ProjectStatusName == "Completed - Success" ? "text-success" :
+                                  Project.GetProject().Status.ProjectStatusName == "Completed - Failed" ? "text-danger" :
+                                  Project.GetProject().Status.ProjectStatusName == "Ongoing" ? "text-warning" : "")">
+                                    @Project.GetProject().Status.ProjectStatusName
+                                </td>
                             </tr>
                         }
                     }
@@ -231,4 +236,9 @@
             </table>
         </div>
     </form>
+    }
+    else
+    {
+        <h1 class="text-center mt-5 mb-4">Please wait for an Admin to assign you to a role </h1>
+    }
 }

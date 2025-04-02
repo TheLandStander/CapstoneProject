@@ -83,8 +83,7 @@ namespace DatabaseSystemIntegration.Pages.Tools
                 PersonalInfo obj = new PersonalInfo(
                     data.GetValue(1).ToString(),
                     data.GetValue(2).ToString(),
-                    data.GetValue(3).ToString(),
-                    data.GetValue(4).ToString()
+                    data.GetValue(3).ToString()
                 );
                 obj.setInfo_ID(data.GetValue(0).ToString());
                 list.Add(obj);

@@ -50,9 +50,9 @@ namespace DatabaseSystemIntegration.Pages.Interface
             if (HttpContext.Session.GetInt32("LoggedIn") == 1)
             {
                 User = ObjectConverter.ToUsers(DatabaseControls.SelectFilter(19, 19, HttpContext.Session.GetString("UserID")))[0];
-                UserRoles = User.UserRole.role;
-                if(UserRoles != null) {
-                    if (UserRoles.RoleName == "Admin" || HttpContext.Session.GetString("UserType") == "Project-Manager")
+                if (HttpContext.Session.GetInt32("LoggedIn") == 1)
+                {
+                    if (HttpContext.Session.GetString("UserType") == "Admin" || HttpContext.Session.GetString("UserType") == "Project-Manager")
                     {
                         LoadAdmin();
                     }
@@ -65,11 +65,9 @@ namespace DatabaseSystemIntegration.Pages.Interface
                 {
                     HttpContext.Session.SetString("UserType", "Guest");
                 }
-                    
-
-                return Page();
             }
-            return RedirectToPage("Index");
+
+            return Page();
         }
 
         public IActionResult OnPostSelectPartner(string ID)

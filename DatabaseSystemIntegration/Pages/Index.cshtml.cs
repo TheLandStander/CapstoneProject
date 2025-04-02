@@ -24,22 +24,25 @@ namespace DatabaseSystemIntegration.Pages
 
         public IActionResult OnPost()
         {
-            if (DatabaseControls.SecureLogIn(username, password) == 1)
+            /*If there is an account with the provided credentials, go into the personal info table and set the account ID
+            Passwords were removed from the personalinfo table, and are now stored in the HashedCredentials table
+            when an account is created, a personal inffo recorded is created first, then a credential record that references the personal infoID
+            */
+            if (DatabaseControls.HashedParameterLogin(username, password) == true)
             {
-                CheckLogin(DatabaseControls.LogIn(username, password));
-                DatabaseControls.HashedParameterLogin(username, password);
-            }
-
-            if (HttpContext.Session.GetInt32("LoggedIn") == 1)
-            {
-                //checks for a valid login
+                HttpContext.Session.SetString("AccountID", DatabaseControls.GetHashedAccount(username, password));
                 string ID = HttpContext.Session.GetString("AccountID");
-                User = ObjectConverter.ToUsers(DatabaseControls.SelectFilter(19, 11, ID))[0];
-                HttpContext.Session.SetString("UserID",User.UserID);
-                HttpContext.Session.SetString("UserName", User.Name);
-                HttpContext.Session.SetString("UserType", User.type.UserTypeName);
+                if (DatabaseControls.SelectFilter(19, 11, ID).HasRows)
+                {
+                    HttpContext.Session.SetInt32("LoggedIn", 1);
+                    User = ObjectConverter.ToUsers(DatabaseControls.SelectFilter(19, 11, ID))[0];
+                    HttpContext.Session.SetString("UserID", User.UserID);
+                    HttpContext.Session.SetString("UserName", User.Name);
+                    HttpContext.Session.SetString("UserType", User.type.UserTypeName);
+                }
                 return RedirectToPage("Interface/Project-Dashboard");
             }
+
             else
             {
                 ViewData["ErrorMessage"] = "Invalid username or password.";
@@ -48,24 +51,6 @@ namespace DatabaseSystemIntegration.Pages
 
 
         }
-
-
-        private bool CheckLogin(SqlDataReader results)
-        {
-
-            if (results.HasRows)
-            {
-                results.Read(); //move to the first (and only) row, get the info_id from the first column
-                HttpContext.Session.SetInt32("LoggedIn", 1);
-                HttpContext.Session.SetString("AccountID", results.GetValue(0).ToString());
-                return true;
-            }
-            else
-            {
-                HttpContext.Session.SetInt32("LoggedIn", 0);
-                return false;
-            }
-        }
-
+        
     }
 }

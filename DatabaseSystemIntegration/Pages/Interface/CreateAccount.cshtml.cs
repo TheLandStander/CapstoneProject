@@ -41,8 +41,9 @@ namespace DatabaseSystemIntegration.Pages.Interface
         {
             if (Username != null && Password != null && Email != null && PhoneNumber != null)
             {
-                PersonalInfo PI = new PersonalInfo(Email, PhoneNumber, Username, Password);
+                PersonalInfo PI = new PersonalInfo(Email, PhoneNumber, Username);
                 DatabaseControls.CreateAccount(PI);
+                DatabaseControls.CreateHashedUser(PI.getInfoID(),Username, Password);
             }
         }
 
@@ -55,7 +56,6 @@ namespace DatabaseSystemIntegration.Pages.Interface
         public IActionResult OnPost()
         {
             CreateAccount();
-            DatabaseControls.CreateHashedUser(Username, Password);
             HttpContext.Session.SetString("UserType", "");
             return RedirectToPage("/Index");
         }
