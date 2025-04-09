@@ -45,8 +45,24 @@ namespace DatabaseSystemIntegration.Pages.Interface
             AllGrants = ObjectConverter.ToGrants(DatabaseControls.SelectNoFilter(7));
         }
 
+
+
+
+        public IActionResult OnPost()
+        {
+            if (HttpContext.Session.GetString("UserType") == "Admin" || HttpContext.Session.GetString("UserType") == "Project-Manager")
+            {
+                LoadAdmin();
+            }
+            else
+            {
+                LoadGenericUser();
+            }
+            return Page();
+        }
         public IActionResult OnGet()
         {
+
             if (HttpContext.Session.GetInt32("LoggedIn") == 1)
             {
                 User = ObjectConverter.ToUsers(DatabaseControls.SelectFilter(19, 19, HttpContext.Session.GetString("UserID")))[0];
@@ -69,6 +85,37 @@ namespace DatabaseSystemIntegration.Pages.Interface
 
             return Page();
         }
+
+        public IActionResult OnPostCreatePartner()
+        {
+
+            return RedirectToPage("CreatePartner");
+        }
+
+        public IActionResult OnPostCreateProject()
+        {
+
+            return RedirectToPage("CreateProject");
+        }
+
+        public IActionResult OnPostCreateGrant()
+        {
+
+            return RedirectToPage("CreateGrant");
+        }
+
+        public IActionResult OnPostCreateUser()
+        {
+
+            return RedirectToPage("CreateUser");
+        }
+
+        public IActionResult OnPostGenerateReport()
+        {
+
+            return RedirectToPage("Search");
+        }
+
 
         public IActionResult OnPostSelectPartner(string ID)
         {
@@ -95,7 +142,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
 
         public IActionResult OnPostSelectTask(string ID)
         {
-            HttpContext.Session.SetString("ItemType", "ProjectNote");
+            HttpContext.Session.SetString("ItemType", "Task");
             HttpContext.Session.SetString("ItemID", ID);
             return RedirectToPage("AccessItem");
         }

@@ -5,8 +5,16 @@
       "PackagePath": "staticwebassets\\DatabaseSystemIntegration.ga21sm7f7g.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\Icon.jpg",
+      "PackagePath": "staticwebassets\\Icon.jpg"
+    },
+    {
       "Id": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\css\\styles.css",
+      "PackagePath": "staticwebassets\\css\\styles.css"
     },
     {
       "Id": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\favicon.ico",
@@ -195,6 +203,10 @@
     {
       "Id": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\lib\\bootstrap\\dist\\js\\scripts.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\scripts.js"
     },
     {
       "Id": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",

@@ -1,19 +1,173 @@
 ﻿@page
 @model DatabaseSystemIntegration.Pages.Interface.Project_DashboardModel
-@{
-    //Noah Kurtz, **WORKED INDIVIDUALLY**
-    //loop through each string array and set the column headers to array values
+@{}
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Worker Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+
+        .table-container {
+        margin: 20px auto;
+        max-width: 85%;
+        }
+
+
+        .table {
+        width: 85%;
+        border: 2px solid #450084;
+        border-collapse: collapse;
+        }
+
+
+        .table th {
+        background-color: #450084;
+        color: white;
+        padding: 0.75rem;
+        text-align: center;
+        }
+
+
+        .table td {
+        border: 1px solid #450084;
+        padding: 0.75rem;
+        text-align: center;
+        }
+
+
+        .table tr:hover {
+        background-color: #f1f1f1;
+        }
+
+
+        .sidebar i {
+        color: #fff;
+        margin-bottom: 2rem;
+        font-size: 1.5rem;
+        cursor: pointer;
+        }
+
+        .main-content {
+        margin-left: 80px;
+        padding: 2rem;
+        }
+
+        .clickable-box {
+        background-color: #bca2d8;
+        border-radius: 16px;
+        padding: 1rem;
+        color: #000;
+        margin-bottom: 2rem;
+        text-decoration: none;
+        display: block;
+        transition: transform 0.2s ease;
+        }
+
+        .clickable-box:hover {
+        transform: scale(1.01);
+        background-color: #ad91cf;
+        }
+
+        .clickable-box table {
+        width: 100%;
+        }
+
+        .clickable-box th,
+        .clickable-box td {
+        padding: 0.5rem;
+        vertical-align: top;
+        }
+
+        .clickable-box th {
+        font-weight: bold;
+        }
+
+        .quick-links {
+        background-color: #d3d3d3;
+        border-radius: 16px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        position: absolute;
+        top: 50px;
+        right: 20px;
+        width: 250px; 
+        }
+
+
+        .quick-links .btn {
+        background-color: #46007a;
+        color: white;
+        width: 100%;
+        border-radius: 20px;
+        margin-bottom: 0.5rem;
+        float: right;
+        }
+
+        body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #fff;
+        }
+
+        .text-secondary {
+        color: #6c757d;
+        }
+
+        .text-danger {
+        color: #dc3545;
+        }
+
+        .text-warning {
+        color: #ffc107;
+        }
+
+        .text-success {
+        color: #28a745;
+        }
+
+        .text-primary {
+        color: #007bff;
+        }
+
+        .btn-link {
+        color: #007bff;
+        text-decoration: none;
+        }
+
+        .btn-link:hover {
+        text-decoration: underline;
+        }
+    </style>
+    <form method="post">
+        <div class="quick-links">
+            <h5>Quick Links</h5>
+            @if (HttpContext.Session.GetString("UserType") == "Admin")
+            {
+                <button asp-page-handler="CreateProject" class="btn">Start a project</button>
+                <button  asp-page-handler="GreateGrant" class="btn">Record a grant proposal</button>
+                <button  asp-page-handler="CreateUser" class="btn">Onboard a new user</button>
+                <button  asp-page-handler="CreatePartner" class="btn">Onboard a new partner organization</button>
+                <button asp-page-handler="GenerateReport" class="btn">View Report Dashboard</button>
+            }
+        </div>
+    </form>
+   
+</head>
+
     @if (HttpContext.Session.GetInt32("LoggedIn") == 1)
     {
-        <form method="post">
         @using Microsoft.AspNetCore.Mvc.Rendering
-
+    <form method="post">
         <style>
             .table-container {
             margin: 20px auto;
             max-width: 100%;
             }
         </style>
+
         <h2 class="text-center mt-5 mb-4">Organizations</h2>
         <div class="table-container">
             <table class="table table-bordered table-striped">
@@ -241,4 +395,3 @@
     {
         <h1 class="text-center mt-5 mb-4">Please wait for an Admin to assign you to a role </h1>
     }
-}

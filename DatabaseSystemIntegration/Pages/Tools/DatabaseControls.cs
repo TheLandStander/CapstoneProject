@@ -10,9 +10,8 @@ namespace DatabaseSystemIntegration.Pages.Tools
     public class DatabaseControls
     {
         // Create connection string to connect to the database
-       public static string ConnectionString = "Data Source=localhost;Initial Catalog=Sprint2;Integrated Security=True;Encrypt=False";
-       public static string AuthConnString = "Data Source=Localhost;Initial Catalog=AUTH;Integrated Security=True;Encrypt=False";
-
+       public static string ConnectionString = "Server=tcp:l10.database.windows.net,1433;Initial Catalog=CARE;Persist Security Info=False;User ID=L10JMU;Password=Madison2025!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+       public static string AuthConnString = "Server=tcp:l10.database.windows.net,1433;Initial Catalog=AUTH;Persist Security Info=False;User ID=L10JMU;Password=Madison2025!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         //array of tables, good for selections
         public static string[] Tables =
         {
@@ -89,6 +88,80 @@ namespace DatabaseSystemIntegration.Pages.Tools
             return false;
         }
 
+        public static Users GetUser(string ID)
+        {
+            return ObjectConverter.ToUsers(SelectFilter(19, 19, ID))[0];
+        }
+
+        public static Project[] GetUserProjects(string ID)
+        {
+            AssignedProject[] Holder = ObjectConverter.ToAssignedProject(SelectFilter(0, 19, ID));
+            List<Project> Projects = new List<Project>();
+
+            foreach (AssignedProject ap in Holder)
+            {
+                if (ap.GetProject().Status.ProjectStatusName == "Ongoing")
+                {
+                    Projects.Add(ap.GetProject());
+                }
+            }
+
+            return Projects.ToArray();
+        }
+
+        public static Tasks[] GetUserTasks(string ID)
+        {
+          AssignedTask[] Holder = ObjectConverter.ToAssignedTask(SelectFilter(1, 19, ID));
+          List<Tasks> TaskHolder = new List<Tasks>();
+
+            foreach (AssignedTask at in Holder)
+            {
+                if (at.GetTask().Completed == false)
+                {
+                    TaskHolder.Add(at.GetTask());
+                }
+            }
+
+            return TaskHolder.ToArray();
+        }
+
+        public static ChildTask[] GetUserSubTasks(string ID)
+        {
+            List<ChildTask> Holder = new List<ChildTask>();
+            List<ChildTask> AllHolder = ObjectConverter.ToChildTask(SelectNoFilter(15)).ToList();
+
+            foreach (ChildTask ct in AllHolder)
+            {
+                if (ct.GetAssignedUser().UserID == ID && ct.Completed == false)
+                {
+                    Holder.Add(ct);
+                }
+            }
+            return Holder.ToArray();
+        }
+
+        public static Project GetProject(string ID)
+        {
+           return ObjectConverter.ToProject(SelectFilter(12, 12,ID))[0];
+        }
+
+        public static PartnerStatus[] GetPartnerStatuses()
+        {
+            return ObjectConverter.ToPartnerStatus(SelectNoFilter(3));
+        }
+
+        public static GrantCategory[] GetGrantCategory()
+        {
+            return ObjectConverter.ToGrantCategory(SelectNoFilter(5));
+        }
+        public static GrantStatus[] GetGrantStatuses()
+        {
+            return ObjectConverter.ToGrantStatus(SelectNoFilter(6));
+        }
+        public static ProjectStatus[] GetProjectStatuses()
+        {
+            return ObjectConverter.ToProjectStatus(SelectNoFilter(14));
+        }
 
         public static string MakeID()
         {
@@ -487,7 +560,6 @@ namespace DatabaseSystemIntegration.Pages.Tools
             sqlQuery += "Convert(binary," + tobyte(ct.Completed) + "),'";
             sqlQuery += ct.ParentTaskID;
             sqlQuery += "');";
-            Console.Write(sqlQuery);
             Execute(sqlQuery);
         }
 
@@ -718,7 +790,7 @@ namespace DatabaseSystemIntegration.Pages.Tools
             cmdLogin.Connection.Close();
             return rowCount;
         }
-
+       
         public static void CreateHashedUser(string ID, string Username, string Password)
         {
             string loginquery =

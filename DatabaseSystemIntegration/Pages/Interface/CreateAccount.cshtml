@@ -1,44 +1,103 @@
 ﻿@page
 @model DatabaseSystemIntegration.Pages.Interface.CreateAccountModel
 @{
-    //Noah Kurtz
-
-    <form method="post" style="margin-bottom: 100px;">
-        <h1>Create a User Account</h1>
-        
-        <div class="col-md-6">
-            <label class="form-label">Email</label>
-            <input asp-for="Email" type="email" class="form-control">
-        </div>
-
-        <div class="col-md-6">
-            <label class="form-label">Phone Number</label>
-            <input asp-for="PhoneNumber" type="tel" class="form-control">
-        </div>
-        <br/>
-        <div class="col-md-6">
-            <label class="form-label">Username</label>
-            <input asp-for="Username" type="text" class="form-control">
-        </div>
-
-        <br/>
-        <div class="col-md-6">
-            <label  class="form-label">Password</label>
-            <input asp-for="Password" type="password" class="form-control">
-        </div>
-
-        <div class="form-group">
-            <br>  <button type="submit" asp-page-handler="" class="btn btn-primary">Create User Account</button>  <br>
-        </div>
-    </form>
-    <br/>
-    <form method="post" style="margin-top: 100px;margin-bottom: 100px;">
-        <div class="form-group">
-            <button asp-page="CreateAccount" asp-page-handler="PopulateHandler">Populate</button>
-            <button asp-page="CreateAccount" asp-page-handler="ClearHandler">Clear</button>
-        </div>
-    </form>
 }
+
+<head>
+    <style>
+        .form-container {
+            margin: 0 auto;
+            max-width: 600px;
+            padding: 20px;
+        }
+
+            .form-container h1 {
+                text-align: center;
+                color: #450084;
+                margin-bottom: 30px;
+            }
+            .form-container .form-group {
+                margin-bottom: 20px;
+            }
+
+            .form-container .form-label {
+                font-weight: bold;
+                margin-bottom: 10px;
+                display: inline-block;
+            }
+
+            .form-container .form-control {
+                width: 100%;
+                padding: 10px;
+                border: 2px solid #450084;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+
+                .form-container .form-control:focus {
+                    border-color: #007bff;
+                }
+
+            .form-container .btn {
+                background-color: #450084;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                margin-top: 10px;
+            }
+
+                .form-container .btn:hover {
+                    background-color: #6f2e92;
+                }
+
+        .text-success {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .text-danger {
+            color: #dc3545;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<form method="post" class="form-container">
+    <h1>Create a User Account</h1>
+
+    <div class="form-group">
+        <label class="form-label" for="Email">Email</label>
+        <input asp-for="Email" type="email" class="form-control" id="Email">
+    </div>
+
+    <div class="form-group">
+        <label class="form-label" for="PhoneNumber">Phone Number</label>
+        <input asp-for="PhoneNumber" type="tel" class="form-control" id="PhoneNumber">
+    </div>
+
+    <div class="form-group">
+        <label class="form-label" for="Username">Username</label>
+        <input asp-for="Username" type="text" class="form-control" id="Username">
+    </div>
+
+    <div class="form-group">
+        <label class="form-label" for="Password">Password</label>
+        <input asp-for="Password" type="password" class="form-control" id="Password">
+    </div>
+
+    <div class="form-group text-center">
+        <button type="submit" asp-page-handler="" class="btn">Create User Account</button>
+    </div>
+</form>
+
+<form method="post" class="form-container">
+    <div class="form-group text-center">
+        <button  asp-page-handler="PopulateHandler" class="btn">Populate</button>
+        <button  asp-page-handler="ClearHandler" class="btn">Clear</button>
+    </div>
+</form>
 
 @{
     if (HttpContext.Session.GetString("Username") != null)

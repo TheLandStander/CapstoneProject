@@ -12,9 +12,9 @@ namespace DatabaseSystemIntegration.Pages.Classes
         {
         }
 
-        public Project GetTask()
+        public Tasks GetTask()
         {
-            return ObjectConverter.ToProject(DatabaseControls.SelectFilter(15, 15, TaskID))[0];
+            return ObjectConverter.ToTask(DatabaseControls.SelectFilter(15, 15, TaskID))[0];
         }
 
         public Users GetAssignedUser()

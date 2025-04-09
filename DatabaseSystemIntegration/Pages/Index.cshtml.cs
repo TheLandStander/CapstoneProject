@@ -40,7 +40,7 @@ namespace DatabaseSystemIntegration.Pages
                     HttpContext.Session.SetString("UserName", User.Name);
                     HttpContext.Session.SetString("UserType", User.type.UserTypeName);
                 }
-                return RedirectToPage("Interface/Project-Dashboard");
+                return RedirectToPage("/Interface/Home");
             }
 
             else
