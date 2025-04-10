@@ -31,6 +31,21 @@ namespace DatabaseSystemIntegration.Pages.Classes
 
         }
 
+        public Project[] GetAssignedProjects()
+        {
+            return DatabaseControls.GetUserProjects(UserID);
+        }
+
+        public Tasks[] GetAssignedTasks()
+        {
+            return DatabaseControls.GetUserTasks(UserID);
+        }
+
+        public ChildTask[] GetAssginedSubTasks()
+        {
+            return DatabaseControls.GetUserSubTasks(UserID);
+        }
+
         public Users(string name, string userTypeID, string userStatusID, string infoID, string partnerID)
         {
             UserID = DatabaseControls.MakeID();  // Set primary key

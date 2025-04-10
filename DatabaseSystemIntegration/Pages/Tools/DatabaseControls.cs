@@ -28,7 +28,7 @@ namespace DatabaseSystemIntegration.Pages.Tools
         "Role",
         "PersonalInfo",
         "Project",
-        "ProjectNotes",
+        "Notes",
         "ProjectStatus",
         "Task",
         "UserRole",
@@ -59,7 +59,8 @@ namespace DatabaseSystemIntegration.Pages.Tools
        "User_Role_ID",
        "User_Status_ID",
        "User_Type_ID",
-       "User_ID"
+       "User_ID",
+        "Item_ID"
             };
 
         public static bool CheckDuplicate(AssignedTask at)
@@ -127,12 +128,49 @@ namespace DatabaseSystemIntegration.Pages.Tools
 
         public static ChildTask[] GetUserSubTasks(string ID)
         {
-            List<ChildTask> Holder = new List<ChildTask>();
-            List<ChildTask> AllHolder = ObjectConverter.ToChildTask(SelectNoFilter(15)).ToList();
 
-            foreach (ChildTask ct in AllHolder)
+            List<ChildTask> Holder = new List<ChildTask>();
+            if (SelectNoFilter(4).HasRows)
             {
-                if (ct.GetAssignedUser().UserID == ID && ct.Completed == false)
+                List<ChildTask> AllHolder = ObjectConverter.ToChildTask(SelectNoFilter(4)).ToList();
+
+                foreach (ChildTask ct in AllHolder)
+                {
+                    if (ct.GetAssignedUser() != null && ct.GetAssignedUser().UserID == ID && ct.Completed == false)
+                    {
+                        Holder.Add(ct);
+                    }
+                }
+            }
+            return Holder.ToArray();
+        }
+
+        public static ProjectNotes[] GetNotes(string ID)
+        {
+            List<ProjectNotes> Holder = new List<ProjectNotes>();
+            if (SelectNoFilter(13).HasRows)
+            {
+                ProjectNotes[] AllNotes = ObjectConverter.ToNotes(SelectNoFilter(13));
+
+                foreach (ProjectNotes pn in AllNotes)
+                {
+                    if (pn.ItemID == ID)
+                    {
+                        Holder.Add(pn);
+                    }
+                }
+            }
+            return Holder.ToArray();
+        }
+
+        public static ChildTask[] GetSubTasks(string ID)
+        {
+            ChildTask[] AllChildTasks = ObjectConverter.ToChildTask(SelectNoFilter(4));
+            List<ChildTask> Holder = new List<ChildTask>();
+
+            foreach (ChildTask ct in AllChildTasks)
+            {
+                if (ct.ItemID == ID)
                 {
                     Holder.Add(ct);
                 }
@@ -168,7 +206,7 @@ namespace DatabaseSystemIntegration.Pages.Tools
             //Makes the primary key 
             string ID = "";
             Random rand = new Random();
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 10; i++)
             {
                 ID += rand.Next(10);
             }
@@ -508,7 +546,7 @@ namespace DatabaseSystemIntegration.Pages.Tools
 
         public static void Insert(Project p)
         {
-            String sqlQuery = "INSERT INTO Project(Project_ID, Project_Name, Description, Start_Date, End_Date, Due_Date, Project_Lead_ID, Project_Status_ID) VALUES ('";
+            String sqlQuery = "INSERT INTO Project(Project_ID, Project_Name, Description, Start_Date, End_Date, Due_Date, Project_Lead_ID, Project_Status_ID, Grant_ID) VALUES ('";
             sqlQuery += p.ProjectID + "','";
             sqlQuery += p.ProjectName + "','";
             sqlQuery += p.Description + "','";
@@ -516,7 +554,8 @@ namespace DatabaseSystemIntegration.Pages.Tools
             sqlQuery += p.EndDate + "','";
             sqlQuery += p.DueDate + "','";
             sqlQuery += p.ProjectLeadID + "','";
-            sqlQuery += p.ProjectStatusID;
+            sqlQuery += p.ProjectStatusID + "','";
+            sqlQuery += p.GrantID;
             sqlQuery += "');";
 
             Execute(sqlQuery);
@@ -550,7 +589,7 @@ namespace DatabaseSystemIntegration.Pages.Tools
 
         public static void Insert(ChildTask ct)
         {
-            String sqlQuery = "INSERT INTO ChildTask(Child_Task_ID, Task_Name, Description, StartDate, DueDate, EndDate, Completed, Task_ID) VALUES ('";
+            String sqlQuery = "INSERT INTO ChildTask(Child_Task_ID, Task_Name, Description, StartDate, DueDate, EndDate, Completed, Item_ID) VALUES ('";
             sqlQuery += ct.ChildTaskID + "','";
             sqlQuery += ct.TaskName + "','";
             sqlQuery += ct.Description + "','";
@@ -558,7 +597,7 @@ namespace DatabaseSystemIntegration.Pages.Tools
             sqlQuery += ct.DueDate + "','"; 
             sqlQuery += ct.EndDate + "',";
             sqlQuery += "Convert(binary," + tobyte(ct.Completed) + "),'";
-            sqlQuery += ct.ParentTaskID;
+            sqlQuery += ct.ItemID;
             sqlQuery += "');";
             Execute(sqlQuery);
         }
@@ -597,16 +636,17 @@ namespace DatabaseSystemIntegration.Pages.Tools
 
         public static void Insert(Grant g)
         {
-            String sqlQuery = "INSERT INTO Grants(Grant_ID, Grant_Name, Amount, Submission_Date, Award_Date, Due_Date, Status_ID, Category_ID, Project_ID) VALUES ('";
+            String sqlQuery = "INSERT INTO Grants(Grant_ID, Grant_Name,Funding_Agency, Amount, Start_Date,Submission_Date, Award_Date, Due_Date, Status_ID, Category_ID) VALUES ('";
             sqlQuery += g.GrantID + "','";
             sqlQuery += g.GrantName + "','";
+            sqlQuery += g.FundingAgency.ToUpper() + "','";
             sqlQuery += g.Amount + "','";
+            sqlQuery += g.StartDate + "','";
             sqlQuery += g.SubmissionDate + "','";
             sqlQuery += g.AwardDate + "','";
             sqlQuery += g.DueDate + "','";
             sqlQuery += g.StatusID + "','";
-            sqlQuery += g.CategoryID + "','";
-            sqlQuery += g.ProjectID;
+            sqlQuery += g.CategoryID;
             sqlQuery += "');";
 
             Execute(sqlQuery);
@@ -614,11 +654,13 @@ namespace DatabaseSystemIntegration.Pages.Tools
 
         public static void Insert(ProjectNotes pn)
         {
-            String sqlQuery = "INSERT INTO ProjectNotes(Notes_ID, Project_Notes, Date, Project_ID) VALUES ('";
+            String sqlQuery = "INSERT INTO Notes(Notes_ID, Notes, Author, Recipient, Date, Item_ID) VALUES ('";
             sqlQuery += pn.NotesID + "','";
             sqlQuery += pn.Notes + "','";
+            sqlQuery += pn.Author + "','";
+            sqlQuery += pn.Recipient + "','";
             sqlQuery += pn.Date + "','";
-            sqlQuery += pn.ProjectID;
+            sqlQuery += pn.ItemID;
             sqlQuery += "');";
 
             Execute(sqlQuery);
@@ -708,6 +750,22 @@ namespace DatabaseSystemIntegration.Pages.Tools
         public static void UpdateGrantAwardDate(string ID, DateOnly AwardDate)
         {
             String sqlQuery = "UPDATE Grants SET AWARD_DATE = '" + AwardDate + "' WHERE GRANT_ID = " + ID + ";";
+
+            SqlCommand cmd = new SqlCommand();
+            SqlConnection Database = new SqlConnection(ConnectionString);
+            cmd.Connection = Database;
+            cmd.CommandText = sqlQuery;
+            cmd.Connection.Open();
+
+            cmd.ExecuteNonQuery();
+            cmd.Dispose();
+            cmd.Connection.Close();
+
+        }
+
+        public static void UpdateSubmissionDate(string ID, DateOnly SubmissionDate)
+        {
+            String sqlQuery = "UPDATE Grants SET SUBMISSION_DATE = '" + SubmissionDate + "' WHERE GRANT_ID = " + ID + ";";
 
             SqlCommand cmd = new SqlCommand();
             SqlConnection Database = new SqlConnection(ConnectionString);

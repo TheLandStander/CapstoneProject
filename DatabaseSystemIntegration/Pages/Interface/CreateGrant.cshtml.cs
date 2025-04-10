@@ -13,10 +13,10 @@ namespace DatabaseSystemIntegration.Pages.Interface
         public string GrantName { get; set; }
 
         [BindProperty]
-        public double Amount { get; set; }
+        public string FundingAgency { get; set; }
 
         [BindProperty]
-        public DateOnly SubDate { get; set; }
+        public double Amount { get; set; }
 
         [BindProperty]
         public DateOnly DueDate { get; set; }
@@ -25,28 +25,21 @@ namespace DatabaseSystemIntegration.Pages.Interface
         public string CategoryID { get; set; }
 
         [BindProperty]
-        public string ProjectID { get; set; }
-
-        [BindProperty]
-        public Project[] Projects { get; set; }
-
-        [BindProperty]
         public GrantCategory[] Category { get; set; }
 
         public void RefreshSelection()
         {
-            Projects = ObjectConverter.ToProject(DatabaseControls.SelectNoFilter(12));
             Category = ObjectConverter.ToGrantCategory(DatabaseControls.SelectNoFilter(5));
-            SubDate = DateOnly.FromDateTime(DateTime.Now);
             DueDate = DateOnly.FromDateTime(DateTime.Now);
         }
 
         public void CheckAddGrant()
         {
             if (GrantName != null && Amount > 0 &&
-               DueDate > SubDate && CategoryID != null && ProjectID != null)
+               DueDate >= DateOnly.FromDateTime(DateTime.Now) && CategoryID != null && FundingAgency != null)
             {
-                Grant g = new Grant(GrantName, (decimal)Amount, SubDate, DueDate, DatabaseControls.GetGrantStatus("Pending").StatusID, CategoryID, ProjectID);
+                Grant g = new Grant(GrantName,FundingAgency, (decimal)Amount, DatabaseControls.GetGrantStatus("InProgress").StatusID, CategoryID);
+                g.DueDate = DueDate;
                 DatabaseControls.Insert(g);
             }
         }
@@ -67,10 +60,8 @@ namespace DatabaseSystemIntegration.Pages.Interface
             ModelState.Clear();
             GrantName = "Sample Grant";
             Amount = 1000;
-            SubDate = new DateOnly(1999, 1, 1);
             DueDate = new DateOnly(1999, 3, 1);
-            ProjectID = "123456";
-            CategoryID = "123456";
+            CategoryID = "1234567890";
             RefreshSelection();
 
             return Page();

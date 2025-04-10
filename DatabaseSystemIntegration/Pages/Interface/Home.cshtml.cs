@@ -14,14 +14,21 @@ namespace DatabaseSystemIntegration.Pages.Interface
 
         public Tasks[] DisplayedTasks { get; set; }
 
-        public Project[] DisplayedProjects { get; set; }
+        public ChildTask[] DisplayedSubTasks { get; set; }
 
-        public Tasks[] SearchTasks(string Name)
+        public void SetObjects()
         {
-            Tasks[] AllTasks = DatabaseControls.GetUserTasks(User.UserID);
-            List<Tasks> SearchResults = new List<Tasks>();
-            List<Tasks> ActiveTasks = new List<Tasks>();
-            foreach (Tasks t in AllTasks)
+            User = DatabaseControls.GetUser(HttpContext.Session.GetString("UserID"));
+            DisplayedTasks = DatabaseControls.GetUserTasks(User.UserID).OrderBy(t => t.DueDate).ToArray();
+            DisplayedSubTasks = DatabaseControls.GetUserSubTasks(User.UserID).OrderBy(p => p.DueDate).ToArray();
+        }
+
+        public ChildTask[] SearchTasks(string Name)
+        {
+            ChildTask[] AllTasks = DatabaseControls.GetUserSubTasks(User.UserID);
+            List<ChildTask> SearchResults = new List<ChildTask>();
+            List<ChildTask> ActiveTasks = new List<ChildTask>();
+            foreach (ChildTask t in AllTasks)
             {
                 if (t.TaskName == Name)
                 {
@@ -30,7 +37,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
                 }
             }
 
-            foreach (Tasks t in SearchResults)
+            foreach (ChildTask t in SearchResults)
             {
                 if (t.Completed == false)
                 {
@@ -47,33 +54,30 @@ namespace DatabaseSystemIntegration.Pages.Interface
             if (Search != null)
             {
                 User = DatabaseControls.GetUser(HttpContext.Session.GetString("UserID"));
-                DisplayedTasks = SearchTasks(Search);
-                DisplayedProjects = DatabaseControls.GetUserProjects(User.UserID).OrderBy(p => p.DueDate).ToArray();
+                DisplayedSubTasks = SearchTasks(Search);
+                DisplayedTasks = DatabaseControls.GetUserTasks(User.UserID).OrderBy(p => p.DueDate).ToArray();
             }
             else
             {
                 User = DatabaseControls.GetUser(HttpContext.Session.GetString("UserID"));
-                DisplayedTasks = DatabaseControls.GetUserTasks(User.UserID).OrderBy(t => t.DueDate).ToArray();
+                DisplayedSubTasks = DatabaseControls.GetUserSubTasks(User.UserID).OrderBy(t => t.DueDate).ToArray();
+                DisplayedTasks = DatabaseControls.GetUserTasks(User.UserID).OrderBy(p => p.DueDate).ToArray();
             }
             User = DatabaseControls.GetUser(HttpContext.Session.GetString("UserID"));
-            DisplayedProjects = DatabaseControls.GetUserProjects(User.UserID).OrderBy(p => p.DueDate).ToArray();
+            DisplayedSubTasks = DatabaseControls.GetUserSubTasks(User.UserID).OrderBy(p => p.DueDate).ToArray();
             return Page();
         }
 
         public void OnPost()
         {
-            User = DatabaseControls.GetUser(HttpContext.Session.GetString("UserID"));
-            DisplayedTasks = DatabaseControls.GetUserTasks(User.UserID).OrderBy(t => t.DueDate).ToArray();
-            DisplayedProjects = DatabaseControls.GetUserProjects(User.UserID).OrderBy(p => p.DueDate).ToArray();
+            SetObjects();
         }
 
         public IActionResult OnGet()
         {
             if (HttpContext.Session.GetInt32("LoggedIn") == 1)
             {
-                User = DatabaseControls.GetUser(HttpContext.Session.GetString("UserID"));
-                DisplayedTasks = DatabaseControls.GetUserTasks(User.UserID).OrderBy(t => t.DueDate).ToArray();
-                DisplayedProjects = DatabaseControls.GetUserProjects(User.UserID).OrderBy(p => p.DueDate).ToArray();
+                SetObjects();
                 return Page();
             }
 
@@ -84,20 +88,30 @@ namespace DatabaseSystemIntegration.Pages.Interface
         {
             HttpContext.Session.SetString("ItemType", "Project");
             HttpContext.Session.SetString("ItemID", ID);
-            User = DatabaseControls.GetUser(HttpContext.Session.GetString("UserID"));
-            DisplayedTasks = DatabaseControls.GetUserTasks(User.UserID).OrderBy(t => t.DueDate).ToArray();
-            DisplayedProjects = DatabaseControls.GetUserProjects(User.UserID).OrderBy(p => p.DueDate).ToArray();
+            SetObjects();
             return RedirectToPage("AccessItem");
         }
 
         public IActionResult OnPostSelectTask(string ID)
         {
-            User = DatabaseControls.GetUser(HttpContext.Session.GetString("UserID"));
-            DisplayedTasks = DatabaseControls.GetUserTasks(User.UserID).OrderBy(t => t.DueDate).ToArray();
-            DisplayedProjects = DatabaseControls.GetUserProjects(User.UserID).OrderBy(p => p.DueDate).ToArray();
+            SetObjects();
             HttpContext.Session.SetString("ItemType", "Task");
             HttpContext.Session.SetString("ItemID", ID);
             return RedirectToPage("AccessItem");
         }
+
+        public void CompleteChildTask(string ID)
+        {
+           ChildTask ChildTask = ObjectConverter.ToChildTask(DatabaseControls.SelectFilter(4, 4, ID))[0];
+           ChildTask.CompleteTask();
+        }
+        public IActionResult OnPostUpdateChildTask(string ID)
+        {
+            SetObjects();
+            CompleteChildTask(ID);
+            return Page();
+        }
+
+
     }
 }

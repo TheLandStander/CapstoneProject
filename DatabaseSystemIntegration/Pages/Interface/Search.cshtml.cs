@@ -49,7 +49,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
 
             foreach (Grant g in Grants)
             {
-                if (g.DueDate <= DateOnly.FromDateTime(DateTime.Now) && g.AwardDate == DateOnly.MinValue)
+                if (g.DueDate <= DateOnly.FromDateTime(DateTime.Now) && g.Status.GrantStatusName == "InProgress")
                 {
                     GHolder.Add(g);
                 }
@@ -125,7 +125,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
 
             foreach (Grant g in Grants)
             {
-                if (g.AwardDate == DateOnly.MinValue)
+                if (g.AwardDate == DateOnly.MinValue && g.Status.StatusID == "Pending")
                 {
                     GHolder.Add(g);
                 }

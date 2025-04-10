@@ -13,6 +13,7 @@ namespace DatabaseSystemIntegration.Pages.Classes
         public DateOnly DueDate { get; set; }
         public string ProjectLeadID { get; set; }
         public string ProjectStatusID { get; set; }
+        public string GrantID { get; set; }
         public Users ProjectLeader { get; set; }
 
         public ProjectStatus Status { get; set; }
@@ -31,8 +32,8 @@ namespace DatabaseSystemIntegration.Pages.Classes
         }
 
         public ProjectNotes[] GetNotes()
-        { 
-            return ObjectConverter.ToProjectNotes(DatabaseControls.SelectFilter(13, 12, ProjectID));
+        {
+            return DatabaseControls.GetNotes(ProjectID);
         }
 
         public Tasks[] GetTasks()
@@ -42,7 +43,7 @@ namespace DatabaseSystemIntegration.Pages.Classes
 
         public Grant[] GetGrants()
         {
-          return ObjectConverter.ToGrants(DatabaseControls.SelectFilter(7, 12, ProjectID));
+            return ObjectConverter.ToGrants(DatabaseControls.SelectFilter(7, 7, GrantID));
         }
 
         public Users GetProjectLead()
@@ -78,15 +79,15 @@ namespace DatabaseSystemIntegration.Pages.Classes
             }
         }
 
-        public void AddNote(string Note)
+        public void AddNote(string Note, string Author,string Recipient)
         {
-            ProjectNotes PN = new ProjectNotes(Note, DateOnly.FromDateTime(DateTime.Now),ProjectID);
+            ProjectNotes PN = new ProjectNotes(Note,Author,Recipient, DateOnly.FromDateTime(DateTime.Now),ProjectID);
             DatabaseControls.Insert(PN);
         }
 
-        public void AddTask(string Name, string Description, DateOnly Start, DateOnly Due)
+        public void AddTask(string Name, string Description, DateOnly Due)
         {
-            Tasks t = new Tasks(Name, Description, Start, Due, false, ProjectID);
+            Tasks t = new Tasks(Name, Description, DateOnly.FromDateTime(DateTime.Now), Due, false, ProjectID);
             DatabaseControls.Insert(t);
         }
 
@@ -95,7 +96,7 @@ namespace DatabaseSystemIntegration.Pages.Classes
             Status = ObjectConverter.ToProjectStatus(DatabaseControls.SelectFilter(14,14, ProjectStatusID))[0];
         }
 
-        public Project(string projectName, string description, DateOnly startDate,DateOnly dueDate, string projectStatusID)
+        public Project(string projectName, string description, DateOnly startDate,DateOnly dueDate, string projectStatusID, string grantID)
         {
             ProjectID = DatabaseControls.MakeID();  // Set primary key
             ProjectName = projectName;
@@ -103,6 +104,7 @@ namespace DatabaseSystemIntegration.Pages.Classes
             StartDate = startDate;
             DueDate = dueDate;
             ProjectStatusID = projectStatusID;
+            GrantID = grantID;
         }
     }
 

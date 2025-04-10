@@ -15,9 +15,6 @@ namespace DatabaseSystemIntegration.Pages.Interface
         public string Project_Description { get; set; }
 
         [BindProperty]
-        public DateOnly StartDate { get; set; }
-
-        [BindProperty]
         public DateOnly DueDate { get; set; }
 
         [BindProperty]
@@ -27,15 +24,14 @@ namespace DatabaseSystemIntegration.Pages.Interface
         {
             Users = ObjectConverter.ToUsers(DatabaseControls.SelectNoFilter(19));
             DueDate = DateOnly.FromDateTime(DateTime.Now);
-            StartDate = DateOnly.FromDateTime(DateTime.Now);
         }
 
 
-        private void CheckAndSubmitProject()
+        public void CheckAndSubmitProject(string ID)
         {
-            if (Project_Name != null && Project_Description != null && StartDate < DueDate)
+            if (Project_Name != null && Project_Description != null && DateOnly.FromDateTime(DateTime.Now) < DueDate)
             {
-                Project P = new Project(Project_Name, Project_Description, StartDate, DueDate,DatabaseControls.GetProjectStatus("Ongoing").ProjectStatusID);
+                Project P = new Project(Project_Name, Project_Description, DateOnly.FromDateTime(DateTime.Now), DueDate,DatabaseControls.GetProjectStatus("Ongoing").ProjectStatusID,ID);
                 DatabaseControls.Insert(P);
             }
         }
@@ -58,7 +54,6 @@ namespace DatabaseSystemIntegration.Pages.Interface
             ModelState.Clear();
             Project_Name = "Sample Project";
             Project_Description = "Sample Description";
-            StartDate = new DateOnly(2025, 12, 1);
             DueDate = new DateOnly(2026, 12, 2);
             RefreshSelection();
             return Page();
@@ -72,9 +67,9 @@ namespace DatabaseSystemIntegration.Pages.Interface
         }
 
 
-        public IActionResult OnPost()
+        public IActionResult OnPost(string ID)
         {
-            CheckAndSubmitProject();
+            CheckAndSubmitProject(ID);
             RefreshSelection();
             return RedirectToPage("Project-Dashboard");
         }

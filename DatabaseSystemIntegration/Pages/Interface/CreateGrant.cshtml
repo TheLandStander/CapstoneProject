@@ -8,9 +8,16 @@
     <h1 class="mb-4">@ViewData["Title"]</h1>
     <form method="post">
         <div class="form-group row mb-3">
-            <label class="col-sm-2 col-form-label" for="GrantName">Grant Name</label>
+            <label class="col-sm-2 col-form-label" >Grant Name</label>
             <div class="col-sm-10">
                 <input asp-for="GrantName" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group row mb-3">
+            <label class="col-sm-2 col-form-label">Funding Agency</label>
+            <div class="col-sm-10">
+                <input asp-for="FundingAgency" class="form-control" />
             </div>
         </div>
 
@@ -22,18 +29,12 @@
         </div>
 
         <div class="form-group row mb-3">
-            <label class="col-sm-2 col-form-label" for="SubDate">Submission Date</label>
-            <div class="col-sm-10">
-                <input asp-for="SubDate" class="form-control" type="date" />
-            </div>
-        </div>
-
-        <div class="form-group row mb-3">
             <label class="col-sm-2 col-form-label" for="DueDate">Due Date</label>
             <div class="col-sm-10">
                 <input asp-for="DueDate" class="form-control" type="date" />
             </div>
         </div>
+
         <div class="form-group row mb-3">
             <label class="col-sm-2 col-form-label" for="CategoryID">Category</label>
             <div class="col-sm-10">
@@ -41,18 +42,6 @@
                     @foreach (var category in Model.Category)
                     {
                         <option value="@category.CategoryID">@category.CategoryName</option>
-                    }
-                </select>
-            </div>
-        </div>
-
-        <div class="form-group row mb-3">
-            <label class="col-sm-2 col-form-label" for="ProjectID">Project</label>
-            <div class="col-sm-10">
-                <select asp-for="ProjectID" class="form-control">
-                    @foreach (var project in Model.Projects)
-                    {
-                        <option value="@project.ProjectID">@project.ProjectName</option>
                     }
                 </select>
             </div>

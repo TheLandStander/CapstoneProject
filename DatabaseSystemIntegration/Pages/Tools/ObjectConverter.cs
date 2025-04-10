@@ -213,7 +213,8 @@ namespace DatabaseSystemIntegration.Pages.Tools
                     data.GetValue(2).ToString(),
                     DateOnly.FromDateTime((DateTime)data.GetValue(3)),
                     DateOnly.FromDateTime((DateTime)data.GetValue(5)),
-                    data.GetValue(7).ToString()
+                    data.GetValue(7).ToString(),
+                    data.GetValue(8).ToString()
                 );
                 obj.ProjectID = data.GetValue(0).ToString();
                 obj.EndDate = DateOnly.FromDateTime((DateTime)data.GetValue(4));
@@ -383,15 +384,16 @@ namespace DatabaseSystemIntegration.Pages.Tools
             {
                 Grant obj = new Grant(
                     data.GetValue(1).ToString(),
-                    Convert.ToDecimal(data.GetValue(2)),
-                    DateOnly.FromDateTime((DateTime)data.GetValue(3)),
-                    DateOnly.FromDateTime((DateTime)data.GetValue(5)),
-                    data.GetValue(6).ToString(),
-                    data.GetValue(7).ToString(),
-                    data.GetValue(8).ToString()
+                    data.GetValue(2).ToString(),
+                    Convert.ToDecimal(data.GetValue(3)),
+                    data.GetValue(8).ToString(),
+                    data.GetValue(9).ToString()
                 );
                 obj.GrantID = data.GetValue(0).ToString();
-                obj.AwardDate = DateOnly.FromDateTime((DateTime)data.GetValue(4));
+                obj.StartDate = DateOnly.FromDateTime((DateTime)data.GetValue(4));
+                obj.SubmissionDate = DateOnly.FromDateTime((DateTime)data.GetValue(5));
+                obj.AwardDate = DateOnly.FromDateTime((DateTime)data.GetValue(6));
+                obj.DueDate = DateOnly.FromDateTime((DateTime)data.GetValue(7));
                 list.Add(obj);
             }
             data.DisposeAsync();
@@ -403,29 +405,26 @@ namespace DatabaseSystemIntegration.Pages.Tools
             return list.ToArray();
         }
 
-       public static ProjectNotes[] ToProjectNotes(SqlDataReader data)
+        public static ProjectNotes[] ToNotes(SqlDataReader data)
         {
             List<ProjectNotes> list = new List<ProjectNotes>();
             while (data.Read())
             {
                 ProjectNotes obj = new ProjectNotes(
                     data.GetValue(1).ToString(),
-                    DateOnly.FromDateTime((DateTime)data.GetValue(2)),
-                    data.GetValue(3).ToString()
+                    data.GetValue(2).ToString(),
+                    data.GetValue(3).ToString(),
+                    DateOnly.FromDateTime((DateTime)data.GetValue(4)),
+                    data.GetValue(5).ToString()
                 );
+
                 obj.NotesID = data.GetValue(0).ToString();
                 list.Add(obj);
-            }
+            } 
             data.DisposeAsync();
             data.Close();
-            foreach (ProjectNotes i in list)
-            {
-                i.SetVars();
-            }
             return list.ToArray();
         }
-
-
 
 
     }

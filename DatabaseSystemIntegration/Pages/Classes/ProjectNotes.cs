@@ -6,20 +6,20 @@ namespace DatabaseSystemIntegration.Pages.Classes
     {
         public string NotesID { get; set; }
         public string Notes { get; set; }
+        public string Author { get; set; }
+        public string Recipient { get; set; }
         public DateOnly Date { get; set; }
-        public string ProjectID { get; set; }
-        public Project AssociatedProject { get; set; }
+        public string ItemID { get; set; }
 
-        public void SetVars()
-        {
-            AssociatedProject = ObjectConverter.ToProject(DatabaseControls.SelectFilter(12, 12, ProjectID))[0];
-        }
-        public ProjectNotes(string projectNotes, DateOnly date, string projectID)
+        
+        public ProjectNotes(string note,string author, string recipient, DateOnly date, string item)
         {
             NotesID = DatabaseControls.MakeID();  // Set primary key
-            Notes = projectNotes;
+            Notes = note;
+            Author = author;
+            Recipient = recipient;
             Date = date;
-            ProjectID = projectID;
+            ItemID = item;
         }
     }
 

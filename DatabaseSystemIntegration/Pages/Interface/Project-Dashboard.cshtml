@@ -147,18 +147,18 @@
             @if (HttpContext.Session.GetString("UserType") == "Admin")
             {
                 <button asp-page-handler="CreateProject" class="btn">Start a project</button>
-                <button  asp-page-handler="GreateGrant" class="btn">Record a grant proposal</button>
-                <button  asp-page-handler="CreateUser" class="btn">Onboard a new user</button>
-                <button  asp-page-handler="CreatePartner" class="btn">Onboard a new partner organization</button>
+                <button asp-page-handler="CreateGrant" class="btn">Record a grant proposal</button>
+                <button asp-page-handler="CreateUser" class="btn">Onboard a new user</button>
+                <button asp-page-handler="CreatePartner" class="btn">Onboard a new partner organization</button>
                 <button asp-page-handler="GenerateReport" class="btn">View Report Dashboard</button>
             }
         </div>
     </form>
-   
+
 </head>
 
-    @if (HttpContext.Session.GetInt32("LoggedIn") == 1)
-    {
+@if (HttpContext.Session.GetInt32("LoggedIn") == 1)
+{
         @using Microsoft.AspNetCore.Mvc.Rendering
     <form method="post">
         <style>
@@ -229,6 +229,7 @@
                 <thead class="thead-dark">
                     <tr>
                         <th>Grant Name</th>
+                        <th>Funding Agency</th>
                         <th>Award Amount ($)</th>
                         <th>Submission Date</th>
                         <th>Due Date</th>
@@ -243,11 +244,20 @@
                         @foreach (var grant in Model.AllGrants)
                         {
                             <tr>
+
                                 <td>
                                     <button class="btn btn-link" asp-page-handler="SelectGrant" asp-route-id="@grant.GrantID">@grant.GrantName</button>
                                 </td>
+                                <td>@grant.FundingAgency</td>
                                 <td>@grant.Amount</td>
-                                <td>@grant.SubmissionDate</td>
+                                    @if (@grant.SubmissionDate != DateOnly.MinValue)
+                                    {
+                                    <td>@grant.SubmissionDate</td>
+                                    }
+                                    else
+                                    {
+                                    <td> - </td>
+                                    }
                                 <td>@grant.DueDate</td>
                                 @if (@grant.AwardDate != DateOnly.MinValue){
                                     <td>@grant.AwardDate</td>
@@ -269,12 +279,25 @@
                                 {
                                     <td class="text-danger">@grant.Status.GrantStatusName</td>
                                 }
-                                <td>
-                                    <button class="btn btn-link" asp-page-handler="SelectProject" asp-route-id="@grant.ProjectID">@grant.GetProject().ProjectName</button>
-                                </td>
+                                @if (@grant.Status.GrantStatusName == "InProgress")
+                                 {
+                                    <td>@grant.Status.GrantStatusName</td>
+                                 }
+                                    @if (grant.GetProject() != null)
+                                    {
+                                    <td>
+                                        <button class="btn btn-link" asp-page-handler="SelectProject" asp-route-id="@grant.GetProject().ProjectID">@grant.GrantName</button>
+                                    </td>
+                                    }
+                                    else
+                                    {
+                                    <td class="mb-2"><strong>No Project Started</strong></td>
+
+                                    }
                             </tr>
                         }
-                    else {
+                    else if (Model.User.type.UserTypeName == "Internal Employee")
+                    {
                         @foreach (var Project in Model.AssignedProjects)
                         {
                             @foreach(var grant in Project.GetProject().GetGrants()){
@@ -283,7 +306,15 @@
                                         <button class="btn btn-link" asp-page-handler="SelectGrant" asp-route-id="@grant.GrantID">@grant.GrantName</button>
                                     </td>
                                     <td>@grant.Amount</td>
-                                    <td>@grant.SubmissionDate</td>
+                                    <td>@grant.StartDate</td>
+                                    @if (@grant.SubmissionDate != DateOnly.MinValue)
+                                    {
+                                        <td>@grant.SubmissionDate</td>
+                                    }
+                                    else
+                                    {
+                                        <td> - </td>
+                                    }
                                     <td>@grant.DueDate</td>
                                     @if (@grant.AwardDate != DateOnly.MinValue)
                                     {
@@ -306,9 +337,21 @@
                                     {
                                         <td class="text-danger">@grant.Status.GrantStatusName</td>
                                     }
-                                    <td>
-                                        <button class="btn btn-link" asp-page-handler="SelectProject" asp-route-id="@grant.ProjectID">@grant.GetProject().ProjectName</button>
-                                    </td>
+                                    @if (@grant.Status.GrantStatusName == "InProgress")
+                                    {
+                                        <td>@grant.Status.GrantStatusName</td>
+                                    }
+                                    @if (grant.GetProject() != null)
+                                    {
+                                        <td>
+                                            <button class="btn btn-link" asp-page-handler="SelectGrant" asp-route-id="@grant.GetProject().ProjectID">@grant.GrantName</button>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td class="mb-2"><strong>No Project Started</strong></td>
+
+                                    }
                                 </tr>
                             }
                         }
@@ -317,7 +360,7 @@
             </table>
         </div>
         <h2 class="text-center mt-5 mb-4">Projects</h2>
-        <div class="table-container">
+        <div class="table-container" style="margin-bottom:50px;">
             <table class="table table-bordered table-striped">
                 <thead class="thead-dark">
                     <tr>

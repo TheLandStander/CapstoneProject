@@ -105,7 +105,7 @@
 
                 <div class="task-card" style="background-color: #bca2d8">
                     
-                    @if (Model.DisplayedTasks == null || Model.DisplayedTasks.Length == 0)
+                    @if (Model.DisplayedSubTasks == null || Model.DisplayedSubTasks.Length == 0)
                     {
                         <p>Good Work, All Tasks Completed!</p>
                     }
@@ -118,17 +118,21 @@
                                     <th>Task Name</th>
                                     <th>Description</th>
                                     <th>Due Date</th>
+                                    <th>Mark Complete</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var task in Model.DisplayedTasks)
+                                @foreach (var task in Model.DisplayedSubTasks)
                                 {
                                     <tr>
-                                        <td>
-                                            <button class="btn btn-link" asp-page-handler="SelectTask" asp-route-id="@task.TaskID">@task.TaskName</button>
-                                        </td>
+                                        <td>@task.TaskName</td>
                                         <td>@task.Description</td>
                                         <td>@task.DueDate</td>
+                                        <td class="align-middle">
+                                            <button type="submit" asp-page-handler="UpdateChildTask" asp-route-id="@task.ChildTaskID" class="btn btn-sm btn-primary mt-2">
+                                                Complete
+                                            </button>
+                                        </td>
                                     </tr>
                                 }
                             </tbody>
@@ -138,8 +142,8 @@
             </div>
 
             <div class="right-panel">
-                <h3>Upcoming Project Deadlines</h3>
-                @if (Model.DisplayedProjects.Length == 0)
+                <h3>Upcoming Project Milestones</h3>
+                @if (Model.DisplayedTasks == null || Model.DisplayedTasks.Length == 0)
                 {
                     <p>Good Work, All Projects Completed!</p>
                 }
@@ -148,22 +152,22 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Project Urgency Ranking</th>
-                                <th>Project Name</th>
+                                <th>Task Urgency Ranking</th>
+                                <th>Task Name</th>
                                 <th>Description</th>
                                 <th>Due Date</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @for (int i = 0; i < Model.DisplayedProjects.Length; i++)
+                            @for (int i = 0; i < Model.DisplayedTasks.Length; i++)
                             {
                                 <tr>
                                     <td>@(i + 1)</td>
                                     <td>
-                                        <button class="btn btn-link" asp-page-handler="SelectProject" asp-route-id="@Model.DisplayedProjects[i].ProjectID">@Model.DisplayedProjects[i].ProjectName</button>
+                                        <button class="btn btn-link" asp-page-handler="SelectProject" asp-route-id="@Model.DisplayedTasks[i].ProjectID">@Model.DisplayedTasks[i].TaskName</button>
                                     </td>
-                                    <td>@Model.DisplayedProjects[i].Description</td>
-                                    <td>@Model.DisplayedProjects[i].DueDate</td>
+                                    <td>@Model.DisplayedTasks[i].Description</td>
+                                    <td>@Model.DisplayedTasks[i].DueDate</td>
                                 </tr>
                             }
                         </tbody>

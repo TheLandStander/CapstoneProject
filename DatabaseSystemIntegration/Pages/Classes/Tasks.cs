@@ -42,10 +42,15 @@ namespace DatabaseSystemIntegration.Pages.Classes
             }
         }
 
-        public void AddChildTask(string Name, string Description,DateOnly Start,DateOnly Due)
+        public void AddNote(string Note, string Author, string Recipient)
         {
-            ChildTask ct = new ChildTask(Name, Description, Start,Due ,false, TaskID);
-            DatabaseControls.Insert(ct);
+            ProjectNotes PN = new ProjectNotes(Note, Author, Recipient, DateOnly.FromDateTime(DateTime.Now), TaskID);
+            DatabaseControls.Insert(PN);
+        }
+
+        public ProjectNotes[] GetNotes()
+        {
+            return DatabaseControls.GetNotes(TaskID);
         }
 
         public Project GetProject()
@@ -53,9 +58,9 @@ namespace DatabaseSystemIntegration.Pages.Classes
             return ObjectConverter.ToProject(DatabaseControls.SelectFilter(12, 12, ProjectID))[0];
         }
 
-        public ChildTask[] GetChildTasks()
+        public ChildTask[] GetSubTasks()
         {
-           return ObjectConverter.ToChildTask(DatabaseControls.SelectFilter(4, 15, TaskID));
+            return DatabaseControls.GetSubTasks(TaskID);
         }
 
         public void SetVars()

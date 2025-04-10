@@ -15,7 +15,7 @@ namespace DatabaseSystemIntegration.Pages.Classes
 
         public string UserID { get; set; }
 
-        public string ParentTaskID { get; set; }
+        public string ItemID { get; set; }
 
 
         public void CompleteTask()
@@ -26,7 +26,7 @@ namespace DatabaseSystemIntegration.Pages.Classes
 
         public bool isAssigned()
         {
-            if (UserID.Length == 6)
+            if (UserID.Length == 10)
             {
                 return true;
             }
@@ -41,15 +41,15 @@ namespace DatabaseSystemIntegration.Pages.Classes
 
         public Users GetAssignedUser()
         {
+            if (DatabaseControls.SelectFilter(19, 19, UserID).HasRows)
+            {
                 return ObjectConverter.ToUsers(DatabaseControls.SelectFilter(19, 19, UserID))[0];
+            }
+            return null; 
         }
 
-        public Tasks GetParentTask()
-        {
-           return ObjectConverter.ToTask(DatabaseControls.SelectFilter(15, 15, ParentTaskID))[0];
-        }
 
-        public ChildTask(string taskName, string description, DateOnly Start, DateOnly Due, bool completed, string parentTaskID)
+        public ChildTask(string taskName, string description, DateOnly Start, DateOnly Due, bool completed, string itemID)
         {
             ChildTaskID = DatabaseControls.MakeID();  // Set primary key
             TaskName = taskName;
@@ -57,7 +57,7 @@ namespace DatabaseSystemIntegration.Pages.Classes
             StartDate = Start;
             DueDate = Due;
             Completed = completed;
-            ParentTaskID = parentTaskID;
+            ItemID = itemID;
         }
     }
 
