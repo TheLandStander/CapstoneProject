@@ -1,4 +1,5 @@
 ﻿@page
+@using System.IO
 @model DatabaseSystemIntegration.Pages.Interface.AccessItemModel
 @{
 
@@ -586,6 +587,8 @@
                             <th>Start Date</th>
                             <th>Due Date</th>
                             <th>End Date</th>
+                            <th>Upload File</th>
+                            <th>Current File</th>
                             <th>Take Task</th>
                             <th>Mark As Completed</th>
                         </tr>
@@ -602,6 +605,37 @@
                                 <td>@task.StartDate</td>
                                 <td>@task.DueDate</td>
                                 <td>@(task.EndDate != DateOnly.MinValue ? task.EndDate.ToString() : "-")</td>
+
+                                <td class="align-middle">
+                                    <a asp-page="FileUpload" asp-route-taskId="@task.ChildTaskID" class="btn btn-sm btn-secondary">
+                                        Upload File
+                                    </a>
+                                </td>
+
+                                <td>
+                                @{
+                                    string filedir = Directory.GetCurrentDirectory();
+                                    filedir += @"\wwwroot\fileupload\";
+                                    <br />
+                                    DirectoryInfo imagesFolder = new DirectoryInfo(filedir);
+
+                                    var fileListing = imagesFolder.GetFiles()
+                                    .OrderByDescending(f => f.LastWriteTime)
+                                    .FirstOrDefault(); 
+
+                                    if (fileListing != null)
+                                    {
+                                        string fullName = fileListing.Name;
+                                        string shortName = fullName.Length > 20 ? fullName.Substring(0, 17) + "..." : fullName;
+                                        <a href="/fileupload/@fullName" target="_blank">@shortName</a>
+                                    }
+                                    else
+                                    {
+                                        <span>No files found.</span>
+                                    }
+                                }
+                                </td>
+
                                 @if (task.isAssigned())
                                 {
                                     <td>Member Assigned: @task.GetAssignedUser().Name</td>

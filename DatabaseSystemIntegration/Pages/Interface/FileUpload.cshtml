@@ -1,0 +1,21 @@
+﻿@page
+@model DatabaseSystemIntegration.Pages.Interface.FileUploadModel
+@{
+}
+
+<form method="post" enctype="multipart/form-data" asp-action="FileUpload">
+    <div class="form-group">
+        <div class="col-md-10">
+            <p>Choose Files to Upload:</p>
+            <input asp-for="files" type="file" multiple />
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" value="Upload File" />
+        </div>
+    </div>
+    <br />
+    <a asp-page="AccessItem" class="btn btn-primary">Return</a>
+</form>

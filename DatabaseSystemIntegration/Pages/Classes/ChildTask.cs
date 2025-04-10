@@ -1,4 +1,5 @@
-﻿using DatabaseSystemIntegration.Pages.Tools;
+﻿using DatabaseSystemIntegration.Pages.Interface;
+using DatabaseSystemIntegration.Pages.Tools;
 using System.Threading.Tasks;
 
 namespace DatabaseSystemIntegration.Pages.Classes
