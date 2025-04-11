@@ -6,403 +6,484 @@
     </head>
     <body>
     <form style="text-align: left; margin-bottom: 20px; method="post" asp-page-handler="">
-        @if (HttpContext.Session.GetString("ItemType") == "Project")
+        
+    
+    
+    
+    
+    @if (HttpContext.Session.GetString("ItemType") == "Project")
         {
-                <div class="border p-4 rounded bg-light mx-auto" style="max-width: 1000px; overflow-y: auto;">
-                <h3 class="text-center">@Model.project.ProjectName</h3>
-                <p class="mb-2"><strong>Project Description:</strong> @Model.project.Description</p>
-                <p class="mb-2"><strong>Status:</strong></p>
-                <p class="@(Model.project.Status.ProjectStatusName == "Completed - Success" ? "text-success" :
+                <div class="border p-4 rounded mx-auto shadow-sm" style="max-width: 1200px; background-color: #f5f5f5;">
+                    <h3 class="text-center mb-2" style="color: #2d0042;">@Model.project.ProjectName</h3>
+                    <div class="text-center mb-4">
+                        <p class="lead" style="color: #2d0042; padding: 10px; border-radius: 8px; display: inline-block; background-color: #e8e0f5; border: 1px solid #5e3a87;">
+                            @Model.project.Description
+                        </p>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="p-3 rounded mb-3" style="background-color: #fff; border-left: 4px solid #5e3a87; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                <p class="mb-2"><strong style="color: #2d0042;">Status:</strong></p>
+                                <p class="@(Model.project.Status.ProjectStatusName == "Completed - Success" ? "text-success" :
                             Model.project.Status.ProjectStatusName == "Completed - Failed" ? "text-danger"  :
-                             Model.project.Status.ProjectStatusName == "Ongoing" ? "text-warning" : "")">
-                    @Model.project.Status.ProjectStatusName
-                </p>
-
-                <p class="mb-2"><strong>Start Date:</strong> @Model.project.StartDate</p>
-                <p class="mb-2"><strong>Due Date:</strong> @Model.project.DueDate</p>
-                <p class="mb-2"><strong>End Date:</strong> @(Model.project.EndDate != DateOnly.MinValue ? Model.project.EndDate.ToString() : "-")</p>
-
-                @if (HttpContext.Session.GetString("UserType") == "Admin" || HttpContext.Session.GetString("UserType") == "Project-Manager"
-             || Model.project.ProjectLeadID == HttpContext.Session.GetString("UserID"))
-                {
-                    <p class="mb-2"><strong>Update Status:</strong></p>
-                    <select asp-for="ProjectStatusID" class="form-control">
-                        @foreach (var status in Model.ProjectStatus)
-                        {
-                            <option value="@status.ProjectStatusID">@status.ProjectStatusName</option>
-                        }
-                    </select>
-                    <button type="submit" asp-page-handler="UpdateProject" class="btn btn-primary mt-2">Update Project</button>
-                }
-            </div>
-
-                <div class="border rounded p-3 mt-4 bg-white mx-auto" style="max-width: 1000px; overflow-x: auto; ">
-                <h4 class="mb-2">Project Members</h4>
-                <div class="d-flex flex-row" style="overflow-x: auto; white-space: nowrap;">
-                    @if (Model.project.GetEmployees().Any())
-                    {
-                        @foreach (var user in Model.project.GetEmployees())
-                        {
-                            <div class="user-card border p-3 rounded text-center mx-2" style="min-width: 220px;">
-                                <div class="@(user.UserID == Model.project.ProjectLeadID ? "text-success" : "")">
-                                    <strong>Name:</strong> @user.Name
-                                </div>
-                                @if (user.UserID == Model.project.ProjectLeadID)
-                                {
-                                    <div class="text-success"><strong>Project Lead</strong></div>
-                                }
-                                <div><strong>Role:</strong> @user.type.UserTypeName</div>
-                                <p><strong>Organization:</strong> @user.GetPartner().BusName</p>
+                             Model.project.Status.ProjectStatusName == "Ongoing" ? "text-warning" : "text-muted") fw-bold">
+                                    @Model.project.Status.ProjectStatusName
+                                </p>
                             </div>
-                        }
-                    }
-                    else
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3 rounded mb-3" style="background-color: #fff; border-left: 4px solid #5e3a87; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                <p class="mb-2"><strong style="color: #2d0042;">Start Date:</strong></p>
+                                <p style="color: #4a4a4a;">@Model.project.StartDate</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3 rounded mb-3" style="background-color: #fff; border-left: 4px solid #5e3a87; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                <p class="mb-2"><strong style="color: #2d0042;">Due Date:</strong></p>
+                                <p style="color: #4a4a4a;">@Model.project.DueDate</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    @if (HttpContext.Session.GetString("UserType") == "Admin" || HttpContext.Session.GetString("UserType") == "Project-Manager" || Model.project.ProjectLeadID == HttpContext.Session.GetString("UserID"))
                     {
-                        <span class="text-muted">No Employees Assigned</span>
+                        <div class="p-3 rounded mt-3" style="background-color: #fff; border-left: 4px solid #5e3a87; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                            <p class="mb-2"><strong style="color: #2d0042;">Update Status:</strong></p>
+                            <div class="d-flex align-items-center">
+                                <select asp-for="ProjectStatusID" class="form-control mr-2" style="width: 300px; border-color: #5e3a87;">
+                                    @foreach (var status in Model.ProjectStatus)
+                                    {
+                                        <option value="@status.ProjectStatusID">@status.ProjectStatusName</option>
+                                    }
+                                </select>
+                                <button type="submit" asp-page-handler="UpdateProject" class="btn text-white" style="background-color: #5e3a87;">Update Project</button>
+                            </div>
+                        </div>
                     }
                 </div>
-                    <div class="mt-3" style="">
+
+                <div class="border rounded p-4 mt-4 mx-auto shadow-sm" style="max-width: 1200px; background-color: #f5f5f5;">
+                    <h4 class="mb-3" style="color: #2d0042; border-bottom: 2px solid #5e3a87; padding-bottom: 8px;">Project Members</h4>
+                    <div class="d-flex flex-row mb-4" style="overflow-x: auto; white-space: nowrap;">
+                        @if (Model.project.GetEmployees().Any())
+                        {
+                            @foreach (var user in Model.project.GetEmployees())
+                            {
+                                <div class="user-card p-3 rounded text-center mx-2" style="min-width: 220px; background-color: #fff; border: 1px solid #ddd; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                    <div class="@(user.UserID == Model.project.ProjectLeadID ? "text-success fw-bold" : "")">
+                                        <strong style="color: #2d0042;">Name:</strong> @user.Name
+                                        @if (user.UserID == Model.project.ProjectLeadID)
+                                        {
+                                            <span class="badge ms-2" style="background-color: #5e3a87;">Lead</span>
+                                        }
+                                    </div>
+                                    <div><strong style="color: #2d0042;">Role:</strong> @user.type.UserTypeName</div>
+                                    <p class="mb-0"><strong style="color: #2d0042;">Organization:</strong> @user.GetPartner().BusName</p>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="text-muted p-3">No Employees Assigned</div>
+                        }
+                    </div>
+
                     @if (HttpContext.Session.GetString("UserType") == "Project-Manager" || HttpContext.Session.GetString("UserType") == "Admin")
                     {
-                        <p class="mb-2"><strong>Add Member To Project:</strong></p>
-                        <div class="form-group d-flex align-items-center">
-                            <label for="User_ID" class="mr-2">Select Member:</label>
-                            <select asp-for="User_ID" class="form-control mr-2" style="width: 200px;">
-                                @foreach (var member in Model.Users)
-                                {
-                                    <option value="@member.UserID">@member.Name</option>
-                                }
-                            </select>
-                            <button type="submit" asp-page-handler="AssignProject" class="btn btn-primary">Add</button>
-                        </div>
-
-                        <p class="mb-2"><strong>Add Project Lead:</strong></p>
-                        <div class="form-group d-flex align-items-center">
-                            <label for="User_ID2" class="mr-2">Select Lead:</label>
-                            <select asp-for="User_ID2" class="form-control mr-2" style="width: 200px;">
-                                @foreach (var member in Model.project.GetEmployees())
-                                {
-                                    <option value="@member.UserID">@member.Name</option>
-                                }
-                            </select>
-                            <button type="submit" asp-page-handler="UpdateProjectLead" class="btn btn-primary">Add</button>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="p-3 rounded" style="background-color: #fff; border-left: 4px solid #5e3a87; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                    <h5 class="mb-3" style="color: #2d0042;">Add Member To Project</h5>
+                                    <div class="form-group">
+                                        <label for="User_ID" class="form-label" style="color: #2d0042;">Select Member:</label>
+                                        <select asp-for="User_ID" class="form-control mb-2" style="border-color: #5e3a87;">
+                                            @foreach (var member in Model.Users)
+                                            {
+                                                <option value="@member.UserID">@member.Name</option>
+                                            }
+                                        </select>
+                                        <button type="submit" asp-page-handler="AssignProject" class="btn text-white w-100" style="background-color: #5e3a87;">Add Member</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 rounded" style="background-color: #fff; border-left: 4px solid #5e3a87; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                    <h5 class="mb-3" style="color: #2d0042;">Assign Project Lead</h5>
+                                    <div class="form-group">
+                                        <label for="User_ID2" class="form-label" style="color: #2d0042;">Select Lead:</label>
+                                        <select asp-for="User_ID2" class="form-control mb-2" style="border-color: #5e3a87;">
+                                            @foreach (var member in Model.project.GetEmployees())
+                                            {
+                                                <option value="@member.UserID">@member.Name</option>
+                                            }
+                                        </select>
+                                        <button type="submit" asp-page-handler="UpdateProjectLead" class="btn text-white w-100" style="background-color: #4a2d6b;">Assign Lead</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     }
                 </div>
 
-            </div>
-
-                <div class="border rounded p-4 mt-4 bg-white mx-auto" style="max-width: 1200px;;">
-                <h3 class="text-center mb-3">Project Tasks</h3>
-                <div class="table-responsive" style="max-height: 400px; overflow: auto;">
-                    <table class="table table-bordered table-striped" style="">
-                        <thead class="thead-light">
-                            <tr>
-                                <th style="white-space: nowrap;">Name</th>
-                                <th style="white-space: nowrap;">Description</th>
-                                <th style="white-space: nowrap;">Status</th>
-                                <th style="white-space: nowrap;">Start Date</th>
-                                <th style="white-space: nowrap;">Due Date</th>
-                                <th style="white-space: nowrap;">End Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var task in Model.project.GetTasks())
-                            {
-                                @if (
-                                   HttpContext.Session.GetString("UserType") == "Project-Manager" ||
-                                   HttpContext.Session.GetString("UserType") == "PI" ||
-                                   HttpContext.Session.GetString("UserType") == "CO-PI" ||
-                                  HttpContext.Session.GetString("UserType") == "Admin")
+                <div class="border rounded p-4 mt-4 mx-auto shadow-sm" style="max-width: 1200px; background-color: #f5f5f5;">
+                    <h3 class="text-center mb-4" style="color: #2d0042; border-bottom: 2px solid #5e3a87; padding-bottom: 8px;">Project Tasks</h3>
+                    <div class="table-responsive" style="max-height: 400px;">
+                        <table class="table table-bordered table-hover">
+                            <thead style="background-color: #5e3a87; color: white;">
+                                <tr>
+                                    <th style="min-width: 150px;">Name</th>
+                                    <th style="min-width: 300px;">Description</th>
+                                    <th>Status</th>
+                                    <th>Start Date</th>
+                                    <th>Due Date</th>
+                                    <th>End Date</th>
+                                </tr>
+                            </thead>
+                            <tbody style="background-color: #fff;">
+                                @foreach (var task in Model.project.GetTasks())
                                 {
-                                    <tr>
-                                        <td>
-                                            <button class="btn btn-link" asp-page-handler="SelectTask" asp-route-id="@task.TaskID">@task.TaskName</button>
-                                        </td>
-                                        <td style="white-space: normal; word-wrap: break-word; min-width: 300px;">@task.Description</td>
-                                        <td class="@(task.Completed ? "text-success" : "text-danger")">
-                                            @(task.Completed ? "Complete" : "Incomplete")
-                                        </td>
-                                        <td>@task.StartDate</td>
-                                        <td>@task.DueDate</td>
-                                        <td>@(task.EndDate > DateOnly.MinValue ? $"Complete - {task.EndDate}" : "Incomplete")</td>
-                                    </tr>
-                                }
-                                else
-                                {
-                                    @foreach (var assignedTask in Model.CurrentUser.GetAssignedTasks())
+                                    @if (HttpContext.Session.GetString("UserType") == "Project-Manager" ||
+                               HttpContext.Session.GetString("UserType") == "PI" ||
+                               HttpContext.Session.GetString("UserType") == "CO-PI" ||
+                               HttpContext.Session.GetString("UserType") == "Admin")
                                     {
-                                        @if (assignedTask.TaskID == task.TaskID)
+                                        <tr>
+                                            <td>
+                                                <button class="btn btn-link p-0" asp-page-handler="SelectTask" asp-route-id="@task.TaskID" style="color: #2d0042;">@task.TaskName</button>
+                                            </td>
+                                            <td style="white-space: normal;">@task.Description</td>
+                                            <td class="@(task.Completed ? "text-success" : "text-danger") fw-bold">
+                                                @(task.Completed ? "Complete" : "Incomplete")
+                                            </td>
+                                            <td>@task.StartDate</td>
+                                            <td>@task.DueDate</td>
+                                            <td>@(task.EndDate > DateOnly.MinValue ? task.EndDate.ToString() : "-")</td>
+                                        </tr>
+                                    }
+                                    else
+                                    {
+                                        @foreach (var assignedTask in Model.CurrentUser.GetAssignedTasks())
                                         {
-                                            <tr>
-                                                <td>
-                                                    <button class="btn btn-link" asp-page-handler="SelectTask" asp-route-id="@task.TaskID">@task.TaskName</button>
-                                                </td>
-                                                    <td style="white-space: normal; word-wrap: break-word; min-width: 300px;;">@task.Description</td>
-                                                <td class="@(task.Completed ? "text-success" : "text-danger")">
-                                                    @(task.Completed ? "Complete" : "Incomplete")
-                                                </td>
-                                                <td>@task.StartDate</td>
-                                                <td>@task.DueDate</td>
-                                                <td>@(task.EndDate > DateOnly.MinValue ? $"Complete - {task.EndDate}" : "Incomplete")</td>
-                                            </tr>
+                                            @if (assignedTask.TaskID == task.TaskID)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <button class="btn btn-link p-0" asp-page-handler="SelectTask" asp-route-id="@task.TaskID" style="color: #2d0042;">@task.TaskName</button>
+                                                    </td>
+                                                    <td style="white-space: normal;">@task.Description</td>
+                                                    <td class="@(task.Completed ? "text-success" : "text-danger") fw-bold">
+                                                        @(task.Completed ? "Complete" : "Incomplete")
+                                                    </td>
+                                                    <td>@task.StartDate</td>
+                                                    <td>@task.DueDate</td>
+                                                    <td>@(task.EndDate > DateOnly.MinValue ? task.EndDate.ToString() : "-")</td>
+                                                </tr>
+                                            }
                                         }
                                     }
                                 }
-                               
-                            }
-                        </tbody>
-                    </table>
-                </div>
-                @if (HttpContext.Session.GetString("UserID") == Model.project.ProjectLeadID)
-                {
-                        <div class="text-center mt-3" style="">
-                        <p class="mb-3" style="font-size: 1.5rem;"><strong>Add Task:</strong></p>
-
-                        <label class="form-label" style="font-size: 1.2rem;">Enter Task Details</label>
-                        <input asp-for="TaskName" class="form-control mx-auto" style="max-width: 600px; font-size: 1.2rem;" placeholder="Enter Task Name">
-
-                        <textarea asp-for="TaskDesc" class="form-control mx-auto mt-3" style="max-width: 600px; font-size: 1.2rem;" placeholder="Enter Description" rows="4"></textarea>
-
-                        <label class="form-label mt-3" style="font-size: 1.2rem;">Due Date</label>
-                        <input asp-for="Date" class="form-control mx-auto" style="max-width: 250px; font-size: 1.2rem;" type="date">
-
-                        <button type="submit" asp-page-handler="AddTask" class="btn btn-primary mt-4" style="font-size: 1.2rem; padding: 10px 20px;">Add Task</button>
+                            </tbody>
+                        </table>
                     </div>
-                }
-            </div>
 
+                    @if (HttpContext.Session.GetString("UserID") == Model.project.ProjectLeadID)
+                    {
+                        <div class="p-4 rounded mt-4" style="background-color: #fff; border-left: 4px solid #5e3a87; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                            <h4 class="text-center mb-4" style="color: #2d0042;">Add New Task</h4>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label" style="color: #2d0042;">Task Name</label>
+                                    <input asp-for="TaskName" class="form-control" placeholder="Enter Task Name" style="border-color: #5e3a87;">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label" style="color: #2d0042;">Due Date</label>
+                                    <input asp-for="Date" class="form-control" type="date" style="border-color: #5e3a87;">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" style="color: #2d0042;">Description</label>
+                                <textarea asp-for="TaskDesc" class="form-control" placeholder="Enter Description" rows="3" style="border-color: #5e3a87;"></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" asp-page-handler="AddTask" class="btn text-white px-4" style="background-color: #5e3a87;">Add Task</button>
+                            </div>
+                        </div>
+                    }
+                </div>
 
-                <div class="border rounded p-4 mt-4 bg-white mx-auto" style="max-width: 1200px; margin: 0 auto;">
-                <h3 class="text-center mb-3">Project Notes</h3>
-                    <div class="table-responsive" style="max-height: 800px; overflow: auto;">
-                    <table class="table table-bordered table-striped" style="">
-                        <thead class="thead-light">
-                            <tr>
-                                <th style="white-space: nowrap;">From</th>
-                                <th style="white-space: nowrap;">To</th>
-                                <th style="white-space: nowrap;">Note</th>
-                                <th style="white-space: nowrap;">Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var Note in Model.project.GetNotes())
-                            {
+                <div class="border rounded p-4 mt-4 mx-auto shadow-sm" style="max-width: 1200px; background-color: #f5f5f5;">
+                    <h3 class="text-center mb-4" style="color: #2d0042; border-bottom: 2px solid #5e3a87; padding-bottom: 8px;">Project Notes</h3>
+                    <div class="table-responsive" style="max-height: 400px;">
+                        <table class="table table-bordered table-hover">
+                            <thead style="background-color: #5e3a87; color: white;">
                                 <tr>
-                                    <td>@Note.Author</td>
-                                    <td>@Note.Recipient</td>
-                                    <td style="white-space: normal; word-wrap: break-word; Max-width: 400px;">@Note.Notes</td>
-                                    <td>@Note.Date</td>
+                                    <th style="min-width: 150px;">From</th>
+                                    <th style="min-width: 150px;">To</th>
+                                    <th>Note</th>
+                                    <th style="min-width: 120px;">Date</th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-                <div class="text-center mt-3">
-                    <p class="mb-3" style="font-size: 1.5rem;"><strong>Add Note:</strong></p>
-                    <label class="form-label" style="font-size: 1.2rem;">Add Project Note</label>
-                    <input asp-for="NoteTo" class="form-control mx-auto" style="max-width: 600px; font-size: 1.2rem;" placeholder="Enter Recipient">
-                    <textarea asp-for="Note" class="form-control mx-auto mt-3" style="max-width: 600px; font-size: 1.2rem;" placeholder="Enter Description" rows="4"></textarea>
-                    <button type="submit" asp-page-handler="AddNote" asp-route-id="@Model.project.ProjectID" class="btn btn-primary mt-4" style="font-size: 1.2rem; padding: 10px 20px;">Add Note</button>
-                </div>
-            </div>
+                            </thead>
+                            <tbody style="background-color: #fff;">
+                                @foreach (var Note in Model.project.GetNotes())
+                                {
+                                    <tr>
+                                        <td>@Note.Author</td>
+                                        <td>@Note.Recipient</td>
+                                        <td style="white-space: normal;">@Note.Notes</td>
+                                        <td>@Note.Date</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
 
+                    <div class="p-4 rounded mt-4" style="background-color: #fff; border-left: 4px solid #5e3a87; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                        <h4 class="text-center mb-4" style="color: #2d0042;">Add New Note</h4>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label" style="color: #2d0042;">Recipient</label>
+                                <input asp-for="NoteTo" class="form-control" placeholder="Enter Recipient" style="border-color: #5e3a87;">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label" style="color: #2d0042;">Date</label>
+                                <input type="text" class="form-control" value="@DateTime.Now.ToShortDateString()" readonly style="border-color: #5e3a87;">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" style="color: #2d0042;">Note</label>
+                            <textarea asp-for="Note" class="form-control" placeholder="Enter your note here" rows="3" style="border-color: #5e3a87;"></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" asp-page-handler="AddNote" asp-route-id="@Model.project.ProjectID" class="btn text-white px-4" style="background-color: #4a2d6b;">Add Note</button>
+                        </div>
+                    </div>
+                </div>
         }
 
+
+
+
+
+
+
+
+
+
         @if (HttpContext.Session.GetString("ItemType") == "Grant")
-        {
-                <div class="border rounded p-4 bg-white mx-auto" style="max-width: 1500px; max-height: 700px; overflow-y: auto;">
-                <h4 class="text-center mb-3">@Model.grant.GrantName</h4>
-                <p class="mb-2"><strong>Funding Agency:</strong> @Model.grant.FundingAgency</p>
-                <p class="mb-2"><strong>Grant Category:</strong> @Model.grant.Category.CategoryName</p>
+            {
+                <div class="border rounded p-4 mx-auto shadow-sm" style="max-width: 1500px; max-height: 700px; overflow-y: auto; background-color: #f5f5f5;">
+                    <h4 class="text-center mb-3" style="color: #2d0042;">@Model.grant.GrantName</h4>
 
-                <p class="
-            @(Model.grant.Status.GrantStatusName == "Accepted" ? "text-success" :
-            Model.grant.Status.GrantStatusName == "Pending" ? "text-warning" :
-             Model.grant.Status.GrantStatusName == "Rejected" ? "text-danger" : "")">
-                    <strong>Status:</strong> @Model.grant.Status.GrantStatusName</p>
+                    <div class="p-3 mb-3 rounded" style="background-color: #fff; border-left: 4px solid #5e3a87;">
+                        <p class="mb-2"><strong style="color: #2d0042;">Funding Agency:</strong> @Model.grant.FundingAgency</p>
+                        <p class="mb-2"><strong style="color: #2d0042;">Grant Category:</strong> @Model.grant.Category.CategoryName</p>
+                        <p class="@(Model.grant.Status.GrantStatusName == "Accepted" ? "text-success" :
+                Model.grant.Status.GrantStatusName == "Pending" ? "text-warning" :
+                 Model.grant.Status.GrantStatusName == "Rejected" ? "text-danger" : "") fw-bold">
+                            <strong style="color: #2d0042;">Status:</strong> @Model.grant.Status.GrantStatusName
+                        </p>
+                    </div>
 
-               
-                @if (Model.grant.Status.GrantStatusName != "InProgress"){
-                <p class="mb-2"><strong>Submission Date:</strong> @Model.grant.SubmissionDate</p>
-                }
-                <p class="mb-2"><strong>Due Date:</strong> @Model.grant.DueDate</p>
-                <p class="mb-2"><strong>Award Amount:</strong> @Model.grant.Amount</p>
-                    <div class="mb-3" style="">
-                    <p class="mb-2"><strong>Update Status:</strong></p>
-                    <select asp-for="GrantStatusID" class="form-control">
-                        @foreach (var status in Model.GrantStatus)
-                        {
-                            <option value="@status.StatusID">@status.GrantStatusName</option>
-                        }
-                    </select>
-                    <button type="submit" class="btn btn-primary mt-2 w-100" asp-page-handler="UpdateGrant">
-                        <strong>Update Grant Status</strong>
-                    </button>
-                </div>
-                @if (Model.grant.Status.GrantStatusName == "Accepted")
-                {
-                    <p class="mb-2"><strong>Award Date:</strong> @Model.grant.AwardDate</p>
-                        <div class="border rounded p-3 bg-light mt-4" style="max-width: 900px; margin: auto;">
-                        @if (Model.grant.GetProject() != null)
-                        {
-                                <h5 class="text-center mb-4">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="p-3 mb-3 rounded" style="background-color: #fff; border-left: 4px solid #5e3a87;">
+                                @if (Model.grant.Status.GrantStatusName != "InProgress")
+                                {
+                                    <p class="mb-2"><strong style="color: #2d0042;">Submission Date:</strong> @Model.grant.SubmissionDate</p>
+                                }
+                                <p class="mb-2"><strong style="color: #2d0042;">Due Date:</strong> @Model.grant.DueDate</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3 mb-3 rounded" style="background-color: #fff; border-left: 4px solid #5e3a87;">
+                                <p class="mb-2"><strong style="color: #2d0042;">Award Amount:</strong> @Model.grant.Amount</p>
+                                @if (Model.grant.Status.GrantStatusName == "Accepted")
+                                {
+                                    <p class="mb-2"><strong style="color: #2d0042;">Award Date:</strong> @Model.grant.AwardDate</p>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3 mb-3 rounded" style="background-color: #fff; border-left: 4px solid #5e3a87;">
+                                <p class="mb-2"><strong style="color: #2d0042;">Update Status:</strong></p>
+                                <select asp-for="GrantStatusID" class="form-control mb-2" style="border-color: #5e3a87;">
+                                    @foreach (var status in Model.GrantStatus)
+                                    {
+                                        <option value="@status.StatusID">@status.GrantStatusName</option>
+                                    }
+                                </select>
+                                <button type="submit" class="btn text-white w-100" style="background-color: #5e3a87;" asp-page-handler="UpdateGrant">
+                                    <strong>Update Grant Status</strong>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    @if (Model.grant.Status.GrantStatusName == "Accepted")
+                    {
+                        <div class="border rounded p-3 mt-4 mx-auto" style="max-width: 900px; background-color: #fff; border-left: 4px solid #5e3a87;">
+                            @if (Model.grant.GetProject() != null)
+                            {
+                                <h5 class="text-center mb-4" style="color: #2d0042;">
                                     <strong>Associated Project</strong>
                                 </h5>
                                 <div class="text-center">
-                                    <button class="btn btn-link mb-3"
+                                    <button class="btn btn-link mb-3" style="color: #5e3a87;"
                                             asp-page-handler="SelectProject"
                                             asp-route-id="@Model.grant.GetProject().ProjectID">
                                         @Model.grant.GetProject().ProjectName
                                     </button>
                                 </div>
-                                <p class="text-center text-muted">@Model.grant.GetProject().Description</p>
-
-                        }
-                        else
-                        {
-                                <div class="container mt-4" style="">
-                                <h1 class="mb-4">Start A Project</h1>
-
-                                <div class="form-group row mb-3">
-                                    <label class="col-sm-2 col-form-label" for="Project_Name">Project Name</label>
-                                    <div class="col-sm-10">
-                                        <input asp-for="ProjectName" class="form-control" />
-                                    </div>
-                                </div>
-
-                                <div class="form-group row mb-3">
-                                    <label class="col-sm-2 col-form-label" for="Project_Description">Project Description</label>
-                                    <div class="col-sm-10">
-                                        <textarea asp-for="ProjectDesc" class="form-control" rows="3"></textarea>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row mb-3">
-                                    <label class="col-sm-2 col-form-label" for="DueDate">Due Date</label>
-                                    <div class="col-sm-10">
-                                        <input asp-for="Date" class="form-control" type="date" />
-                                    </div>
-                                </div>
-
-                                <div class="form-group row mt-4">
-                                    <div class="col-sm-10 offset-sm-2">
-                                        <button type="submit" class="btn btn-primary me-2" asp-page-handler="CreateProject" asp-route-id="@Model.grant.GrantID">Submit</button>
-                                        <button type="submit" class="btn btn-secondary me-2" asp-page-handler="PopulateHandler">Populate</button>
-                                        <button type="submit" class="btn btn-danger" asp-page-handler="ClearHandler">Clear</button>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                    </div>
-                }
-
-                    <div class="task-container" style="max-height: 800px; overflow-y: auto;">
-                    <table class="table table-bordered table-striped mt-4" style="width: 100%; word-wrap: break-word;">
-                        <thead class="thead-light">
-                            <tr>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Status</th>
-                                <th>Start Date</th>
-                                <th>Due Date</th>
-                                <th>End Date</th>
-                                <th>Assign Task</th>
-                                <th>Mark As Completed</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var task in Model.grant.GetSubTasks())
-                            {
-                                <tr>
-                                    <td>@task.TaskName</td>
-
-                                    <td style="max-width: 300px; word-wrap: break-word;">@task.Description</td>
-
-                                    <td class="@(task.Completed ? "text-success" : "text-danger")">
-                                        @(task.Completed ? "Complete" : "Incomplete")
-                                    </td>
-
-                                    <td>@task.StartDate</td>
-                                    <td>@task.DueDate</td>
-                                    <td>@(task.EndDate != DateOnly.MinValue ? task.EndDate.ToString() : "-")</td>
-
-                                    @if (task.isAssigned())
-                                    {
-                                        <td class="align-middle">
-                                            Member Assigned: <br />
-                                            <strong>@task.GetAssignedUser().Name</strong>
-                                        </td>
-                                    }
-                                    else
-                                    {
-                                        <td class="pt-3 align-top">
-                                            @if (HttpContext.Session.GetString("UserType") == "Project-Manager" || HttpContext.Session.GetString("UserType") == "Admin")
-                                            {
-                                                <div class="mb-2"><strong>Add Member To Task:</strong></div>
-                                                <div class="form-group d-flex flex-wrap align-items-center gap-2">
-                                                    <label for="User_ID" class="mb-0 mr-2">Select:</label>
-                                                    <select asp-for="User_ID" class="form-control mb-2 mr-2" style="width: 200px;">
-                                                        @foreach (var member in Model.Users)
-                                                        {
-                                                            <option value="@member.UserID">@member.Name</option>
-                                                        }
-                                                    </select>
-                                                    <button type="submit" asp-page-handler="AssignChildTask" asp-route-ID="@task.ChildTaskID" class="btn btn-sm btn-primary mb-2">
-                                                        Assign
-                                                    </button>
-                                                </div>
-                                            }
-                                        </td>
-                                    }
-
-                                    @if (task.Completed || !task.isAssigned())
-                                    {
-                                        <td class="align-middle">
-                                            <button type="submit" asp-page-handler="UpdateChildTask" asp-route-ID="@task.ChildTaskID" class="btn btn-sm btn-primary mt-2" disabled>
-                                                Complete
-                                            </button>
-                                        </td>
-                                    }
-                                    else
-                                    {
-                                        <td class="align-middle">
-                                            <button type="submit" asp-page-handler="UpdateChildTask" asp-route-ID="@task.ChildTaskID" class="btn btn-sm btn-primary mt-2">
-                                                Complete
-                                            </button>
-                                        </td>
-                                    }
-                                </tr>
+                                <p class="text-center" style="color: #4a4a4a;">@Model.grant.GetProject().Description</p>
                             }
-                        </tbody>
-                    </table>
-                </div>
+                            else
+                            {
+                                <div class="container mt-4">
+                                    <h1 class="mb-4" style="color: #2d0042;">Start A Project</h1>
 
-                @if (HttpContext.Session.GetString("UserType") == "Project-Manager" ||
-                     HttpContext.Session.GetString("UserType") == "PI" ||
-                     HttpContext.Session.GetString("UserType") == "CO-PI" ||
-                     HttpContext.Session.GetString("UserType") == "Admin")
-                {
-                        <div class="text-center mt-3" style="">
-                        <p class="mb-3" style="font-size: 1.5rem;"><strong>Add Task:</strong></p>
+                                    <div class="form-group row mb-3">
+                                        <label class="col-sm-2 col-form-label" for="Project_Name" style="color: #2d0042;">Project Name</label>
+                                        <div class="col-sm-10">
+                                            <input asp-for="ProjectName" class="form-control" style="border-color: #5e3a87;" />
+                                        </div>
+                                    </div>
 
-                        <label class="form-label" style="font-size: 1.2rem;">Enter Task Details</label>
-                        <input asp-for="SubTaskName" class="form-control mx-auto" style="max-width: 600px; font-size: 1.2rem;" placeholder="Enter Task Name">
+                                    <div class="form-group row mb-3">
+                                        <label class="col-sm-2 col-form-label" for="Project_Description" style="color: #2d0042;">Description</label>
+                                        <div class="col-sm-10">
+                                            <textarea asp-for="ProjectDesc" class="form-control" rows="3" style="border-color: #5e3a87;"></textarea>
+                                        </div>
+                                    </div>
 
-                        <textarea asp-for="SubTaskDesc" class="form-control mx-auto mt-3" style="max-width: 600px; font-size: 1.2rem;" placeholder="Enter Description" rows="4"></textarea>
+                                    <div class="form-group row mb-3">
+                                        <label class="col-sm-2 col-form-label" for="DueDate" style="color: #2d0042;">Due Date</label>
+                                        <div class="col-sm-10">
+                                            <input asp-for="Date" class="form-control" type="date" style="border-color: #5e3a87;" />
+                                        </div>
+                                    </div>
 
-                        <label class="form-label mt-3" style="font-size: 1.2rem;">Due Date</label>
-                        <input asp-for="Date" class="form-control mx-auto" style="max-width: 250px; font-size: 1.2rem;" type="date">
+                                    <div class="form-group row mt-4">
+                                        <div class="col-sm-10 offset-sm-2">
+                                            <button type="submit" class="btn text-white me-2" style="background-color: #5e3a87;" asp-page-handler="CreateProject" asp-route-id="@Model.grant.GrantID">Submit</button>
+                                            <button type="submit" class="btn me-2" style="background-color: #e8e0f5; color: #2d0042;" asp-page-handler="PopulateHandler">Populate</button>
+                                            <button type="submit" class="btn text-white" style="background-color: #a52a2a;" asp-page-handler="ClearHandler">Clear</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
 
-                        <button type="submit" asp-page-handler="AddChildTask" asp-route-id="@Model.grant.GrantID" class="btn btn-primary mt-4" style="font-size: 1.2rem; padding: 10px 20px;">Add Task</button>
+                    <div class="task-container mt-4" style="max-height: 800px; overflow-y: auto;">
+                        <table class="table table-bordered table-hover" style="width: 100%; word-wrap: break-word; background-color: #fff;">
+                            <thead style="background-color: #5e3a87; color: white;">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Status</th>
+                                    <th>Start Date</th>
+                                    <th>Due Date</th>
+                                    <th>End Date</th>
+                                    <th>Assign Task</th>
+                                    <th>Mark As Completed</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var task in Model.grant.GetSubTasks())
+                                {
+                                    <tr>
+                                        <td>@task.TaskName</td>
+                                        <td style="max-width: 300px; word-wrap: break-word;">@task.Description</td>
+                                        <td class="@(task.Completed ? "text-success" : "text-danger") fw-bold">
+                                            @(task.Completed ? "Complete" : "Incomplete")
+                                        </td>
+                                        <td>@task.StartDate</td>
+                                        <td>@task.DueDate</td>
+                                        <td>@(task.EndDate != DateOnly.MinValue ? task.EndDate.ToString() : "-")</td>
+
+                                        @if (task.isAssigned())
+                                        {
+                                            <td class="align-middle">
+                                                Member Assigned: <br />
+                                                <strong>@task.GetAssignedUser().Name</strong>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td class="pt-3 align-top">
+                                                @if (HttpContext.Session.GetString("UserType") == "Project-Manager" || HttpContext.Session.GetString("UserType") == "Admin")
+                                                {
+                                                    <div class="mb-2"><strong style="color: #2d0042;">Add Member To Task:</strong></div>
+                                                    <div class="form-group d-flex flex-wrap align-items-center gap-2">
+                                                        <label for="User_ID" class="mb-0 mr-2" style="color: #2d0042;">Select:</label>
+                                                        <select asp-for="User_ID" class="form-control mb-2 mr-2" style="width: 200px; border-color: #5e3a87;">
+                                                            @foreach (var member in Model.Users)
+                                                            {
+                                                                <option value="@member.UserID">@member.Name</option>
+                                                            }
+                                                        </select>
+                                                        <button type="submit" asp-page-handler="AssignChildTask" asp-route-ID="@task.ChildTaskID" class="btn btn-sm text-white mb-2" style="background-color: #5e3a87;">
+                                                            Assign
+                                                        </button>
+                                                    </div>
+                                                }
+                                            </td>
+                                        }
+
+                                        @if (task.Completed || !task.isAssigned())
+                                        {
+                                            <td class="align-middle">
+                                                <button type="submit" asp-page-handler="UpdateChildTask" asp-route-ID="@task.ChildTaskID" class="btn btn-sm text-white mt-2" style="background-color: #5e3a87;" disabled>
+                                                    Complete
+                                                </button>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td class="align-middle">
+                                                <button type="submit" asp-page-handler="UpdateChildTask" asp-route-ID="@task.ChildTaskID" class="btn btn-sm text-white mt-2" style="background-color: #5e3a87;">
+                                                    Complete
+                                                </button>
+                                            </td>
+                                        }
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
                     </div>
-                }
 
-                    <div class="border rounded p-4 mt-4 bg-white mx-auto" style="max-width: 1200px; margin-top: 50px;">
-                        <h3 class="text-center mb-3">Grant Notes</h3>
+                    @if (HttpContext.Session.GetString("UserType") == "Project-Manager" ||
+            HttpContext.Session.GetString("UserType") == "PI" ||
+            HttpContext.Session.GetString("UserType") == "CO-PI" ||
+            HttpContext.Session.GetString("UserType") == "Admin")
+                    {
+                        <div class="text-center mt-3 p-4 rounded" style="background-color: #fff; border-left: 4px solid #5e3a87;">
+                            <h4 class="mb-3" style="color: #2d0042;">Add New Task</h4>
+
+                            <div class="form-group row mb-3">
+                                <label class="col-form-label" style="color: #2d0042;">Task Details</label>
+                                <input asp-for="SubTaskName" class="form-control mx-auto" style="max-width: 600px; border-color: #5e3a87;" placeholder="Enter Task Name">
+                            </div>
+
+                            <div class="form-group row mb-3">
+                                <textarea asp-for="SubTaskDesc" class="form-control mx-auto" style="max-width: 600px; border-color: #5e3a87;" placeholder="Enter Description" rows="4"></textarea>
+                            </div>
+
+                            <div class="form-group row mb-3">
+                                <label class="col-form-label" style="color: #2d0042;">Due Date</label>
+                                <input asp-for="Date" class="form-control mx-auto" style="max-width: 250px; border-color: #5e3a87;" type="date">
+                            </div>
+
+                            <button type="submit" asp-page-handler="AddChildTask" asp-route-id="@Model.grant.GrantID" class="btn text-white" style="background-color: #5e3a87; padding: 10px 20px;">Add Task</button>
+                        </div>
+                    }
+
+                    <div class="border rounded p-4 mt-4 mx-auto" style="max-width: 1200px; background-color: #fff; border-left: 4px solid #5e3a87;">
+                        <h3 class="text-center mb-3" style="color: #2d0042; border-bottom: 2px solid #5e3a87; padding-bottom: 8px;">Grant Notes</h3>
                         <div class="table-responsive" style="max-height: 800px; overflow: auto;">
-                            <table class="table table-bordered table-striped">
-                                <thead class="thead-light">
+                            <table class="table table-bordered table-hover">
+                                <thead style="background-color: #5e3a87; color: white;">
                                     <tr>
                                         <th style="white-space: nowrap;">From</th>
                                         <th style="white-space: nowrap;">To</th>
@@ -425,270 +506,290 @@
                         </div>
                     </div>
 
-                    <style>
-                        .container-center {
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            min-height: 100vh;
-                        }
-                    </style>
-
-                    <div class="text-center mt-3">
-                        <p class="mb-3" style="font-size: 1.5rem;"><strong>Add Note:</strong></p>
-                        <label class="form-label" style="font-size: 1.2rem;">Add Note</label>
-                        <input asp-for="NoteTo" class="form-control mx-auto" style="max-width: 600px; font-size: 1.2rem;" placeholder="Enter Recipient">
-                        <textarea asp-for="Note" class="form-control mx-auto mt-3" style="max-width: 600px; font-size: 1.2rem;" placeholder="Enter Description" rows="4"></textarea>
-                        <button type="submit" asp-page-handler="AddNote" asp-route-id="@Model.grant.GrantID" class="btn btn-primary mt-4" style="font-size: 1.2rem; padding: 10px 20px;">Add Note</button>
+                    <div class="text-center mt-3 p-4 rounded" style="background-color: #fff; border-left: 4px solid #5e3a87;">
+                        <h4 class="mb-3" style="color: #2d0042;">Add New Note</h4>
+                        <div class="form-group row mb-3">
+                            <label class="col-form-label" style="color: #2d0042;">Recipient</label>
+                            <input asp-for="NoteTo" class="form-control mx-auto" style="max-width: 600px; border-color: #5e3a87;" placeholder="Enter Recipient">
+                        </div>
+                        <div class="form-group row mb-3">
+                            <textarea asp-for="Note" class="form-control mx-auto" style="max-width: 600px; border-color: #5e3a87;" placeholder="Enter Description" rows="4"></textarea>
+                        </div>
+                        <button type="submit" asp-page-handler="AddNote" asp-route-id="@Model.grant.GrantID" class="btn text-white" style="background-color: #5e3a87; padding: 10px 20px;">Add Note</button>
                     </div>
                 </div>
 
         }
+
+
+
+
+
+
+
 
         @if (HttpContext.Session.GetString("ItemType") == "Partner")
         {
-                <div class="border p-4 rounded bg-light mx-auto" style="overflow-y: auto;">
-                <h3 class="text-center">@Model.partner.BusName</h3>
+                <div class="border p-4 rounded mx-auto shadow-sm" style="overflow-y: auto; background-color: #f5f5f5;">
+                    <h3 class="text-center" style="color: #2d0042;">@Model.partner.BusName</h3>
 
-                <p class="mb-2">
-                    <strong>Partner Status:</strong>
-                    <span class="
-                @(Model.partner.Status.Status_Flag == "Prospect" ? "text-secondary" :
-              Model.partner.Status.Status_Flag == "Initial Contact" ? "text-danger" :
-              Model.partner.Status.Status_Flag == "In Negotiation" ? "text-warning" :
-              Model.partner.Status.Status_Flag == "Memo-Signed" ? "text-success" :
-              Model.partner.Status.Status_Flag == "Active Partner" ? "text-primary" : "")">
-                        @Model.partner.Status.Status_Flag
-                    </span>
-                </p>
+                    <div class="p-3 mb-3 rounded" style="background-color: #fff; border-left: 4px solid #5e3a87;">
+                        <p class="mb-2">
+                            <strong style="color: #2d0042;">Partner Status:</strong>
+                            <span class="fw-bold
+                    @(Model.partner.Status.Status_Flag == "Prospect" ? "text-secondary" :
+                Model.partner.Status.Status_Flag == "Initial Contact" ? "text-danger" :
+                Model.partner.Status.Status_Flag == "In Negotiation" ? "text-warning" :
+                Model.partner.Status.Status_Flag == "Memo-Signed" ? "text-success" :
+                Model.partner.Status.Status_Flag == "Active Partner" ? "text-primary" : "")">
+                                @Model.partner.Status.Status_Flag
+                            </span>
+                        </p>
 
-                <p class="mb-2"><strong>Update Status:</strong></p>
-                <select asp-for="PartnerStatusID" class="form-control">
-                    @foreach (var status in Model.PartnerStatus)
-                    {
-                        <option value="@status.Partner_Status_ID">@status.Status_Flag</option>
-                    }
-                </select>
+                        <div class="mb-3">
+                            <p class="mb-2"><strong style="color: #2d0042;">Update Status:</strong></p>
+                            <select asp-for="PartnerStatusID" class="form-control mb-2" style="border-color: #5e3a87;">
+                                @foreach (var status in Model.PartnerStatus)
+                                {
+                                    <option value="@status.Partner_Status_ID">@status.Status_Flag</option>
+                                }
+                            </select>
+                            <button type="submit" class="btn text-white w-100" style="background-color: #5e3a87;" asp-page-handler="UpdatePartner">
+                                <strong>Update Partner Status</strong>
+                            </button>
+                        </div>
+                    </div>
 
-                <button type="submit" class="btn btn-primary mt-2" asp-page-handler="UpdatePartner">
-                    <strong>Update Partner Status</strong>
-                </button>
+                    <div class="p-3 mb-3 rounded" style="background-color: #fff; border-left: 4px solid #5e3a87;">
+                        <p class="mb-2"><strong style="color: #2d0042;">Description:</strong> @Model.partner.Description</p>
+                        <p class="mb-2"><strong style="color: #2d0042;">Address:</strong> @Model.partner.Address</p>
+                        <p class="mb-2"><strong style="color: #2d0042;">Phone:</strong> @Model.partner.Phone</p>
+                        <p class="mb-2"><strong style="color: #2d0042;">Email:</strong> @Model.partner.Email</p>
+                    </div>
 
-                <p class="mb-2"><strong>Description:</strong> @Model.partner.Description</p>
-                <p class="mb-2"><strong>Address:</strong> @Model.partner.Address</p>
-                <p class="mb-2"><strong>Phone:</strong> @Model.partner.Phone</p>
-                <p class="mb-2"><strong>Email:</strong> @Model.partner.Email</p>
+                    <div class="p-3 mb-3 rounded" style="max-height: 600px; overflow-y: auto; background-color: #fff; border-left: 4px solid #5e3a87; width: 80%; margin: 0 auto;">
+                        <p class="mb-2 text-center"><strong style="color: #2d0042;">Associated Projects:</strong></p>
+                        <ul class="list-unstyled">
+                            @foreach (var project in Model.partner.GetAssociatedProjects())
+                            {
+                                <li class="mb-2">
+                                    <button class="btn btn-link p-0" style="color: #5e3a87;" asp-page-handler="SelectProject" asp-route-id="@project.ProjectID">@project.ProjectName</button>
+                                </li>
+                            }
+                        </ul>
+                    </div>
 
-                <div style="max-height: 600px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; width: 80%; margin: 0 auto; text-align: center;">
-                <p class="mb-2"><strong>Associated Projects:</strong></p>
-                <ul class="list-unstyled">
-                    @foreach (var project in Model.partner.GetAssociatedProjects())
-                    {
-                        <li>
-                            <button class="btn btn-link p-0" asp-page-handler="SelectProject" asp-route-id="@project.ProjectID">@project.ProjectName</button>
-                        </li>
-                    }
-                </ul>
+                    <div class="p-3 mb-3 rounded" style="max-height: 600px; overflow-y: auto; background-color: #fff; border-left: 4px solid #5e3a87; width: 80%; margin: 0 auto;">
+                        <p class="mb-2 text-center"><strong style="color: #2d0042;">Meeting Minutes:</strong></p>
+                        <ul class="list-unstyled" style="padding-left: 0; margin: 0;">
+                            @foreach (var meeting in Model.partner.GetMeetingMinutes())
+                            {
+                                <li class="mb-3 p-2" style="border: 1px solid #e0d0ff; border-radius: 5px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                                    <div>
+                                        <strong style="color: #2d0042;">Notes:</strong> @meeting.MeetingNotes
+                                    </div>
+                                    <div>
+                                        <strong style="color: #2d0042;">Date:</strong> @meeting.Date
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+
+                    <div class="p-3 rounded" style="background-color: #fff; border-left: 4px solid #5e3a87;">
+                        <h5 class="mb-3" style="color: #2d0042;">Add Meeting Minute</h5>
+                        <div class="form-group mb-3">
+                            <label for="Note" class="form-label" style="color: #2d0042;">Notes</label>
+                            <textarea asp-for="Note" class="form-control" style="border-color: #5e3a87;" placeholder="Enter meeting minute details" rows="3"></textarea>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="Date" class="form-label" style="color: #2d0042;">Date</label>
+                            <input asp-for="Date" type="date" class="form-control" style="border-color: #5e3a87;" />
+                        </div>
+                        <button type="submit" asp-page-handler="AddMeeting" class="btn text-white" style="background-color: #5e3a87;">Add Meeting Minute</button>
+                    </div>
                 </div>
-                <p class="mb-2 text-center"><strong>Meeting Minutes:</strong></p>
-                    <div style="max-height: 600px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; width: 80%; margin: 0 auto; text-align: center;">
-                    <ul class="list-unstyled" style="padding-left: 0; margin: 0; list-style-position: inside;">
-                        @foreach (var meeting in Model.partner.GetMeetingMinutes())
-                        {
-                            <li style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; border-radius: 5px; max-width: 600px; word-wrap: break-word; margin-left: auto; margin-right: auto;">
-                                <div>
-                                    <strong>Notes:</strong> @meeting.MeetingNotes
-                                </div>
-                                <div>
-                                    <strong>Date:</strong> @meeting.Date
-                                </div>
-                            </li>
-                        }
-                    </ul>
-                </div>
-
-
-                    <div class="col-sm-10" style="">
-                    <p class="mb-2"><strong>Add Meeting Minute:</strong></p>
-
-                    <label for="Note" class="form-label">Notes</label>
-                    <textarea asp-for="Note" class="form-control" placeholder="Enter meeting minute details" rows="3"></textarea>
-
-                    <label for="Date" class="form-label mt-2">Date</label>
-                    <input asp-for="Date" type="date" class="form-control" />
-
-                    <button type="submit" asp-page-handler="AddMeeting" class="btn btn-primary mt-2">Add Meeting Minute</button>
-                </div>
-
-            </div>
         }
+
+
+
+
+
+
+
+
 
         @if (HttpContext.Session.GetString("ItemType") == "Task")
         {
-                <div class="task-container" style="">
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <h3 class="mb-0">@Model.ParentTask.TaskName</h3>
+                <div class="task-container" style="background-color: #f5f5f5;">
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-header" style="background-color: #5e3a87; color: white;">
+                            <h3 class="mb-0">@Model.ParentTask.TaskName</h3>
+                        </div>
+                        <div class="card-body" style="background-color: #fff; border-left: 4px solid #5e3a87;">
+                            <p><strong style="color: #2d0042;">Description:</strong> @Model.ParentTask.Description</p>
+                            <p>
+                                <strong style="color: #2d0042;">Status:</strong>
+                                @if (Model.ParentTask.Completed == true)
+                                {
+                                    <span class="text-success fw-bold">Complete</span>
+                                }
+                                else
+                                {
+                                    <span class="text-danger fw-bold">Incomplete</span>
+                                }
+                            </p>
+                            <div class="d-flex justify-content-start mt-3">
+                                <button type="submit" asp-page-handler="UpdateTask" class="btn text-white" style="background-color: #5e3a87;">Mark As Completed</button>
+                            </div>
+                            <p><strong style="color: #2d0042;">Start Date:</strong> @Model.ParentTask.StartDate</p>
+                            <p><strong style="color: #2d0042;">Due Date:</strong> @Model.ParentTask.DueDate</p>
+                            <p><strong style="color: #2d0042;">End Date:</strong> @(Model.ParentTask.EndDate != DateOnly.MinValue ? Model.ParentTask.EndDate.ToString() : "-")</p>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <p><strong>Description:</strong> @Model.ParentTask.Description</p>
-                        <p>
-                            <strong>Status:</strong>
-                            @if (Model.ParentTask.Completed == true)
+
+                    <div class="border rounded p-3 mt-4 mx-auto shadow-sm" style="max-width: 1000px; background-color: #fff; border-left: 4px solid #5e3a87;">
+                        <h4 class="mb-2" style="color: #2d0042;">Project Members</h4>
+                        <div class="d-flex flex-row" style="overflow-x: auto; white-space: nowrap;">
+                            @if (Model.ParentTask.GetEmployees().Any())
                             {
-                                <span class="text-success">Complete</span>
+                                @foreach (var user in Model.ParentTask.GetEmployees())
+                                {
+                                    <div class="user-card p-3 rounded text-center mx-2" style="min-width: 220px; background-color: #f9f6ff; border: 1px solid #bca2d8;">
+                                        <div><strong style="color: #2d0042;">Name:</strong> @user.Name</div>
+                                        <div><strong style="color: #2d0042;">Role:</strong> @user.type.UserTypeName</div>
+                                        <p class="mb-0"><strong style="color: #2d0042;">Organization:</strong> @user.GetPartner().BusName</p>
+                                    </div>
+                                }
                             }
                             else
                             {
-                                <span class="text-danger">Incomplete</span>
+                                <span class="text-muted">No Employees Assigned</span>
                             }
-                        </p>
-                        <div class="d-flex justify-content-start mt-3">
-                            
-                                <button type="submit" asp-page-handler="UpdateTask" class="btn btn-primary btn-sm me-2">Mark As Completed</button>
                         </div>
-                        <p><strong>Start Date:</strong> @Model.ParentTask.StartDate</p>
-                        <p><strong>Due Date:</strong> @Model.ParentTask.DueDate</p>
-                        <p>
-                            <strong>End Date:</strong>
-                            <td>@(Model.ParentTask.EndDate != DateOnly.MinValue ? Model.ParentTask.EndDate.ToString() : "-")</td>
-                        </p>
-                    </div>
-                </div>
-                    <div class="border rounded p-3 mt-4 bg-white mx-auto" style="max-width: 1000px; overflow-x: auto;">
-                    <h4 class="mb-2">Project Members</h4>
-                    <div class="d-flex flex-row" style="overflow-x: auto; white-space: nowrap;">
-                        @if (Model.ParentTask.GetEmployees().Any())
-                        {
-                            @foreach (var user in Model.ParentTask.GetEmployees())
+                        <div class="mt-3">
+                            @if (HttpContext.Session.GetString("UserType") == "Project-Manager" || HttpContext.Session.GetString("UserType") == "Admin")
                             {
-                                <div class="user-card border p-3 rounded text-center mx-2" style="min-width: 220px;">
-
-                                    <div><strong>Role:</strong> @user.Name</div>
-                                    <div><strong>Role:</strong> @user.type.UserTypeName</div>
-                                    <p><strong>Organization:</strong> @user.GetPartner().BusName</p>
+                                <p class="mb-2"><strong style="color: #2d0042;">Add Member To Task:</strong></p>
+                                <div class="form-group d-flex align-items-center">
+                                    <label for="User_ID" class="mr-2" style="color: #2d0042;">Select Member:</label>
+                                    <select asp-for="User_ID" class="form-control mr-2" style="width: 200px; border-color: #5e3a87;">
+                                        @foreach (var member in Model.Users)
+                                        {
+                                            <option value="@member.UserID">@member.Name</option>
+                                        }
+                                    </select>
+                                    <button type="submit" asp-page-handler="AssignTask" class="btn text-white" style="background-color: #5e3a87;">Add</button>
                                 </div>
                             }
-                        }
-                        else
-                        {
-                            <span class="text-muted">No Employees Assigned</span>
-                        }
+                        </div>
                     </div>
-                    <div class="mt-3">
-                        @if (HttpContext.Session.GetString("UserType") == "Project-Manager" || HttpContext.Session.GetString("UserType") == "Admin")
-                        {
-                            <p class="mb-2"><strong>Add Member To Task:</strong></p>
-                            <div class="form-group d-flex align-items-center">
-                                <label for="User_ID" class="mr-2">Select Member:</label>
-                                <select asp-for="User_ID" class="form-control mr-2" style="width: 200px;">
-                                    @foreach (var member in Model.Users)
-                                    {
-                                        <option value="@member.UserID">@member.Name</option>
-                                    }
-                                </select>
-                                <button type="submit" asp-page-handler="AssignTask" class="btn btn-primary">Add</button>
-                            </div>
-
-                           
-                        }
-                    </div>
-
                 </div>
-            </div>
-                <div class="task-container" style="max-height: 600px; overflow-y: auto; margin-bottom: 50px;">
-                <table class="table table-bordered table-striped mt-4" style="width: 100%; word-wrap: break-word;">
-                    <thead class="thead-light">
-                        <tr>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Status</th>
-                            <th>Start Date</th>
-                            <th>Due Date</th>
-                            <th>End Date</th>
-                            <th>Take Task</th>
-                            <th>Mark As Completed</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var task in Model.ParentTask.GetSubTasks())
-                        {
+
+                <div class="task-container shadow-sm" style="max-height: 600px; overflow-y: auto; margin-bottom: 50px; background-color: #f5f5f5;">
+                    <table class="table table-bordered table-hover mt-4" style="width: 100%; background-color: #fff;">
+                        <thead style="background-color: #5e3a87; color: white;">
                             <tr>
-                                <td>@task.TaskName</td>
-                                <td style="max-width: 300px; word-wrap: break-word;">@task.Description</td>
-                                <td class="@(task.Completed ? "text-success" : "text-danger")">
-                                    @(task.Completed ? "Complete" : "Incomplete")
-                                </td>
-                                <td>@task.StartDate</td>
-                                <td>@task.DueDate</td>
-                                <td>@(task.EndDate != DateOnly.MinValue ? task.EndDate.ToString() : "-")</td>
-                                @if (task.isAssigned())
-                                {
-                                    <td>Member Assigned: @task.GetAssignedUser().Name</td>
-                                }
-                                else
-                                {
-                                    <td><button type="submit" asp-page-handler="AssignChildTask" asp-route-ID="@task.ChildTaskID" class="btn btn-primary mt-2">Assign</button></td>
-                                }
-                                @if (task.Completed == true || task.isAssigned() == false)
-                                {
-                                    <td><button type="submit" asp-page-handler="UpdateChildTask" asp-route-ID="@task.ChildTaskID" class="btn btn-primary mt-2" disabled>Complete</button></td>
-                                }
-                                else
-                                {
-                                    <td><button type="submit" asp-page-handler="UpdateChildTask" asp-route-ID="@task.ChildTaskID" class="btn btn-primary mt-2">Complete</button></td>
-                                }
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-                @if (HttpContext.Session.GetString("UserID") == Model.ParentTask.GetProject().ProjectLeadID)
-                {
-                    <div class="col-sm-10">
-                        <p class="mb-2"><strong>Add Sub Task:</strong></p>
-                        <label class="form-label">Enter Task Details</label>
-                        <input asp-for="SubTaskName" class="form-control" placeholder="Enter Task Name">
-                        <textarea asp-for="SubTaskDesc" class="form-control" placeholder="Enter Description" rows="3"></textarea>
-                        <label class="form-label">Due Date</label>
-                        <input asp-for="Date" class="form-control" type="date" placeholder="Due Date">
-                        <button type="submit" asp-page-handler="AddChildTask" asp-route-id="@Model.ParentTask.TaskID" class="btn btn-primary mt-2">Add Task</button>
-                    </div>
-                }
-            </div>
-                <div class="border rounded p-4 mt-4 bg-white mx-auto" style="max-width: 1200px;">
-                <h3 class="text-center mb-3">Task Notes</h3>
-                    <div class="table-responsive" style="max-height: 800px; overflow: auto;">
-                    <table class="table table-bordered table-striped">
-                        <thead class="thead-light">
-                            <tr>
-                                <th style="white-space: nowrap;">From</th>
-                                <th style="white-space: nowrap;">To</th>
-                                <th style="white-space: nowrap;">Note</th>
-                                <th style="white-space: nowrap;">Date</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Status</th>
+                                <th>Start Date</th>
+                                <th>Due Date</th>
+                                <th>End Date</th>
+                                <th>Take Task</th>
+                                <th>Mark As Completed</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var Note in Model.ParentTask.GetNotes())
+                            @foreach (var task in Model.ParentTask.GetSubTasks())
                             {
                                 <tr>
-                                    <td>@Note.Author</td>
-                                    <td>@Note.Recipient</td>
-                                    <td style="white-space: normal; word-wrap: break-word; Max-width: 400px;">@Note.Notes</td>
-                                    <td>@Note.Date</td>
+                                    <td>@task.TaskName</td>
+                                    <td style="max-width: 300px; word-wrap: break-word;">@task.Description</td>
+                                    <td class="@(task.Completed ? "text-success" : "text-danger") fw-bold">
+                                        @(task.Completed ? "Complete" : "Incomplete")
+                                    </td>
+                                    <td>@task.StartDate</td>
+                                    <td>@task.DueDate</td>
+                                    <td>@(task.EndDate != DateOnly.MinValue ? task.EndDate.ToString() : "-")</td>
+                                    @if (task.isAssigned())
+                                    {
+                                        <td>Member Assigned: @task.GetAssignedUser().Name</td>
+                                    }
+                                    else
+                                    {
+                                        <td><button type="submit" asp-page-handler="AssignChildTask" asp-route-ID="@task.ChildTaskID" class="btn text-white" style="background-color: #5e3a87;">Assign</button></td>
+                                    }
+                                    @if (task.Completed == true || task.isAssigned() == false)
+                                    {
+                                        <td><button type="submit" asp-page-handler="UpdateChildTask" asp-route-ID="@task.ChildTaskID" class="btn text-white" style="background-color: #5e3a87;" disabled>Complete</button></td>
+                                    }
+                                    else
+                                    {
+                                        <td><button type="submit" asp-page-handler="UpdateChildTask" asp-route-ID="@task.ChildTaskID" class="btn text-white" style="background-color: #5e3a87;">Complete</button></td>
+                                    }
                                 </tr>
                             }
                         </tbody>
                     </table>
+
+                    @if (HttpContext.Session.GetString("UserID") == Model.ParentTask.GetProject().ProjectLeadID)
+                    {
+                        <div class="p-4 rounded mt-4" style="background-color: #fff; border-left: 4px solid #5e3a87;">
+                            <h4 class="mb-3" style="color: #2d0042;">Add Sub Task</h4>
+                            <div class="form-group mb-3">
+                                <label class="form-label" style="color: #2d0042;">Task Details</label>
+                                <input asp-for="SubTaskName" class="form-control" style="border-color: #5e3a87;" placeholder="Enter Task Name">
+                            </div>
+                            <div class="form-group mb-3">
+                                <textarea asp-for="SubTaskDesc" class="form-control" style="border-color: #5e3a87;" placeholder="Enter Description" rows="3"></textarea>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="form-label" style="color: #2d0042;">Due Date</label>
+                                <input asp-for="Date" class="form-control" style="border-color: #5e3a87;" type="date" placeholder="Due Date">
+                            </div>
+                            <button type="submit" asp-page-handler="AddChildTask" asp-route-id="@Model.ParentTask.TaskID" class="btn text-white" style="background-color: #5e3a87;">Add Task</button>
+                        </div>
+                    }
                 </div>
-                <div class="text-center mt-3">
-                    <p class="mb-3" style="font-size: 1.5rem;"><strong>Add Note:</strong></p>
-                    <label class="form-label" style="font-size: 1.2rem;">Add Note</label>
-                    <input asp-for="NoteTo" class="form-control mx-auto" style="max-width: 600px; font-size: 1.2rem;" placeholder="Enter Recipient">
-                    <textarea asp-for="Note" class="form-control mx-auto mt-3" style="max-width: 600px; font-size: 1.2rem;" placeholder="Enter Description" rows="4"></textarea>
-                    <button type="submit" asp-page-handler="AddNote" asp-route-id="@Model.ParentTask.TaskID" class="btn btn-primary mt-4" style="font-size: 1.2rem; padding: 10px 20px;">Add Note</button>
+
+                <div class="border rounded p-4 mt-4 mx-auto shadow-sm" style="max-width: 1200px; background-color: #fff; border-left: 4px solid #5e3a87;">
+                    <h3 class="text-center mb-3" style="color: #2d0042;">Task Notes</h3>
+                    <div class="table-responsive" style="max-height: 800px; overflow: auto;">
+                        <table class="table table-bordered table-hover">
+                            <thead style="background-color: #5e3a87; color: white;">
+                                <tr>
+                                    <th style="white-space: nowrap;">From</th>
+                                    <th style="white-space: nowrap;">To</th>
+                                    <th style="white-space: nowrap;">Note</th>
+                                    <th style="white-space: nowrap;">Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var Note in Model.ParentTask.GetNotes())
+                                {
+                                    <tr>
+                                        <td>@Note.Author</td>
+                                        <td>@Note.Recipient</td>
+                                        <td style="white-space: normal; word-wrap: break-word; max-width: 400px;">@Note.Notes</td>
+                                        <td>@Note.Date</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-center mt-3 p-4">
+                        <h4 class="mb-3" style="color: #2d0042;">Add New Note</h4>
+                        <div class="form-group mb-3">
+                            <label class="form-label" style="color: #2d0042;">Recipient</label>
+                            <input asp-for="NoteTo" class="form-control mx-auto" style="max-width: 600px; border-color: #5e3a87;" placeholder="Enter Recipient">
+                        </div>
+                        <div class="form-group mb-3">
+                            <textarea asp-for="Note" class="form-control mx-auto" style="max-width: 600px; border-color: #5e3a87;" placeholder="Enter Description" rows="4"></textarea>
+                        </div>
+                        <button type="submit" asp-page-handler="AddNote" asp-route-id="@Model.ParentTask.TaskID" class="btn text-white" style="background-color: #5e3a87; padding: 10px 20px;">Add Note</button>
+                    </div>
                 </div>
-            </div>
-                
         }
     </form>
     </body>
