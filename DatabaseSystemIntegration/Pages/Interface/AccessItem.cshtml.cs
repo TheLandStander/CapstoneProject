@@ -80,7 +80,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
 
         public void LoadGrant()
         {
-            if (ItemType == "Grant" && grant == null)
+            if (ItemType == "Grant"l)
             {
                 grant = ObjectConverter.ToGrants(DatabaseControls.SelectFilter(7, 7, ItemID))[0];
                 GrantStatus = ObjectConverter.ToGrantStatus(DatabaseControls.SelectNoFilter(6));
@@ -89,7 +89,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
 
         public void LoadProject()
         {
-            if (ItemType == "Project" && project == null)
+            if (ItemType == "Project")
             {
                 project = ObjectConverter.ToProject(DatabaseControls.SelectFilter(12, 12, ItemID))[0];
                 ProjectStatus = ObjectConverter.ToProjectStatus(DatabaseControls.SelectNoFilter(14));
@@ -98,7 +98,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
 
         public void LoadPartner()
         {
-            if (ItemType == "Partner" && partner == null)
+            if (ItemType == "Partner")
             {
                 partner = ObjectConverter.ToPartner(DatabaseControls.SelectFilter(2, 2, ItemID))[0];
                 PartnerStatus = ObjectConverter.ToPartnerStatus(DatabaseControls.SelectNoFilter(3));
@@ -107,7 +107,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
 
         public void LoadTask()
         {
-            if (ItemType == "Task" && ParentTask == null)
+            if (ItemType == "Task")
             {
                 ParentTask = ObjectConverter.ToTask(DatabaseControls.SelectFilter(15, 15, ItemID))[0];
             }
@@ -311,6 +311,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
             LoadObjects();
             CompleteChildTask(ID);
             SetVars();
+            LoadObjects();
             return Page();
         }
 
