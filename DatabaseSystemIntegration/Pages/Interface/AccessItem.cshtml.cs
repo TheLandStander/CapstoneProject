@@ -80,7 +80,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
 
         public void LoadGrant()
         {
-            if (ItemType == "Grant"l)
+            if (ItemType == "Grant")
             {
                 grant = ObjectConverter.ToGrants(DatabaseControls.SelectFilter(7, 7, ItemID))[0];
                 GrantStatus = ObjectConverter.ToGrantStatus(DatabaseControls.SelectNoFilter(6));

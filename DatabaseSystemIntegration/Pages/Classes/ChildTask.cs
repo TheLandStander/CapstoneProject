@@ -30,7 +30,7 @@ namespace DatabaseSystemIntegration.Pages.Classes
 
         public bool isAssigned()
         {
-            if (UserID.Length == 10)
+            if (DatabaseControls.SelectFilter(19, 19, UserID).HasRows)
             {
                 return true;
             }
@@ -45,7 +45,7 @@ namespace DatabaseSystemIntegration.Pages.Classes
 
         public Users GetAssignedUser()
         {
-            if (DatabaseControls.SelectFilter(19, 19, UserID).HasRows)
+            if (isAssigned())
             {
                 return ObjectConverter.ToUsers(DatabaseControls.SelectFilter(19, 19, UserID))[0];
             }

@@ -136,9 +136,12 @@ namespace DatabaseSystemIntegration.Pages.Tools
 
                 foreach (ChildTask ct in AllHolder)
                 {
-                    if (ct.GetAssignedUser() != null && ct.GetAssignedUser().UserID == ID && ct.Completed == false)
+                    if (ct.isAssigned() == true && ct.Completed == false)
                     {
-                        Holder.Add(ct);
+                        if (ct.GetAssignedUser().UserID == ID)
+                        {
+                            Holder.Add(ct);
+                        }
                     }
                 }
             }
