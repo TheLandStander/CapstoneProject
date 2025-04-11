@@ -11,16 +11,36 @@
       "RelativeMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|solutionrelative:pages\\interface\\home.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|c:\\users\\apers\\onedrive\\documents\\capstoneproject\\databasesystemintegration\\pages\\classes\\childtask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|solutionrelative:pages\\classes\\childtask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|c:\\users\\apers\\onedrive\\documents\\capstoneproject\\databasesystemintegration\\pages\\tools\\databasecontrols.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|solutionrelative:pages\\tools\\databasecontrols.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|c:\\users\\apers\\onedrive\\documents\\capstoneproject\\databasesystemintegration\\pages\\tools\\objectconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|solutionrelative:pages\\tools\\objectconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|c:\\users\\apers\\onedrive\\documents\\capstoneproject\\databasesystemintegration\\pages\\interface\\messages.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|solutionrelative:pages\\interface\\messages.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|c:\\users\\apers\\onedrive\\documents\\capstoneproject\\databasesystemintegration\\pages\\interface\\accessitem.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|solutionrelative:pages\\interface\\accessitem.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|c:\\users\\apers\\onedrive\\documents\\capstoneproject\\databasesystemintegration\\pages\\interface\\messages.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|solutionrelative:pages\\interface\\messages.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|c:\\users\\apers\\onedrive\\documents\\capstoneproject\\databasesystemintegration\\pages\\interface\\createpartner.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|solutionrelative:pages\\interface\\createpartner.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|c:\\users\\apers\\onedrive\\documents\\capstoneproject\\databasesystemintegration\\pages\\interface\\search.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|solutionrelative:pages\\interface\\search.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|c:\\users\\apers\\onedrive\\documents\\capstoneproject\\databasesystemintegration\\pages\\interface\\creategrant.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|solutionrelative:pages\\interface\\creategrant.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|c:\\users\\apers\\onedrive\\documents\\capstoneproject\\databasesystemintegration\\pages\\interface\\createuser.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|solutionrelative:pages\\interface\\createuser.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|c:\\users\\apers\\onedrive\\documents\\capstoneproject\\databasesystemintegration\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|solutionrelative:wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|c:\\users\\apers\\onedrive\\documents\\capstoneproject\\databasesystemintegration\\pages\\interface\\accessitem.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -29,6 +49,14 @@
     {
       "AbsoluteMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|c:\\users\\apers\\onedrive\\documents\\capstoneproject\\databasesystemintegration\\pages\\interface\\project-dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|solutionrelative:pages\\interface\\project-dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|c:\\users\\apers\\onedrive\\documents\\capstoneproject\\databasesystemintegration\\pages\\interface\\accessitem.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|solutionrelative:pages\\interface\\accessitem.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|c:\\users\\apers\\onedrive\\documents\\capstoneproject\\databasesystemintegration\\pages\\interface\\createuser.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{67B37597-1833-49AA-A723-3C8B96382FEB}|DatabaseSystemIntegration.csproj|solutionrelative:pages\\interface\\createuser.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,23 +66,92 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 7,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "ChildTask.cs",
-              "DocumentMoniker": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\Pages\\Classes\\ChildTask.cs",
-              "RelativeDocumentMoniker": "Pages\\Classes\\ChildTask.cs",
-              "ToolTip": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\Pages\\Classes\\ChildTask.cs",
-              "RelativeToolTip": "Pages\\Classes\\ChildTask.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAAYwC0AAAAQAAAAAAAAAA==",
+              "Title": "DatabaseControls.cs",
+              "DocumentMoniker": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\Pages\\Tools\\DatabaseControls.cs",
+              "RelativeDocumentMoniker": "Pages\\Tools\\DatabaseControls.cs",
+              "ToolTip": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\Pages\\Tools\\DatabaseControls.cs",
+              "RelativeToolTip": "Pages\\Tools\\DatabaseControls.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-10T07:07:26.401Z"
+              "WhenOpened": "2025-04-10T23:20:05.216Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Messages.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\Pages\\Interface\\Messages.cshtml.cs",
+              "RelativeDocumentMoniker": "Pages\\Interface\\Messages.cshtml.cs",
+              "ToolTip": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\Pages\\Interface\\Messages.cshtml.cs",
+              "RelativeToolTip": "Pages\\Interface\\Messages.cshtml.cs",
+              "ViewState": "AgIAACMAAAAAAAAAAAAAAD0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-10T23:13:33.708Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "CreateGrant.cshtml",
+              "DocumentMoniker": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\Pages\\Interface\\CreateGrant.cshtml",
+              "RelativeDocumentMoniker": "Pages\\Interface\\CreateGrant.cshtml",
+              "ToolTip": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\Pages\\Interface\\CreateGrant.cshtml",
+              "RelativeToolTip": "Pages\\Interface\\CreateGrant.cshtml",
+              "ViewState": "AgIAAGYAAAAAAAAAAAAuwJAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-10T22:19:15.396Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CreatePartner.cshtml",
+              "DocumentMoniker": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\Pages\\Interface\\CreatePartner.cshtml",
+              "RelativeDocumentMoniker": "Pages\\Interface\\CreatePartner.cshtml",
+              "ToolTip": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\Pages\\Interface\\CreatePartner.cshtml",
+              "RelativeToolTip": "Pages\\Interface\\CreatePartner.cshtml",
+              "ViewState": "AgIAAGoAAAAAAAAAAAAuwJQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-10T22:19:09.193Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Messages.cshtml",
+              "DocumentMoniker": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\Pages\\Interface\\Messages.cshtml",
+              "RelativeDocumentMoniker": "Pages\\Interface\\Messages.cshtml",
+              "ToolTip": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\Pages\\Interface\\Messages.cshtml",
+              "RelativeToolTip": "Pages\\Interface\\Messages.cshtml",
+              "ViewState": "AgIAAEoAAAAAAAAAAAAAAFoAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-10T22:18:55.755Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Search.cshtml",
+              "DocumentMoniker": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\Pages\\Interface\\Search.cshtml",
+              "RelativeDocumentMoniker": "Pages\\Interface\\Search.cshtml",
+              "ToolTip": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\Pages\\Interface\\Search.cshtml",
+              "RelativeToolTip": "Pages\\Interface\\Search.cshtml",
+              "ViewState": "AgIAAE0AAAAAAAAAAAAewGUAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-10T22:14:14.351Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "CreateUser.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\Pages\\Interface\\CreateUser.cshtml.cs",
+              "RelativeDocumentMoniker": "Pages\\Interface\\CreateUser.cshtml.cs",
+              "ToolTip": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\Pages\\Interface\\CreateUser.cshtml.cs",
+              "RelativeToolTip": "Pages\\Interface\\CreateUser.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-10T19:01:44.885Z"
             },
             {
               "$type": "Document",
@@ -64,7 +161,7 @@
               "RelativeDocumentMoniker": "Pages\\Interface\\Home.cshtml.cs",
               "ToolTip": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\Pages\\Interface\\Home.cshtml.cs",
               "RelativeToolTip": "Pages\\Interface\\Home.cshtml.cs",
-              "ViewState": "AgIAAE0AAAAAAAAAAAAAAGsAAAAyAAAAAAAAAA==",
+              "ViewState": "AgIAACcAAAAAAAAAAAAAAEEAAABVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-10T06:45:16.62Z",
               "EditorCaption": ""
@@ -77,38 +174,50 @@
               "RelativeDocumentMoniker": "Pages\\Interface\\Home.cshtml",
               "ToolTip": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\Pages\\Interface\\Home.cshtml",
               "RelativeToolTip": "Pages\\Interface\\Home.cshtml",
-              "ViewState": "AgIAAGYAAAAAAAAAAAAAAIMAAABiAAAAAAAAAA==",
+              "ViewState": "AgIAAIoAAAAAAAAAAAAAAA4AAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-04-10T06:45:05.372Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ObjectConverter.cs",
-              "DocumentMoniker": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\Pages\\Tools\\ObjectConverter.cs",
-              "RelativeDocumentMoniker": "Pages\\Tools\\ObjectConverter.cs",
-              "ToolTip": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\Pages\\Tools\\ObjectConverter.cs",
-              "RelativeToolTip": "Pages\\Tools\\ObjectConverter.cs",
-              "ViewState": "AgIAABYBAAAAAAAAAAApwBcBAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-10T05:04:30.98Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 10,
               "Title": "AccessItem.cshtml",
               "DocumentMoniker": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\Pages\\Interface\\AccessItem.cshtml",
               "RelativeDocumentMoniker": "Pages\\Interface\\AccessItem.cshtml",
               "ToolTip": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\Pages\\Interface\\AccessItem.cshtml",
               "RelativeToolTip": "Pages\\Interface\\AccessItem.cshtml",
-              "ViewState": "AgIAAE4BAAAAAAAAAAAAAGkBAAAtAAAAAAAAAA==",
+              "ViewState": "AgIAAEQAAAAAAAAAAAAAAFkAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-04-10T02:35:30.635Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
+              "Title": "CreateUser.cshtml",
+              "DocumentMoniker": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\Pages\\Interface\\CreateUser.cshtml",
+              "RelativeDocumentMoniker": "Pages\\Interface\\CreateUser.cshtml",
+              "ToolTip": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\Pages\\Interface\\CreateUser.cshtml",
+              "RelativeToolTip": "Pages\\Interface\\CreateUser.cshtml",
+              "ViewState": "AgIAAHQAAAAAAAAAAAAuwIAAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-10T19:01:45.627Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "site.css",
+              "DocumentMoniker": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\css\\site.css",
+              "RelativeDocumentMoniker": "wwwroot\\css\\site.css",
+              "ToolTip": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\css\\site.css",
+              "RelativeToolTip": "wwwroot\\css\\site.css",
+              "ViewState": "AgIAAAIBAAAAAAAAAAAcwC0BAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-04-10T22:11:57.741Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "AccessItem.cshtml.cs",
               "DocumentMoniker": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\Pages\\Interface\\AccessItem.cshtml.cs",
               "RelativeDocumentMoniker": "Pages\\Interface\\AccessItem.cshtml.cs",
@@ -120,13 +229,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 11,
               "Title": "Project-Dashboard.cshtml",
               "DocumentMoniker": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\Pages\\Interface\\Project-Dashboard.cshtml",
               "RelativeDocumentMoniker": "Pages\\Interface\\Project-Dashboard.cshtml",
               "ToolTip": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\Pages\\Interface\\Project-Dashboard.cshtml",
               "RelativeToolTip": "Pages\\Interface\\Project-Dashboard.cshtml",
-              "ViewState": "AgIAABcBAAAAAAAAAAAAACoBAABQAAAAAAAAAA==",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAewG4AAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-04-10T02:52:31.436Z"
             }

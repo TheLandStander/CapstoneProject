@@ -3,62 +3,146 @@
 @{
     ViewData["Title"] = "Add Partner";
 }
-<div class="container mt-4">
-    <h1 class="mb-4">@ViewData["Title"]</h1>
-    <form method="post">
-        <div class="form-group row mb-3">
-            <label class="col-sm-2 col-form-label" for="BusinessName">Business Name</label>
-            <div class="col-sm-10">
-                <input asp-for="BusinessName" class="form-control" />
-            </div>
+<head>
+    <style>
+        /* Overall background color for the page */
+        body {
+            background-color: #f4f7fa; /* Light grey background for the page */
+        }
+
+        .add-partner-page .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .add-partner-form {
+            background-color: #ffffff; /* White background for the form */
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid #ddd;
+            box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .1);
+        }
+
+            .add-partner-form .form-label {
+                font-weight: 600;
+                color: #333;
+            }
+
+            .add-partner-form .form-control,
+            .add-partner-form .form-select {
+                border: 1px solid #ced4da;
+                border-radius: 8px;
+                padding: 0.5rem;
+                font-size: 0.95rem;
+            }
+
+                .add-partner-form .form-control:focus,
+                .add-partner-form .form-select:focus {
+                    border-color: #b599ce;
+                    box-shadow: 0 0 0 0.2rem rgba(181, 153, 206, 0.25);
+                    outline: none;
+                }
+
+            .add-partner-form .btn {
+                border-radius: 6px;
+                font-size: 0.95rem;
+                padding: 0.5rem 1.25rem;
+                min-width: 120px;
+            }
+
+            .add-partner-form .btn-primary {
+                background-color: #b599ce;
+                border-color: #b599ce;
+                color: #fff;
+            }
+
+            .add-partner-form .btn-secondary {
+                background-color: #6c757d;
+                border-color: #6c757d;
+                color: #fff;
+            }
+
+            .add-partner-form .btn-danger {
+                background-color: #dc3545;
+                border-color: #dc3545;
+                color: #fff;
+            }
+
+            .add-partner-form .btn:hover {
+                opacity: 0.95;
+            }
+
+        /* Improved form layout for responsive design */
+        .add-partner-page h1 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .add-partner-form {
+            padding: 1.5rem;
+        }
+
+            .add-partner-form .form-label {
+                font-size: 1rem;
+            }
+
+            .add-partner-form .form-control,
+            .add-partner-form .form-select {
+                font-size: 1rem;
+            }
+
+            .add-partner-form .btn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+        }
+    </style>
+</head>
+<div class="add-partner-page container mt-4" style="margin-bottom:50px;">
+    <h1 class="text-center mb-4">@ViewData["Title"]</h1>
+
+    <form method="post" class="add-partner-form">
+        <div class="mb-3">
+            <label class="form-label" for="BusinessName">Business Name</label>
+            <input asp-for="BusinessName" class="form-control" />
         </div>
 
-        <div class="form-group row mb-3">
-            <label class="col-sm-2 col-form-label" for="Address">Address</label>
-            <div class="col-sm-10">
-                <input asp-for="Address" class="form-control" />
-            </div>
+        <div class="mb-3">
+            <label class="form-label" for="Address">Address</label>
+            <input asp-for="Address" class="form-control" />
         </div>
 
-        <div class="form-group row mb-3">
-            <label class="col-sm-2 col-form-label" for="Phone">Phone</label>
-            <div class="col-sm-10">
-                <input asp-for="Phone" class="form-control" />
-            </div>
+        <div class="mb-3">
+            <label class="form-label" for="Phone">Phone</label>
+            <input asp-for="Phone" class="form-control" />
         </div>
 
-        <div class="form-group row mb-3">
-            <label class="col-sm-2 col-form-label" for="Email">Email</label>
-            <div class="col-sm-10">
-                <input asp-for="Email" class="form-control" />
-            </div>
+        <div class="mb-3">
+            <label class="form-label" for="Email">Email</label>
+            <input asp-for="Email" class="form-control" />
         </div>
 
-        <div class="form-group row mb-3">
-            <label class="col-sm-2 col-form-label" for="Description">Description</label>
-            <div class="col-sm-10">
-                <textarea asp-for="Description" class="form-control" rows="3"></textarea>
-            </div>
+        <div class="mb-3">
+            <label class="form-label" for="Description">Description</label>
+            <textarea asp-for="Description" class="form-control" rows="3"></textarea>
         </div>
 
-        <div class="form-group row mb-3">
-            <label class="col-sm-2 col-form-label" for="StatusID">Status</label>
-            <div class="col-sm-10">
-                <select asp-for="StatusID" class="form-control">
-                    @foreach (var status in Model.Status)
-                    {
-                        <option value="@status.Partner_Status_ID">@status.Status_Flag</option>
-                    }
-                </select>
-            </div>
+        <div class="mb-3">
+            <label class="form-label" for="StatusID">Status</label>
+            <select asp-for="StatusID" class="form-control">
+                @foreach (var status in Model.Status)
+                {
+                    <option value="@status.Partner_Status_ID">@status.Status_Flag</option>
+                }
+            </select>
         </div>
 
-        <div class="form-group row mt-4">
-            <div class="col-sm-10 offset-sm-2">
-                <button type="submit" class="btn btn-primary me-2" asp-page-handler="Submit">Submit</button>
-                <button type="submit" class="btn btn-secondary me-2" asp-page-handler="PopulateHandler">Populate</button>
-                <button type="submit" class="btn btn-danger" asp-page-handler="ClearHandler">Clear</button>
-            </div>
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary me-2" asp-page-handler="Submit">Submit</button>
+            <button type="submit" class="btn btn-secondary me-2" asp-page-handler="PopulateHandler">Populate</button>
+            <button type="submit" class="btn btn-danger" asp-page-handler="ClearHandler">Clear</button>
         </div>
     </form>
 </div>

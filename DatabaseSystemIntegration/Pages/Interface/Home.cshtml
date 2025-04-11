@@ -1,11 +1,62 @@
 ﻿@page
 @model DatabaseSystemIntegration.Pages.Interface.Home
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <title>Dashboard</title>
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        .gantt-chart {
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+            margin-bottom: 50px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #CBB677;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #450084;
+            color: #CBB677;
+            font-weight: bold;
+        }
+
+        .gantt-bar {
+            background-color: #450084;
+            height: 20px;
+            border-radius: 4px;
+        }
+
+        .task-name {
+            width: 150px;
+            background-color: #450084;
+            color: #CBB677;
+        }
+
+        .date-cell {
+            width: 60px;
+            text-align: center;
+        }
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -19,14 +70,14 @@
             margin: 20px;
         }
 
-        .left-panel {
-            flex: 3; 
+        .left-task-panel {
+            flex: 5; 
             height: 100%;
             padding: 20px;
         }
 
-        .right-panel {
-            flex: 5;
+        .right-task-panel {
+            flex: 1;
             height: 100%;
             padding: 20px;
             border: 1px solid #ddd;
@@ -60,7 +111,7 @@
         }
 
         th {
-            background-color: #bca2d8;
+            background-color: #46007a;
             color: white;
         }
 
@@ -72,7 +123,7 @@
             text-align: center;
             margin-top: 20px;
             border: 1px solid #ddd;
-            background-color: #bca2d8;
+            background-color:  #46007a;
         }
 
         button {
@@ -94,7 +145,7 @@
     <form method="post">
         <div class="main-section">
 
-            <div class="left-panel" style="padding-right:50px">
+            <div class="left-task-panel" style="padding-right:50px">
                 <input asp-for="Search" class="search-bar" placeholder="Task Name" />
                 <button type="submit" asp-page-handler="Search" class="visually-hidden">Search</button>
 
@@ -141,7 +192,7 @@
                 </div>
             </div>
 
-            <div class="right-panel">
+            <div class="right-task-panel">
                 <h3>Upcoming Project Milestones</h3>
                 @if (Model.DisplayedTasks == null || Model.DisplayedTasks.Length == 0)
                 {
@@ -152,7 +203,7 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Task Urgency Ranking</th>
+                                <th>Task Urgency</th>
                                 <th>Task Name</th>
                                 <th>Description</th>
                                 <th>Due Date</th>
@@ -176,5 +227,50 @@
             </div>
         </div>
     </form>
-</body>
+        <div class="gantt-chart">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="task-name">Project</th>
+                        <th class="date-cell">Jan</th>
+                        <th class="date-cell">Feb</th>
+                        <th class="date-cell">Mar</th>
+                        <th class="date-cell">Apr</th>
+                        <th class="date-cell">May</th>
+                        <th class="date-cell">Jun</th>
+                        <th class="date-cell">Jul</th>
+                        <th class="date-cell">Aug</th>
+                        <th class="date-cell">Sep</th>
+                        <th class="date-cell">Oct</th>
+                        <th class="date-cell">Nov</th>
+                        <th class="date-cell">Dec</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="task-name">Task A</td>
+                        <td colspan="3"><div class="gantt-bar" style="width: 100%;"></div></td>
+                        <td colspan="9"></td>
+                    </tr>
+                    <tr>
+                        <td class="task-name">Task B</td>
+                        <td colspan="2"></td>
+                        <td colspan="5"><div class="gantt-bar" style="width: 100%;"></div></td>
+                        <td colspan="5"></td>
+                    </tr>
+                    <tr>
+                        <td class="task-name">Task C</td>
+                        <td colspan="6"></td>
+                        <td colspan="4"><div class="gantt-bar" style="width: 100%;"></div></td>
+                        <td colspan="2"></td>
+                    </tr>
+                    <tr>
+                        <td class="task-name">Task D</td>
+                        <td colspan="9"></td>
+                        <td colspan="3"><div class="gantt-bar" style="width: 100%;"></div></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
 </html>

@@ -42,7 +42,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
         {
             ObjectConverter.ToPartnerStatus(DatabaseControls.SelectNoFilter(3));
             AddPartner();
-            return Page();
+            return RedirectToPage("Project-Dashboard");
         }
 
         public IActionResult OnPostPopulateHandler()

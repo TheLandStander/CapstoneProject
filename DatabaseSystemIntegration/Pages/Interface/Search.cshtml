@@ -1,7 +1,9 @@
 ﻿@page
 @model DatabaseSystemIntegration.Pages.Interface.SearchModel
 @{
-
+    <head>
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    </head>
     <div class="container">
         <h2>Generate Report</h2>
 
@@ -95,8 +97,19 @@
                             {
                                 <td class="text-danger">@grant.Status.GrantStatusName</td>
                             }
+                            @if (@grant.Status.GrantStatusName == "InProgress")
+                            {
+                                <td>@grant.Status.GrantStatusName</td>
+                            }
                             <td>
-                                <button class="btn btn-link" asp-page-handler="SelectProject" asp-route-id="@grant.GetProject().ProjectID">@grant.GetProject().ProjectName</button>
+                                @if (@grant.GetProject() !=null)
+                                {
+                                    <button class="btn btn-link" asp-page-handler="SelectProject" asp-route-id="@grant.GetProject().ProjectID">@grant.GetProject().ProjectName</button>
+                                }
+                                else
+                                {
+                                <p> - </p>
+                                }
                             </td>
                         </tr>
                     }
@@ -142,7 +155,7 @@
             </table>
         </div>
         <h2 class="text-center mt-5 mb-4">Tasks</h2>
-        <div class="table-container">
+        <div class="table-container" style="margin-bottom:50px">
             <table class="table table-bordered table-striped">
                 <thead class="thead-dark">
                     <tr>

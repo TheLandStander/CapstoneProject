@@ -1,33 +1,119 @@
 ﻿@page
 @model DatabaseSystemIntegration.Pages.Interface.MessagesModel
 @{
-  
+    <head>
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <style>
+            /* Modify the fonts and background colors */
+            body {
+                font-family: 'Arial', sans-serif;
+                background-color: #f4f4f9;
+            }
+
+            .message-card {
+                border-radius: 8px;
+                border: 1px solid #ddd;
+                margin-bottom: 1rem;
+                padding: 1.5rem;
+                background-color: #ffffff; 
+                box-shadow: 0 .25rem .75rem rgba(0, 0, 0, 0.1);
+            }
+
+            .message-card .card-body {
+                padding: 1rem;
+                background-color: #ffffff;
+                border-radius: 8px;
+                box-shadow: 0 .125rem .375rem rgba(0, 0, 0, 0.075);
+                margin-bottom: 1rem;
+            }
+
+            .form-group {
+                margin-bottom: 1.5rem;
+            }
+
+            .form-control {
+                border-radius: 6px;
+                padding: 0.75rem;
+            }
+
+            .btn {
+                border-radius: 6px;
+                font-size: 1rem;
+                padding: 0.5rem 1.5rem;
+            }
+
+            .btn-primary {
+                background-color: #007bff;
+                border-color: #007bff;
+                color: white;
+            }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #0056b3;
+            }
+
+            .btn-secondary {
+                background-color: #6c757d;
+                border-color: #6c757d;
+                color: white;
+            }
+
+            .btn-secondary:hover {
+                background-color: #5a6268;
+                border-color: #5a6268;
+            }
+
+            .btn-danger {
+                background-color: #dc3545;
+                border-color: #dc3545;
+                color: white;
+            }
+
+            .btn-danger:hover {
+                background-color: #c82333;
+                border-color: #c82333;
+            }
+
+
+            .messages-container {
+                max-height: 500px;
+                overflow-y: auto;
+                margin-bottom: 1.5rem;
+            }
+
+
+            h4, h5 {
+                font-family: 'Arial', sans-serif;
+                color: #333;
+            }
+        </style>
+    </head>
+
     <form method="post">
+        <!-- Title Section -->
+        <div class="form-group text-center">
+            <h4>Messages</h4>
+        </div>
+
+        <!-- Messages Display Section -->
+        <div class="messages-container">
+            @for (int i = Model.Messages.Length - 1; i >= 0; i--)
+            {
+                <div class="message-card">
+                    <div class="card-body">
+                        <p><strong>Time:</strong> @Model.Messages[i].Send_Date</p>
+                        <p><strong>Sender:</strong> @Model.Messages[i].SendingUser.Name</p>
+                        <p><strong>Subject:</strong> @Model.Messages[i].Message_Subject</p>
+                        <p><strong>Message:</strong> @Model.Messages[i].Content</p>
+                    </div>
+                </div>
+            }
+        </div>
+
 
         <div class="form-group">
-            <h4>Messages</h4>
-            <div class="card">
-                <div class="card-body" style="overflow-y: scroll; max-height:500px;">
-                        @for (int i = Model.Messages.Length -1; i >= 0; i--)
-                        {
-                        <br />
-                        <div class="card">
-                            <div class="card-body" style="width: 20rem;">
-                            Time : @Model.Messages[i].Send_Date
-                            <br/>
-                                Sender : @Model.Messages[i].SendingUser.Name
-                            <br />
-                                Subject : @Model.Messages[i].Message_Subject
-                            <br />
-                                Message: @Model.Messages[i].Content
-                            <br />
-                         </div>
-                        </div>
-                        }
-                </div>
-        <br />
-        <div class="form-group">
-            <h4>Select a Recipient</h4>
+            <h5>Select a Recipient</h5>
             <select asp-for="Recipient_ID" class="form-control">
                 @foreach (var User in Model.Users)
                 {
@@ -35,29 +121,30 @@
                 }
             </select>
         </div>
-        </div>
-        </div>
-        <br/>
+
+
         <div class="form-group">
-            <H4>Subject</H4>
+            <h5>Subject</h5>
             <input type="text" asp-for="MessageSubject" class="form-control" />
         </div>
 
-        <div class="form-group">
-            <label >Enter Message</label>
-            <textarea class="form-control" rows="3" asp-for = "MessageContent"></textarea>
-        </div>
-            <br />
 
         <div class="form-group">
-         <button type="submit" asp-page-handler=""  class="btn btn-primary">Send Message</button> 
+            <label for="MessageContent">Enter Message</label>
+            <textarea class="form-control" rows="4" asp-for="MessageContent"></textarea>
         </div>
-    </form>
-    <br/>
-    <form method="post" style="margin-top: 100px;margin-bottom: 100px;">
-        <div class="form-group">
-            <button asp-page="Messages" asp-page-handler="PopulateHandler">Populate</button>
-            <button asp-page="Messages" asp-page-handler="ClearHandler">Clear</button>
+
+
+        <div class="form-group text-center">
+            <button type="submit" asp-page-handler="" class="btn btn-primary">Send Message</button>
+        </div>
+
+        <br />
+
+        
+        <div class="form-group text-center" style="margin-top: 50px;">
+            <button asp-page="Messages" asp-page-handler="PopulateHandler" class="btn btn-secondary">Populate</button>
+            <button asp-page="Messages" asp-page-handler="ClearHandler" class="btn btn-danger">Clear</button>
         </div>
     </form>
 }

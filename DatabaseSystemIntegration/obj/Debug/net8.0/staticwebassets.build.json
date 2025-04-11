@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "LRK7K1eXBB2MmIAQ99/RPtvC8BO/MZvVp/D4OocDKOk=",
+  "Hash": "z66WL7q8OGL2OqqB3lLnTP+iLvz3JbwpZN1NDgpIfK8=",
   "Source": "DatabaseSystemIntegration",
   "BasePath": "_content/DatabaseSystemIntegration",
   "Mode": "Default",
@@ -31,8 +31,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "ScopedCss",
       "AssetTraitValue": "ApplicationBundle",
-      "Fingerprint": "ga21sm7f7g",
-      "Integrity": "KFqB8O2dXnatJpf/fJYKao8MW2TIPPUBhofFv+MI/BY=",
+      "Fingerprint": "5que4711jk",
+      "Integrity": "DeOrJoTFV7Iet0fu8awNh7gp8HW0TdpuTqiHit/4Jtc=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\obj\\Debug\\net8.0\\scopedcss\\bundle\\DatabaseSystemIntegration.styles.css"
@@ -52,8 +52,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "ScopedCss",
       "AssetTraitValue": "ProjectBundle",
-      "Fingerprint": "ga21sm7f7g",
-      "Integrity": "KFqB8O2dXnatJpf/fJYKao8MW2TIPPUBhofFv+MI/BY=",
+      "Fingerprint": "5que4711jk",
+      "Integrity": "DeOrJoTFV7Iet0fu8awNh7gp8HW0TdpuTqiHit/4Jtc=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\DatabaseSystemIntegration.bundle.scp.css"
@@ -73,8 +73,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "9r79ivkek9",
-      "Integrity": "e4K1xbCACpfzjSVimJlf35Ki9kdn1OQ+3dsC33miM4Y=",
+      "Fingerprint": "tyk1vhzt6y",
+      "Integrity": "mwzF/cylx+Wdg+1Nssl5Z5g6+OEICwqULKHhR3nxOnw=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
@@ -1384,51 +1384,6 @@
   ],
   "Endpoints": [
     {
-      "Route": "css/site.9r79ivkek9.css",
-      "AssetFile": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\css\\site.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "2520"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"e4K1xbCACpfzjSVimJlf35Ki9kdn1OQ+3dsC33miM4Y=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 09 Apr 2025 03:24:58 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "9r79ivkek9"
-        },
-        {
-          "Name": "label",
-          "Value": "css/site.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-e4K1xbCACpfzjSVimJlf35Ki9kdn1OQ+3dsC33miM4Y="
-        }
-      ]
-    },
-    {
       "Route": "css/site.css",
       "AssetFile": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\css\\site.css",
       "Selectors": [],
@@ -1439,7 +1394,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2520"
+          "Value": "5124"
         },
         {
           "Name": "Content-Type",
@@ -1447,11 +1402,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"e4K1xbCACpfzjSVimJlf35Ki9kdn1OQ+3dsC33miM4Y=\""
+          "Value": "\"mwzF/cylx+Wdg+1Nssl5Z5g6+OEICwqULKHhR3nxOnw=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 09 Apr 2025 03:24:58 GMT"
+          "Value": "Thu, 10 Apr 2025 22:30:01 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1461,7 +1416,52 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-e4K1xbCACpfzjSVimJlf35Ki9kdn1OQ+3dsC33miM4Y="
+          "Value": "sha256-mwzF/cylx+Wdg+1Nssl5Z5g6+OEICwqULKHhR3nxOnw="
+        }
+      ]
+    },
+    {
+      "Route": "css/site.tyk1vhzt6y.css",
+      "AssetFile": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\css\\site.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5124"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"mwzF/cylx+Wdg+1Nssl5Z5g6+OEICwqULKHhR3nxOnw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 10 Apr 2025 22:30:01 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "tyk1vhzt6y"
+        },
+        {
+          "Name": "label",
+          "Value": "css/site.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-mwzF/cylx+Wdg+1Nssl5Z5g6+OEICwqULKHhR3nxOnw="
         }
       ]
     },
@@ -1548,6 +1548,96 @@
       ]
     },
     {
+      "Route": "DatabaseSystemIntegration.5que4711jk.bundle.scp.css",
+      "AssetFile": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\DatabaseSystemIntegration.bundle.scp.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1227"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"DeOrJoTFV7Iet0fu8awNh7gp8HW0TdpuTqiHit/4Jtc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 10 Apr 2025 20:36:57 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "5que4711jk"
+        },
+        {
+          "Name": "label",
+          "Value": "DatabaseSystemIntegration.bundle.scp.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-DeOrJoTFV7Iet0fu8awNh7gp8HW0TdpuTqiHit/4Jtc="
+        }
+      ]
+    },
+    {
+      "Route": "DatabaseSystemIntegration.5que4711jk.styles.css",
+      "AssetFile": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\obj\\Debug\\net8.0\\scopedcss\\bundle\\DatabaseSystemIntegration.styles.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1227"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"DeOrJoTFV7Iet0fu8awNh7gp8HW0TdpuTqiHit/4Jtc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 10 Apr 2025 20:36:57 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "5que4711jk"
+        },
+        {
+          "Name": "label",
+          "Value": "DatabaseSystemIntegration.styles.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-DeOrJoTFV7Iet0fu8awNh7gp8HW0TdpuTqiHit/4Jtc="
+        }
+      ]
+    },
+    {
       "Route": "DatabaseSystemIntegration.bundle.scp.css",
       "AssetFile": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\DatabaseSystemIntegration.bundle.scp.css",
       "Selectors": [],
@@ -1558,7 +1648,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1225"
+          "Value": "1227"
         },
         {
           "Name": "Content-Type",
@@ -1566,11 +1656,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"KFqB8O2dXnatJpf/fJYKao8MW2TIPPUBhofFv+MI/BY=\""
+          "Value": "\"DeOrJoTFV7Iet0fu8awNh7gp8HW0TdpuTqiHit/4Jtc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 31 Mar 2025 20:39:35 GMT"
+          "Value": "Thu, 10 Apr 2025 20:36:57 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1580,97 +1670,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-KFqB8O2dXnatJpf/fJYKao8MW2TIPPUBhofFv+MI/BY="
-        }
-      ]
-    },
-    {
-      "Route": "DatabaseSystemIntegration.ga21sm7f7g.bundle.scp.css",
-      "AssetFile": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\DatabaseSystemIntegration.bundle.scp.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "1225"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"KFqB8O2dXnatJpf/fJYKao8MW2TIPPUBhofFv+MI/BY=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Mon, 31 Mar 2025 20:39:35 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "ga21sm7f7g"
-        },
-        {
-          "Name": "label",
-          "Value": "DatabaseSystemIntegration.bundle.scp.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-KFqB8O2dXnatJpf/fJYKao8MW2TIPPUBhofFv+MI/BY="
-        }
-      ]
-    },
-    {
-      "Route": "DatabaseSystemIntegration.ga21sm7f7g.styles.css",
-      "AssetFile": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\obj\\Debug\\net8.0\\scopedcss\\bundle\\DatabaseSystemIntegration.styles.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "1225"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"KFqB8O2dXnatJpf/fJYKao8MW2TIPPUBhofFv+MI/BY=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Mon, 31 Mar 2025 20:39:35 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "ga21sm7f7g"
-        },
-        {
-          "Name": "label",
-          "Value": "DatabaseSystemIntegration.styles.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-KFqB8O2dXnatJpf/fJYKao8MW2TIPPUBhofFv+MI/BY="
+          "Value": "sha256-DeOrJoTFV7Iet0fu8awNh7gp8HW0TdpuTqiHit/4Jtc="
         }
       ]
     },
@@ -1685,7 +1685,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1225"
+          "Value": "1227"
         },
         {
           "Name": "Content-Type",
@@ -1693,11 +1693,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"KFqB8O2dXnatJpf/fJYKao8MW2TIPPUBhofFv+MI/BY=\""
+          "Value": "\"DeOrJoTFV7Iet0fu8awNh7gp8HW0TdpuTqiHit/4Jtc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 31 Mar 2025 20:39:35 GMT"
+          "Value": "Thu, 10 Apr 2025 20:36:57 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1707,7 +1707,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-KFqB8O2dXnatJpf/fJYKao8MW2TIPPUBhofFv+MI/BY="
+          "Value": "sha256-DeOrJoTFV7Iet0fu8awNh7gp8HW0TdpuTqiHit/4Jtc="
         }
       ]
     },

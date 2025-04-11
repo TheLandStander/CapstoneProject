@@ -37,13 +37,13 @@ namespace DatabaseSystemIntegration.Pages.Interface
         public void OnPost() 
         {
             SendMessage();
-            Messages = ObjectConverter.ToMessages(DatabaseControls.GetMessages(HttpContext.Session.GetString("UserID")));
+            Messages = ObjectConverter.ToMessages(DatabaseControls.GetMessages(HttpContext.Session.GetString("UserID"))).OrderBy(m=>m.Send_Date).ToArray();
             Users = ObjectConverter.ToUsers(DatabaseControls.SelectNoFilter(19));
         }
         public IActionResult OnPostPopulateHandler()
         {
             ModelState.Clear();
-            Messages = ObjectConverter.ToMessages(DatabaseControls.GetMessages(HttpContext.Session.GetString("UserID")));
+            Messages = ObjectConverter.ToMessages(DatabaseControls.GetMessages(HttpContext.Session.GetString("UserID"))).OrderBy(m => m.Send_Date).ToArray();
             Users = ObjectConverter.ToUsers(DatabaseControls.SelectNoFilter(19));
             MessageContent = "Sample message body";
             MessageSubject = "Sample message subject";
@@ -54,7 +54,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
         public IActionResult OnPostClearHandler()
         {
             ModelState.Clear();
-            Messages = ObjectConverter.ToMessages(DatabaseControls.GetMessages(HttpContext.Session.GetString("UserID")));
+            Messages = ObjectConverter.ToMessages(DatabaseControls.GetMessages(HttpContext.Session.GetString("UserID"))).OrderBy(m => m.Send_Date).ToArray();
             Users = ObjectConverter.ToUsers(DatabaseControls.SelectNoFilter(19));
 
             return Page();
@@ -64,7 +64,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
         {
             if (HttpContext.Session.GetInt32("LoggedIn") == 1)
             {
-                Messages = ObjectConverter.ToMessages(DatabaseControls.GetMessages(HttpContext.Session.GetString("UserID")));
+                Messages = ObjectConverter.ToMessages(DatabaseControls.GetMessages(HttpContext.Session.GetString("UserID"))).OrderBy(m => m.Send_Date).ToArray();
                 Users = ObjectConverter.ToUsers(DatabaseControls.SelectNoFilter(19));
                     return Page();
             }

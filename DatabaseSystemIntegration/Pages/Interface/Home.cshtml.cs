@@ -64,7 +64,6 @@ namespace DatabaseSystemIntegration.Pages.Interface
                 DisplayedTasks = DatabaseControls.GetUserTasks(User.UserID).OrderBy(p => p.DueDate).ToArray();
             }
             User = DatabaseControls.GetUser(HttpContext.Session.GetString("UserID"));
-            DisplayedSubTasks = DatabaseControls.GetUserSubTasks(User.UserID).OrderBy(p => p.DueDate).ToArray();
             return Page();
         }
 

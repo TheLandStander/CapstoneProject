@@ -9,7 +9,7 @@ using System.Collections;
 
 namespace DatabaseSystemIntegration.Pages.Tools
 {
-    //Noah Kurtz, **WORKED INDIVIDUALLY**
+
     public class ObjectConverter
     {
         public static Partner[] ToPartner(SqlDataReader data)

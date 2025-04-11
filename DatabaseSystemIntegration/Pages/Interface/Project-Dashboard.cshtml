@@ -109,7 +109,7 @@
         body {
         margin: 0;
         font-family: 'Segoe UI', sans-serif;
-        background-color: #fff;
+        background-color: #f0f0f0;
         }
 
         .text-secondary {
@@ -144,10 +144,10 @@
     <form method="post">
         <div class="quick-links">
             <h5>Quick Links</h5>
-            @if (HttpContext.Session.GetString("UserType") == "Admin")
+            @if (HttpContext.Session.GetString("UserType") == "Admin" || HttpContext.Session.GetString("UserType") == "Project-Manager"
+            || HttpContext.Session.GetString("UserType") == "PI" || HttpContext.Session.GetString("UserType") == "CO-PI")
             {
-                <button asp-page-handler="CreateProject" class="btn">Start a project</button>
-                <button asp-page-handler="CreateGrant" class="btn">Record a grant proposal</button>
+                <button asp-page-handler="CreateGrant" class="btn">Start a grant proposal</button>
                 <button asp-page-handler="CreateUser" class="btn">Onboard a new user</button>
                 <button asp-page-handler="CreatePartner" class="btn">Onboard a new partner organization</button>
                 <button asp-page-handler="GenerateReport" class="btn">View Report Dashboard</button>
@@ -156,7 +156,6 @@
     </form>
 
 </head>
-
 @if (HttpContext.Session.GetInt32("LoggedIn") == 1)
 {
         @using Microsoft.AspNetCore.Mvc.Rendering
@@ -170,7 +169,7 @@
 
         <h2 class="text-center mt-5 mb-4">Organizations</h2>
         <div class="table-container">
-            <table class="table table-bordered table-striped">
+            <table class="table table-bordered table-striped" style="background-color: #f0f0f0;">
                 <thead class="thead-dark" >
                     <tr>
                         <th>Organization Name</th>
@@ -225,7 +224,7 @@
         </div>
         <h2 class="text-center mb-4">Grant Applications</h2>
         <div class="table-container">
-            <table class="table table-bordered table-striped">
+            <table class="table table-bordered table-striped" style="background-color: #f0f0f0;">
                 <thead class="thead-dark">
                     <tr>
                         <th>Grant Name</th>
@@ -286,7 +285,7 @@
                                     @if (grant.GetProject() != null)
                                     {
                                     <td>
-                                        <button class="btn btn-link" asp-page-handler="SelectProject" asp-route-id="@grant.GetProject().ProjectID">@grant.GrantName</button>
+                                        <button class="btn btn-link" asp-page-handler="SelectProject" asp-route-id="@grant.GetProject().ProjectID">@grant.GetProject().ProjectName</button>
                                     </td>
                                     }
                                     else
@@ -361,7 +360,7 @@
         </div>
         <h2 class="text-center mt-5 mb-4">Projects</h2>
         <div class="table-container" style="margin-bottom:50px;">
-            <table class="table table-bordered table-striped">
+            <table class="table table-bordered table-striped" style="background-color: #f0f0f0;">
                 <thead class="thead-dark">
                     <tr>
                         <th>Project Name</th>

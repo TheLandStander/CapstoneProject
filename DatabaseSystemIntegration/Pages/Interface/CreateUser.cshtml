@@ -1,21 +1,116 @@
 ﻿@page
 @model DatabaseSystemIntegration.Pages.Interface.CreateUser
 @{
-    ViewData["Title"] = "Create User";
+    ViewData["Title"] = "Onboard User";
 }
-<div class="container mt-4">
+<head>
+    <style>
+        /* Overall background color for the page */
+        body {
+            background-color: #f4f7fa; /* Light grey background for the page */
+        }
+
+        .create-user-page .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .create-user-form {
+            background-color: #ffffff; /* White background for the form */
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid #ddd;
+            box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .1);
+        }
+
+            .create-user-form .form-label {
+                font-weight: 600;
+                color: #333;
+            }
+
+            .create-user-form .form-control,
+            .create-user-form .form-select {
+                border: 1px solid #ced4da;
+                border-radius: 8px;
+                padding: 0.5rem;
+                font-size: 0.95rem;
+            }
+
+                .create-user-form .form-control:focus,
+                .create-user-form .form-select:focus {
+                    border-color: #b599ce;
+                    box-shadow: 0 0 0 0.2rem rgba(181, 153, 206, 0.25);
+                    outline: none;
+                }
+
+            .create-user-form .btn {
+                border-radius: 6px;
+                font-size: 0.95rem;
+                padding: 0.5rem 1.25rem;
+                min-width: 120px;
+            }
+
+            .create-user-form .btn-primary {
+                background-color: #b599ce;
+                border-color: #b599ce;
+                color: #fff;
+            }
+
+            .create-user-form .btn-secondary {
+                background-color: #6c757d;
+                border-color: #6c757d;
+                color: #fff;
+            }
+
+            .create-user-form .btn-danger {
+                background-color: #dc3545;
+                border-color: #dc3545;
+                color: #fff;
+            }
+
+            .create-user-form .btn:hover {
+                opacity: 0.95;
+            }
+
+        /* Improved form layout for responsive design */
+        .create-user-page h1 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .create-user-form {
+            padding: 1.5rem;
+        }
+
+            .create-user-form .form-label {
+                font-size: 1rem;
+            }
+
+            .create-user-form .form-control,
+            .create-user-form .form-select {
+                font-size: 1rem;
+            }
+
+            .create-user-form .btn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+        }
+    </style>
+</head>
+<div class="create-user-page container mt-4" style="margin-bottom:50px;">
     <h1 class="text-center mb-4">@ViewData["Title"]</h1>
 
-    <form method="post" class="p-4 border rounded bg-light">
-        <!-- Name Input -->
+    <form method="post" class="create-user-form">
         <div class="mb-3">
-            <label class="form-label fw-bold" for="Name">Name</label>
+            <label class="form-label" for="Name">Name</label>
             <input asp-for="Name" class="form-control" />
         </div>
 
-        <!-- Account Selection -->
         <div class="mb-3">
-            <label class="form-label fw-bold" for="AccountID">Account</label>
+            <label class="form-label" for="AccountID">Account</label>
             <select asp-for="AccountID" class="form-select">
                 @foreach (var account in Model.Accounts)
                 {
@@ -24,9 +119,8 @@
             </select>
         </div>
 
-        <!-- Organization Selection -->
         <div class="mb-3">
-            <label class="form-label fw-bold">Organization</label>
+            <label class="form-label">Organization</label>
             <select asp-for="PartnerID" class="form-select">
                 @foreach (var partner in Model.Partners)
                 {
@@ -35,9 +129,8 @@
             </select>
         </div>
 
-        <!-- User Role Selection -->
         <div class="mb-3">
-            <label class="form-label fw-bold" for="RoleID">User Role</label>
+            <label class="form-label" for="RoleID">User Role</label>
             <select asp-for="RoleID" class="form-select" multiple>
                 @foreach (var Role in Model.Roles)
                 {
@@ -46,9 +139,8 @@
             </select>
         </div>
 
-        <!-- User Type Selection -->
         <div class="mb-3">
-            <label class="form-label fw-bold" for="UserTypeID">User Type</label>
+            <label class="form-label" for="UserTypeID">User Type</label>
             <select asp-for="UserTypeID" class="form-select" multiple>
                 @foreach (var type in Model.Types)
                 {
@@ -57,7 +149,6 @@
             </select>
         </div>
 
-        <!-- Buttons -->
         <div class="text-center mt-4">
             <button type="submit" class="btn btn-primary me-2" asp-page-handler="">Submit</button>
             <button type="submit" class="btn btn-secondary me-2" asp-page-handler="PopulateHandler">Populate</button>
