@@ -413,6 +413,170 @@
       ]
     },
     {
+      "Route": "fileupload/CIS 484 Capstone Publishing to Azure Cloud Guide.pdf",
+      "AssetFile": "fileupload/CIS 484 Capstone Publishing to Azure Cloud Guide.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4269450"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"1p7QUciSc0thgXVGJp/7Z+2e6josui2vqfwHK5pjcOQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 11 Apr 2025 01:33:34 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-1p7QUciSc0thgXVGJp/7Z+2e6josui2vqfwHK5pjcOQ="
+        }
+      ]
+    },
+    {
+      "Route": "fileupload/CIS 484 Capstone Publishing to Azure Cloud Guide.yxdlp77j6u.pdf",
+      "AssetFile": "fileupload/CIS 484 Capstone Publishing to Azure Cloud Guide.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4269450"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"1p7QUciSc0thgXVGJp/7Z+2e6josui2vqfwHK5pjcOQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 11 Apr 2025 01:33:34 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "yxdlp77j6u"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-1p7QUciSc0thgXVGJp/7Z+2e6josui2vqfwHK5pjcOQ="
+        },
+        {
+          "Name": "label",
+          "Value": "fileupload/CIS 484 Capstone Publishing to Azure Cloud Guide.pdf"
+        }
+      ]
+    },
+    {
+      "Route": "fileupload/[COB 487] Simulation Game Report _ Template New.docx",
+      "AssetFile": "fileupload/[COB 487] Simulation Game Report _ Template New.docx",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "18963"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"kklDxVhO8FqG0q3hUELcS387i2CyuCnOg2BQ7+Zlt40=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 11 Apr 2025 01:33:34 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-kklDxVhO8FqG0q3hUELcS387i2CyuCnOg2BQ7+Zlt40="
+        }
+      ]
+    },
+    {
+      "Route": "fileupload/[COB 487] Simulation Game Report _ Template New.yb03aiohr9.docx",
+      "AssetFile": "fileupload/[COB 487] Simulation Game Report _ Template New.docx",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "18963"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"kklDxVhO8FqG0q3hUELcS387i2CyuCnOg2BQ7+Zlt40=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 11 Apr 2025 01:33:34 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "yb03aiohr9"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-kklDxVhO8FqG0q3hUELcS387i2CyuCnOg2BQ7+Zlt40="
+        },
+        {
+          "Name": "label",
+          "Value": "fileupload/[COB 487] Simulation Game Report _ Template New.docx"
+        }
+      ]
+    },
+    {
       "Route": "js/site.js",
       "AssetFile": "js/site.js",
       "Selectors": [],

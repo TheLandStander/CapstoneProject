@@ -3,7 +3,7 @@
   "ManifestType": "Publish",
   "Endpoints": [
     {
-      "Route": "DatabaseSystemIntegration.ga21sm7f7g.styles.css",
+      "Route": "DatabaseSystemIntegration.5que4711jk.styles.css",
       "AssetFile": "DatabaseSystemIntegration.styles.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -17,7 +17,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1225"
+          "Value": "1227"
         },
         {
           "Name": "Content-Type",
@@ -25,21 +25,21 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"KFqB8O2dXnatJpf/fJYKao8MW2TIPPUBhofFv+MI/BY=\""
+          "Value": "\"DeOrJoTFV7Iet0fu8awNh7gp8HW0TdpuTqiHit/4Jtc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 08 Apr 2025 19:34:27 GMT"
+          "Value": "Fri, 11 Apr 2025 03:40:27 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "ga21sm7f7g"
+          "Value": "5que4711jk"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-KFqB8O2dXnatJpf/fJYKao8MW2TIPPUBhofFv+MI/BY="
+          "Value": "sha256-DeOrJoTFV7Iet0fu8awNh7gp8HW0TdpuTqiHit/4Jtc="
         },
         {
           "Name": "label",
@@ -62,7 +62,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1225"
+          "Value": "1227"
         },
         {
           "Name": "Content-Type",
@@ -70,17 +70,17 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"KFqB8O2dXnatJpf/fJYKao8MW2TIPPUBhofFv+MI/BY=\""
+          "Value": "\"DeOrJoTFV7Iet0fu8awNh7gp8HW0TdpuTqiHit/4Jtc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 08 Apr 2025 19:34:27 GMT"
+          "Value": "Fri, 11 Apr 2025 03:40:27 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-KFqB8O2dXnatJpf/fJYKao8MW2TIPPUBhofFv+MI/BY="
+          "Value": "sha256-DeOrJoTFV7Iet0fu8awNh7gp8HW0TdpuTqiHit/4Jtc="
         }
       ]
     },
@@ -167,51 +167,6 @@
       ]
     },
     {
-      "Route": "css/site.9r79ivkek9.css",
-      "AssetFile": "css/site.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "2520"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"e4K1xbCACpfzjSVimJlf35Ki9kdn1OQ+3dsC33miM4Y=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 09 Apr 2025 03:24:58 GMT"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "9r79ivkek9"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-e4K1xbCACpfzjSVimJlf35Ki9kdn1OQ+3dsC33miM4Y="
-        },
-        {
-          "Name": "label",
-          "Value": "css/site.css"
-        }
-      ]
-    },
-    {
       "Route": "css/site.css",
       "AssetFile": "css/site.css",
       "Selectors": [],
@@ -226,7 +181,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2520"
+          "Value": "5124"
         },
         {
           "Name": "Content-Type",
@@ -234,17 +189,62 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"e4K1xbCACpfzjSVimJlf35Ki9kdn1OQ+3dsC33miM4Y=\""
+          "Value": "\"mwzF/cylx+Wdg+1Nssl5Z5g6+OEICwqULKHhR3nxOnw=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 09 Apr 2025 03:24:58 GMT"
+          "Value": "Thu, 10 Apr 2025 22:30:01 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-e4K1xbCACpfzjSVimJlf35Ki9kdn1OQ+3dsC33miM4Y="
+          "Value": "sha256-mwzF/cylx+Wdg+1Nssl5Z5g6+OEICwqULKHhR3nxOnw="
+        }
+      ]
+    },
+    {
+      "Route": "css/site.tyk1vhzt6y.css",
+      "AssetFile": "css/site.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5124"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"mwzF/cylx+Wdg+1Nssl5Z5g6+OEICwqULKHhR3nxOnw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 10 Apr 2025 22:30:01 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "tyk1vhzt6y"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-mwzF/cylx+Wdg+1Nssl5Z5g6+OEICwqULKHhR3nxOnw="
+        },
+        {
+          "Name": "label",
+          "Value": "css/site.css"
         }
       ]
     },
@@ -409,6 +409,170 @@
         {
           "Name": "integrity",
           "Value": "sha256-ixBg8ZN2jFW8SN7ei6jam+bJP45tyulG428aiVa3Jps="
+        }
+      ]
+    },
+    {
+      "Route": "fileupload/CIS 484 Capstone Publishing to Azure Cloud Guide.pdf",
+      "AssetFile": "fileupload/CIS 484 Capstone Publishing to Azure Cloud Guide.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4269450"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"1p7QUciSc0thgXVGJp/7Z+2e6josui2vqfwHK5pjcOQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 11 Apr 2025 01:33:34 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-1p7QUciSc0thgXVGJp/7Z+2e6josui2vqfwHK5pjcOQ="
+        }
+      ]
+    },
+    {
+      "Route": "fileupload/CIS 484 Capstone Publishing to Azure Cloud Guide.yxdlp77j6u.pdf",
+      "AssetFile": "fileupload/CIS 484 Capstone Publishing to Azure Cloud Guide.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4269450"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"1p7QUciSc0thgXVGJp/7Z+2e6josui2vqfwHK5pjcOQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 11 Apr 2025 01:33:34 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "yxdlp77j6u"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-1p7QUciSc0thgXVGJp/7Z+2e6josui2vqfwHK5pjcOQ="
+        },
+        {
+          "Name": "label",
+          "Value": "fileupload/CIS 484 Capstone Publishing to Azure Cloud Guide.pdf"
+        }
+      ]
+    },
+    {
+      "Route": "fileupload/[COB 487] Simulation Game Report _ Template New.docx",
+      "AssetFile": "fileupload/[COB 487] Simulation Game Report _ Template New.docx",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "18963"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"kklDxVhO8FqG0q3hUELcS387i2CyuCnOg2BQ7+Zlt40=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 11 Apr 2025 01:33:34 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-kklDxVhO8FqG0q3hUELcS387i2CyuCnOg2BQ7+Zlt40="
+        }
+      ]
+    },
+    {
+      "Route": "fileupload/[COB 487] Simulation Game Report _ Template New.yb03aiohr9.docx",
+      "AssetFile": "fileupload/[COB 487] Simulation Game Report _ Template New.docx",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "18963"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"kklDxVhO8FqG0q3hUELcS387i2CyuCnOg2BQ7+Zlt40=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 11 Apr 2025 01:33:34 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "yb03aiohr9"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-kklDxVhO8FqG0q3hUELcS387i2CyuCnOg2BQ7+Zlt40="
+        },
+        {
+          "Name": "label",
+          "Value": "fileupload/[COB 487] Simulation Game Report _ Template New.docx"
         }
       ]
     },

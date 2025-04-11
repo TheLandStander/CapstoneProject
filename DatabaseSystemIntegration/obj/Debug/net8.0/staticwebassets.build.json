@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "z66WL7q8OGL2OqqB3lLnTP+iLvz3JbwpZN1NDgpIfK8=",
+  "Hash": "psQ5aJMJRq5juorra9AKw569hzpzfs7gNUhfwYxMPT0=",
   "Source": "DatabaseSystemIntegration",
   "BasePath": "_content/DatabaseSystemIntegration",
   "Mode": "Default",
@@ -120,6 +120,48 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\fileupload\\[COB 487] Simulation Game Report _ Template New.docx",
+      "SourceId": "DatabaseSystemIntegration",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\",
+      "BasePath": "_content/DatabaseSystemIntegration",
+      "RelativePath": "fileupload/[COB 487] Simulation Game Report _ Template New#[.{fingerprint}]?.docx",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "yb03aiohr9",
+      "Integrity": "kklDxVhO8FqG0q3hUELcS387i2CyuCnOg2BQ7+Zlt40=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\fileupload\\[COB 487] Simulation Game Report _ Template New.docx"
+    },
+    {
+      "Identity": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\fileupload\\CIS 484 Capstone Publishing to Azure Cloud Guide.pdf",
+      "SourceId": "DatabaseSystemIntegration",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\",
+      "BasePath": "_content/DatabaseSystemIntegration",
+      "RelativePath": "fileupload/CIS 484 Capstone Publishing to Azure Cloud Guide#[.{fingerprint}]?.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "yxdlp77j6u",
+      "Integrity": "1p7QUciSc0thgXVGJp/7Z+2e6josui2vqfwHK5pjcOQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\fileupload\\CIS 484 Capstone Publishing to Azure Cloud Guide.pdf"
     },
     {
       "Identity": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\Icon.jpg",
@@ -1790,6 +1832,170 @@
         {
           "Name": "integrity",
           "Value": "sha256-ixBg8ZN2jFW8SN7ei6jam+bJP45tyulG428aiVa3Jps="
+        }
+      ]
+    },
+    {
+      "Route": "fileupload/[COB 487] Simulation Game Report _ Template New.docx",
+      "AssetFile": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\fileupload\\[COB 487] Simulation Game Report _ Template New.docx",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "18963"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"kklDxVhO8FqG0q3hUELcS387i2CyuCnOg2BQ7+Zlt40=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 11 Apr 2025 01:33:34 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-kklDxVhO8FqG0q3hUELcS387i2CyuCnOg2BQ7+Zlt40="
+        }
+      ]
+    },
+    {
+      "Route": "fileupload/[COB 487] Simulation Game Report _ Template New.yb03aiohr9.docx",
+      "AssetFile": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\fileupload\\[COB 487] Simulation Game Report _ Template New.docx",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "18963"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"kklDxVhO8FqG0q3hUELcS387i2CyuCnOg2BQ7+Zlt40=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 11 Apr 2025 01:33:34 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "yb03aiohr9"
+        },
+        {
+          "Name": "label",
+          "Value": "fileupload/[COB 487] Simulation Game Report _ Template New.docx"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-kklDxVhO8FqG0q3hUELcS387i2CyuCnOg2BQ7+Zlt40="
+        }
+      ]
+    },
+    {
+      "Route": "fileupload/CIS 484 Capstone Publishing to Azure Cloud Guide.pdf",
+      "AssetFile": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\fileupload\\CIS 484 Capstone Publishing to Azure Cloud Guide.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4269450"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"1p7QUciSc0thgXVGJp/7Z+2e6josui2vqfwHK5pjcOQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 11 Apr 2025 01:33:34 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-1p7QUciSc0thgXVGJp/7Z+2e6josui2vqfwHK5pjcOQ="
+        }
+      ]
+    },
+    {
+      "Route": "fileupload/CIS 484 Capstone Publishing to Azure Cloud Guide.yxdlp77j6u.pdf",
+      "AssetFile": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\fileupload\\CIS 484 Capstone Publishing to Azure Cloud Guide.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4269450"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"1p7QUciSc0thgXVGJp/7Z+2e6josui2vqfwHK5pjcOQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 11 Apr 2025 01:33:34 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "yxdlp77j6u"
+        },
+        {
+          "Name": "label",
+          "Value": "fileupload/CIS 484 Capstone Publishing to Azure Cloud Guide.pdf"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-1p7QUciSc0thgXVGJp/7Z+2e6josui2vqfwHK5pjcOQ="
         }
       ]
     },

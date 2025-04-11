@@ -48,6 +48,30 @@
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-ixBg8ZN2jFW8SN7ei6jam\u002BbJP45tyulG428aiVa3Jps="}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"23462"},{"Name":"Content-Type","Value":"image/x-icon"},{"Name":"ETag","Value":"\u0022ixBg8ZN2jFW8SN7ei6jam\u002BbJP45tyulG428aiVa3Jps=\u0022"},{"Name":"Last-Modified","Value":"Mon, 07 Apr 2025 20:16:27 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/DatabaseSystemIntegration/fileupload/CIS 484 Capstone Publishing to Azure Cloud Guide.pdf">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\fileupload\CIS 484 Capstone Publishing to Azure Cloud Guide.pdf'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-1p7QUciSc0thgXVGJp/7Z\u002B2e6josui2vqfwHK5pjcOQ="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"4269450"},{"Name":"Content-Type","Value":"application/pdf"},{"Name":"ETag","Value":"\u00221p7QUciSc0thgXVGJp/7Z\u002B2e6josui2vqfwHK5pjcOQ=\u0022"},{"Name":"Last-Modified","Value":"Fri, 11 Apr 2025 01:33:34 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/DatabaseSystemIntegration/fileupload/CIS 484 Capstone Publishing to Azure Cloud Guide.yxdlp77j6u.pdf">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\fileupload\CIS 484 Capstone Publishing to Azure Cloud Guide.pdf'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"yxdlp77j6u"},{"Name":"integrity","Value":"sha256-1p7QUciSc0thgXVGJp/7Z\u002B2e6josui2vqfwHK5pjcOQ="},{"Name":"label","Value":"_content/DatabaseSystemIntegration/fileupload/CIS 484 Capstone Publishing to Azure Cloud Guide.pdf"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"4269450"},{"Name":"Content-Type","Value":"application/pdf"},{"Name":"ETag","Value":"\u00221p7QUciSc0thgXVGJp/7Z\u002B2e6josui2vqfwHK5pjcOQ=\u0022"},{"Name":"Last-Modified","Value":"Fri, 11 Apr 2025 01:33:34 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/DatabaseSystemIntegration/fileupload/[COB 487] Simulation Game Report _ Template New.docx">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\fileupload\[COB 487] Simulation Game Report _ Template New.docx'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-kklDxVhO8FqG0q3hUELcS387i2CyuCnOg2BQ7\u002BZlt40="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"18963"},{"Name":"Content-Type","Value":"application/vnd.openxmlformats-officedocument.wordprocessingml.document"},{"Name":"ETag","Value":"\u0022kklDxVhO8FqG0q3hUELcS387i2CyuCnOg2BQ7\u002BZlt40=\u0022"},{"Name":"Last-Modified","Value":"Fri, 11 Apr 2025 01:33:34 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/DatabaseSystemIntegration/fileupload/[COB 487] Simulation Game Report _ Template New.yb03aiohr9.docx">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\fileupload\[COB 487] Simulation Game Report _ Template New.docx'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"yb03aiohr9"},{"Name":"integrity","Value":"sha256-kklDxVhO8FqG0q3hUELcS387i2CyuCnOg2BQ7\u002BZlt40="},{"Name":"label","Value":"_content/DatabaseSystemIntegration/fileupload/[COB 487] Simulation Game Report _ Template New.docx"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"18963"},{"Name":"Content-Type","Value":"application/vnd.openxmlformats-officedocument.wordprocessingml.document"},{"Name":"ETag","Value":"\u0022kklDxVhO8FqG0q3hUELcS387i2CyuCnOg2BQ7\u002BZlt40=\u0022"},{"Name":"Last-Modified","Value":"Fri, 11 Apr 2025 01:33:34 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/DatabaseSystemIntegration/Icon.23jadwbwao.jpg">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Icon.jpg'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>

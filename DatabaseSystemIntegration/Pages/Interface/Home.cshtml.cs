@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DatabaseSystemIntegration.Pages.Interface
 {
-    public class Home : PageModel
+    public class HomeModel : PageModel
     {
         public Users User { get; set; }
 
@@ -16,54 +16,55 @@ namespace DatabaseSystemIntegration.Pages.Interface
 
         public ChildTask[] DisplayedSubTasks { get; set; }
 
+        [BindProperty]
+        public IFormFile UploadedFile { get; set; }
+
         public void SetObjects()
         {
-            User = DatabaseControls.GetUser(HttpContext.Session.GetString("UserID"));
-            DisplayedTasks = DatabaseControls.GetUserTasks(User.UserID).OrderBy(t => t.DueDate).ToArray();
-            DisplayedSubTasks = DatabaseControls.GetUserSubTasks(User.UserID).OrderBy(p => p.DueDate).ToArray();
+            if (User == null)
+            {
+                User = DatabaseControls.GetUser(HttpContext.Session.GetString("UserID"));
+            }
+            if (DisplayedTasks == null)
+            {
+                DisplayedTasks = DatabaseControls.GetUserTasks(User.UserID).OrderBy(t => t.DueDate).ToArray();
+            }
+            if (DisplayedSubTasks == null)
+            {
+                DisplayedSubTasks = DatabaseControls.GetUserSubTasks(User.UserID).OrderBy(p => p.DueDate).ToArray();
+            }
         }
 
         public ChildTask[] SearchTasks(string Name)
         {
             ChildTask[] AllTasks = DatabaseControls.GetUserSubTasks(User.UserID);
             List<ChildTask> SearchResults = new List<ChildTask>();
-            List<ChildTask> ActiveTasks = new List<ChildTask>();
             foreach (ChildTask t in AllTasks)
             {
-                if (t.TaskName == Name)
+                if (t.TaskName == Name && t.Completed == false)
                 {
-                    Console.Write(Name);
                     SearchResults.Add(t);
                 }
-            }
+            }            
 
-            foreach (ChildTask t in SearchResults)
-            {
-                if (t.Completed == false)
-                {
-                    ActiveTasks.Add(t);
-                
-                }
-            }
-
-            return ActiveTasks.OrderBy(t => t.DueDate).ToArray();
+            return SearchResults.OrderBy(t => t.DueDate).ToArray();
         }
 
         public IActionResult OnPostSearch()
         {
             if (Search != null)
             {
+                DisplayedTasks = DatabaseControls.GetUserTasks(User.UserID).OrderBy(p => p.DueDate).ToArray();
                 User = DatabaseControls.GetUser(HttpContext.Session.GetString("UserID"));
                 DisplayedSubTasks = SearchTasks(Search);
-                DisplayedTasks = DatabaseControls.GetUserTasks(User.UserID).OrderBy(p => p.DueDate).ToArray();
             }
             else
             {
+                DisplayedTasks = DatabaseControls.GetUserTasks(User.UserID).OrderBy(p => p.DueDate).ToArray();
                 User = DatabaseControls.GetUser(HttpContext.Session.GetString("UserID"));
                 DisplayedSubTasks = DatabaseControls.GetUserSubTasks(User.UserID).OrderBy(t => t.DueDate).ToArray();
-                DisplayedTasks = DatabaseControls.GetUserTasks(User.UserID).OrderBy(p => p.DueDate).ToArray();
             }
-            User = DatabaseControls.GetUser(HttpContext.Session.GetString("UserID"));
+
             return Page();
         }
 
@@ -71,6 +72,45 @@ namespace DatabaseSystemIntegration.Pages.Interface
         {
             SetObjects();
         }
+
+        public async Task<IActionResult> OnPostDownloadPdf(string id, string name)
+        {
+            SetObjects();
+            var fileStream = await FileManager.RetrieveFileAsync(id);
+            if (fileStream == null) return NotFound();
+
+            return File(fileStream, "application/pdf", $"{name}.pdf");
+        }
+
+        public async Task<IActionResult> OnPostDownloadDoc(string id, string name)
+        {
+            SetObjects();
+            var fileStream = await FileManager.RetrieveFileAsync(id);
+            if (fileStream == null) return NotFound();
+            return File(fileStream, "application/msword", $"{name}.docx");
+        }
+
+        public async Task<IActionResult> OnPostDownloadExel(string id, string name)
+        {
+            SetObjects();
+            var fileStream = await FileManager.RetrieveFileAsync(id);
+            if (fileStream == null) return NotFound();
+
+            return File(fileStream, "application/vnd.ms-excel", $"{name}.xls");
+        }
+
+        public async Task<IActionResult> OnPostUpload(string id)
+        {
+            SetObjects();
+            if (UploadedFile == null || UploadedFile.Length == 0)
+            {
+                return Page();
+            }
+            using var stream = UploadedFile.OpenReadStream();
+            await FileManager.UploadFileAsync(id, stream);
+            return Page();
+        }
+
 
         public IActionResult OnGet()
         {
@@ -83,14 +123,6 @@ namespace DatabaseSystemIntegration.Pages.Interface
             return RedirectToPage("/index");
         }
 
-        public IActionResult OnPostSelectProject(string ID)
-        {
-            HttpContext.Session.SetString("ItemType", "Project");
-            HttpContext.Session.SetString("ItemID", ID);
-            SetObjects();
-            return RedirectToPage("AccessItem");
-        }
-
         public IActionResult OnPostSelectTask(string ID)
         {
             SetObjects();
@@ -101,13 +133,13 @@ namespace DatabaseSystemIntegration.Pages.Interface
 
         public void CompleteChildTask(string ID)
         {
-           ChildTask ChildTask = ObjectConverter.ToChildTask(DatabaseControls.SelectFilter(4, 4, ID))[0];
+            ChildTask ChildTask = ObjectConverter.ToChildTask(DatabaseControls.SelectFilter(4, 4, ID))[0];
            ChildTask.CompleteTask();
         }
-        public IActionResult OnPostUpdateChildTask(string ID)
+        public IActionResult OnPostUpdateChildTask(string id)
         {
+            CompleteChildTask(id);
             SetObjects();
-            CompleteChildTask(ID);
             return Page();
         }
 

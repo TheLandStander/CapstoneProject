@@ -21,6 +21,14 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\fileupload\\CIS 484 Capstone Publishing to Azure Cloud Guide.pdf",
+      "PackagePath": "staticwebassets\\fileupload\\CIS 484 Capstone Publishing to Azure Cloud Guide.pdf"
+    },
+    {
+      "Id": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\fileupload\\[COB 487] Simulation Game Report _ Template New.docx",
+      "PackagePath": "staticwebassets\\fileupload\\[COB 487] Simulation Game Report _ Template New.docx"
+    },
+    {
       "Id": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

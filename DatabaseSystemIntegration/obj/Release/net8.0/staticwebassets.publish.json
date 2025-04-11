@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "RBBrDWGq20UTW+HJFPzwZZg9lQyFjgHf3sav28up8mk=",
+  "Hash": "xlhPSuoJ3pPpECoUyedpsDNCJ/MCvJq8eRfIDqgW5QI=",
   "Source": "DatabaseSystemIntegration",
   "BasePath": "_content/DatabaseSystemIntegration",
   "Mode": "Default",
@@ -31,8 +31,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "ScopedCss",
       "AssetTraitValue": "ApplicationBundle",
-      "Fingerprint": "ga21sm7f7g",
-      "Integrity": "KFqB8O2dXnatJpf/fJYKao8MW2TIPPUBhofFv+MI/BY=",
+      "Fingerprint": "5que4711jk",
+      "Integrity": "DeOrJoTFV7Iet0fu8awNh7gp8HW0TdpuTqiHit/4Jtc=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\obj\\Release\\net8.0\\scopedcss\\bundle\\DatabaseSystemIntegration.styles.css"
@@ -52,8 +52,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "ScopedCss",
       "AssetTraitValue": "ProjectBundle",
-      "Fingerprint": "ga21sm7f7g",
-      "Integrity": "KFqB8O2dXnatJpf/fJYKao8MW2TIPPUBhofFv+MI/BY=",
+      "Fingerprint": "5que4711jk",
+      "Integrity": "DeOrJoTFV7Iet0fu8awNh7gp8HW0TdpuTqiHit/4Jtc=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\obj\\Release\\net8.0\\scopedcss\\projectbundle\\DatabaseSystemIntegration.bundle.scp.css"
@@ -73,8 +73,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "9r79ivkek9",
-      "Integrity": "e4K1xbCACpfzjSVimJlf35Ki9kdn1OQ+3dsC33miM4Y=",
+      "Fingerprint": "tyk1vhzt6y",
+      "Integrity": "mwzF/cylx+Wdg+1Nssl5Z5g6+OEICwqULKHhR3nxOnw=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
@@ -120,6 +120,48 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\fileupload\\[COB 487] Simulation Game Report _ Template New.docx",
+      "SourceId": "DatabaseSystemIntegration",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\",
+      "BasePath": "_content/DatabaseSystemIntegration",
+      "RelativePath": "fileupload/[COB 487] Simulation Game Report _ Template New#[.{fingerprint}]?.docx",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "yb03aiohr9",
+      "Integrity": "kklDxVhO8FqG0q3hUELcS387i2CyuCnOg2BQ7+Zlt40=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\fileupload\\[COB 487] Simulation Game Report _ Template New.docx"
+    },
+    {
+      "Identity": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\fileupload\\CIS 484 Capstone Publishing to Azure Cloud Guide.pdf",
+      "SourceId": "DatabaseSystemIntegration",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\",
+      "BasePath": "_content/DatabaseSystemIntegration",
+      "RelativePath": "fileupload/CIS 484 Capstone Publishing to Azure Cloud Guide#[.{fingerprint}]?.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "yxdlp77j6u",
+      "Integrity": "1p7QUciSc0thgXVGJp/7Z+2e6josui2vqfwHK5pjcOQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\fileupload\\CIS 484 Capstone Publishing to Azure Cloud Guide.pdf"
     },
     {
       "Identity": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\Icon.jpg",
@@ -1384,51 +1426,6 @@
   ],
   "Endpoints": [
     {
-      "Route": "css/site.9r79ivkek9.css",
-      "AssetFile": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\css\\site.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "2520"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"e4K1xbCACpfzjSVimJlf35Ki9kdn1OQ+3dsC33miM4Y=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 09 Apr 2025 03:24:58 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "9r79ivkek9"
-        },
-        {
-          "Name": "label",
-          "Value": "css/site.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-e4K1xbCACpfzjSVimJlf35Ki9kdn1OQ+3dsC33miM4Y="
-        }
-      ]
-    },
-    {
       "Route": "css/site.css",
       "AssetFile": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\css\\site.css",
       "Selectors": [],
@@ -1439,7 +1436,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2520"
+          "Value": "5124"
         },
         {
           "Name": "Content-Type",
@@ -1447,11 +1444,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"e4K1xbCACpfzjSVimJlf35Ki9kdn1OQ+3dsC33miM4Y=\""
+          "Value": "\"mwzF/cylx+Wdg+1Nssl5Z5g6+OEICwqULKHhR3nxOnw=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 09 Apr 2025 03:24:58 GMT"
+          "Value": "Thu, 10 Apr 2025 22:30:01 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1461,7 +1458,52 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-e4K1xbCACpfzjSVimJlf35Ki9kdn1OQ+3dsC33miM4Y="
+          "Value": "sha256-mwzF/cylx+Wdg+1Nssl5Z5g6+OEICwqULKHhR3nxOnw="
+        }
+      ]
+    },
+    {
+      "Route": "css/site.tyk1vhzt6y.css",
+      "AssetFile": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\css\\site.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5124"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"mwzF/cylx+Wdg+1Nssl5Z5g6+OEICwqULKHhR3nxOnw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 10 Apr 2025 22:30:01 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "tyk1vhzt6y"
+        },
+        {
+          "Name": "label",
+          "Value": "css/site.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-mwzF/cylx+Wdg+1Nssl5Z5g6+OEICwqULKHhR3nxOnw="
         }
       ]
     },
@@ -1548,6 +1590,96 @@
       ]
     },
     {
+      "Route": "DatabaseSystemIntegration.5que4711jk.bundle.scp.css",
+      "AssetFile": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\obj\\Release\\net8.0\\scopedcss\\projectbundle\\DatabaseSystemIntegration.bundle.scp.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1227"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"DeOrJoTFV7Iet0fu8awNh7gp8HW0TdpuTqiHit/4Jtc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 11 Apr 2025 03:40:27 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "5que4711jk"
+        },
+        {
+          "Name": "label",
+          "Value": "DatabaseSystemIntegration.bundle.scp.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-DeOrJoTFV7Iet0fu8awNh7gp8HW0TdpuTqiHit/4Jtc="
+        }
+      ]
+    },
+    {
+      "Route": "DatabaseSystemIntegration.5que4711jk.styles.css",
+      "AssetFile": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\obj\\Release\\net8.0\\scopedcss\\bundle\\DatabaseSystemIntegration.styles.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1227"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"DeOrJoTFV7Iet0fu8awNh7gp8HW0TdpuTqiHit/4Jtc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 11 Apr 2025 03:40:27 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "5que4711jk"
+        },
+        {
+          "Name": "label",
+          "Value": "DatabaseSystemIntegration.styles.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-DeOrJoTFV7Iet0fu8awNh7gp8HW0TdpuTqiHit/4Jtc="
+        }
+      ]
+    },
+    {
       "Route": "DatabaseSystemIntegration.bundle.scp.css",
       "AssetFile": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\obj\\Release\\net8.0\\scopedcss\\projectbundle\\DatabaseSystemIntegration.bundle.scp.css",
       "Selectors": [],
@@ -1558,7 +1690,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1225"
+          "Value": "1227"
         },
         {
           "Name": "Content-Type",
@@ -1566,11 +1698,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"KFqB8O2dXnatJpf/fJYKao8MW2TIPPUBhofFv+MI/BY=\""
+          "Value": "\"DeOrJoTFV7Iet0fu8awNh7gp8HW0TdpuTqiHit/4Jtc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 08 Apr 2025 19:34:27 GMT"
+          "Value": "Fri, 11 Apr 2025 03:40:27 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1580,97 +1712,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-KFqB8O2dXnatJpf/fJYKao8MW2TIPPUBhofFv+MI/BY="
-        }
-      ]
-    },
-    {
-      "Route": "DatabaseSystemIntegration.ga21sm7f7g.bundle.scp.css",
-      "AssetFile": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\obj\\Release\\net8.0\\scopedcss\\projectbundle\\DatabaseSystemIntegration.bundle.scp.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "1225"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"KFqB8O2dXnatJpf/fJYKao8MW2TIPPUBhofFv+MI/BY=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 08 Apr 2025 19:34:27 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "ga21sm7f7g"
-        },
-        {
-          "Name": "label",
-          "Value": "DatabaseSystemIntegration.bundle.scp.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-KFqB8O2dXnatJpf/fJYKao8MW2TIPPUBhofFv+MI/BY="
-        }
-      ]
-    },
-    {
-      "Route": "DatabaseSystemIntegration.ga21sm7f7g.styles.css",
-      "AssetFile": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\obj\\Release\\net8.0\\scopedcss\\bundle\\DatabaseSystemIntegration.styles.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "1225"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"KFqB8O2dXnatJpf/fJYKao8MW2TIPPUBhofFv+MI/BY=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 08 Apr 2025 19:34:27 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "ga21sm7f7g"
-        },
-        {
-          "Name": "label",
-          "Value": "DatabaseSystemIntegration.styles.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-KFqB8O2dXnatJpf/fJYKao8MW2TIPPUBhofFv+MI/BY="
+          "Value": "sha256-DeOrJoTFV7Iet0fu8awNh7gp8HW0TdpuTqiHit/4Jtc="
         }
       ]
     },
@@ -1685,7 +1727,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1225"
+          "Value": "1227"
         },
         {
           "Name": "Content-Type",
@@ -1693,11 +1735,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"KFqB8O2dXnatJpf/fJYKao8MW2TIPPUBhofFv+MI/BY=\""
+          "Value": "\"DeOrJoTFV7Iet0fu8awNh7gp8HW0TdpuTqiHit/4Jtc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 08 Apr 2025 19:34:27 GMT"
+          "Value": "Fri, 11 Apr 2025 03:40:27 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1707,7 +1749,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-KFqB8O2dXnatJpf/fJYKao8MW2TIPPUBhofFv+MI/BY="
+          "Value": "sha256-DeOrJoTFV7Iet0fu8awNh7gp8HW0TdpuTqiHit/4Jtc="
         }
       ]
     },
@@ -1790,6 +1832,170 @@
         {
           "Name": "integrity",
           "Value": "sha256-ixBg8ZN2jFW8SN7ei6jam+bJP45tyulG428aiVa3Jps="
+        }
+      ]
+    },
+    {
+      "Route": "fileupload/[COB 487] Simulation Game Report _ Template New.docx",
+      "AssetFile": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\fileupload\\[COB 487] Simulation Game Report _ Template New.docx",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "18963"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"kklDxVhO8FqG0q3hUELcS387i2CyuCnOg2BQ7+Zlt40=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 11 Apr 2025 01:33:34 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-kklDxVhO8FqG0q3hUELcS387i2CyuCnOg2BQ7+Zlt40="
+        }
+      ]
+    },
+    {
+      "Route": "fileupload/[COB 487] Simulation Game Report _ Template New.yb03aiohr9.docx",
+      "AssetFile": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\fileupload\\[COB 487] Simulation Game Report _ Template New.docx",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "18963"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"kklDxVhO8FqG0q3hUELcS387i2CyuCnOg2BQ7+Zlt40=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 11 Apr 2025 01:33:34 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "yb03aiohr9"
+        },
+        {
+          "Name": "label",
+          "Value": "fileupload/[COB 487] Simulation Game Report _ Template New.docx"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-kklDxVhO8FqG0q3hUELcS387i2CyuCnOg2BQ7+Zlt40="
+        }
+      ]
+    },
+    {
+      "Route": "fileupload/CIS 484 Capstone Publishing to Azure Cloud Guide.pdf",
+      "AssetFile": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\fileupload\\CIS 484 Capstone Publishing to Azure Cloud Guide.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4269450"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"1p7QUciSc0thgXVGJp/7Z+2e6josui2vqfwHK5pjcOQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 11 Apr 2025 01:33:34 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-1p7QUciSc0thgXVGJp/7Z+2e6josui2vqfwHK5pjcOQ="
+        }
+      ]
+    },
+    {
+      "Route": "fileupload/CIS 484 Capstone Publishing to Azure Cloud Guide.yxdlp77j6u.pdf",
+      "AssetFile": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\fileupload\\CIS 484 Capstone Publishing to Azure Cloud Guide.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4269450"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"1p7QUciSc0thgXVGJp/7Z+2e6josui2vqfwHK5pjcOQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 11 Apr 2025 01:33:34 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "yxdlp77j6u"
+        },
+        {
+          "Name": "label",
+          "Value": "fileupload/CIS 484 Capstone Publishing to Azure Cloud Guide.pdf"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-1p7QUciSc0thgXVGJp/7Z+2e6josui2vqfwHK5pjcOQ="
         }
       ]
     },

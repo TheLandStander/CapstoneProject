@@ -2,17 +2,18 @@
 @model DatabaseSystemIntegration.Pages.Interface.AccessItemModel
 @{
     <head>
-           <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     </head>
     <body>
-    <form style="text-align: left; margin-bottom: 20px; method="post" asp-page-handler="">
-        
-    
-    
-    
-    
-    @if (HttpContext.Session.GetString("ItemType") == "Project")
-        {
+        <form style="text-align: left; margin-bottom: 20px; method="post" enctype="multipart/form-data" asp-page-handler="">
+
+
+
+
+
+            @if (HttpContext.Session.GetString("ItemType") == "Project")
+            {
                 <div class="border p-4 rounded mx-auto shadow-sm" style="max-width: 1200px; background-color: #f5f5f5;">
                     <h3 class="text-center mb-2" style="color: #2d0042;">@Model.project.ProjectName</h3>
                     <div class="text-center mb-4">
@@ -138,27 +139,61 @@
                                     <th>Start Date</th>
                                     <th>Due Date</th>
                                     <th>End Date</th>
+                                    <th>Document</th>
                                 </tr>
                             </thead>
                             <tbody style="background-color: #fff;">
                                 @foreach (var task in Model.project.GetTasks())
                                 {
                                     @if (HttpContext.Session.GetString("UserType") == "Project-Manager" ||
-                               HttpContext.Session.GetString("UserType") == "PI" ||
-                               HttpContext.Session.GetString("UserType") == "CO-PI" ||
-                               HttpContext.Session.GetString("UserType") == "Admin")
+                            HttpContext.Session.GetString("UserType") == "PI" ||
+                            HttpContext.Session.GetString("UserType") == "CO-PI" ||
+                            HttpContext.Session.GetString("UserType") == "Admin")
                                     {
                                         <tr>
                                             <td>
-                                                <button class="btn btn-link p-0" asp-page-handler="SelectTask" asp-route-id="@task.TaskID" style="color: #2d0042;">@task.TaskName</button>
+                                                <button class="btn btn-primary rounded-pill px-3" style="background-color:#5e3a87;"
+                                                asp-page-handler="SelectTask" 
+                                                asp-route-id="@task.TaskID" 
+                                                style="color: #2d0042; text-decoration: none; font-weight: 500;">
+                                                    @task.TaskName
+                                                </button>
                                             </td>
-                                            <td style="white-space: normal;">@task.Description</td>
-                                            <td class="@(task.Completed ? "text-success" : "text-danger") fw-bold">
-                                                @(task.Completed ? "Complete" : "Incomplete")
+                                            <td style="white-space: normal; padding: 0.75rem;">@task.Description</td>
+                                            <td class="@(task.Completed ? "text-success" : "text-danger") fw-bold align-middle">
+                                                <span class="badge @(task.Completed ? "bg-success" : "bg-danger")">
+                                                    @(task.Completed ? "Complete" : "Incomplete")
+                                                </span>
                                             </td>
-                                            <td>@task.StartDate</td>
-                                            <td>@task.DueDate</td>
-                                            <td>@(task.EndDate > DateOnly.MinValue ? task.EndDate.ToString() : "-")</td>
+                                            <td class="align-middle">@task.StartDate</td>
+                                            <td class="align-middle">@task.DueDate</td>
+                                            <td class="align-middle">@(task.EndDate > DateOnly.MinValue ? task.EndDate.ToString() : "-")</td>
+                                            <td class="align-middle">
+                                                <div class="d-flex flex-column gap-2">
+                                                    <input asp-for="UploadedFile" type="file"
+                                                    class="form-control form-control-sm"
+                                                    accept=".docx"
+                                                    style="width: 220px;"
+                                                    title="Word files only">
+                                                    <button type="submit"
+                                                    asp-page-handler="Upload"
+                                                    asp-route-id="@task.TaskID"
+                                                    class="btn btn-sm text-white py-1 px-2"
+                                                    style="background-color: #5e3a87;">
+                                                        <i class="bi bi-upload"></i>
+                                                    </button>
+                                                    @if (task.HasFiles())
+                                                    {
+                                                        <button asp-page-handler="DownloadDoc"
+                                                        asp-route-id="@task.TaskID"
+                                                        asp-route-name="@task.TaskName"
+                                                        class="btn btn-sm text-white py-1 px-2"
+                                                        style="background-color: #5e3a87;">
+                                                            <i class="bi bi-download"></i> Download
+                                                        </button>
+                                                    }
+                                                </div>
+                                            </td>
                                         </tr>
                                     }
                                     else
@@ -169,15 +204,49 @@
                                             {
                                                 <tr>
                                                     <td>
-                                                        <button class="btn btn-link p-0" asp-page-handler="SelectTask" asp-route-id="@task.TaskID" style="color: #2d0042;">@task.TaskName</button>
+                                                        <button class="btn btn-primary rounded-pill px-3" style="background-color:#5e3a87;"
+                                                        asp-page-handler="SelectTask" 
+                                                        asp-route-id="@task.TaskID" 
+                                                        style="color: #2d0042; text-decoration: none; font-weight: 500;">
+                                                            @task.TaskName
+                                                        </button>
                                                     </td>
-                                                    <td style="white-space: normal;">@task.Description</td>
-                                                    <td class="@(task.Completed ? "text-success" : "text-danger") fw-bold">
-                                                        @(task.Completed ? "Complete" : "Incomplete")
+                                                    <td style="white-space: normal; padding: 0.75rem;">@task.Description</td>
+                                                    <td class="@(task.Completed ? "text-success" : "text-danger") fw-bold align-middle">
+                                                        <span class="badge @(task.Completed ? "bg-success" : "bg-danger")">
+                                                            @(task.Completed ? "Complete" : "Incomplete")
+                                                        </span>
                                                     </td>
-                                                    <td>@task.StartDate</td>
-                                                    <td>@task.DueDate</td>
-                                                    <td>@(task.EndDate > DateOnly.MinValue ? task.EndDate.ToString() : "-")</td>
+                                                    <td class="align-middle">@task.StartDate</td>
+                                                    <td class="align-middle">@task.DueDate</td>
+                                                    <td class="align-middle">@(task.EndDate > DateOnly.MinValue ? task.EndDate.ToString() : "-")</td>
+                                                    <td class="align-middle">
+                                                        <td class="align-middle">
+                                                            <div class="d-flex flex-column gap-2">
+                                                                <input asp-for="UploadedFile" type="file"
+                                                                class="form-control form-control-sm"
+                                                                accept=".docx"
+                                                                style="width: 220px;"
+                                                                title="Word files only">
+                                                                <button type="submit"
+                                                                asp-page-handler="Upload"
+                                                                asp-route-id="@task.TaskID"
+                                                                class="btn btn-sm text-white py-1 px-2"
+                                                                style="background-color: #5e3a87;">
+                                                                    <i class="bi bi-upload"></i>
+                                                                </button>
+                                                                @if (task.HasFiles())
+                                                                {
+                                                                    <button asp-page-handler="DownloadDoc"
+                                                                    asp-route-id="@task.TaskID"
+                                                                    asp-route-name="@task.TaskName"
+                                                                    class="btn btn-sm text-white py-1 px-2"
+                                                                    style="background-color: #5e3a87;">
+                                                                        <i class="bi bi-download"></i> Download
+                                                                    </button>
+                                                                }
+                                                            </div>
+                                                        </td>
                                                 </tr>
                                             }
                                         }
@@ -259,7 +328,7 @@
                         </div>
                     </div>
                 </div>
-        }
+            }
 
 
 
@@ -270,7 +339,7 @@
 
 
 
-        @if (HttpContext.Session.GetString("ItemType") == "Grant")
+            @if (HttpContext.Session.GetString("ItemType") == "Grant")
             {
                 <div class="border rounded p-4 mx-auto shadow-sm" style="max-width: 1500px; max-height: 700px; overflow-y: auto; background-color: #f5f5f5;">
                     <h4 class="text-center mb-3" style="color: #2d0042;">@Model.grant.GrantName</h4>
@@ -325,17 +394,32 @@
                         <div class="border rounded p-3 mt-4 mx-auto" style="max-width: 900px; background-color: #fff; border-left: 4px solid #5e3a87;">
                             @if (Model.grant.GetProject() != null)
                             {
-                                <h5 class="text-center mb-4" style="color: #2d0042;">
-                                    <strong>Associated Project</strong>
-                                </h5>
-                                <div class="text-center">
-                                    <button class="btn btn-link mb-3" style="color: #5e3a87;"
-                                            asp-page-handler="SelectProject"
-                                            asp-route-id="@Model.grant.GetProject().ProjectID">
-                                        @Model.grant.GetProject().ProjectName
-                                    </button>
+                                <div class="project-card p-4 mb-4 text-center" style="background-color: #f9f6ff; border-radius: 8px; border-left: 4px solid #5e3a87;">
+                                    <h5 class="mb-3" style="color: #2d0042; font-weight: 600;">
+                                        <i class="bi bi-diagram-2-fill me-2"></i>Associated Project
+                                    </h5>
+
+                                    <div class="d-flex flex-column align-items-center">
+                                        <button class="btn btn-primary rounded-pill px-3" style="background-color:#5e3a87;"
+                                        style="border-color: #5e3a87; color: #5e3a87; font-weight: 500;"
+                                        asp-page-handler="SelectProject"
+                                        asp-route-id="@Model.grant.GetProject().ProjectID">
+                                            <i class="bi bi-box-arrow-up-right me-2"></i>
+                                            @Model.grant.GetProject().ProjectName
+                                        </button>
+
+                                        <div class="project-details mt-2" style="max-width: 600px;">
+                                            <p class="mb-2" style="color: #4a4a4a; font-size: 0.95rem;">
+                                                <i class="bi bi-card-text me-2"></i>
+                                                @Model.grant.GetProject().Description
+                                            </p>
+                                            <span class="badge"
+                                            style="background-color: #28a745; color: white;">
+                                                @Model.grant.GetProject().Status.ProjectStatusName
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <p class="text-center" style="color: #4a4a4a;">@Model.grant.GetProject().Description</p>
                             }
                             else
                             {
@@ -366,8 +450,6 @@
                                     <div class="form-group row mt-4">
                                         <div class="col-sm-10 offset-sm-2">
                                             <button type="submit" class="btn text-white me-2" style="background-color: #5e3a87;" asp-page-handler="CreateProject" asp-route-id="@Model.grant.GrantID">Submit</button>
-                                            <button type="submit" class="btn me-2" style="background-color: #e8e0f5; color: #2d0042;" asp-page-handler="PopulateHandler">Populate</button>
-                                            <button type="submit" class="btn text-white" style="background-color: #a52a2a;" asp-page-handler="ClearHandler">Clear</button>
                                         </div>
                                     </div>
                                 </div>
@@ -385,6 +467,7 @@
                                     <th>Start Date</th>
                                     <th>Due Date</th>
                                     <th>End Date</th>
+                                    <th>Documents</th>
                                     <th>Assign Task</th>
                                     <th>Mark As Completed</th>
                                 </tr>
@@ -402,12 +485,46 @@
                                         <td>@task.DueDate</td>
                                         <td>@(task.EndDate != DateOnly.MinValue ? task.EndDate.ToString() : "-")</td>
 
+                                        <td class="align-middle">
+                                            <div class="d-flex flex-column gap-2">
+                                                <input asp-for="UploadedFile" type="file" 
+                                                class="form-control form-control-sm" 
+                                                accept=".docx"
+                                                style="width: 220px;"
+                                                title="Word files only">
+                                                <button type="submit" 
+                                                asp-page-handler="Upload" 
+                                                asp-route-id="@task.ChildTaskID"
+                                                class="btn btn-sm text-white py-1 px-2" 
+                                                style="background-color: #5e3a87;">
+                                                    <i class="bi bi-upload"></i>
+                                                </button>
+                                                @if (task.HasFiles())
+                                                {
+                                                    <button asp-page-handler="DownloadDoc" 
+                                                    asp-route-id="@task.ChildTaskID"
+                                                    asp-route-name="@task.TaskName"
+                                                    class="btn btn-sm text-white py-1 px-2" 
+                                                    style="background-color: #5e3a87;">
+                                                        <i class="bi bi-download"></i> Download
+                                                    </button>
+                                                }
+                                            </div>
+                                        </td>
+
                                         @if (task.isAssigned())
                                         {
-                                            <td class="align-middle">
-                                                Member Assigned: <br />
-                                                <strong>@task.GetAssignedUser().Name</strong>
-                                            </td>
+                                            @if (task.isAssigned())
+                                            {
+                                                @if (task.UserID != Model.CurrentUser.UserID)
+                                                {
+                                                    <td>Member Assigned: @task.GetAssignedUser().Name</td>
+                                                }
+                                                else
+                                                {
+                                                    <td>Member Assigned: @Model.CurrentUser.Name</td>
+                                                }
+                                            }
                                         }
                                         else
                                         {
@@ -519,7 +636,7 @@
                     </div>
                 </div>
 
-        }
+            }
 
 
 
@@ -528,8 +645,8 @@
 
 
 
-        @if (HttpContext.Session.GetString("ItemType") == "Partner")
-        {
+            @if (HttpContext.Session.GetString("ItemType") == "Partner")
+            {
                 <div class="border p-4 rounded mx-auto shadow-sm" style="overflow-y: auto; background-color: #f5f5f5;">
                     <h3 class="text-center" style="color: #2d0042;">@Model.partner.BusName</h3>
 
@@ -609,7 +726,7 @@
                         <button type="submit" asp-page-handler="AddMeeting" class="btn text-white" style="background-color: #5e3a87;">Add Meeting Minute</button>
                     </div>
                 </div>
-        }
+            }
 
 
 
@@ -619,8 +736,8 @@
 
 
 
-        @if (HttpContext.Session.GetString("ItemType") == "Task")
-        {
+            @if (HttpContext.Session.GetString("ItemType") == "Task")
+            {
                 <div class="task-container" style="background-color: #f5f5f5;">
                     <div class="card mb-4 shadow-sm">
                         <div class="card-header" style="background-color: #5e3a87; color: white;">
@@ -698,6 +815,7 @@
                                 <th>End Date</th>
                                 <th>Take Task</th>
                                 <th>Mark As Completed</th>
+                                <th>Document</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -714,7 +832,14 @@
                                     <td>@(task.EndDate != DateOnly.MinValue ? task.EndDate.ToString() : "-")</td>
                                     @if (task.isAssigned())
                                     {
-                                        <td>Member Assigned: @task.GetAssignedUser().Name</td>
+                                        @if (task.UserID != Model.CurrentUser.UserID)
+                                        {
+                                            <td>Member Assigned: @task.GetAssignedUser().Name</td>
+                                        }
+                                        else
+                                        {
+                                            <td>Member Assigned: @Model.CurrentUser.Name</td>
+                                        }
                                     }
                                     else
                                     {
@@ -728,6 +853,32 @@
                                     {
                                         <td><button type="submit" asp-page-handler="UpdateChildTask" asp-route-ID="@task.ChildTaskID" class="btn text-white" style="background-color: #5e3a87;">Complete</button></td>
                                     }
+                                    <td class="align-middle">
+                                        <div class="d-flex flex-column gap-2">
+                                            <input asp-for="UploadedFile" type="file"
+                                            class="form-control form-control-sm"
+                                            accept=".docx"
+                                            style="width: 220px;"
+                                            title="Word files only">
+                                            <button type="submit"
+                                            asp-page-handler="Upload"
+                                            asp-route-id="@task.ChildTaskID"
+                                            class="btn btn-sm text-white py-1 px-2"
+                                            style="background-color: #5e3a87;">
+                                                <i class="bi bi-upload"></i>
+                                            </button>
+                                            @if (task.HasFiles())
+                                            {
+                                                <button asp-page-handler="DownloadDoc"
+                                                asp-route-id="@task.ChildTaskID"
+                                                asp-route-name="@task.TaskName"
+                                                class="btn btn-sm text-white py-1 px-2"
+                                                style="background-color: #5e3a87;">
+                                                    <i class="bi bi-download"></i> Download
+                                                </button>
+                                            }
+                                        </div>
+                                    </td>
                                 </tr>
                             }
                         </tbody>

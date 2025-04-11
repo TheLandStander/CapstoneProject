@@ -13,7 +13,11 @@ namespace DatabaseSystemIntegration.Pages.Classes
         public bool Completed { get; set; }
         public string ProjectID { get; set; }
 
+        public bool HasFiles()
+        {
+            return FileManager.FileExistsAsync(TaskID).GetAwaiter().GetResult();
 
+        }
         public Users[] GetEmployees()
         {
             AssignedProject[] ap = ObjectConverter.ToAssignedProject(DatabaseControls.SelectFilter(1, 15, TaskID));

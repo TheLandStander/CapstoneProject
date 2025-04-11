@@ -7,6 +7,8 @@ C:\Users\apers\OneDrive\Documents\CapstoneProject\DatabaseSystemIntegration\obj\
 C:\Users\apers\OneDrive\Documents\CapstoneProject\DatabaseSystemIntegration\obj\Release\net8.0\PubTmp\Out\DatabaseSystemIntegration.pdb
 C:\Users\apers\OneDrive\Documents\CapstoneProject\DatabaseSystemIntegration\obj\Release\net8.0\PubTmp\Out\Azure.Core.dll
 C:\Users\apers\OneDrive\Documents\CapstoneProject\DatabaseSystemIntegration\obj\Release\net8.0\PubTmp\Out\Azure.Identity.dll
+C:\Users\apers\OneDrive\Documents\CapstoneProject\DatabaseSystemIntegration\obj\Release\net8.0\PubTmp\Out\Azure.Storage.Blobs.dll
+C:\Users\apers\OneDrive\Documents\CapstoneProject\DatabaseSystemIntegration\obj\Release\net8.0\PubTmp\Out\Azure.Storage.Common.dll
 C:\Users\apers\OneDrive\Documents\CapstoneProject\DatabaseSystemIntegration\obj\Release\net8.0\PubTmp\Out\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\apers\OneDrive\Documents\CapstoneProject\DatabaseSystemIntegration\obj\Release\net8.0\PubTmp\Out\Microsoft.Bcl.Cryptography.dll
 C:\Users\apers\OneDrive\Documents\CapstoneProject\DatabaseSystemIntegration\obj\Release\net8.0\PubTmp\Out\Microsoft.Data.SqlClient.dll
@@ -27,6 +29,7 @@ C:\Users\apers\OneDrive\Documents\CapstoneProject\DatabaseSystemIntegration\obj\
 C:\Users\apers\OneDrive\Documents\CapstoneProject\DatabaseSystemIntegration\obj\Release\net8.0\PubTmp\Out\System.Configuration.ConfigurationManager.dll
 C:\Users\apers\OneDrive\Documents\CapstoneProject\DatabaseSystemIntegration\obj\Release\net8.0\PubTmp\Out\System.Diagnostics.EventLog.dll
 C:\Users\apers\OneDrive\Documents\CapstoneProject\DatabaseSystemIntegration\obj\Release\net8.0\PubTmp\Out\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\apers\OneDrive\Documents\CapstoneProject\DatabaseSystemIntegration\obj\Release\net8.0\PubTmp\Out\System.IO.Hashing.dll
 C:\Users\apers\OneDrive\Documents\CapstoneProject\DatabaseSystemIntegration\obj\Release\net8.0\PubTmp\Out\System.Memory.Data.dll
 C:\Users\apers\OneDrive\Documents\CapstoneProject\DatabaseSystemIntegration\obj\Release\net8.0\PubTmp\Out\System.Security.Cryptography.Pkcs.dll
 C:\Users\apers\OneDrive\Documents\CapstoneProject\DatabaseSystemIntegration\obj\Release\net8.0\PubTmp\Out\System.Security.Cryptography.ProtectedData.dll

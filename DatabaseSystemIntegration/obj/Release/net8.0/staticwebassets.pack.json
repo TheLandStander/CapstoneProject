@@ -2,7 +2,7 @@
   "Files": [
     {
       "Id": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\obj\\Release\\net8.0\\scopedcss\\projectbundle\\DatabaseSystemIntegration.bundle.scp.css",
-      "PackagePath": "staticwebassets\\DatabaseSystemIntegration.ga21sm7f7g.bundle.scp.css"
+      "PackagePath": "staticwebassets\\DatabaseSystemIntegration.5que4711jk.bundle.scp.css"
     },
     {
       "Id": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\Icon.jpg",
@@ -19,6 +19,14 @@
     {
       "Id": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\fileupload\\CIS 484 Capstone Publishing to Azure Cloud Guide.pdf",
+      "PackagePath": "staticwebassets\\fileupload\\CIS 484 Capstone Publishing to Azure Cloud Guide.pdf"
+    },
+    {
+      "Id": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\fileupload\\[COB 487] Simulation Game Report _ Template New.docx",
+      "PackagePath": "staticwebassets\\fileupload\\[COB 487] Simulation Game Report _ Template New.docx"
     },
     {
       "Id": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\js\\site.js",

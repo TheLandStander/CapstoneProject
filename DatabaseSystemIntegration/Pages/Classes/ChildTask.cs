@@ -17,7 +17,11 @@ namespace DatabaseSystemIntegration.Pages.Classes
 
         public string ItemID { get; set; }
 
+        public bool HasFiles()
+        {
+            return FileManager.FileExistsAsync(ChildTaskID).GetAwaiter().GetResult();
 
+        }
         public void CompleteTask()
         {
             Completed = true;

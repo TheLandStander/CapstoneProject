@@ -382,22 +382,22 @@ namespace DatabaseSystemIntegration.Pages.Tools
 
         public static void CompleteChildTask(ChildTask t)
         {
-            String sqlQuery = "UPDATE ChildTask SET Completed =" + tobyte(t.Completed) + "WHERE Child_Task_ID = " + t.ChildTaskID + ";";
+            String sqlQuery = "UPDATE ChildTask SET Completed =" + tobyte(t.Completed) + "WHERE Child_Task_ID = '" + t.ChildTaskID + "';";
             Execute(sqlQuery);
 
-            sqlQuery = "UPDATE ChildTask SET EndDate = '" + DateOnly.FromDateTime(DateTime.Now) + "' WHERE Child_Task_ID = " + t.ChildTaskID + ";";
+            sqlQuery = "UPDATE ChildTask SET EndDate = '" + DateOnly.FromDateTime(DateTime.Now) + "' WHERE Child_Task_ID = '" + t.ChildTaskID + "';";
             Execute(sqlQuery);
         }
 
         public static void AssignChildTask(ChildTask t)
         {
-            String sqlQuery = "UPDATE ChildTask SET User_ID = " + t.UserID + " WHERE Child_Task_ID = " + t.ChildTaskID + ";";
+            String sqlQuery = "UPDATE ChildTask SET User_ID = '" + t.UserID + "' WHERE Child_Task_ID = '" + t.ChildTaskID + "';";
             Execute(sqlQuery);
         }
 
         public static void SetProjectLead(Project P, Users U)
         {
-            String sqlQuery = "UPDATE Project SET Project_Lead_ID = " + U.UserID + " WHERE Project_ID = " + P.ProjectID + ";";
+            String sqlQuery = "UPDATE Project SET Project_Lead_ID = '" + U.UserID + "' WHERE Project_ID = '" + P.ProjectID + "';";
             Execute(sqlQuery);
         }
 

@@ -80,3 +80,6 @@ C:\Users\apers\OneDrive\Documents\CapstoneProject\DatabaseSystemIntegration\obj\
 C:\Users\apers\OneDrive\Documents\CapstoneProject\DatabaseSystemIntegration\obj\Release\net8.0\DatabaseSystemIntegration.pdb
 C:\Users\apers\OneDrive\Documents\CapstoneProject\DatabaseSystemIntegration\obj\Release\net8.0\DatabaseSystemIntegration.genruntimeconfig.cache
 C:\Users\apers\OneDrive\Documents\CapstoneProject\DatabaseSystemIntegration\obj\Release\net8.0\ref\DatabaseSystemIntegration.dll
+C:\Users\apers\OneDrive\Documents\CapstoneProject\DatabaseSystemIntegration\bin\Release\net8.0\Azure.Storage.Blobs.dll
+C:\Users\apers\OneDrive\Documents\CapstoneProject\DatabaseSystemIntegration\bin\Release\net8.0\Azure.Storage.Common.dll
+C:\Users\apers\OneDrive\Documents\CapstoneProject\DatabaseSystemIntegration\bin\Release\net8.0\System.IO.Hashing.dll

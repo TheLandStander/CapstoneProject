@@ -13,16 +13,18 @@ namespace DatabaseSystemIntegration.Pages.Classes
 
         public UserRole UserRole { get; set; }
 
-        public UserStatus status { get; set; }
-
         public UserType type { get; set; }
 
         public void SetVars()
         {
 
             UserRole = ObjectConverter.ToUserRole(DatabaseControls.SelectFilter(16, 19, UserID))[0];
-            status = ObjectConverter.ToUserStatus(DatabaseControls.SelectFilter(17, 17, UserStatusID))[0];
             type = ObjectConverter.ToUserType(DatabaseControls.SelectFilter(18, 18, UserTypeID))[0];
+        }
+
+        public UserStatus GetStatus()
+        {
+            return ObjectConverter.ToUserStatus(DatabaseControls.SelectFilter(17, 17, UserStatusID))[0];
         }
 
         public Partner GetPartner() 

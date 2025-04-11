@@ -59,6 +59,9 @@ namespace DatabaseSystemIntegration.Pages.Interface
         [BindProperty]
         public string User_ID2 { get; set; }
 
+        [BindProperty]
+        public IFormFile UploadedFile { get; set; }
+
         public string ItemType { get; set; }
         public string ItemID { get; set; }
         public Grant grant { get; set; }
@@ -130,7 +133,47 @@ namespace DatabaseSystemIntegration.Pages.Interface
                 
         }
 
+        public async Task<IActionResult> OnPostDownloadPdf(string id, string name)
+        {
+            LoadObjects();
+            SetVars();
+            var fileStream = await FileManager.RetrieveFileAsync(id);
+            if (fileStream == null) return NotFound();
 
+            return File(fileStream, "application/pdf", $"{name}.pdf");
+        }
+
+        public async Task<IActionResult> OnPostDownloadDoc(string id, string name)
+        {
+            LoadObjects();
+            SetVars();
+            var fileStream = await FileManager.RetrieveFileAsync(id);
+            if (fileStream == null) return NotFound();
+            return File(fileStream, "application/msword", $"{name}.docx");
+        }
+
+        public async Task<IActionResult> OnPostDownloadExel(string id, string name)
+        {
+            LoadObjects();
+            SetVars();
+            var fileStream = await FileManager.RetrieveFileAsync(id);
+            if (fileStream == null) return NotFound();
+
+            return File(fileStream, "application/vnd.ms-excel", $"{name}.xls");
+        }
+
+        public async Task<IActionResult> OnPostUpload(string id)
+        {
+            LoadObjects();
+            SetVars();
+            if (UploadedFile == null || UploadedFile.Length == 0)
+            {
+                return Page();
+            }
+            using var stream = UploadedFile.OpenReadStream();
+            await FileManager.UploadFileAsync(id, stream);
+            return Page();
+        }
         public IActionResult OnPostSelectGrant(string ID)
         {
             HttpContext.Session.SetString("ItemType", "Grant");
