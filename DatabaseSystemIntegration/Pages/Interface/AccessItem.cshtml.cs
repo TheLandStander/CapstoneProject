@@ -80,7 +80,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
 
         public void LoadGrant()
         {
-            if (ItemType == "Grant")
+            if (ItemType == "Grant" && grant == null)
             {
                 grant = ObjectConverter.ToGrants(DatabaseControls.SelectFilter(7, 7, ItemID))[0];
                 GrantStatus = ObjectConverter.ToGrantStatus(DatabaseControls.SelectNoFilter(6));
@@ -89,7 +89,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
 
         public void LoadProject()
         {
-            if (ItemType == "Project")
+            if (ItemType == "Project" && project == null)
             {
                 project = ObjectConverter.ToProject(DatabaseControls.SelectFilter(12, 12, ItemID))[0];
                 ProjectStatus = ObjectConverter.ToProjectStatus(DatabaseControls.SelectNoFilter(14));
@@ -98,7 +98,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
 
         public void LoadPartner()
         {
-            if (ItemType == "Partner")
+            if (ItemType == "Partner" && partner == null)
             {
                 partner = ObjectConverter.ToPartner(DatabaseControls.SelectFilter(2, 2, ItemID))[0];
                 PartnerStatus = ObjectConverter.ToPartnerStatus(DatabaseControls.SelectNoFilter(3));
@@ -107,7 +107,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
 
         public void LoadTask()
         {
-            if (ItemType == "Task")
+            if (ItemType == "Task" && ParentTask == null)
             {
                 ParentTask = ObjectConverter.ToTask(DatabaseControls.SelectFilter(15, 15, ItemID))[0];
             }
@@ -164,8 +164,6 @@ namespace DatabaseSystemIntegration.Pages.Interface
 
         public async Task<IActionResult> OnPostUpload(string id)
         {
-            LoadObjects();
-            SetVars();
             if (UploadedFile == null || UploadedFile.Length == 0)
             {
                 return Page();
@@ -178,6 +176,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
         {
             HttpContext.Session.SetString("ItemType", "Grant");
             HttpContext.Session.SetString("ItemID", ID);
+            LoadObjects(); 
             return RedirectToPage("AccessItem");
         }
 
@@ -185,6 +184,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
         {
             HttpContext.Session.SetString("ItemType", "Project");
             HttpContext.Session.SetString("ItemID", ID);
+            LoadObjects();
             return RedirectToPage("AccessItem");
         }
 
@@ -192,6 +192,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
         {
             HttpContext.Session.SetString("ItemType", "Task");
             HttpContext.Session.SetString("ItemID", ID);
+            LoadObjects();
             return RedirectToPage("AccessItem");
         }
       
@@ -206,6 +207,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
         {
             HttpContext.Session.SetString("ItemType", "Partner");
             HttpContext.Session.SetString("ItemID", ID);
+            LoadObjects();
             return RedirectToPage("AccessItem");
         }
 
@@ -214,15 +216,22 @@ namespace DatabaseSystemIntegration.Pages.Interface
             LoadObjects();
             ParentTask.AssignTask(User_ID);
             SetVars();
-            return RedirectToPage("AccessItem");
+            return Page();
         }
 
         public IActionResult OnPostAssignChildTask(string ID)
         {
             LoadObjects();
-            AssignChildTask(ID,User_ID);
-            SetVars();
-            return RedirectToPage("AccessItem");
+            if (ItemType == "Grant")
+            {
+                AssignChildTask(ID, User_ID);
+            }
+            else
+            {
+                AssignChildTask(ID, HttpContext.Session.GetString("UserID"));
+            }
+                SetVars();
+            return Page();
         }
 
         public IActionResult OnPostAssignProject()
@@ -230,7 +239,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
             LoadObjects();
             project.AssignProject(User_ID);
             SetVars();
-            return RedirectToPage("AccessItem");
+            return Page();
         }
 
         public IActionResult OnPostCreateProject(string ID)
@@ -246,7 +255,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
             LoadObjects();
             project.SetProjectLeader(User_ID2);
             SetVars();
-            return RedirectToPage("AccessItem");
+            return Page();
         }
 
         public IActionResult OnPostAddNote(string ID)
@@ -255,7 +264,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
             ProjectNotes N = new ProjectNotes(Note, CurrentUser.Name, NoteTo, DateOnly.FromDateTime(DateTime.Now), ID);
             DatabaseControls.Insert(N);
             SetVars();
-            return RedirectToPage("AccessItem");
+            return Page();
         }
 
         public IActionResult OnPostAddMeeting()
@@ -263,7 +272,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
             LoadObjects();
             partner.AddMeeting(Note, Date);
             SetVars();
-            return RedirectToPage("AccessItem");
+            return Page();
         }
 
         public IActionResult OnPostAddTask()
@@ -274,19 +283,19 @@ namespace DatabaseSystemIntegration.Pages.Interface
                 project.AddTask(TaskName, TaskDesc, Date);
             }
             SetVars();
-            return RedirectToPage("AccessItem");
+            return Page();
         }
 
         public IActionResult OnPostAddChildTask(string ID)
         {
-             LoadObjects();
+            LoadObjects();
             if (DateOnly.FromDateTime(DateTime.Now) <= Date)
             {
                 ChildTask CT = new ChildTask(SubTaskName, SubTaskDesc, DateOnly.FromDateTime(DateTime.Now),Date, false, ID);
                 DatabaseControls.Insert(CT);
             }
             SetVars();
-            return RedirectToPage("AccessItem");
+            return Page();
         }
 
         public IActionResult OnPostUpdateTask()
@@ -294,7 +303,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
             LoadObjects();
             ParentTask.CompleteTask();
             SetVars();
-            return RedirectToPage("AccessItem");
+            return Page();
         }
 
         public IActionResult OnPostUpdateChildTask(string ID)
@@ -302,7 +311,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
             LoadObjects();
             CompleteChildTask(ID);
             SetVars();
-            return RedirectToPage("AccessItem");
+            return Page();
         }
 
         public IActionResult OnPostUpdatePartner()
@@ -313,7 +322,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
                 partner.UpdateStatus(PartnerStatusID);
             }
             SetVars();
-            return RedirectToPage("AccessItem");
+            return Page();
         }
 
         public IActionResult OnPostUpdateProject()
@@ -324,7 +333,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
                 project.UpdateStatus(ProjectStatusID);
             }
             SetVars();
-            return RedirectToPage("AccessItem");
+            return Page();
         }
 
         public IActionResult OnPostUpdateGrant()
@@ -335,7 +344,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
                 grant.UpdateStatus(GrantStatusID);
             }
             SetVars();
-            return RedirectToPage("AccessItem");
+            return Page();
         }
 
         public IActionResult OnPostUpdateProjectDate()
@@ -346,7 +355,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
                 project.UpdateDueDate(UpdatedDate);
             }
             SetVars();
-            return RedirectToPage("AccessItem");
+            return Page();
         }
 
         public void SetVars()
@@ -359,12 +368,12 @@ namespace DatabaseSystemIntegration.Pages.Interface
         {
             ItemType = HttpContext.Session.GetString("ItemType");
             ItemID = HttpContext.Session.GetString("ItemID");
+            Users = ObjectConverter.ToUsers(DatabaseControls.SelectNoFilter(19));
+            CurrentUser = DatabaseControls.GetUser(HttpContext.Session.GetString("UserID"));
             LoadGrant();
             LoadProject();
             LoadTask();
             LoadPartner();
-            Users = ObjectConverter.ToUsers(DatabaseControls.SelectNoFilter(19));
-            CurrentUser = DatabaseControls.GetUser(HttpContext.Session.GetString("UserID"));
         }
 
         public void OnGet()

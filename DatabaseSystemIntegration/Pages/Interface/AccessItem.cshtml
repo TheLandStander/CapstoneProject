@@ -424,7 +424,7 @@
                             else
                             {
                                 <div class="container mt-4">
-                                    <h1 class="mb-4" style="color: #2d0042;">Start A Project</h1>
+                                    <h1 class="mb-4" style="color: #2d0042;">Start a Project</h1>
 
                                     <div class="form-group row mb-3">
                                         <label class="col-sm-2 col-form-label" for="Project_Name" style="color: #2d0042;">Project Name</label>
@@ -516,7 +516,7 @@
                                         {
                                             @if (task.isAssigned())
                                             {
-                                                @if (task.UserID != Model.CurrentUser.UserID)
+                                               @if (task.UserID != Model.CurrentUser.UserID && task.GetAssignedUser() != null)
                                                 {
                                                     <td>Member Assigned: @task.GetAssignedUser().Name</td>
                                                 }
@@ -766,7 +766,7 @@
                     </div>
 
                     <div class="border rounded p-3 mt-4 mx-auto shadow-sm" style="max-width: 1000px; background-color: #fff; border-left: 4px solid #5e3a87;">
-                        <h4 class="mb-2" style="color: #2d0042;">Project Members</h4>
+                        <h4 class="mb-2" style="color: #2d0042;">Task Members</h4>
                         <div class="d-flex flex-row" style="overflow-x: auto; white-space: nowrap;">
                             @if (Model.ParentTask.GetEmployees().Any())
                             {
@@ -832,7 +832,7 @@
                                     <td>@(task.EndDate != DateOnly.MinValue ? task.EndDate.ToString() : "-")</td>
                                     @if (task.isAssigned())
                                     {
-                                        @if (task.UserID != Model.CurrentUser.UserID)
+                                        @if (task.UserID != Model.CurrentUser.UserID && task.GetAssignedUser() != null)
                                         {
                                             <td>Member Assigned: @task.GetAssignedUser().Name</td>
                                         }

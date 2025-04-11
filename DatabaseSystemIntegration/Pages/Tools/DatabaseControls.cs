@@ -372,10 +372,10 @@ namespace DatabaseSystemIntegration.Pages.Tools
 
         public static void CompleteTask(Tasks t)
         {
-            String sqlQuery = "UPDATE Task SET Completed =" +  tobyte(t.Completed)  + "WHERE Task_ID = " + t.TaskID + ";";
+            String sqlQuery = "UPDATE Task SET Completed =" + tobyte(t.Completed) + "WHERE Task_ID = '" + t.TaskID + "';";
             Execute(sqlQuery);
 
-            sqlQuery = "UPDATE Task SET EndDate = '" + DateOnly.FromDateTime(DateTime.Now) + "' WHERE Task_ID = " + t.TaskID + ";";
+            sqlQuery = "UPDATE Task SET EndDate = '" + DateOnly.FromDateTime(DateTime.Now) + "' WHERE Task_ID = '" + t.TaskID + "';";
 
             Execute(sqlQuery);
         }
@@ -403,14 +403,14 @@ namespace DatabaseSystemIntegration.Pages.Tools
 
         public static void UpdateProjectStatus(string ProjectID, string StatusID)
         {
-            String sqlQuery = "UPDATE Project SET Project_Status_ID =" + StatusID + " WHERE Project_ID = " + ProjectID + ";";
+            String sqlQuery = "UPDATE Project SET Project_Status_ID ='" + StatusID + "' WHERE Project_ID = '" + ProjectID + "';";
             Execute(sqlQuery);
 
             ProjectStatus ps = ObjectConverter.ToProjectStatus(SelectFilter(14, 14, StatusID))[0];
 
             if (ps.ProjectStatusName != "Ongoing")
             {
-                sqlQuery = "UPDATE Project SET End_Date = '" + DateOnly.FromDateTime(DateTime.Now) + "' WHERE Project_ID = " + ProjectID + ";";
+                sqlQuery = "UPDATE Project SET End_Date = '" + DateOnly.FromDateTime(DateTime.Now) + "' WHERE Project_ID = '" + ProjectID + "';";
                 Execute(sqlQuery);
             }
 
@@ -418,14 +418,14 @@ namespace DatabaseSystemIntegration.Pages.Tools
 
         public static void UpdatePartnerStatus(string PartnerID, string StatusID)
         {
-            String sqlQuery = "UPDATE Partner SET Partner_Status_ID = " + StatusID + " WHERE Partner_ID = " + PartnerID + ";";
+            String sqlQuery = "UPDATE Partner SET Partner_Status_ID = '" + StatusID + "' WHERE Partner_ID = '" + PartnerID + "';";
             Execute(sqlQuery);
 
         }
 
         public static void UpdateProjectDueDate(string ProjectID, DateOnly date)
         {
-            String sqlQuery = "UPDATE Project SET Due_Date = '" + date.ToString("yyyy-MM-dd") + "' WHERE Project_ID = " + ProjectID + ";";
+            String sqlQuery = "UPDATE Project SET Due_Date = '" + date.ToString("yyyy-MM-dd") + "' WHERE Project_ID = '" + ProjectID + "';";
             Execute(sqlQuery);
         }
 

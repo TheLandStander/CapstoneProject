@@ -21,18 +21,10 @@ namespace DatabaseSystemIntegration.Pages.Interface
 
         public void SetObjects()
         {
-            if (User == null)
-            {
                 User = DatabaseControls.GetUser(HttpContext.Session.GetString("UserID"));
-            }
-            if (DisplayedTasks == null)
-            {
                 DisplayedTasks = DatabaseControls.GetUserTasks(User.UserID).OrderBy(t => t.DueDate).ToArray();
-            }
-            if (DisplayedSubTasks == null)
-            {
                 DisplayedSubTasks = DatabaseControls.GetUserSubTasks(User.UserID).OrderBy(p => p.DueDate).ToArray();
-            }
+            
         }
 
         public ChildTask[] SearchTasks(string Name)
@@ -114,6 +106,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
 
         public IActionResult OnGet()
         {
+            
             if (HttpContext.Session.GetInt32("LoggedIn") == 1)
             {
                 SetObjects();
@@ -134,12 +127,12 @@ namespace DatabaseSystemIntegration.Pages.Interface
         public void CompleteChildTask(string ID)
         {
             ChildTask ChildTask = ObjectConverter.ToChildTask(DatabaseControls.SelectFilter(4, 4, ID))[0];
-           ChildTask.CompleteTask();
+            ChildTask.CompleteTask();
         }
         public IActionResult OnPostUpdateChildTask(string id)
         {
-            CompleteChildTask(id);
             SetObjects();
+            CompleteChildTask(id);
             return Page();
         }
 
