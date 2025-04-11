@@ -1,0 +1,10 @@
+URL: https://care-jmu2025-fdfubzh4bmbkabez.canadacentral-01.azurewebsites.net/
+ 
+UserName: Admin
+Password: Password
+ 
+UserName: Andrea Smith
+Password: Password
+ 
+UserName: Joseph Carter
+Password: Password

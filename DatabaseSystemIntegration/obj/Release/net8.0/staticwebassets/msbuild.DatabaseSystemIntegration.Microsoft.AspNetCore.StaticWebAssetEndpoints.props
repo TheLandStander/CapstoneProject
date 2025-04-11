@@ -72,17 +72,17 @@
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"yb03aiohr9"},{"Name":"integrity","Value":"sha256-kklDxVhO8FqG0q3hUELcS387i2CyuCnOg2BQ7\u002BZlt40="},{"Name":"label","Value":"_content/DatabaseSystemIntegration/fileupload/[COB 487] Simulation Game Report _ Template New.docx"}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"18963"},{"Name":"Content-Type","Value":"application/vnd.openxmlformats-officedocument.wordprocessingml.document"},{"Name":"ETag","Value":"\u0022kklDxVhO8FqG0q3hUELcS387i2CyuCnOg2BQ7\u002BZlt40=\u0022"},{"Name":"Last-Modified","Value":"Fri, 11 Apr 2025 01:33:34 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/DatabaseSystemIntegration/Icon.23jadwbwao.jpg">
+    <StaticWebAssetEndpoint Include="_content/DatabaseSystemIntegration/Icon.6yu5m5n6o0.jpg">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Icon.jpg'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"23jadwbwao"},{"Name":"integrity","Value":"sha256-HtyAGNrdb2IRZH28VFw2rj7enYQQfIR5KaScxgGQYAg="},{"Name":"label","Value":"_content/DatabaseSystemIntegration/Icon.jpg"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"11901"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022HtyAGNrdb2IRZH28VFw2rj7enYQQfIR5KaScxgGQYAg=\u0022"},{"Name":"Last-Modified","Value":"Mon, 07 Apr 2025 20:16:25 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"6yu5m5n6o0"},{"Name":"integrity","Value":"sha256-EtpK5Xp2nlCp7D0AOMYahY0OniuP8xZG0tq8mXh4LkM="},{"Name":"label","Value":"_content/DatabaseSystemIntegration/Icon.jpg"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"121490"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022EtpK5Xp2nlCp7D0AOMYahY0OniuP8xZG0tq8mXh4LkM=\u0022"},{"Name":"Last-Modified","Value":"Fri, 11 Apr 2025 18:17:51 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/DatabaseSystemIntegration/Icon.jpg">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Icon.jpg'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-HtyAGNrdb2IRZH28VFw2rj7enYQQfIR5KaScxgGQYAg="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"11901"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022HtyAGNrdb2IRZH28VFw2rj7enYQQfIR5KaScxgGQYAg=\u0022"},{"Name":"Last-Modified","Value":"Mon, 07 Apr 2025 20:16:25 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-EtpK5Xp2nlCp7D0AOMYahY0OniuP8xZG0tq8mXh4LkM="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"121490"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022EtpK5Xp2nlCp7D0AOMYahY0OniuP8xZG0tq8mXh4LkM=\u0022"},{"Name":"Last-Modified","Value":"Fri, 11 Apr 2025 18:17:51 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/DatabaseSystemIntegration/js/site.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\site.js'))</AssetFile>

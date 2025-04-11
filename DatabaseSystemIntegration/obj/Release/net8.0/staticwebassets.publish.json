@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "xlhPSuoJ3pPpECoUyedpsDNCJ/MCvJq8eRfIDqgW5QI=",
+  "Hash": "20n60XmuIfXJN2B0ZwAEUq3CC/15L6yQDbd3R7sOPFU=",
   "Source": "DatabaseSystemIntegration",
   "BasePath": "_content/DatabaseSystemIntegration",
   "Mode": "Default",
@@ -178,8 +178,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "23jadwbwao",
-      "Integrity": "HtyAGNrdb2IRZH28VFw2rj7enYQQfIR5KaScxgGQYAg=",
+      "Fingerprint": "6yu5m5n6o0",
+      "Integrity": "EtpK5Xp2nlCp7D0AOMYahY0OniuP8xZG0tq8mXh4LkM=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Icon.jpg"
@@ -2000,7 +2000,7 @@
       ]
     },
     {
-      "Route": "Icon.23jadwbwao.jpg",
+      "Route": "Icon.6yu5m5n6o0.jpg",
       "AssetFile": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\Icon.jpg",
       "Selectors": [],
       "ResponseHeaders": [
@@ -2010,7 +2010,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "11901"
+          "Value": "121490"
         },
         {
           "Name": "Content-Type",
@@ -2018,11 +2018,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"HtyAGNrdb2IRZH28VFw2rj7enYQQfIR5KaScxgGQYAg=\""
+          "Value": "\"EtpK5Xp2nlCp7D0AOMYahY0OniuP8xZG0tq8mXh4LkM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 07 Apr 2025 20:16:25 GMT"
+          "Value": "Fri, 11 Apr 2025 18:17:51 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2032,7 +2032,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "23jadwbwao"
+          "Value": "6yu5m5n6o0"
         },
         {
           "Name": "label",
@@ -2040,7 +2040,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-HtyAGNrdb2IRZH28VFw2rj7enYQQfIR5KaScxgGQYAg="
+          "Value": "sha256-EtpK5Xp2nlCp7D0AOMYahY0OniuP8xZG0tq8mXh4LkM="
         }
       ]
     },
@@ -2055,7 +2055,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "11901"
+          "Value": "121490"
         },
         {
           "Name": "Content-Type",
@@ -2063,11 +2063,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"HtyAGNrdb2IRZH28VFw2rj7enYQQfIR5KaScxgGQYAg=\""
+          "Value": "\"EtpK5Xp2nlCp7D0AOMYahY0OniuP8xZG0tq8mXh4LkM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 07 Apr 2025 20:16:25 GMT"
+          "Value": "Fri, 11 Apr 2025 18:17:51 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2077,7 +2077,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-HtyAGNrdb2IRZH28VFw2rj7enYQQfIR5KaScxgGQYAg="
+          "Value": "sha256-EtpK5Xp2nlCp7D0AOMYahY0OniuP8xZG0tq8mXh4LkM="
         }
       ]
     },

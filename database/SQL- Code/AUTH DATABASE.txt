@@ -1,9 +1,10 @@
 --AUTH DATABASE
 
 CREATE Table HashedCredentials(
-	CredentialID int IDENTITY(1,1) PRIMARY KEY,
+	CredentialID char(10) PRIMARY KEY,
 	Username nvarchar(100),
-	Password nvarchar(500)
+	Password nvarchar(500),
 );
 
-INSERT INTO dbo.HashedCredentials VALUES ('Admin','1000:QzqJmy2x1+YmgnaMOsUVQoRGaSG/sdng:LIF6i+yBAJ2Cx2ErienexH69Mzw=')
+INSERT INTO dbo.HashedCredentials VALUES ('1234567890','Admin','1000:QzqJmy2x1+YmgnaMOsUVQoRGaSG/sdng:LIF6i+yBAJ2Cx2ErienexH69Mzw=')
+
