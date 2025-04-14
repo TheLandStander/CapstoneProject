@@ -164,6 +164,8 @@ namespace DatabaseSystemIntegration.Pages.Interface
 
         public async Task<IActionResult> OnPostUpload(string id)
         {
+            LoadObjects();
+            SetVars();
             if (UploadedFile == null || UploadedFile.Length == 0)
             {
                 return Page();

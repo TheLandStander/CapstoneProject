@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\Icon.jpg"
     },
     {
+      "Id": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\Icon2.jpg",
+      "PackagePath": "staticwebassets\\Icon2.jpg"
+    },
+    {
       "Id": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

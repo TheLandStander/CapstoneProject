@@ -4,6 +4,7 @@ wwwroot\favicon.ico
 wwwroot\fileupload\[COB 487] Simulation Game Report _ Template New.docx
 wwwroot\fileupload\CIS 484 Capstone Publishing to Azure Cloud Guide.pdf
 wwwroot\Icon.jpg
+wwwroot\Icon2.jpg
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap.css
 wwwroot\lib\bootstrap\dist\css\bootstrap.css.map

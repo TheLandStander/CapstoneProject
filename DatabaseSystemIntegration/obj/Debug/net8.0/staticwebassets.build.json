@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "xozrAc7huYbNYFRaUZlCBRXHSj6f/aTISnEXhd1deOM=",
+  "Hash": "oTG1X2uMYEqxPm5Ib/1/v021jpndeF7r4hjk5TkXcpo=",
   "Source": "DatabaseSystemIntegration",
   "BasePath": "_content/DatabaseSystemIntegration",
   "Mode": "Default",
@@ -183,6 +183,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Icon.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\Icon2.jpg",
+      "SourceId": "DatabaseSystemIntegration",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\",
+      "BasePath": "_content/DatabaseSystemIntegration",
+      "RelativePath": "Icon2#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "eaj90el863",
+      "Integrity": "5hGsfzQG4n5g7BBuvaTlJ4n1eNCpjgK0ekH5ptnPHMw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Icon2.jpg"
     },
     {
       "Identity": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\js\\site.js",
@@ -2078,6 +2099,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-EtpK5Xp2nlCp7D0AOMYahY0OniuP8xZG0tq8mXh4LkM="
+        }
+      ]
+    },
+    {
+      "Route": "Icon2.eaj90el863.jpg",
+      "AssetFile": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\Icon2.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6507"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"5hGsfzQG4n5g7BBuvaTlJ4n1eNCpjgK0ekH5ptnPHMw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 13 Apr 2025 23:27:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "eaj90el863"
+        },
+        {
+          "Name": "label",
+          "Value": "Icon2.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-5hGsfzQG4n5g7BBuvaTlJ4n1eNCpjgK0ekH5ptnPHMw="
+        }
+      ]
+    },
+    {
+      "Route": "Icon2.jpg",
+      "AssetFile": "C:\\Users\\apers\\OneDrive\\Documents\\CapstoneProject\\DatabaseSystemIntegration\\wwwroot\\Icon2.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6507"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"5hGsfzQG4n5g7BBuvaTlJ4n1eNCpjgK0ekH5ptnPHMw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 13 Apr 2025 23:27:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-5hGsfzQG4n5g7BBuvaTlJ4n1eNCpjgK0ekH5ptnPHMw="
         }
       ]
     },
