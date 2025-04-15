@@ -13,13 +13,15 @@ namespace DatabaseSystemIntegration.Pages.Classes
 
         public UserRole UserRole { get; set; }
 
-        public UserType type { get; set; }
-
         public void SetVars()
         {
 
             UserRole = ObjectConverter.ToUserRole(DatabaseControls.SelectFilter(16, 19, UserID))[0];
-            type = ObjectConverter.ToUserType(DatabaseControls.SelectFilter(18, 18, UserTypeID))[0];
+        }
+
+        public UserType GetUserType()
+        { 
+            return ObjectConverter.ToUserType(DatabaseControls.SelectFilter(18, 18, UserTypeID))[0];
         }
 
         public UserStatus GetStatus()
@@ -40,10 +42,25 @@ namespace DatabaseSystemIntegration.Pages.Classes
 
         public Tasks[] GetAssignedTasks()
         {
-            return DatabaseControls.GetUserTasks(UserID);
+            return DatabaseControls.GetAllUserTasks(UserID);
         }
 
         public ChildTask[] GetAssginedSubTasks()
+        {
+            return DatabaseControls.GetAllUserSubTasks(UserID);
+        }
+
+        public Project[] GetAllProjects()
+        {
+            return DatabaseControls.GetUserProjects(UserID);
+        }
+
+        public Tasks[] GetAllTasks()
+        {
+            return DatabaseControls.GetUserTasks(UserID);
+        }
+
+        public ChildTask[] GetAllSubTasks()
         {
             return DatabaseControls.GetUserSubTasks(UserID);
         }

@@ -110,6 +110,19 @@ namespace DatabaseSystemIntegration.Pages.Tools
             return Projects.ToArray();
         }
 
+        public static Project[] GetAllUserProjects(string ID)
+        {
+            AssignedProject[] Holder = ObjectConverter.ToAssignedProject(SelectFilter(0, 19, ID));
+            List<Project> Projects = new List<Project>();
+
+            foreach (AssignedProject ap in Holder)
+            {
+                    Projects.Add(ap.GetProject());
+            }
+
+            return Projects.ToArray();
+        }
+
         public static Tasks[] GetUserTasks(string ID)
         {
           AssignedTask[] Holder = ObjectConverter.ToAssignedTask(SelectFilter(1, 19, ID));
@@ -126,6 +139,19 @@ namespace DatabaseSystemIntegration.Pages.Tools
             return TaskHolder.ToArray();
         }
 
+        public static Tasks[] GetAllUserTasks(string ID)
+        {
+            AssignedTask[] Holder = ObjectConverter.ToAssignedTask(SelectFilter(1, 19, ID));
+            List<Tasks> TaskHolder = new List<Tasks>();
+
+            foreach (AssignedTask at in Holder)
+            {
+                    TaskHolder.Add(at.GetTask());
+            }
+
+            return TaskHolder.ToArray();
+        }
+
         public static ChildTask[] GetUserSubTasks(string ID)
         {
 
@@ -137,6 +163,28 @@ namespace DatabaseSystemIntegration.Pages.Tools
                 foreach (ChildTask ct in AllHolder)
                 {
                     if (ct.isAssigned() == true && ct.Completed == false)
+                    {
+                        if (ct.GetAssignedUser().UserID == ID)
+                        {
+                            Holder.Add(ct);
+                        }
+                    }
+                }
+            }
+            return Holder.ToArray();
+        }
+
+        public static ChildTask[] GetAllUserSubTasks(string ID)
+        {
+
+            List<ChildTask> Holder = new List<ChildTask>();
+            if (SelectNoFilter(4).HasRows)
+            {
+                List<ChildTask> AllHolder = ObjectConverter.ToChildTask(SelectNoFilter(4)).ToList();
+
+                foreach (ChildTask ct in AllHolder)
+                {
+                    if (ct.isAssigned() == true)
                     {
                         if (ct.GetAssignedUser().UserID == ID)
                         {

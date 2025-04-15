@@ -295,11 +295,11 @@
                                     }
                             </tr>
                         }
-                    else if (Model.User.type.UserTypeName == "Internal Employee")
+                    else if (Model.User.GetUserType().UserTypeName == "Internal Employee")
                     {
                         @foreach (var Project in Model.AssignedProjects)
                         {
-                            @foreach(var grant in Project.GetProject().GetGrants()){
+                            @foreach(var grant in Project.GetGrants()){
                                 <tr>
                                     <td>
                                         <button class="btn btn-link" asp-page-handler="SelectGrant" asp-route-id="@grant.GrantID">@grant.GrantName</button>
@@ -406,24 +406,24 @@
                         {
                             <tr>
                                 <td>
-                                    <button class="btn btn-link" asp-page-handler="SelectProject" asp-route-id="@Project.ProjectID">@Project.GetProject().ProjectName</button>
+                                    <button class="btn btn-link" asp-page-handler="SelectProject" asp-route-id="@Project.ProjectID">@Project.ProjectName</button>
                                 </td>
-                                <td>@Project.GetProject().Description</td>
-                                <td>@Project.GetProject().StartDate</td>
-                                <td>@Project.GetProject().DueDate</td>
-                                @if (@Project.GetProject().EndDate > DateOnly.MinValue)
+                                <td>@Project.Description</td>
+                                <td>@Project.StartDate</td>
+                                <td>@Project.DueDate</td>
+                                @if (@Project.EndDate > DateOnly.MinValue)
                                 {
-                                    <td>@Project.GetProject().EndDate</td>
+                                    <td>@Project.EndDate</td>
                                 }
                                 else
                                 {
                                     <td> - </td>
                                 }
                                 <td class="
-                                @(Project.GetProject().Status.ProjectStatusName == "Completed - Success" ? "text-success" :
-                                  Project.GetProject().Status.ProjectStatusName == "Completed - Failed" ? "text-danger" :
-                                  Project.GetProject().Status.ProjectStatusName == "Ongoing" ? "text-warning" : "")">
-                                    @Project.GetProject().Status.ProjectStatusName
+                                @(Project.Status.ProjectStatusName == "Completed - Success" ? "text-success" :
+                                  Project.Status.ProjectStatusName == "Completed - Failed" ? "text-danger" :
+                                  Project.Status.ProjectStatusName == "Ongoing" ? "text-warning" : "")">
+                                    @Project.Status.ProjectStatusName
                                 </td>
                             </tr>
                         }

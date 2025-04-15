@@ -21,9 +21,9 @@ namespace DatabaseSystemIntegration.Pages.Interface
 
         public Partner[] Partners { get; set; }
 
-        public AssignedProject[] AssignedProjects { get; set; }
+        public Project[] AssignedProjects { get; set; }
 
-        public AssignedTask[] AssignedTasks { get; set; }
+        public Tasks[] AssignedTasks { get; set; }
 
         public void LoadAdmin()
         {
@@ -35,8 +35,9 @@ namespace DatabaseSystemIntegration.Pages.Interface
         }
 
         public void LoadGenericUser()
-        { 
-            AssignedProjects = ObjectConverter.ToAssignedProject(DatabaseControls.SelectFilter(0, 19, User.UserID));
+        {
+            AssignedProjects = User.GetAllProjects();
+            AssignedTasks = User.GetAllTasks();
         }
 
         public void LoadProjectManager()

@@ -79,7 +79,7 @@
                                             <span class="badge ms-2" style="background-color: #5e3a87;">Lead</span>
                                         }
                                     </div>
-                                    <div><strong style="color: #2d0042;">Role:</strong> @user.type.UserTypeName</div>
+                                    <div><strong style="color: #2d0042;">Role:</strong> @user.GetUserType().UserTypeName</div>
                                     <p class="mb-0"><strong style="color: #2d0042;">Organization:</strong> @user.GetPartner().BusName</p>
                                 </div>
                             }
@@ -778,7 +778,7 @@
                                 {
                                     <div class="user-card p-3 rounded text-center mx-2" style="min-width: 220px; background-color: #f9f6ff; border: 1px solid #bca2d8;">
                                         <div><strong style="color: #2d0042;">Name:</strong> @user.Name</div>
-                                        <div><strong style="color: #2d0042;">Role:</strong> @user.type.UserTypeName</div>
+                                        <div><strong style="color: #2d0042;">Role:</strong> @user.GetUserType().UserTypeName</div>
                                         <p class="mb-0"><strong style="color: #2d0042;">Organization:</strong> @user.GetPartner().BusName</p>
                                     </div>
                                 }
