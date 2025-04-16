@@ -15,9 +15,3 @@ SET NOCOUNT ON;
 END;
 GO
 
-DECLARE @User_Name AS NVARCHAR(500);
-DECLARE @Password AS NVARCHAR(500);
-SET @User_Name = 'Admin';
-SET @Password = '1000:QzqJmy2x1+YmgnaMOsUVQoRGaSG/sdng:LIF6i+yBAJ2Cx2ErienexH69Mzw=';
-EXEC dbo.sp_Login @User_Name, @Password;
-GO

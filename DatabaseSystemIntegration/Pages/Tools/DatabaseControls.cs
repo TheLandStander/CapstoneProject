@@ -10,9 +10,13 @@ namespace DatabaseSystemIntegration.Pages.Tools
     public class DatabaseControls
     {
         // Create connection string to connect to the database
-       public static string ConnectionString = "Server=tcp:l10.database.windows.net,1433;Initial Catalog=CARE;Persist Security Info=False;User ID=L10JMU;Password=Madison2025!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-       public static string AuthConnString = "Server=tcp:l10.database.windows.net,1433;Initial Catalog=AUTH;Persist Security Info=False;User ID=L10JMU;Password=Madison2025!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-        //array of tables, good for selections
+        //public static string ConnectionString = "Server=tcp:l10.database.windows.net,1433;Initial Catalog=CARE;Persist Security Info=False;User ID=L10JMU;Password=Madison2025!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        //public static string AuthConnString = "Server=tcp:l10.database.windows.net,1433;Initial Catalog=AUTH;Persist Security Info=False;User ID=L10JMU;Password=Madison2025!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+
+        public static string ConnectionString = "Data Source=localhost;Initial Catalog=CARE;Integrated Security=True;Encrypt=False";
+        public static string AuthConnString = "Data Source=localhost;Initial Catalog=AUTH;Integrated Security=True;Encrypt=False";
+
+
         public static string[] Tables =
         {
         "AssignedProject",

@@ -147,7 +147,8 @@
                                 @if (HttpContext.Session.GetString("UserType") == "Project-Manager" ||
                         HttpContext.Session.GetString("UserType") == "PI" ||
                         HttpContext.Session.GetString("UserType") == "CO-PI" ||
-                        HttpContext.Session.GetString("UserType") == "Admin"){
+                        HttpContext.Session.GetString("UserType") == "Admin" ||
+                        Model.project.ProjectLeadID == Model.CurrentUser.UserID){
                                 
                                 @foreach (var task in Model.project.GetTasks())
                                 {
@@ -577,7 +578,8 @@
                     @if (HttpContext.Session.GetString("UserType") == "Project-Manager" ||
             HttpContext.Session.GetString("UserType") == "PI" ||
             HttpContext.Session.GetString("UserType") == "CO-PI" ||
-            HttpContext.Session.GetString("UserType") == "Admin")
+            HttpContext.Session.GetString("UserType") == "Admin" ||
+            Model.ParentTask.GetProject().ProjectLeadID == Model.CurrentUser.UserID)
                     {
                         <div class="text-center mt-3 p-4 rounded" style="background-color: #fff; border-left: 4px solid #5e3a87;">
                             <h4 class="mb-3" style="color: #2d0042;">Add New Task</h4>

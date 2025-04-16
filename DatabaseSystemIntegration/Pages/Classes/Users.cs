@@ -52,17 +52,17 @@ namespace DatabaseSystemIntegration.Pages.Classes
 
         public Project[] GetAllProjects()
         {
-            return DatabaseControls.GetUserProjects(UserID);
+            return DatabaseControls.GetAllUserProjects(UserID);
         }
 
         public Tasks[] GetAllTasks()
         {
-            return DatabaseControls.GetUserTasks(UserID);
+            return DatabaseControls.GetAllUserTasks(UserID);
         }
 
         public ChildTask[] GetAllSubTasks()
         {
-            return DatabaseControls.GetUserSubTasks(UserID);
+            return DatabaseControls.GetAllUserSubTasks(UserID);
         }
 
         public Users(string name, string userTypeID, string userStatusID, string infoID, string partnerID)

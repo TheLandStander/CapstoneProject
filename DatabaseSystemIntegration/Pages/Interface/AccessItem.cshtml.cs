@@ -168,11 +168,11 @@ namespace DatabaseSystemIntegration.Pages.Interface
             SetVars();
             if (UploadedFile == null || UploadedFile.Length == 0)
             {
-                return Page();
+                 return RedirectToPage("AccessItem");
             }
             using var stream = UploadedFile.OpenReadStream();
             await FileManager.UploadFileAsync(id, stream);
-            return Page();
+             return RedirectToPage("AccessItem");
         }
         public IActionResult OnPostSelectGrant(string ID)
         {
@@ -218,7 +218,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
             LoadObjects();
             ParentTask.AssignTask(User_ID);
             SetVars();
-            return Page();
+             return RedirectToPage("AccessItem");
         }
 
         public IActionResult OnPostAssignChildTask(string ID)
@@ -233,7 +233,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
                 AssignChildTask(ID, HttpContext.Session.GetString("UserID"));
             }
                 SetVars();
-            return Page();
+             return RedirectToPage("AccessItem");
         }
 
         public IActionResult OnPostAssignProject()
@@ -241,7 +241,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
             LoadObjects();
             project.AssignProject(User_ID);
             SetVars();
-            return Page();
+             return RedirectToPage("AccessItem");
         }
 
         public IActionResult OnPostCreateProject(string ID)
@@ -257,7 +257,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
             LoadObjects();
             project.SetProjectLeader(User_ID2);
             SetVars();
-            return Page();
+             return RedirectToPage("AccessItem");
         }
 
         public IActionResult OnPostAddNote(string ID)
@@ -266,7 +266,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
             ProjectNotes N = new ProjectNotes(Note, CurrentUser.Name, NoteTo, DateOnly.FromDateTime(DateTime.Now), ID);
             DatabaseControls.Insert(N);
             SetVars();
-            return Page();
+             return RedirectToPage("AccessItem");
         }
 
         public IActionResult OnPostAddMeeting()
@@ -274,7 +274,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
             LoadObjects();
             partner.AddMeeting(Note, Date);
             SetVars();
-            return Page();
+             return RedirectToPage("AccessItem");
         }
 
         public IActionResult OnPostAddTask()
@@ -285,7 +285,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
                 project.AddTask(TaskName, TaskDesc, Date);
             }
             SetVars();
-            return Page();
+             return RedirectToPage("AccessItem");
         }
 
         public IActionResult OnPostAddChildTask(string ID)
@@ -297,7 +297,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
                 DatabaseControls.Insert(CT);
             }
             SetVars();
-            return Page();
+            return RedirectToPage("AccessItem");
         }
 
         public IActionResult OnPostUpdateTask()
@@ -305,7 +305,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
             LoadObjects();
             ParentTask.CompleteTask();
             SetVars();
-            return Page();
+             return RedirectToPage("AccessItem");
         }
 
         public IActionResult OnPostUpdateChildTask(string ID)
@@ -314,7 +314,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
             CompleteChildTask(ID);
             SetVars();
             LoadObjects();
-            return Page();
+             return RedirectToPage("AccessItem");
         }
 
         public IActionResult OnPostUpdatePartner()
@@ -325,7 +325,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
                 partner.UpdateStatus(PartnerStatusID);
             }
             SetVars();
-            return Page();
+             return RedirectToPage("AccessItem");
         }
 
         public IActionResult OnPostUpdateProject()
@@ -336,7 +336,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
                 project.UpdateStatus(ProjectStatusID);
             }
             SetVars();
-            return Page();
+             return RedirectToPage("AccessItem");
         }
 
         public IActionResult OnPostUpdateGrant()
@@ -347,7 +347,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
                 grant.UpdateStatus(GrantStatusID);
             }
             SetVars();
-            return Page();
+             return RedirectToPage("AccessItem");
         }
 
         public IActionResult OnPostUpdateProjectDate()
@@ -358,7 +358,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
                 project.UpdateDueDate(UpdatedDate);
             }
             SetVars();
-            return Page();
+             return RedirectToPage("AccessItem");
         }
 
         public void SetVars()

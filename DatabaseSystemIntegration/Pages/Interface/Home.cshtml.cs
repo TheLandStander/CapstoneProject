@@ -133,7 +133,7 @@ namespace DatabaseSystemIntegration.Pages.Interface
         {
             SetObjects();
             CompleteChildTask(id);
-            return Page();
+            return RedirectToPage("Home");
         }
 
 
